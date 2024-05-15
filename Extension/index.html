@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+        .table {
+          -webkit-text-size-adjust: 100%;
+          -webkit-tap-highlight-color: transparent;
+          --blue: #007bff;
+          --indigo: #6610f2;
+          --purple: #6f42c1;
+          --pink: #e83e8c;
+          --red: #dc3545;
+          --orange: #fd7e14;
+          --yellow: #ffc107;
+          --green: #28a745;
+          --teal: #20c997;
+          --cyan: B6;
+          --white: #fff;
+          --gray: #6c757d;
+          --gray-dark: #343a40;
+          --primary: #007bff;
+          --secondary: #6c757d;
+          --success: #28a745;
+          --info: #5D80B6;
+          --warning: #ffc107;
+          --danger: #dc3545;
+          --light: #f8f9fa;
+          --dark: #343a40;
+          --breakpoint-xs: 0;
+          --breakpoint-sm: 576px;
+          --breakpoint-md: 768px;
+          --breakpoint-lg: 992px;
+          --breakpoint-xl: 1200px;
+          --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+          font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          font-weight: 400;
+          line-height: 1.5;
+          text-align: left;
+          color: #5a5a5a;
+          font-size: 15px;
+          box-sizing: border-box;
+          border-collapse: inherit;
+          max-width: 100%;
+          background-color: transparent;
+          border: none;
+          width: 80%;
+          margin-bottom: 0!important;
+        }
+
+        .th{
+          -webkit-text-size-adjust: 100%;
+          -webkit-tap-highlight-color: transparent;
+          --blue: #007bff;
+          --indigo: #6610f2;
+          --purple: #6f42c1;
+          --pink: #e83e8c;
+          --red: #dc3545;
+          --orange: #fd7e14;
+          --yellow: #ffc107;
+          --green: #28a745;
+          --teal: #20c997;
+          --cyan: B6;
+          --white: #fff;
+          --gray: #6c757d;
+          --gray-dark: #343a40;
+          --primary: #007bff;
+          --secondary: #6c757d;
+          --success: #28a745;
+          --info: #5D80B6;
+          --warning: #ffc107;
+          --danger: #dc3545;
+          --light: #f8f9fa;
+          --dark: #343a40;
+          --breakpoint-xs: 0;
+          --breakpoint-sm: 576px;
+          --breakpoint-md: 768px;
+          --breakpoint-lg: 992px;
+          --breakpoint-xl: 1200px;
+          --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+          font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          line-height: 1.5;
+          font-size: 15px;
+          border-collapse: inherit;
+          border: none;
+          color: #495057;
+          background-color: #e9ecef;
+          border-color: #dee2e6;
+          box-sizing: border-box;
+          vertical-align: bottom;
+          padding: 0;
+          margin: 0;
+          text-align: center;
+        }
+
+        .td {
+          -webkit-text-size-adjust: 100%;
+          -webkit-tap-highlight-color: transparent;
+          --blue: #007bff;
+          --indigo: #6610f2;
+          --purple: #6f42c1;
+          --pink: #e83e8c;
+          --red: #dc3545;
+          --orange: #fd7e14;
+          --yellow: #ffc107;
+          --green: #28a745;
+          --teal: #20c997;
+          --cyan: B6;
+          --white: #fff;
+          --gray: #6c757d;
+          --gray-dark: #343a40;
+          --primary: #007bff;
+          --secondary: #6c757d;
+          --success: #28a745;
+          --info: #5D80B6;
+          --warning: #ffc107;
+          --danger: #dc3545;
+          --light: #f8f9fa;
+          --dark: #343a40;
+          --breakpoint-xs: 0;
+          --breakpoint-sm: 576px;
+          --breakpoint-md: 768px;
+          --breakpoint-lg: 992px;
+          --breakpoint-xl: 1200px;
+          --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+          font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          font-weight: 400;
+          line-height: 1.5;
+          color: #5a5a5a;
+          font-size: 15px;
+          border-collapse: inherit;
+          padding: .3rem;
+          border: none;
+          vertical-align: middle;
+          box-sizing: border-box;
+          text-align: center;
+        }
+
+        .tr {
+          -webkit-text-size-adjust: 100%;
+          -webkit-tap-highlight-color: transparent;
+          --blue: #007bff;
+          --indigo: #6610f2;
+          --purple: #6f42c1;
+          --pink: #e83e8c;
+          --red: #dc3545;
+          --orange: #fd7e14;
+          --yellow: #ffc107;
+          --green: #28a745;
+          --teal: #20c997;
+          --cyan: B6;
+          --white: #fff;
+          --gray: #6c757d;
+          --gray-dark: #343a40;
+          --primary: #007bff;
+          --secondary: #6c757d;
+          --success: #28a745;
+          --info: #5D80B6;
+          --warning: #ffc107;
+          --danger: #dc3545;
+          --light: #f8f9fa;
+          --dark: #343a40;
+          --breakpoint-xs: 0;
+          --breakpoint-sm: 576px;
+          --breakpoint-md: 768px;
+          --breakpoint-lg: 992px;
+          --breakpoint-xl: 1200px;
+          --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+          font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          font-weight: 400;
+          line-height: 1.5;
+          text-align: left;
+          color: #5a5a5a;
+          font-size: 15px;
+          border-collapse: inherit;
+          box-sizing: border-box;
+          background-color: rgba(0,0,0,.05);
+        }
+
+        .slide-in {
+          animation: slide-in 0.5s forwards;
+          z-index: -1;
+        }
+
+        .slide-out {
+          animation: slide-out 0.5s forwards;
+          z-index: -1;
+        }
+
+        @keyframes slide-in {
+          0% { transform: translateY(100%); }
+          100% { transform: translateY(0); }
+        }
+
+        @keyframes slide-out {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-100%); }
+        }
+
+        .slide-in-reverse {
+          animation: slide-in-reverse 0.5s forwards;
+        }
+        
+        .slide-out-reverse {
+          animation: slide-out-reverse 0.5s forwards;
+        }
+        
+        @keyframes slide-in-reverse {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(0); }
+        }
+        
+        @keyframes slide-out-reverse {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(100%); }
+        }
+
+        .slide-in-left {
+          animation: slide-in-left 0.5s forwards;
+        }
+
+        .slide-out-left {
+          animation: slide-out-left 0.5s forwards;
+        }
+
+        @keyframes slide-in-left {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(0); }
+        }
+
+        @keyframes slide-out-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+
+        .slide-in-left {
+          animation: slide-in-left 0.5s forwards;
+        }
+
+        .slide-out-left {
+          animation: slide-out-left 0.5s forwards;
+        }
+
+        @keyframes slide-in-left {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(0); }
+        }
+
+        @keyframes slide-out-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+
+        .slide-in-right {
+          animation: slide-in-right 0.5s forwards;
+        }
+
+        .slide-out-right {
+          animation: slide-out-right 0.5s forwards;
+        }
+
+        @keyframes slide-in-right {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(0); }
+        }
+
+        @keyframes slide-out-right {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(100%); }
+        }
+  </style>
+</head>
+<body>
+  <table id="tableintegrantes" data-toolbar="#toolbar" data-toggle="table" data-locale="es-AR" data-search="true" class="table table-sm table-striped table-hover table-borderless table-bordered">
+      <tr id="1034793" data-index="44">
+        <td style="text-align: center; ">
+          <img src="/Fotos/3/ID_1034793.jpg" height="50" width="50" alt="Pariso Dos Santos, Martina Abril">
+        </td>
+        <td style="text-align: center; ">Pariso Dos Santos, Martina Abril &nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td style="text-align: center; border: 2px black;">
+          <div style="border: 2px black;">
+            <a href="mailto:mparisodos@uade.edu.ar" target="_blank">
+              <ul style="position: absolute; background-color: white; display: none; list-style-type: none;">
+                <li style="padding: 5px;">
+                  0
+                  <button>Like</button>
+                </li>
+                <li style="padding: 5px;">
+                  0
+                  <button>Dislike</button>
+                </li>
+              </ul>
+              <img src="https://lh3.googleusercontent.com/ogw/AF2bZyg6xCr_vEM6tw2LISVEWXQb6ygRrE9Al-95Mhr3oA=s32-c-mo">
+            </a>
+          </div>
+        </td>
+        <td style="text-align: center; ">
+          <i class="far fa-envelope"></i> mparisodos@uade.edu.ar
+        </td>
+        <td style="text-align: center; ">1145174</td>
+        <td style="text-align: center; ">Alumno</td>
+        <td class="d-none">1</td>
+      </tr>
+
+      <tr>      
+        <td colspan="6">
+            
+
+            <table>
+              <thead>
+                <tr>
+                  <td colspan="6">Presentacion</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="6">Estudiante de la carrera de Ingenieria en Informatica. Me considero una persona responsable, comprometida y con muchas ganas de aprender. Me gusta trabajar en equipo y soy muy proactiva. Tengo experiencia en atención al cliente y en ventas. Me gustaría poder aplicar mis conocimientos en una empresa y seguir creciendo profesionalmente.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table>
+              <thead>
+                <tr>
+                  <td colspan="6">Comentarios</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <button id="btnPrev">Prev</button>
+                    <button id="btnNext">Next</button>
+                  </td>
+                  <td colspan="5">
+                    <div id="comentariosContainer" style="position: relative; overflow: hidden;">
+                      <ul id="comentarios" style="margin: 0;padding: 0;list-style-type: none;">
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, repellat beatae tempore, doloribus officiis porro quia natus illum et, necessitatibus quisquam inventore sequi nemo neque provident libero atque praesentium? Culpa?</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, laborum. Quam odio omnis architecto? Veniam, sapiente! Deleniti explicabo perferendis saepe, illum consequatur, optio similique quam voluptatibus quaerat magnam numquam veniam.</li>
+                        <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit magnam cum, placeat, ad incidunt dolore labore nam doloremque vero, esse nihil modi repudiandae reiciendis id culpa laborum accusamus consectetur neque.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, beatae, inventore neque, libero similique enim repellendus tempora iste error ad nulla ipsum voluptas expedita praesentium consequatur saepe architecto id? Nam.</li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table>
+              <thead>
+                <tr>
+                  <td colspan="6">Portfolio</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>                  
+                  <td colspan="6">
+                    <div id="comentariosContainer" style="position: relative; overflow: hidden;">
+                      <ul id="portfolio" style="margin: 0;padding: 0;list-style-type: none;">
+                        <li style="display: flex;">
+                          <img src="https://source.unsplash.com/random/200x100?sig=1" alt="Imagen aleatoria">
+                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, repellat beatae tempore, doloribus officiis porro quia natus illum et, necessitatibus quisquam inventore sequi nemo neque provident libero atque praesentium? Culpa?</p>
+                        </li>
+                        <li style="display: flex;">
+                          <img src="https://source.unsplash.com/random/200x100?sig=2" alt="Imagen aleatoria">
+                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, laborum. Quam odio omnis architecto? Veniam, sapiente! Deleniti explicabo perferendis saepe, illum consequatur, optio similique quam voluptatibus quaerat magnam numquam veniam.</p>
+                        </li>
+                        <li style="display: flex;">
+                          <img src="https://source.unsplash.com/random/200x100?sig=3" alt="Imagen aleatoria">
+                          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit magnam cum, placeat, ad incidunt dolore labore nam doloremque vero, esse nihil modi repudiandae reiciendis id culpa laborum accusamus consectetur neque.</p>
+                        </li>
+                        <li style="display: flex;">
+                          <img src="https://source.unsplash.com/random/200x100?sig=4" alt="Imagen aleatoria">
+                          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, beatae, inventore neque, libero similique enim repellendus tempora iste error ad nulla ipsum voluptas expedita praesentium consequatur saepe architecto id? Nam.</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">                    
+                    <button id="btnPrevPortfolio" style="width: 100%;">Prev</button>
+                  </td>
+                  <td colspan="3">
+                    <button id="btnNextPortfolio" style="width: 100%;">Next</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </td>
+      </tr>
+      <tr class="d-none"></tr>
+</tbody>
+  </table>
+
+  <script>
+  let comentarios = document.querySelector("#comentarios").children;
+  let btnNext = document.querySelector("#btnNext");
+  let btnPrev = document.querySelector("#btnPrev");
+  let index = 0;
+
+  // Ocultar todos los comentarios al principio
+  for (let i = 0; i < comentarios.length; i++) {
+    comentarios[i].style.display = "none";
+  }
+
+  // Mostrar el primer comentario
+  if (comentarios.length > 0) {
+    comentarios[0].style.display = "block";
+  }
+
+  btnNext.addEventListener("click", function() {
+    // Ocultar el comentario actual
+    comentarios[index].classList.add("slide-out");
+
+    setTimeout(function() {
+      comentarios[index].style.display = "none";
+      comentarios[index].classList.remove("slide-out");
+
+      // Incrementar el índice
+      index = (index + 1) % comentarios.length;
+
+      // Mostrar el siguiente comentario
+      comentarios[index].style.display = "block";
+      comentarios[index].classList.add("slide-in");
+
+      setTimeout(function() {
+        comentarios[index].classList.remove("slide-in");
+      }, 500);
+    }, 500);
+  });
+
+  btnPrev.addEventListener("click", function() {
+  // Ocultar el comentario actual
+  comentarios[index].classList.add("slide-out-reverse");
+
+  setTimeout(function() {
+    comentarios[index].style.display = "none";
+    comentarios[index].classList.remove("slide-out-reverse");
+
+    // Decrementar el índice
+    index = (index - 1 + comentarios.length) % comentarios.length;
+
+    // Mostrar el comentario anterior
+    comentarios[index].style.display = "block";
+    comentarios[index].classList.add("slide-in-reverse");
+
+    setTimeout(function() {
+      comentarios[index].classList.remove("slide-in-reverse");
+    }, 500);
+  }, 500);
+  });
+
+
+  var portfolioItems = document.querySelectorAll('#portfolio li');
+  var btnNextPortfolio = document.getElementById('btnNextPortfolio');
+  var btnPrevPortfolio = document.getElementById('btnPrevPortfolio');
+  var indexPortfolio = 0;
+
+  // Ocultar todos los elementos del portfolio excepto el primero
+  for (var i = 1; i < portfolioItems.length; i++) {
+    portfolioItems[i].style.display = 'none';
+  }
+
+  btnNextPortfolio.addEventListener("click", function() {
+  // Ocultar el comentario actual
+  portfolioItems[indexPortfolio].classList.add("slide-out-left");
+
+  setTimeout(function() {
+    portfolioItems[indexPortfolio].style.display = "none";
+    portfolioItems[indexPortfolio].classList.remove("slide-out-left");
+
+    // Incrementar el índice
+    indexPortfolio = (indexPortfolio + 1) % portfolioItems.length;
+
+    // Mostrar el siguiente comentario
+    portfolioItems[indexPortfolio].style.display = "flex";
+    portfolioItems[indexPortfolio].classList.add("slide-in-left");
+
+    setTimeout(function() {
+      portfolioItems[indexPortfolio].classList.remove("slide-in-left");
+    }, 500);
+  }, 500);
+});
+
+  btnPrevPortfolio.addEventListener("click", function() {
+  // Ocultar el elemento del portfolio actual
+  portfolioItems[indexPortfolio].classList.add("slide-out-right");
+
+  setTimeout(function() {
+    portfolioItems[indexPortfolio].style.display = "none";
+    portfolioItems[indexPortfolio].classList.remove("slide-out-right");
+
+    // Decrementar el índice
+    indexPortfolio = (indexPortfolio - 1 + portfolioItems.length) % portfolioItems.length;
+
+    // Mostrar el elemento del portfolio anterior
+    portfolioItems[indexPortfolio].style.display = "flex";
+    portfolioItems[indexPortfolio].classList.add("slide-in-right");
+
+    setTimeout(function() {
+      portfolioItems[indexPortfolio].classList.remove("slide-in-right");
+    }, 500);
+  }, 500);
+});
+  
+  </script>
+</body>
+</html>

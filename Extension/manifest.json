@@ -1,0 +1,31 @@
+{
+  "name": "Bridge",
+  "description": "Bridge es una herramienta simple que te permite conectarte con tus compañeros de la facultad",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon/icon16.png",
+      "32": "images/icon/icon32.png",
+      "48": "images/icon/icon48.png",
+      "128": "images/icon/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon/icon16.png",
+    "32": "images/icon/icon32.png",
+    "48": "images/icon/icon48.png",
+    "128": "images/icon/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.webcampus.uade.edu.ar/Integrantes/*"],
+      "js": ["scripts/integrantes.js"]
+    },
+    {
+      "matches": ["https://www.webcampus.uade.edu.ar/HistorialAcademico/Historial_academico.aspx*"],
+      "js": ["scripts/historialAcademico.js"]
+    }
+  ]
+}
