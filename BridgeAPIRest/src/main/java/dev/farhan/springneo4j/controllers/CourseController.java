@@ -4,7 +4,6 @@ import dev.farhan.springneo4j.models.Course;
 import dev.farhan.springneo4j.objects.CourseDTO;
 import dev.farhan.springneo4j.services.CourseEnrolmentService;
 import dev.farhan.springneo4j.services.CourseService;
-import dev.farhan.springneo4j.services.LessonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
