@@ -1,6 +1,6 @@
 package dev.farhan.springneo4j.services;
 
-import dev.farhan.springneo4j.models.User;
+import dev.farhan.springneo4j.models.Estudiante;
 import dev.farhan.springneo4j.repositories.UserRepository;
 import dev.farhan.springneo4j.requests.CreateUserRequest;
 
@@ -18,8 +18,8 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User createUser(CreateUserRequest request) {
-        User user = new User();
+    public Estudiante createUser(CreateUserRequest request) {
+        Estudiante user = new Estudiante();
 
         user.setName(request.getName());
         // TODO: make sure that this username doesn't exist.

@@ -1,6 +1,6 @@
 package dev.farhan.springneo4j.controllers;
 
-import dev.farhan.springneo4j.models.User;
+import dev.farhan.springneo4j.models.Estudiante;
 import dev.farhan.springneo4j.objects.UserDTO;
 import dev.farhan.springneo4j.requests.CreateUserRequest;
 import dev.farhan.springneo4j.services.UserService;
@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> signUp(@RequestBody CreateUserRequest request) {
-        User user = userService.createUser(request);
+        Estudiante user = userService.createUser(request);
 
         UserDTO responseUser = new UserDTO(user.getName(), user.getUsername(), user.getRoles());
 

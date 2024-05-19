@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 @Node
-public class User implements UserDetails {
+public class Estudiante implements UserDetails {
     @Id @GeneratedValue
     private Long id;
     private String name;
@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private String password;
     private String roles;
 
-    public User() {
+    public Estudiante() {
     }
 
     public Long getId() {

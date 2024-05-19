@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.farhan.springneo4j.models.Course;
+import dev.farhan.springneo4j.models.Curso;
 import dev.farhan.springneo4j.requests.CourseEnrolmentRequest;
 
 @RestController
@@ -32,7 +32,7 @@ public class CourseEnrolmentController {
 
     @GetMapping("/")
     public ResponseEntity<List<CourseDTO>> enrollments(Principal principal) {
-        List<Course> courses = courseEnrolmentService.getAllEnrolledCoursesByUsername(principal.getName());
+        List<Curso> courses = courseEnrolmentService.getAllEnrolledCoursesByUsername(principal.getName());
 
         List<CourseDTO> responseCourses = courses.stream().map(
                 (course) -> {

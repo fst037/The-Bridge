@@ -1,6 +1,6 @@
 package dev.farhan.springneo4j.controllers;
 
-import dev.farhan.springneo4j.models.Course;
+import dev.farhan.springneo4j.models.Curso;
 import dev.farhan.springneo4j.objects.CourseDTO;
 import dev.farhan.springneo4j.services.CourseEnrolmentService;
 import dev.farhan.springneo4j.services.CourseService;
@@ -27,7 +27,7 @@ public class CourseController {
 
     @GetMapping("/")
     public ResponseEntity<List<CourseDTO>> courseIndex(Principal principal) {
-        List<Course> courses = courseService.getAllCourses();
+        List<Curso> courses = courseService.getAllCourses();
 
         List<CourseDTO> responseCourses = courses.stream().map(
                 (course) -> {
@@ -51,7 +51,7 @@ public class CourseController {
 
     @GetMapping("/{identifier}")
     public ResponseEntity<CourseDTO> courseDetails(@PathVariable String identifier, Principal principal) {
-        Course course = courseService.getCourseByIdentifier(identifier);
+        Curso course = courseService.getCourseByIdentifier(identifier);
         CourseDTO responseCourse = new CourseDTO();
 
         responseCourse.setIdentifier(course.getIdentifier());

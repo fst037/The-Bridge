@@ -1,6 +1,6 @@
 package dev.farhan.springneo4j.services;
 
-import dev.farhan.springneo4j.models.Course;
+import dev.farhan.springneo4j.models.Curso;
 import dev.farhan.springneo4j.queryresults.CourseEnrolmentQueryResult;
 import dev.farhan.springneo4j.repositories.CourseRepository;
 import dev.farhan.springneo4j.repositories.UserRepository;
@@ -18,7 +18,7 @@ public class CourseEnrolmentService {
         this.userRepository = userRepository;
     }
 
-    public List<Course> getAllEnrolledCoursesByUsername(String username) {
+    public List<Curso> getAllEnrolledCoursesByUsername(String username) {
         return courseRepository.findAllEnrolledCoursesByUsername(username);
     }
 

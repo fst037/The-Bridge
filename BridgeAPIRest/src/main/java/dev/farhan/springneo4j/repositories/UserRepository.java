@@ -1,14 +1,14 @@
 package dev.farhan.springneo4j.repositories;
 
-import dev.farhan.springneo4j.models.User;
+import dev.farhan.springneo4j.models.Estudiante;
 import dev.farhan.springneo4j.queryresults.CourseEnrolmentQueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.Optional;
 
-public interface UserRepository extends Neo4jRepository<User, Long> {
-    Optional<User> findUserByUsername(String username);
+public interface UserRepository extends Neo4jRepository<Estudiante, Long> {
+    Optional<Estudiante> findUserByUsername(String username);
 
     @Query("MATCH (user:User), (course:Course) WHERE user.username = $username AND course.identifier = $identifier " +
             "RETURN EXISTS((user)-[:ENROLLED_IN]->(course))")
