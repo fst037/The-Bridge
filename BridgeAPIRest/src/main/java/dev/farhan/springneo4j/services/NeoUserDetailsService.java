@@ -15,10 +15,9 @@ public class NeoUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository
-                .findUserByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found" + username));
+                .findEstudianteByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found" + email));
     }
 }

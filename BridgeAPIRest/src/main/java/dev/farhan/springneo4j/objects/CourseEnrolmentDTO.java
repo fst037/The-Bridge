@@ -1,11 +1,11 @@
 package dev.farhan.springneo4j.objects;
 
-import dev.farhan.springneo4j.models.Course;
+import dev.farhan.springneo4j.models.Curso;
 
 public class CourseEnrolmentDTO {
     private String name;
     private String username;
-    private Course course;
+    private Curso curso;
 
     public CourseEnrolmentDTO() {
     }
@@ -26,11 +26,11 @@ public class CourseEnrolmentDTO {
         this.username = username;
     }
 
-    public Course getCourse() {
-        return course;
+    public Curso getCourse() {
+        return curso;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Curso curso) {
+        this.curso = curso;
     }
 }

@@ -1,6 +1,6 @@
 package dev.farhan.springneo4j.services;
 
-import dev.farhan.springneo4j.models.Course;
+import dev.farhan.springneo4j.models.Curso;
 import dev.farhan.springneo4j.repositories.CourseRepository;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,11 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public List<Course> getAllCourses() {
+    public List<Curso> getAllCourses() {
         return courseRepository.findAll();
     }
 
-    public Course getCourseByIdentifier(String identifier) {
+    public Curso getCourseByIdentifier(String identifier) {
 
         return courseRepository.findCourseByIdentifier(identifier)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404)));
