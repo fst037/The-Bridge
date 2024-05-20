@@ -37,7 +37,7 @@ public class CourseEnrolmentController {
                     CursoDTO responseCourse = new CursoDTO();
 
                     responseCourse.setIdentificador(course.getIdentificador());
-                    responseCourse.setTitulo(course.getNombre());
+                    responseCourse.setTitulo(course.getMateria().getNombre());
                     responseCourse.setProfesor(course.getProfesor());
                     responseCourse.setEnrolled(true);
 

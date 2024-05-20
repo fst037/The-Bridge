@@ -12,7 +12,6 @@ public class Curso {
     @Id @GeneratedValue
     private Long id;
     private String identificador;
-    private String nombre;
     @Relationship(type = "DE_MATERIA", direction = Relationship.Direction.OUTGOING)
     private Materia materia;
     @Relationship(type = "A_CARGO_DE", direction = Relationship.Direction.INCOMING)
@@ -31,20 +30,20 @@ public class Curso {
         this.identificador = identificador;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public Profesor getProfesor() {
         return profesor;
     }
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
+    }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
     }
 
     public List<Estudiante> getEstudiantes() {

@@ -3,6 +3,7 @@ package dev.farhan.springneo4j.objects;
 import dev.farhan.springneo4j.models.Comentario;
 import dev.farhan.springneo4j.models.Valoracion;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class EstudianteDTO {
@@ -10,14 +11,21 @@ public class EstudianteDTO {
     private String email;
     private String roles;
     private List<Comentario> comentarios;
-    private List<Valoracion> valoraciones;
+    private HashMap<String, Integer> valoracionesHashMap;
 
     public EstudianteDTO(String name, String username, String roles, List<Comentario> comentarios, List<Valoracion> valoraciones) {
         this.nombre = name;
         this.email = username;
         this.roles = roles;
         this.comentarios = comentarios;
-        this.valoraciones = valoraciones;
+        this.valoracionesHashMap = new HashMap<String, Integer>();
+        for (Valoracion valoracion : valoraciones) {
+            if (valoracionesHashMap.containsKey(valoracion.getAptitud1())) {
+                valoracionesHashMap.put(valoracion.getAptitud1(), valoracionesHashMap.get(valoracion.getAptitud1()) + 1);
+            } else {
+                valoracionesHashMap.put(valoracion.getAptitud1(), 1);
+            }
+        }
     }
     
     public String getNombre() {
@@ -44,11 +52,11 @@ public class EstudianteDTO {
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
-    public List<Valoracion> getValoraciones() {
-        return valoraciones;
+    public HashMap<String, Integer> getValoraciones() {
+        return valoracionesHashMap;
     }
-    public void setValoraciones(List<Valoracion> valoraciones) {
-        this.valoraciones = valoraciones;
+    public void setValoraciones(HashMap<String, Integer> valoraciones) {
+        this.valoracionesHashMap = valoraciones;
     }
 
     

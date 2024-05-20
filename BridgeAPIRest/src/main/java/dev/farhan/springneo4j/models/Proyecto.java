@@ -8,12 +8,12 @@ import java.util.ArrayList;
 @Node
 public class Proyecto {
 
-    String titulo;
-    String descripción;
-    ArrayList<String> links;
-    String fotos;
+    private String titulo;
+    private String descripcion;
+    private ArrayList<String> links;
+    private String fotos;
     @Relationship(type = "REALIZADO_EN_EQUIPO_CON", direction = Relationship.Direction.OUTGOING)
-    Equipo equipo;
+    private Equipo equipo;
 
 
     public Proyecto(String titulo, String descripcion, Equipo equipo) {
@@ -23,14 +23,14 @@ public class Proyecto {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripción = descripcion;
+        this.descripcion = descripcion;
     }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    public String getDescripción() {return this.descripción;}
+    public String getDescripcion() {return this.descripcion;}
 
     public String getTitulo() {
         return this.titulo;

@@ -22,4 +22,7 @@ public interface UserRepository extends Neo4jRepository<Estudiante, Long> {
 
     @Query("MATCH (estudiante:Estudiante)-[:ESTUDIA_EN]->(curso:Curso {identificador: $identificador}) RETURN estudiante")
     List<Estudiante> findAllEstudiantesDeCurso(String identificador);
+
+    @Query("MATCH (estudiante:Estudiante) WHERE estudiante.email IN $emails RETURN estudiante")
+    List<Estudiante> findEstudiantesByEmails(List<String> emails);
 }

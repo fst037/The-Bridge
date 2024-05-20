@@ -32,7 +32,7 @@ public class CursoController {
                     CursoDTO responseCourse = new CursoDTO();
 
                     responseCourse.setIdentificador(course.getIdentificador());
-                    responseCourse.setTitulo(course.getNombre());
+                    responseCourse.setTitulo(course.getMateria().getNombre());
                     responseCourse.setProfesor(course.getProfesor());
 
                     if (principal != null)
@@ -52,7 +52,7 @@ public class CursoController {
         CursoDTO responseCourse = new CursoDTO();
 
         responseCourse.setIdentificador(curso.getIdentificador());
-        responseCourse.setTitulo(curso.getNombre());
+        responseCourse.setTitulo(curso.getMateria().getNombre());
         responseCourse.setProfesor(curso.getProfesor());
 
         if (principal != null)

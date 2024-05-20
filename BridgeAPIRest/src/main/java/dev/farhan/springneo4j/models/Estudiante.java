@@ -20,6 +20,7 @@ public class Estudiante implements UserDetails {
     private String email;
     private String password;
     private String roles;
+    private boolean enabled;
     @Relationship(type = "COMENTO_A", direction = Relationship.Direction.INCOMING)
     private List<Comentario> comentariosRecibidos;
     @Relationship(type = "VALORO_A", direction = Relationship.Direction.INCOMING)
@@ -67,6 +68,9 @@ public class Estudiante implements UserDetails {
     public void setRoles(String roles) {
         this.roles = roles;
     }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public List<Comentario> getComentarios() {
         return comentariosRecibidos;
@@ -107,7 +111,7 @@ public class Estudiante implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 
     @Override

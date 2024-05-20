@@ -24,9 +24,17 @@ public class UserService {
     }
 
     public Estudiante createUser(CreateUserRequest request) {
-        Estudiante estudiante = new Estudiante();
+        Estudiante estudiante = userRepository.findEstudianteByEmail(request.getUsername())
+                .orElse(new Estudiante());
 
+        estudiante.setEnabled(true);
         estudiante.setNombre(request.getName());
+
+        //verificar email educativo y regex
+        if (!request.getUsername().matches("^[a-zA-Z0-9._%+-]+@edu.com.ar$")) {
+            throw new IllegalArgumentException("Email must be from an educational institution");
+        }
+
         estudiante.setEmail(request.getUsername());
         estudiante.setRoles(request.getRoles());
         estudiante.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -38,6 +46,10 @@ public class UserService {
 
     public List<Estudiante> getEstudiantesDeCurso(String identifier) {
         return userRepository.findAllEstudiantesDeCurso(identifier);
+    }
+
+    public List<Estudiante> getEstudiantesByEmails(List<String> emails) {
+        return userRepository.findEstudiantesByEmails(emails);
     }
 
     public Estudiante getEstudianteByEmail(String email) {

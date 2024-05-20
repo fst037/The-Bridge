@@ -16,7 +16,6 @@ public class Profesor {
     private String legajo;
     private String usuario;
     private String contraseña;
-
     @Relationship(type = "A_CARGO_DE", direction = Relationship.Direction.OUTGOING)
     private ArrayList<Curso> cursos;
 
