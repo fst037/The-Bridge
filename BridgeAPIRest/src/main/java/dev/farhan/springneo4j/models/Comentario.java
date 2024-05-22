@@ -11,9 +11,9 @@ public class Comentario {
     private String mensaje;
 
     @TargetNode
-    private Estudiante estudiante;
+    private User estudiante;
 
-    public Comentario(String mensaje, Estudiante estudiante) {
+    public Comentario(String mensaje, User estudiante) {
         this.mensaje = mensaje;
         this.estudiante = estudiante;
     }
@@ -26,7 +26,7 @@ public class Comentario {
         return mensaje;
     }
 
-    public Estudiante getEstudiante() {
+    public User getEstudiante() {
         return estudiante;
     }
 }

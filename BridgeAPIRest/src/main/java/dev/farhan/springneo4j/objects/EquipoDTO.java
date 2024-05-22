@@ -1,28 +1,21 @@
 package dev.farhan.springneo4j.objects;
-
 import dev.farhan.springneo4j.models.Curso;
-import dev.farhan.springneo4j.models.Equipo;
-import dev.farhan.springneo4j.models.Estudiante;
+import dev.farhan.springneo4j.models.User;
 import dev.farhan.springneo4j.models.Proyecto;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Relationship;
-
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class EquipoDTO {
 
     private long id;
-
-    private ArrayList<Estudiante> estudiantes = new ArrayList<Estudiante>();
-
-    private Proyecto proyecto;
-
+    private List<User> estudiantes = new ArrayList<User>();
     private Curso curso;
 
-    public EquipoDTO(long id, Proyecto proyecto, ArrayList<Estudiante> estudiantes) {
-        this.id = id;
-        this.proyecto = proyecto;
+
+    public EquipoDTO(List<User> estudiantes, Curso curso) {
+        setId(id);
+        this.curso = curso;
         this.estudiantes = estudiantes;
     }
 
@@ -34,19 +27,11 @@ public class EquipoDTO {
         this.curso = curso;
     }
 
-    public Proyecto getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
-
-    public ArrayList<Estudiante> getEstudiantes() {
+    public List<User> getEstudiantes() {
         return estudiantes;
     }
 
-    public void setEstudiantes(ArrayList<Estudiante> estudiantes) {
+    public void setEstudiantes(List<User> estudiantes) {
         this.estudiantes = estudiantes;
     }
 

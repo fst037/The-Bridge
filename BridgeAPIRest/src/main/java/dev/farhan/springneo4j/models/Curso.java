@@ -17,7 +17,7 @@ public class Curso {
     @Relationship(type = "A_CARGO_DE", direction = Relationship.Direction.INCOMING)
     private Profesor profesor;
     @Relationship(type = "ESTUDIA_EN", direction = Relationship.Direction.INCOMING)
-    private List<Estudiante> estudiantes;
+    private List<User> estudiantes;
 
     public Curso() {
     }
@@ -46,11 +46,11 @@ public class Curso {
         this.materia = materia;
     }
 
-    public List<Estudiante> getEstudiantes() {
+    public List<User> getEstudiantes() {
         return estudiantes;
     }
 
-    public void setEstudiantes(List<Estudiante> estudiantes) {
+    public void setEstudiantes(List<User> estudiantes) {
         this.estudiantes = estudiantes;
     }
 }

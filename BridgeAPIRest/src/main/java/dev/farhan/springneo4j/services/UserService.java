@@ -1,7 +1,7 @@
 package dev.farhan.springneo4j.services;
 
 import dev.farhan.springneo4j.models.Comentario;
-import dev.farhan.springneo4j.models.Estudiante;
+import dev.farhan.springneo4j.models.User;
 import dev.farhan.springneo4j.models.Valoracion;
 import dev.farhan.springneo4j.repositories.UserRepository;
 import dev.farhan.springneo4j.requests.CreateUserRequest;
@@ -23,9 +23,9 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Estudiante createUser(CreateUserRequest request) {
-        Estudiante estudiante = userRepository.findEstudianteByEmail(request.getUsername())
-                .orElse(new Estudiante());
+    public User createUser(CreateUserRequest request) {
+        User estudiante = userRepository.findEstudianteByEmail(request.getUsername())
+                .orElse(new User());
 
         estudiante.setEnabled(true);
         estudiante.setNombre(request.getName());
@@ -44,27 +44,27 @@ public class UserService {
         return estudiante;
     }
 
-    public List<Estudiante> getEstudiantesDeCurso(String identifier) {
+    public List<User> getEstudiantesDeCurso(String identifier) {
         return userRepository.findAllEstudiantesDeCurso(identifier);
     }
 
-    public List<Estudiante> getEstudiantesByEmails(List<String> emails) {
+    public List<User> getEstudiantesByEmails(List<String> emails) {
         return userRepository.findEstudiantesByEmails(emails);
     }
 
-    public Estudiante getEstudianteByEmail(String email) {
+    public User getEstudianteByEmail(String email) {
         return userRepository.findEstudianteByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found" + email));
     }
 
     public void addComentarioToEstudiante(String email, Comentario comentario) {
-        Estudiante estudiante = getEstudianteByEmail(email);
+        User estudiante = getEstudianteByEmail(email);
         estudiante.recibeComentario(comentario);
         userRepository.save(estudiante);
     }
 
     public void addValoracionToEstudiante(String email, Valoracion valoracion) {
-        Estudiante estudiante = getEstudianteByEmail(email);
+        User estudiante = getEstudianteByEmail(email);
         estudiante.recibeValoracion(valoracion);
         userRepository.save(estudiante);
     }
