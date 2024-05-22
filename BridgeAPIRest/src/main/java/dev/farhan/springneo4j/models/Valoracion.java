@@ -17,12 +17,12 @@ public class Valoracion {
     private String mensaje;
 
     @TargetNode
-    private Estudiante estudiante;
+    private User estudiante;
 
     public Valoracion() {
     }
 
-    public Valoracion(String aptitud1, String aptitud2, String aptitud3, Estudiante estudiante, String mensaje) {
+    public Valoracion(String aptitud1, String aptitud2, String aptitud3, User estudiante, String mensaje) {
         this.aptitud1 = aptitud1;
         this.aptitud2 = aptitud2;
         this.aptitud3 = aptitud3;
@@ -42,7 +42,7 @@ public class Valoracion {
         return aptitud3;
     }
 
-    public Estudiante getEstudiante() {
+    public User getEstudiante() {
         return estudiante;
     }
 

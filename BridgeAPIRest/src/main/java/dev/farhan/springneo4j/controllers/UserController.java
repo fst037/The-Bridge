@@ -1,7 +1,7 @@
 package dev.farhan.springneo4j.controllers;
 
 import dev.farhan.springneo4j.models.Comentario;
-import dev.farhan.springneo4j.models.Estudiante;
+import dev.farhan.springneo4j.models.User;
 import dev.farhan.springneo4j.models.Valoracion;
 import dev.farhan.springneo4j.objects.ComentarioDTO;
 import dev.farhan.springneo4j.objects.EstudianteDTO;
@@ -34,7 +34,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<EstudianteDTO> signUp(@RequestBody CreateUserRequest request) {
-        Estudiante estudiante = userService.createUser(request);
+        User estudiante = userService.createUser(request);
 
         EstudianteDTO responseUser = new EstudianteDTO(estudiante.getNombre(), estudiante.getUsername(), estudiante.getRoles(), estudiante.getComentarios(), estudiante.getValoraciones());
 
@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping("/estudiante/{email}")
     public ResponseEntity<EstudianteDTO> getEstudianteByEmail(@PathVariable String email) {
-        Estudiante estudiante = userService.getEstudianteByEmail(email);
+        User estudiante = userService.getEstudianteByEmail(email);
 
         EstudianteDTO responseUser = new EstudianteDTO(estudiante.getNombre(), estudiante.getEmail(), estudiante.getRoles(), estudiante.getComentarios(), estudiante.getValoraciones());
 
@@ -52,7 +52,7 @@ public class UserController {
 
     @GetMapping("/curso/{identificador}/estudiantes")
     public ResponseEntity<List<EstudianteDTO>> getCursoEstudiantes(@PathVariable String identificador) {
-        List<Estudiante> students = userService.getEstudiantesDeCurso(identificador);
+        List<User> students = userService.getEstudiantesDeCurso(identificador);
 
         List<EstudianteDTO> responseStudents = students.stream().map(
                 (student) -> new EstudianteDTO(student.getNombre(), student.getEmail(), student.getRoles(), student.getComentarios(), student.getValoraciones())
@@ -63,8 +63,8 @@ public class UserController {
 
     @PostMapping("/comentarPerfil")
     public ResponseEntity<ComentarioDTO> addCommentarioAEstudiante(Principal principal, @RequestBody AddComentarioRequest comentarioRequest) {
-        Estudiante remitente = userService.getEstudianteByEmail(principal.getName());
-        Estudiante destinatario = userService.getEstudianteByEmail(comentarioRequest.getDestinatario());
+        User remitente = userService.getEstudianteByEmail(principal.getName());
+        User destinatario = userService.getEstudianteByEmail(comentarioRequest.getDestinatario());
 
         //TODO: Add validation to check if the comment is not toxic
         userService.addComentarioToEstudiante(destinatario.getEmail(), new Comentario(comentarioRequest.getMensaje(), remitente));
@@ -76,8 +76,8 @@ public class UserController {
 
     @PostMapping("/valorarPerfil")
     public ResponseEntity<ValoracionDTO> addValoracionAEstudiante(Principal principal, @RequestBody AddValoracionRequest valoracionRequest) {
-        Estudiante remitente = userService.getEstudianteByEmail(principal.getName());
-        Estudiante destinatario = userService.getEstudianteByEmail(valoracionRequest.getDestinatario());
+        User remitente = userService.getEstudianteByEmail(principal.getName());
+        User destinatario = userService.getEstudianteByEmail(valoracionRequest.getDestinatario());
 
         Valoracion valoracion = new Valoracion(
                 valoracionRequest.getAptitud1(),

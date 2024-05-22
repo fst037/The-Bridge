@@ -1,20 +1,20 @@
 package dev.farhan.springneo4j.queryresults;
 
 import dev.farhan.springneo4j.models.Curso;
-import dev.farhan.springneo4j.models.Estudiante;
+import dev.farhan.springneo4j.models.User;
 
 public class CourseEnrolmentQueryResult {
-    private Estudiante user;
+    private User user;
     private Curso curso;
 
     public CourseEnrolmentQueryResult() {
     }
 
-    public Estudiante getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Estudiante estudiante) {
+    public void setUser(User estudiante) {
         this.user = estudiante;
     }
 
