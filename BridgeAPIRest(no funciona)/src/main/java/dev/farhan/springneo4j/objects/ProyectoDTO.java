@@ -1,6 +1,9 @@
 package dev.farhan.springneo4j.objects;
 
 import dev.farhan.springneo4j.models.Equipo;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.ArrayList;
 

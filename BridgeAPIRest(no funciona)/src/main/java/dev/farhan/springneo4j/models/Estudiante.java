@@ -6,13 +6,12 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
 @Node
-public class Estudiante implements UserDetails {
+public class User implements UserDetails {
     @Id @GeneratedValue
     private Long id;
     private String nombre;
@@ -26,7 +25,7 @@ public class Estudiante implements UserDetails {
     @Relationship(type = "VALORO_A", direction = Relationship.Direction.INCOMING)
     private List<Valoracion> valoracionesRecibidas;
 
-    public Estudiante() {
+    public User() {
     }
 
     public Long getId() {
