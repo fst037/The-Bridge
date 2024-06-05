@@ -1,10 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { IconoUser } from "./IconoUser";
 import { PersonasInfo } from "./PersonasInfo";
 import { PersonasInfoWrapper } from "./PersonasInfoWrapper";
 import "./style.css";
 
 export const PaginaInicio = () => {
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
+
   return (
     <div className="pagina-inicio">
       <div className="overlap-3">
@@ -133,6 +140,7 @@ export const PaginaInicio = () => {
           </div>
         </div>
         <div className="text-wrapper-19">Inicio</div>
+        <button onClick={handleRegisterClick}>Registrarme</button>
       </div>
     </div>
   );
