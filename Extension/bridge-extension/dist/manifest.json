@@ -26,10 +26,6 @@
     {
       "matches": ["https://www.webcampus.uade.edu.ar/Integrantes/*"],
       "js": ["scripts/integrantes.js"]
-    },
-    {
-      "matches": ["https://www.webcampus.uade.edu.ar/HistorialAcademico/Historial_academico.aspx*"],
-      "js": ["scripts/historialAcademico.js"]
     }
   ]
 }

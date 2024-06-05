@@ -41,7 +41,6 @@ function agregarBotonACadaFila() {
         siguienteFila.classList.toggle("d-none");
       }
     });
-
     td.appendChild(boton);
     fila.insertBefore(td, fila.children[2]);
     let sigFilaHTML = `<tr class="d-none">      
@@ -369,6 +368,15 @@ function setAnimacionesCarrousel(){
     }, 500);
   });
 }
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  console.log(request)
+  if (request.nombre !== undefined && request.encendido !== undefined) {
+    // An Interruptor was toggled in the extension
+    console.log(request.nombre + ' was toggled. New state: ' + request.encendido);
+  }
+});
+
 
 crearEncabezado();
 agregarBotonACadaFila();

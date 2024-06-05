@@ -5,8 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 600px;
-  min-height: 400px;
+  
+  height: 500px;
+  width: 400px;
 }
 
 code {
@@ -16,11 +17,26 @@ code {
 
 .App {
   text-align: center;
+  height: 100%;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.ListaConfiguraciones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+  height: 100%;
+  width: 100%;
+  padding: 20px;  
+  box-sizing: border-box;
+}
+
+.ListaConfiguraciones li {
+  margin: 10px;
+  width: 100%;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -31,7 +47,6 @@ code {
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,3 +68,64 @@ code {
   }
 }
 
+.WrapperHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    height: 50px;
+    width: 100%;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    background-color: #c7c;
+}
+
+h1{
+    font-size: 1.5em;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    margin: 10px;
+}
+.WrapperInterruptor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ddd;
+  border-radius: 20px;
+  padding: 0px 20px;
+}
+
+h2 {
+  margin-right:20px;
+}
+
+button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.buttonApagar{
+  background-color: #f88;
+  color: #000;
+}
+
+.buttonEncender{
+  background-color: #8f8;
+  color: #000;
+}
