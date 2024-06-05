@@ -2,12 +2,15 @@ package TheBridge.TheBridgeNeo4jApiREST.controllers;
 
 import TheBridge.TheBridgeNeo4jApiREST.models.Course;
 import TheBridge.TheBridgeNeo4jApiREST.objects.CourseDTO;
+import TheBridge.TheBridgeNeo4jApiREST.objects.UserDTO;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.CoursesOfSubjectQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.requests.AddUsersToCourseRequest;
 import TheBridge.TheBridgeNeo4jApiREST.services.CourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/cursos")
@@ -89,7 +92,13 @@ public class CourseController {
     public ResponseEntity<CourseDTO> addUsersToCourse(@RequestBody AddUsersToCourseRequest request) {
         String courseCode = request.getCourseCode();
 
-        for (String username : request.getUsernames()) {
+        List<String> courseUsers = courseService.getUsersOfCourse(courseCode).getUsers().stream().map(UserDTO::getUsername).toList();
+
+        List<String> usernames = request.getUsernames();
+
+        usernames.removeAll(courseUsers);
+
+        for (String username: usernames) {
             courseService.addUserToCourse(username, courseCode);
         }
 

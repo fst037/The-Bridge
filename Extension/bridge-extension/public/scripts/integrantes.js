@@ -13,6 +13,95 @@ function crearEncabezado() {
   tr.insertBefore(th, tr.children[2]);
 }
 
+function cargarIntegrantesNeo4j() {
+  console.log("Leyendo integrantes...");
+  let filas = document.querySelectorAll("#tableintegrantes > tbody > tr");
+  let integrantes = [];
+  for (let fila of filas) {
+
+    let name = fila.children[1].textContent.trim();
+    let username = fila.children[2].textContent.trim().toLowerCase();
+    let legajo = fila.children[3].textContent.trim();
+
+    let integrante = {
+      name: name,
+      username: username,
+      legajo: legajo
+    };
+    if (fila.children[4].textContent.trim() == "Alumno")
+    integrantes.push(integrante);
+  }
+  console.log(integrantes);
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  //TODO usar credenciales de la extensión
+
+  let username = "sacarle@uade.edu.ar";
+  let password = "password";
+  let encodedCredentials = btoa(username + ":" + password);
+  let authHeader = "Basic " + encodedCredentials;
+
+  myHeaders.append("Authorization", authHeader);
+
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+
+  let url = window.location.href;
+  let parts = url.split("=");
+  let courseCode = parts[parts.length - 1];
+
+  let integrantesYaPresentes = [];
+  
+  fetch("http://localhost:8080/api/v1/cursos/usuariosDeCurso?courseCode=" + courseCode, requestOptions)
+    .then((response) => response.text())
+    .then((result) => integrantesYaPresentes = JSON.parse(result))
+    .then(() => {
+
+      let nombresYaPresentes = integrantesYaPresentes.users.map(integrante => integrante.username);
+
+      console.log(nombresYaPresentes);
+
+      let integrantesFiltrados = integrantes.filter(integrante => !nombresYaPresentes.includes(integrante.username));
+
+      fetch('http://localhost:8080/api/v1/auth/preRegisterUsers', {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(integrantesFiltrados)
+      })
+
+      .then(data => console.log(data))
+      .then(() => {
+
+
+        let courseData = {
+          courseCode: courseCode,
+          usernames: integrantes.map(integrante => integrante.username)
+        };
+      
+        console.log(courseData);
+      
+        fetch('http://localhost:8080/api/v1/cursos/agregarVariosUsuariosACurso', {
+          method: 'POST',
+          headers: myHeaders,
+          body: JSON.stringify(courseData)
+        })
+        .then(data => console.log(data))
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    })
+    .catch((error) => console.error(error));
+
+}
+
 function agregarBotonACadaFila() {
   let filas = document.querySelectorAll("#tableintegrantes > tbody > tr");
   for (let fila of filas) {    
@@ -377,7 +466,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   }
 });
 
-
+cargarIntegrantesNeo4j();
 crearEncabezado();
 agregarBotonACadaFila();
 agregarEstilos();

@@ -66,7 +66,7 @@ public class TeamController {
         TeamDTO nuevoEquipo = equipoService.removeStudentFromTeam(principal.getName(), username, identifier);
         return new ResponseEntity<>(nuevoEquipo, HttpStatus.OK);
     }
-
+    /*
     @GetMapping("/{identifier}/reccomendations")
     public ResponseEntity<List<UserHabilitiesDTO>> getEstudiantesRecomendaciones(@RequestParam String identifier) {
         String habilidadNecesaria = this.getHabilidadNecesaria(identifier);
@@ -203,5 +203,5 @@ public class TeamController {
             default:
                 throw new IllegalArgumentException("Habilidad desconocida: " + habilidad);
         }
-    }
+    }*/
 }
