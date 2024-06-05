@@ -1,0 +1,711 @@
+.pagina-inicio {
+    height: 1024px;
+    width: 1440px;
+  }
+  
+  .pagina-inicio .overlap-3 {
+    height: 1024px;
+    position: relative;
+    width: 1446px;
+  }
+  
+  .pagina-inicio .PLANTILLA-PARA {
+    height: 1024px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1446px;
+  }
+  
+  .pagina-inicio .overlap-4 {
+    background-color: #ffffff;
+    height: 1024px;
+    position: relative;
+    width: 1440px;
+  }
+  
+  .pagina-inicio .overlap-5 {
+    height: 79px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1440px;
+  }
+  
+  .pagina-inicio .barra-superior {
+    background-color: #dbcef6eb;
+    height: 79px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1440px;
+  }
+  
+  .pagina-inicio .icono-user-instance {
+    background-image: url(./ejemplo-icono-1-2.png) !important;
+    left: 1354px !important;
+    position: absolute !important;
+    top: 0 !important;
+  }
+  
+  .pagina-inicio .bridge {
+    height: 41px;
+    left: 56px;
+    object-fit: cover;
+    position: absolute;
+    top: 19px;
+    width: 203px;
+  }
+  
+  .pagina-inicio .logo {
+    height: 53px;
+    left: 13px;
+    object-fit: cover;
+    position: absolute;
+    top: 7px;
+    width: 45px;
+  }
+  
+  .pagina-inicio .buscador {
+    height: 41px;
+    left: 280px;
+    position: absolute;
+    top: 19px;
+    width: 506px;
+  }
+  
+  .pagina-inicio .overlap-6 {
+    background-color: #ffffff;
+    border-radius: 15px;
+    height: 41px;
+    position: relative;
+    width: 504px;
+  }
+  
+  .pagina-inicio .buscar {
+    height: 27px;
+    left: 8px;
+    object-fit: cover;
+    position: absolute;
+    top: 7px;
+    width: 26px;
+  }
+  
+  .pagina-inicio .text-wrapper-4 {
+    color: #9a9a9a;
+    font-family: "Inter-LightItalic", Helvetica;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 300;
+    left: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 8px;
+    width: 93px;
+  }
+  
+  .pagina-inicio .iconos-wrapper {
+    background-color: #efe8ff;
+    height: 945px;
+    left: 0;
+    position: absolute;
+    top: 79px;
+    width: 84px;
+  }
+  
+  .pagina-inicio .iconos {
+    height: 877px;
+    left: 10px;
+    position: relative;
+    top: 33px;
+    width: 61px;
+  }
+  
+  .pagina-inicio .home {
+    background-image: url(./home-1.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 49px;
+    left: 7px;
+    position: absolute;
+    top: 0;
+    width: 45px;
+  }
+  
+  .pagina-inicio .setting {
+    height: 50px;
+    left: 3px;
+    object-fit: cover;
+    position: absolute;
+    top: 827px;
+    width: 54px;
+  }
+  
+  .pagina-inicio .notificaciones {
+    background-image: url(./notificacion-1.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 40px;
+    left: 11px;
+    position: absolute;
+    top: 409px;
+    width: 37px;
+  }
+  
+  .pagina-inicio .ratings {
+    background-image: url(./rating-1.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 54px;
+    left: 8px;
+    position: absolute;
+    top: 334px;
+    width: 45px;
+  }
+  
+  .pagina-inicio .mi-perfil {
+    background-image: url(./miperfil-1.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 41px;
+    left: 12px;
+    position: absolute;
+    top: 73px;
+    width: 36px;
+  }
+  
+  .pagina-inicio .mis-equipos {
+    background-image: url(./grupoicono-1.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 52px;
+    left: 6px;
+    position: absolute;
+    top: 200px;
+    width: 50px;
+  }
+  
+  .pagina-inicio .mis-cursos {
+    background-image: url(./iconocurso-1.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 47px;
+    left: 0;
+    position: absolute;
+    top: 133px;
+    width: 61px;
+  }
+  
+  .pagina-inicio .comunidad {
+    background-image: url(./iconocomunidadpng-1.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 41px;
+    left: 11px;
+    position: absolute;
+    top: 272px;
+    width: 40px;
+  }
+  
+  .pagina-inicio .text-wrapper-5 {
+    color: #4d4d4d;
+    font-family: "Varela Round-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    left: 140px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 163px;
+    width: 208px;
+  }
+  
+  .pagina-inicio .curso-info {
+    height: 99px;
+    left: 138px;
+    position: absolute;
+    top: 213px;
+    width: 1207px;
+  }
+  
+  .pagina-inicio .group {
+    height: 98px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 397px;
+  }
+  
+  .pagina-inicio .overlap-group-3 {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #4d4d4d;
+    border-radius: 12px;
+    height: 98px;
+    position: relative;
+    width: 393px;
+  }
+  
+  .pagina-inicio .text-wrapper-6 {
+    color: #4d4d4d;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 4px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 12px;
+    width: 161px;
+  }
+  
+  .pagina-inicio .text-wrapper-7 {
+    color: #4c4c4cab;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 45px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 43px;
+    width: 238px;
+  }
+  
+  .pagina-inicio .group-2 {
+    height: 99px;
+    left: 406px;
+    position: absolute;
+    top: 0;
+    width: 805px;
+  }
+  
+  .pagina-inicio .overlap-7 {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #4d4d4d;
+    border-radius: 12px;
+    height: 98px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 393px;
+  }
+  
+  .pagina-inicio .text-wrapper-8 {
+    color: #4d4d4d;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 3px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 12px;
+    width: 161px;
+  }
+  
+  .pagina-inicio .text-wrapper-9 {
+    color: #4c4c4cab;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 31px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 43px;
+    width: 238px;
+  }
+  
+  .pagina-inicio .overlap-group-wrapper {
+    height: 98px;
+    left: 408px;
+    position: absolute;
+    top: 1px;
+    width: 397px;
+  }
+  
+  .pagina-inicio .text-wrapper-10 {
+    color: #4d4d4d;
+    font-family: "Varela Round-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    left: 138px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 709px;
+    width: 219px;
+  }
+  
+  .pagina-inicio .text-wrapper-11 {
+    color: #4d4d4d;
+    font-family: "Varela Round-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    left: 138px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 433px;
+    width: 219px;
+  }
+  
+  .pagina-inicio .line {
+    height: 1px;
+    left: 151px;
+    object-fit: cover;
+    position: absolute;
+    top: 937px;
+    width: 1219px;
+  }
+  
+  .pagina-inicio .line-2 {
+    height: 1px;
+    left: 151px;
+    object-fit: cover;
+    position: absolute;
+    top: 661px;
+    width: 1219px;
+  }
+  
+  .pagina-inicio .equipos-info {
+    height: 98px;
+    left: 138px;
+    position: absolute;
+    top: 483px;
+    width: 399px;
+  }
+  
+  .pagina-inicio .contarmiembros {
+    height: 21px;
+    left: 164px;
+    object-fit: cover;
+    position: absolute;
+    top: 13px;
+    width: 21px;
+  }
+  
+  .pagina-inicio .text-wrapper-12 {
+    color: #4d4d4d;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 15px;
+    font-weight: 500;
+    left: 180px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 16px;
+    width: 31px;
+  }
+  
+  .pagina-inicio .overlap-8 {
+    height: 99px;
+    left: 138px;
+    position: absolute;
+    top: 759px;
+    width: 1207px;
+  }
+  
+  .pagina-inicio .personas {
+    height: 98px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1207px;
+  }
+  
+  .pagina-inicio .personas-info-instance {
+    left: 0 !important;
+    position: absolute !important;
+    top: 0 !important;
+  }
+  
+  .pagina-inicio .design-component-instance-node {
+    left: 406px !important;
+    position: absolute !important;
+    top: 0 !important;
+  }
+  
+  .pagina-inicio .overlap-wrapper {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #4d4d4d;
+    border-radius: 12px;
+    height: 98px;
+    left: 814px;
+    position: absolute;
+    top: 0;
+    width: 393px;
+  }
+  
+  .pagina-inicio .overlap-9 {
+    height: 59px;
+    left: 15px;
+    position: relative;
+    top: 14px;
+    width: 246px;
+  }
+  
+  .pagina-inicio .text-wrapper-13 {
+    color: #4d4d4d;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 64px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 4px;
+    width: 161px;
+  }
+  
+  .pagina-inicio .overlap-10 {
+    height: 59px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 246px;
+  }
+  
+  .pagina-inicio .text-wrapper-14 {
+    color: #4c4c4cab;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 8px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 29px;
+    width: 238px;
+  }
+  
+  .pagina-inicio .iconouser-2 {
+    height: 59px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 61px;
+  }
+  
+  .pagina-inicio .agregaruser {
+    height: 38px;
+    left: 347px;
+    object-fit: cover;
+    position: absolute;
+    top: 61px;
+    width: 35px;
+  }
+  
+  .pagina-inicio .agregaruser-2 {
+    height: 38px;
+    left: 1170px;
+    object-fit: cover;
+    position: absolute;
+    top: 54px;
+    width: 35px;
+  }
+  
+  .pagina-inicio .equipos-info-2 {
+    height: 98px;
+    left: 544px;
+    position: absolute;
+    top: 483px;
+    width: 807px;
+  }
+  
+  .pagina-inicio .div-wrapper {
+    height: 98px;
+    left: 408px;
+    position: absolute;
+    top: 0;
+    width: 399px;
+  }
+  
+  .pagina-inicio .boton-nuevo {
+    height: 35px;
+    left: 362px;
+    position: absolute;
+    top: 167px;
+    width: 118px;
+  }
+  
+  .pagina-inicio .overlap-11 {
+    background-color: #00bcc6;
+    box-shadow: 0px 4px 4px #00000040;
+    height: 35px;
+    position: relative;
+    width: 116px;
+  }
+  
+  .pagina-inicio .text-wrapper-15 {
+    color: #ffffff;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 8px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0px 4px 4px #00000040;
+    top: 4px;
+    width: 100px;
+  }
+  
+  .pagina-inicio .boton-nuevo-2 {
+    height: 35px;
+    left: 362px;
+    position: absolute;
+    top: 440px;
+    width: 118px;
+  }
+  
+  .pagina-inicio .text-wrapper-16 {
+    color: #ffffff;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 8px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0px 4px 4px #00000040;
+    top: 6px;
+    width: 100px;
+  }
+  
+  .pagina-inicio .agregaruser-3 {
+    height: 38px;
+    left: 896px;
+    object-fit: cover;
+    position: absolute;
+    top: 813px;
+    width: 35px;
+  }
+  
+  .pagina-inicio .ver-ms {
+    height: 32px;
+    left: 151px;
+    position: absolute;
+    top: 360px;
+    width: 1221px;
+  }
+  
+  .pagina-inicio .overlap-12 {
+    height: 32px;
+    position: relative;
+    width: 1219px;
+  }
+  
+  .pagina-inicio .line-3 {
+    height: 1px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 15px;
+    width: 1219px;
+  }
+  
+  .pagina-inicio .rectangle {
+    background-color: #1e1e1e;
+    height: 32px;
+    left: 490px;
+    position: absolute;
+    top: 0;
+    width: 196px;
+  }
+  
+  .pagina-inicio .text-wrapper-17 {
+    color: #fdfdfd;
+    font-family: "Inter-SemiBold Italic", Helvetica;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 600;
+    left: 491px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 193px;
+  }
+  
+  .pagina-inicio .ver-ms-2 {
+    height: 32px;
+    left: 641px;
+    position: absolute;
+    top: 646px;
+    width: 198px;
+  }
+  
+  .pagina-inicio .overlap-13 {
+    height: 32px;
+    position: relative;
+    width: 196px;
+  }
+  
+  .pagina-inicio .rectangle-2 {
+    background-color: #1e1e1e;
+    height: 32px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 196px;
+  }
+  
+  .pagina-inicio .text-wrapper-18 {
+    color: #fdfdfd;
+    font-family: "Inter-SemiBold Italic", Helvetica;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 600;
+    left: 1px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 193px;
+  }
+  
+  .pagina-inicio .ver-ms-3 {
+    height: 32px;
+    left: 641px;
+    position: absolute;
+    top: 921px;
+    width: 198px;
+  }
+  
+  .pagina-inicio .overlap-14 {
+    background-color: #1e1e1e;
+    height: 32px;
+    position: relative;
+    width: 196px;
+  }
+  
+  .pagina-inicio .text-wrapper-19 {
+    color: #4c4c4c66;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 36px;
+    font-weight: 500;
+    left: 140px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 112px;
+    width: 224px;
+  }
