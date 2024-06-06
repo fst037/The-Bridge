@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IconoUser } from "./IconoUser";
 import { PersonasInfo } from "./PersonasInfo";
@@ -71,39 +70,69 @@ export const PaginaInicio = () => {
               <div className="overlap-group-3">
                 <div className="text-wrapper-6">NombreEquipo</div>
                 <div className="text-wrapper-7">Informacion del curso</div>
-                <img className="contarmiembros" alt="Contarmiembros" src="contarmiembros-1-2.png" />
+                <img
+                  className="contarmiembros"
+                  alt="Contarmiembros"
+                  src="contarmiembros-1-2.png"
+                />
                 <div className="text-wrapper-12">8</div>
               </div>
             </div>
             <div className="overlap-8">
               <div className="personas">
-                <PersonasInfo className="personas-info-instance" iconouser="iconouser2-1-2.png" />
-                <PersonasInfoWrapper className="design-component-instance-node" iconouser="iconouser3-1-2.png" />
+                <PersonasInfo
+                  className="personas-info-instance"
+                  iconouser="iconouser2-1-2.png"
+                />
+                <PersonasInfoWrapper
+                  className="design-component-instance-node"
+                  iconouser="iconouser3-1-2.png"
+                />
                 <div className="overlap-wrapper">
                   <div className="overlap-9">
                     <div className="text-wrapper-13">NombreUsuario</div>
                     <div className="overlap-10">
                       <div className="text-wrapper-14">infoUsuario</div>
-                      <img className="iconouser-2" alt="Iconouser" src="iconouser4-3.png" />
+                      <img
+                        className="iconouser-2"
+                        alt="Iconouser"
+                        src="iconouser4-3.png"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
-              <img className="agregaruser" alt="Agregaruser" src="agregaruser-1.png" />
-              <img className="agregaruser-2" alt="Agregaruser" src="agregaruser-3.png" />
+              <img
+                className="agregaruser"
+                alt="Agregaruser"
+                src="agregaruser-1.png"
+              />
+              <img
+                className="agregaruser-2"
+                alt="Agregaruser"
+                src="agregaruser-3.png"
+              />
             </div>
             <div className="equipos-info-2">
               <div className="overlap-7">
                 <div className="text-wrapper-6">NombreEquipo</div>
                 <div className="text-wrapper-7">Informacion del curso</div>
-                <img className="contarmiembros" alt="Contarmiembros" src="contarmiembros-1.png" />
+                <img
+                  className="contarmiembros"
+                  alt="Contarmiembros"
+                  src="contarmiembros-1.png"
+                />
                 <div className="text-wrapper-12">7</div>
               </div>
               <div className="div-wrapper">
                 <div className="overlap-group-3">
                   <div className="text-wrapper-6">NombreEquipo</div>
                   <div className="text-wrapper-7">Informacion del curso</div>
-                  <img className="contarmiembros" alt="Contarmiembros" src="image.png" />
+                  <img
+                    className="contarmiembros"
+                    alt="Contarmiembros"
+                    src="image.png"
+                  />
                   <div className="text-wrapper-12">10</div>
                 </div>
               </div>
@@ -120,7 +149,11 @@ export const PaginaInicio = () => {
             </div>
           </div>
         </div>
-        <img className="agregaruser-3" alt="Agregaruser" src="agregaruser-2.png" />
+        <img
+          className="agregaruser-3"
+          alt="Agregaruser"
+          src="agregaruser-2.png"
+        />
         <div className="ver-ms">
           <div className="overlap-12">
             <img className="line-3" alt="Line" src="line-1.svg" />

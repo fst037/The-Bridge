@@ -4,6 +4,7 @@ import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/Register";
 import { Layout } from "./pages/Layout";
 import { Inicio } from "./pages/Inicio";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="inicio" element={<Inicio />} />
         </Route>
       </Routes>
+      <Toaster />
     </BrowserRouter>
   );
 }

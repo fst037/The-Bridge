@@ -1,8 +1,28 @@
 import "./index.css";
+import { useState } from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLock2Line } from "react-icons/ri";
+import { MdDriveFileRenameOutline } from "react-icons/md";
+import { LuBinary } from "react-icons/lu";
+import { ClipLoader } from "react-spinners";
+import { useSignup } from "../../hooks/useSignup";
+import { FormInput } from "../../components/FormInput";
 
 export const Register = () => {
+  const [inputs, setInputs] = useState({
+    name: "",
+    legajo: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const { signup, loading } = useSignup();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signup(inputs);
+  };
+
   return (
     <div className="w-screen h-screen grid place-items-center text-center text-white body">
       <article
@@ -10,47 +30,71 @@ export const Register = () => {
         backdrop-blur-sm bg-opacity-50 text-start"
       >
         <h1 className="text-3xl font-bold">Bienvenido/a a Bridge</h1>
-        <div className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <label className="flex flex-col mb-4 text-lg">
+            Nombre
+            <FormInput
+              type={"text"}
+              value={inputs.name}
+              placeholder={"Introduce su nombre"}
+              onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
+              Icon={MdDriveFileRenameOutline}
+            />
+          </label>
+          <label className="flex flex-col mb-4 text-lg">
+            Legajo
+            <FormInput
+              type={"number"}
+              value={inputs.legajo}
+              placeholder={"Introduce su numero de legajo"}
+              onChange={(e) => setInputs({ ...inputs, legajo: e.target.value })}
+              Icon={LuBinary}
+            />
+          </label>
           <label className="flex flex-col mb-4 text-lg">
             Correo Electronico
-            <div className="w-full relative flex items-center text-gray-500 focus-within:text-gray-950">
-              <MdOutlineEmail className="size-6 absolute ml-2 pointer-events-none" />
-              <input
-                type="email"
-                className="rounded-md outline-none pr-3 pl-10 py-2 w-full ring-gray-300 focus:ring-gray-800 focus:ring-2"
-                placeholder="Introduce tu email"
-              />
-            </div>
+            <FormInput
+              type={"email"}
+              placeholder={"Introduce tu email educativo"}
+              value={inputs.username}
+              onChange={(e) =>
+                setInputs({ ...inputs, username: e.target.value })
+              }
+              Icon={MdOutlineEmail}
+            />
           </label>
           <label className="flex flex-col mb-4 text-lg">
             Contraseña
-            <div className="w-full relative flex items-center text-gray-500 focus-within:text-gray-950">
-              <RiLock2Line className="size-6 absolute ml-2 pointer-events-none" />
-              <input
-                type="password"
-                className="rounded-md outline-none pr-3 pl-10 py-2 w-full ring-gray-300 focus:ring-gray-800 focus:ring-2"
-                placeholder="Introduce tu contraseña"
-              />
-            </div>
+            <FormInput
+              type={"password"}
+              placeholder={"Introduce una contraseña"}
+              value={inputs.password}
+              onChange={(e) =>
+                setInputs({ ...inputs, password: e.target.value })
+              }
+              Icon={RiLock2Line}
+            />
           </label>
           <label className="flex flex-col mb-4 text-lg">
             Confirmar contraseña
-            <div className="w-full relative flex items-center text-gray-500 focus-within:text-gray-950">
-              <RiLock2Line className="size-6 absolute ml-2 pointer-events-none" />
-              <input
-                type="password"
-                className="rounded-md outline-none pr-3 pl-10 py-2 w-full ring-gray-300 focus:ring-gray-800 focus:ring-2"
-                placeholder="Confirma la contraseña"
-              />
-            </div>
+            <FormInput
+              type={"password"}
+              placeholder={"Confirma la contraseña"}
+              value={inputs.confirmPassword}
+              onChange={(e) =>
+                setInputs({ ...inputs, confirmPassword: e.target.value })
+              }
+              Icon={RiLock2Line}
+            />
           </label>
           <button
-            className="mt-6 rounded-md bg-button2 px-4 py-2 font-semibold text-white transition-all hover:bg-button2/80
-          active:bg-button2"
+            disabled={loading}
+            className={`mt-6 rounded-md ${loading ? "bg-[#CF4734]" : "bg-button2"} px-4 py-2 font-semibold text-white transition-all hover:bg-[#ED6653]
+          active:bg-[#E45946]`}
           >
-            Registrarse
+            {loading ? <ClipLoader size={16} color="#fff" /> : "Registrarse"}
           </button>
-        </div>
+        </form>
       </article>
     </div>
   );
