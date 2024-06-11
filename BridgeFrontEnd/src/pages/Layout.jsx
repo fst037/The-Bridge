@@ -1,15 +1,20 @@
 import { Outlet, Navigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
+import { SideBar } from "../components/SideBar";
+import { Header } from "../components/Header";
 
 export const Layout = () => {
-  const user = "user";
+  const { authUser } = useAuthContext();
 
-  if (!user) return <Navigate to="/login" />;
+  if (!authUser) return <Navigate to="/login" />;
 
   return (
-    <div className="grid h-screen grid-cols-[70px_1fr] grid-rows-[70px_1fr]">
-      <header className="flex items-center justify-between col-span-2 p-4 bg-[#DBCEF6]"></header>
-      <aside className="sidebar bg-[#F0E9FF]"></aside>
-      <Outlet />
+    <div className="w-screen">
+      <Header />
+      <SideBar />
+      <div className="ml-12 mt-12 md:mt-16 md:ml-16 flex-1">
+        <Outlet />
+      </div>
     </div>
   );
 };

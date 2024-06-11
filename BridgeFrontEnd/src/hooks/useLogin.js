@@ -9,23 +9,21 @@ export const useLogin = () => {
   const navigate = useNavigate();
 
   const login = async ({ username, password }) => {
-    if (!username || !password) {
-      toast.error("Debes completar todos los campos");
-    }
-
+    if (!username || !password) toast.error("Debes completar todos los campos");
     try {
       setLoading(true);
       const encodedCredentials = btoa(`${username}:${password}`);
+      const authorizationHeader = `Basic ${encodedCredentials}`;
 
       const res = await fetch("/api/v1/auth/me", {
         method: "GET",
-        headers: {
-          Authorization: `Basic ${encodedCredentials}`,
-        },
+        headers: { Authorization: authorizationHeader },
       });
+
       if (!res.ok) throw new Error("Error al iniciar sesion");
+
       setAuthUser(username);
-      localStorage.setItem("bridge-user", JSON.stringify(username));
+      localStorage.setItem("bridge-user", JSON.stringify(authorizationHeader));
       toast.success("Inicio de sesion exitoso");
       return navigate("/inicio");
     } catch (error) {

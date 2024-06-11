@@ -5,6 +5,11 @@ import { Register } from "./pages/register/Register";
 import { Layout } from "./pages/Layout";
 import { Inicio } from "./pages/Inicio";
 import { Toaster } from "react-hot-toast";
+import { Perfil } from "./pages/Perfil";
+import { Cursos } from "./pages/Cursos";
+import { Equipos } from "./pages/Equipos";
+import { Comunidad } from "./pages/Comunidad";
+import { Ratings } from "./pages/Ratings";
 
 function App() {
   return (
@@ -15,6 +20,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Layout />}>
           <Route path="inicio" element={<Inicio />} />
+          <Route path="perfil" element={<Perfil />} />
+          <Route path="cursos" element={<Cursos />} />
+          <Route path="equipos" element={<Equipos />} />
+          <Route path="comunidad" element={<Comunidad />} />
+          <Route path="ratings" element={<Ratings />} />
         </Route>
       </Routes>
       <Toaster />

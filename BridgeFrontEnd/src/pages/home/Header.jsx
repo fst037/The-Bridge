@@ -1,5 +1,6 @@
 import LogoBridge from "../../assets/LogoBridge.svg";
 import Bridge from "../../assets/Bridge.svg";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
@@ -9,16 +10,27 @@ export const Header = () => {
         <img src={Bridge} alt="Bridge" className="w-40" />
       </div>
       <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-2 md:space-y-0 items-center text-[#FAFAFA]">
-        <a className="text-2xl font-bold hover:underline transition">Inicio</a>
+        <Link
+          className="text-2xl font-bold hover:underline transition"
+          to={"/inicio"}
+        >
+          Inicio
+        </Link>
         <a className="text-2xl font-bold hover:underline transition">
           Sobre nosotros
         </a>
-        <button className="rounded-md bg-button2 px-4 py-2 hover:bg-button2/80 transition-all">
+        <Link
+          className="rounded-md bg-button2 px-4 py-2 hover:bg-button2/80 transition-all"
+          to={"/register"}
+        >
           Registrate
-        </button>
-        <button className="rounded-md bg-button1 px-4 py-2 hover:bg-button1/80 transition-all">
+        </Link>
+        <Link
+          className="rounded-md bg-button1 px-4 py-2 hover:bg-button1/80 transition-all"
+          to={"/login"}
+        >
           Inicia Sesion
-        </button>
+        </Link>
       </div>
     </header>
   );
