@@ -3,6 +3,7 @@ import { useState } from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLock2Line } from "react-icons/ri";
 import { ClipLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 import { FormInput } from "../../components/FormInput";
 import { useLogin } from "../../hooks/useLogin";
 
@@ -60,6 +61,12 @@ export const Login = () => {
             {loading ? <ClipLoader size={16} color="#fff" /> : "Iniciar sesion"}
           </button>
         </form>
+        <p>
+          ¿No tienes una cuenta?{" "}
+          <Link className="underline hover:text-gray-200" to={"/register"}>
+            Registrate
+          </Link>
+        </p>
       </article>
     </div>
   );

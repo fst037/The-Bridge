@@ -5,6 +5,7 @@ import { RiLock2Line } from "react-icons/ri";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { LuBinary } from "react-icons/lu";
 import { ClipLoader } from "react-spinners";
+import { Link } from "react-router-dom";
 import { useSignup } from "../../hooks/useSignup";
 import { FormInput } from "../../components/FormInput";
 
@@ -26,7 +27,7 @@ export const Register = () => {
   return (
     <div className="w-screen h-screen grid place-items-center text-center text-white body">
       <article
-        className="flex flex-col sm:w-[350px] md:w-[450px] gap-12 p-8 bg-gray-950 rounded-2xl bg-clip-padding backdrop-filter 
+        className="flex flex-col sm:w-[350px] md:w-[450px] gap-4 md:gap-12 p-8 bg-gray-950 rounded-2xl bg-clip-padding backdrop-filter 
         backdrop-blur-sm bg-opacity-50 text-start"
       >
         <h1 className="text-3xl font-bold">Bienvenido/a a Bridge</h1>
@@ -89,12 +90,18 @@ export const Register = () => {
           </label>
           <button
             disabled={loading}
-            className={`mt-6 rounded-md ${loading ? "bg-[#CF4734]" : "bg-button2"} px-4 py-2 font-semibold text-white transition-all hover:bg-[#ED6653]
+            className={`rounded-md ${loading ? "bg-[#CF4734]" : "bg-button2"} px-4 py-2 font-semibold text-white transition-all hover:bg-[#ED6653]
           active:bg-[#E45946]`}
           >
             {loading ? <ClipLoader size={16} color="#fff" /> : "Registrarse"}
           </button>
         </form>
+        <p>
+          ¿Ya tienes una cuenta?{" "}
+          <Link className="underline hover:text-gray-200" to={"/login"}>
+            Inicia sesion
+          </Link>
+        </p>
       </article>
     </div>
   );

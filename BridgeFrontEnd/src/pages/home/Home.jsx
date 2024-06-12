@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Imagen1 from "../../assets/Imagen1.svg";
 import { Header } from "./Header";
 
@@ -26,9 +27,12 @@ export const Home = () => {
         <h4 className="text-center font-semibold md:text-xl">
           ¡Regístrate y transforma tu experiencia universitaria hoy!
         </h4>
-        <button className="mt-6 rounded-md bg-button2 px-4 py-2 font-semibold text-white transition-all hover:bg-button2/80">
+        <Link
+          className="mt-6 rounded-md bg-button2 px-4 py-2 font-semibold text-white transition-all hover:bg-button2/80"
+          to={"/register"}
+        >
           Regístrate
-        </button>
+        </Link>
       </footer>
     </div>
   );
