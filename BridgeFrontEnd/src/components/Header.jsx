@@ -43,7 +43,7 @@ export const Header = () => {
 const ProfileCardItem = ({ text, icon, to }) => {
   return (
     <Link
-      className="flex items-center gap-1 p-2 cursor-pointer hover:bg-gray-300"
+      className="flex items-center gap-1 p-2 cursor-pointer bg-white hover:bg-gray-300"
       to={to}
     >
       {icon}
