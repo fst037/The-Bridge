@@ -1,4 +1,5 @@
-import { InfoCard } from "./InfoCard";
+import { AddActionButton } from "../../components/AddActionButton";
+import { InfoCard } from "../../components/InfoCard";
 
 export const MisCursos = () => {
   return (
@@ -6,9 +7,7 @@ export const MisCursos = () => {
       <div className="mt-2">
         <div className="flex space-x-2 my-4">
           <h3 className="text-3xl">Mis Cursos</h3>
-          <button className="bg-[#00BCC6] hover:bg-[#01AAB3] active:bg-[#009CA4] px-4 py-1 rounded-sm text-xl text-white transition">
-            Nuevo +
-          </button>
+          <AddActionButton />
         </div>
         <article className="grid grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
           <InfoCard />

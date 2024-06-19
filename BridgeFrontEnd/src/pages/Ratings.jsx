@@ -1,3 +1,8 @@
 export const Ratings = () => {
-  return <h1>ratings</h1>;
+  return (
+    <div className="p-8">
+      <h2 className="text-4xl text-gray-400/80">Ratings</h2>
+      <main></main>
+    </div>
+  );
 };

@@ -3,13 +3,13 @@ import { Home } from "./pages/home/Home";
 import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/Register";
 import { Layout } from "./pages/Layout";
-import { Inicio } from "./pages/Inicio";
 import { Toaster } from "react-hot-toast";
 import { Perfil } from "./pages/perfil/Perfil";
 import { Cursos } from "./pages/Cursos";
 import { Equipos } from "./pages/Equipos";
 import { Comunidad } from "./pages/Comunidad";
 import { Ratings } from "./pages/Ratings";
+import { Inicio } from "./pages/inicio/Inicio";
 
 function App() {
   return (
