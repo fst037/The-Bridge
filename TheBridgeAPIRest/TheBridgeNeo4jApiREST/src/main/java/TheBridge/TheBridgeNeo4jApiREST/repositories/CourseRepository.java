@@ -18,6 +18,11 @@ public interface CourseRepository extends Neo4jRepository<Course, UUID> {
     @Query("MATCH (e:Course {code: $code}) RETURN e")
     Course findCourseByCode(String code);
 
+    @Query("MATCH (u:User {username: $username}) " +
+            "MATCH (u)-[:ESTUDIA_EN]->(c:Course) " +
+            "RETURN collect(c) as courses")
+    List<Course> findCoursesOfUser(String username);
+
     @Query("MATCH (s:Subject {code: $subjectCode}) " +
             "MATCH (c:Course)-[:DE_MATERIA]->(s) " +
             "RETURN collect(c) as courses, s as subject")

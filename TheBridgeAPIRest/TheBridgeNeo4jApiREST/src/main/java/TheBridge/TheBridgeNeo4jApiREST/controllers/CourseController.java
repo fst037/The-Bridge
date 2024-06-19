@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -31,6 +32,13 @@ public class CourseController {
         }
 
         return new ResponseEntity<>(course, HttpStatus.OK);
+    }
+
+    @GetMapping("/misCursos")
+    public ResponseEntity<List<Course>> getMyCourses(Principal principal) {
+        List<Course> courses = courseService.getCoursesOfUser(principal.getName());
+
+        return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
     @GetMapping("/deIdenfifier")

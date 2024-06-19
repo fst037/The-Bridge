@@ -47,7 +47,9 @@ public class ProjectService {
 
     public ProjectTeamCourseQueryResult createProject(Principal principal, CreateProyectRequest request) {
 
-        if (!projectRepository.isUserInCourseAndTeam(principal.getName(), request.getCursoIdentifier(), request.getEquipoIdentifier()).equals(principal.getName())) {
+        String verify = projectRepository.isUserInCourseAndTeam(principal.getName(), request.getCursoIdentifier(), request.getEquipoIdentifier());
+
+        if (verify == null || !verify.equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(403));
         }
 

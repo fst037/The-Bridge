@@ -8,6 +8,8 @@ import TheBridge.TheBridgeNeo4jApiREST.repositories.CourseRepository;
 import TheBridge.TheBridgeNeo4jApiREST.repositories.SubjectRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CourseService {
     private final CourseRepository courseRepository;
@@ -32,6 +34,10 @@ public class CourseService {
 
     public Course getCourseByIdentifier(String identifier) {
         return courseRepository.findCourseByIdentifier(identifier);
+    }
+
+    public List<Course> getCoursesOfUser(String username) {
+        return courseRepository.findCoursesOfUser(username);
     }
 
     public Course getCourseByCode(String code) {

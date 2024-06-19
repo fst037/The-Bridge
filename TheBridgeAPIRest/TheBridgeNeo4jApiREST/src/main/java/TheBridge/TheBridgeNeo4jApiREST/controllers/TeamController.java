@@ -68,16 +68,16 @@ public class TeamController {
     }
     /*
     @GetMapping("/{identifier}/reccomendations")
-    public ResponseEntity<List<UserHabilitiesDTO>> getEstudiantesRecomendaciones(@RequestParam String identifier) {
+    public ResponseEntity<List<UserSkillsDTO>> getEstudiantesRecomendaciones(@RequestParam String identifier) {
         String habilidadNecesaria = this.getHabilidadNecesaria(identifier);
         List<User> totalEstudiantes = userService.getAllUsers();
         Comparator<User> comparator = getComparatorByHabilidad(habilidadNecesaria.toLowerCase());
         PriorityQueue<User> userQueue = new PriorityQueue<>(comparator);
         userQueue.addAll(totalEstudiantes);
-        List<UserHabilitiesDTO> sortedUsers = new ArrayList<>();
+        List<UserSkillsDTO> sortedUsers = new ArrayList<>();
         while (!userQueue.isEmpty()) {
             User usuario = userQueue.poll();
-            UserHabilitiesDTO userHabilitiesDTO = new UserHabilitiesDTO(usuario.getName(), usuario.getUsername(), usuario.getLegajo());
+            UserSkillsDTO userHabilitiesDTO = new UserSkillsDTO(usuario.getName(), usuario.getUsername(), usuario.getLegajo());
             userHabilitiesDTO.setLiderazgo(userHabilitiesDTO.getLiderazgo());
             userHabilitiesDTO.setOrganizacion(userHabilitiesDTO.getOrganizacion());
             userHabilitiesDTO.setIdeacion(userHabilitiesDTO.getIdeacion());
