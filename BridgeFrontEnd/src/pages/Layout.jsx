@@ -6,7 +6,7 @@ import { Header } from "../components/Header";
 export const Layout = () => {
   const { authUser } = useAuthContext();
 
-  if (authUser) return <Navigate to="/login" />;
+  if (!authUser) return <Navigate to="/login" />;
 
   return (
     <div className="w-screen">

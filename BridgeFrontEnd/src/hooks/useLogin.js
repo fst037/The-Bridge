@@ -22,7 +22,7 @@ export const useLogin = () => {
 
       if (!res.ok) throw new Error("Error al iniciar sesion");
 
-      setAuthUser(username);
+      setAuthUser(authorizationHeader);
       localStorage.setItem("bridge-user", JSON.stringify(authorizationHeader));
       toast.success("Inicio de sesion exitoso");
       return navigate("/inicio");
