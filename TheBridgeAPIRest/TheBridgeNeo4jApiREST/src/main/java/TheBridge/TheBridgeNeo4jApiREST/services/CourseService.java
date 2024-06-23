@@ -3,11 +3,14 @@ package TheBridge.TheBridgeNeo4jApiREST.services;
 
 import TheBridge.TheBridgeNeo4jApiREST.models.Course;
 import TheBridge.TheBridgeNeo4jApiREST.objects.CourseDTO;
+import TheBridge.TheBridgeNeo4jApiREST.objects.UserDTO;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.CoursesOfSubjectQueryResult;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.UsersOfCourseQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.repositories.CourseRepository;
 import TheBridge.TheBridgeNeo4jApiREST.repositories.SubjectRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,18 +64,23 @@ public class CourseService {
     }
 
     public CourseDTO getUsersOfCourse(String courseCode) {
-        return courseRepository.findUsersOfCourse(courseCode).toCourseDTO();
+        UsersOfCourseQueryResult course = courseRepository.findUsersOfCourse(courseCode);
+        if (course == null) {
+
+            return new CourseDTO("", courseCode, new ArrayList<UserDTO>());
+        }
+        return course.toCourseDTO();
     }
 
     public CourseDTO addUserToCourse(String username, String courseCode) {
         courseRepository.addUserToCourse(username, courseCode);
 
-        return courseRepository.findUsersOfCourse(courseCode).toCourseDTO();
+        return getUsersOfCourse(courseCode);
     }
 
     public CourseDTO removeUserFromCourse(String username, String courseCode) {
         courseRepository.removeUserFromCourse(username, courseCode);
 
-        return courseRepository.findUsersOfCourse(courseCode).toCourseDTO();
+        return getUsersOfCourse(courseCode);
     }
 }

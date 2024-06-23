@@ -2,12 +2,15 @@ package TheBridge.TheBridgeNeo4jApiREST.repositories;
 
 import TheBridge.TheBridgeNeo4jApiREST.models.User;
 import TheBridge.TheBridgeNeo4jApiREST.objects.CommentDTO;
+import TheBridge.TheBridgeNeo4jApiREST.objects.UserSkillsDTO;
 import TheBridge.TheBridgeNeo4jApiREST.objects.ValoracionDTO;
 import TheBridge.TheBridgeNeo4jApiREST.objects.VotosDTO;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.UserSkillsQueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,6 +49,19 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
             "WITH apoc.text.join(v.votos, \",\") AS votos " +
             "RETURN apoc.text.join(collect(votos), \",\")")
     String getSkillsByUsername(String username);
+
+    @Query("MATCH (c:Course {code: $courseCode})<-[:ESTUDIA_EN]-(u:User) " +
+            "OPTIONAL MATCH (u)<-[v:VALORO_A]-(:User) " +
+            "WITH u, v.votos AS votos " +
+            "UNWIND coalesce(votos, [null]) AS voto " +
+            "WITH u, voto, count(voto) AS count " +
+            "WITH u, collect([voto, count]) AS skillVotePairs " +
+            "WITH u, apoc.map.fromPairs(skillVotePairs) AS skillVotesMap " +
+            "RETURN u.name AS name, u.username AS username, u.legajo AS legajo, " +
+            "CASE WHEN size(keys(skillVotesMap)) = 1 AND keys(skillVotesMap)[0] IS NULL THEN '{}' " +
+            "ELSE apoc.convert.toJson(skillVotesMap) " +
+            "END AS skillVotesJson")
+    List<UserSkillsQueryResult> getUsersSkillsByCourse(String courseCode);
 
     @Query("MATCH (u:User {username: $username}) SET u.introduction = $introduction RETURN u")
     User modifyUserIntroduction(String username, String introduction);

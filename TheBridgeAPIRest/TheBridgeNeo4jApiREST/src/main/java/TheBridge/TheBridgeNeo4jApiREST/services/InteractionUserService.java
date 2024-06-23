@@ -1,19 +1,17 @@
 package TheBridge.TheBridgeNeo4jApiREST.services;
 
+import TheBridge.TheBridgeNeo4jApiREST.models.CategoriasValoracion;
 import TheBridge.TheBridgeNeo4jApiREST.models.Comment;
 import TheBridge.TheBridgeNeo4jApiREST.models.User;
 import TheBridge.TheBridgeNeo4jApiREST.models.Valoracion;
-import TheBridge.TheBridgeNeo4jApiREST.objects.CommentDTO;
-import TheBridge.TheBridgeNeo4jApiREST.objects.ValoracionDTO;
-import TheBridge.TheBridgeNeo4jApiREST.objects.VotosDTO;
+import TheBridge.TheBridgeNeo4jApiREST.objects.*;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.UserSkillsQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class InteractionUserService {
@@ -53,6 +51,16 @@ public class InteractionUserService {
         List<String> skills = Arrays.stream(userRepository.getSkillsByUsername(username).split(",")).toList();
         HashMap<String, Float> skillsMap = new HashMap<>();
 
+        if (skills.isEmpty()) {
+            List<String> skillNames = Arrays.stream(CategoriasValoracion.values()).map(CategoriasValoracion::name).toList();
+
+            for (String skill : skillNames) {
+                skillsMap.put(skill, 1f/ skillNames.size());
+            }
+
+            return skillsMap;
+        }
+
         int totalSkills = 0;
 
         for (String skill : skills) {
@@ -69,6 +77,24 @@ public class InteractionUserService {
         }
 
         return skillsMap;
+    }
+
+    public List<UserSkillsDTO> getUsersSkillsByCourse(String courseCode) {
+
+        List<UserSkillsQueryResult> userSkills = userRepository.getUsersSkillsByCourse(courseCode);
+
+        List<UserSkillsDTO> userSkillsDTOList = new ArrayList<UserSkillsDTO>();
+
+        for (UserSkillsQueryResult userSkill : userSkills) {
+
+            UserSkillsDTO userSkillsDTO = new UserSkillsDTO(
+                    new UserDTO(userSkill.getName(), userSkill.getUsername(), userSkill.getLegajo()),
+                    userSkill.calculateProportionalSkills());
+
+            userSkillsDTOList.add(userSkillsDTO);
+        }
+
+        return userSkillsDTOList;
     }
 
     public void ocultarComentario(Principal principal, String remitente, String timestamp) {
