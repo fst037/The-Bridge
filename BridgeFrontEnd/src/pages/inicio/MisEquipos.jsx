@@ -2,19 +2,16 @@ import { createContext } from "react";
 import { useQuery } from "react-query";
 import { AddActionButton } from "../../components/AddActionButton";
 import { InfoCard } from "../../components/InfoCard";
-import { CreateTeamModal } from "./CreateTeamModal";
+import { CreateTeamModal } from "../../components/CreateTeamModal";
 import { useCardToggle } from "../../hooks/useCardToggle";
 import { getMyTeams } from "../../services/teams";
-import toast from "react-hot-toast";
+import { queryConfig } from "../../utils/queryConfig";
 
 export const ModalContext = createContext();
 
 export const MisEquipos = () => {
   const { cardRef, isOpen, setIsOpen } = useCardToggle();
-  const { data: teams } = useQuery("teams", getMyTeams, {
-    retry: false,
-    onError: (error) => toast.error(error.message),
-  });
+  const { data: teams } = useQuery("teams", getMyTeams, queryConfig);
 
   return (
     <section>
@@ -29,15 +26,11 @@ export const MisEquipos = () => {
           ))}
         </article>
       </div>
-      <ModalContext.Provider
-        value={{
-          cardRef,
-          isOpen,
-          setIsOpen,
-        }}
-      >
-        <CreateTeamModal />
-      </ModalContext.Provider>
+      <CreateTeamModal
+        cardRef={cardRef}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </section>
   );
 };

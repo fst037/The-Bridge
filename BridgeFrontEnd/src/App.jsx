@@ -6,7 +6,7 @@ import { Layout } from "./pages/Layout";
 import { Toaster } from "react-hot-toast";
 import { Perfil } from "./pages/perfil/Perfil";
 import { Cursos } from "./pages/Cursos";
-import { Equipos } from "./pages/Equipos";
+import { Equipos } from "./pages/equipos/Equipos";
 import { Comunidad } from "./pages/Comunidad";
 import { Ratings } from "./pages/Ratings";
 import { Inicio } from "./pages/inicio/Inicio";

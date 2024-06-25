@@ -1,5 +1,6 @@
 import { FaUser } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
+import { FaRegCopy } from "react-icons/fa";
 // import { FiEyeOff } from "react-icons/fi";
 
 export const Companeros = () => {
@@ -22,13 +23,16 @@ export const Companeros = () => {
 
 const Companero = () => {
   return (
-    <div className="flex border items-center gap-4 p-2 max-w-[300px] border-gray-300 rounded-md">
+    <div className="flex border items-center gap-4 p-2 max-w-[300px] border-gray-300 rounded-md ">
       <div>
         <FaUser className="size-8" />
       </div>
       <div>
         <p>Nombre usuario</p>
-        <p>Info usuario</p>
+        <div className="flex items-center gap-1 text-gray-400 font-light text-sm overflow-hidden hover:underline hover:cursor-pointer">
+          usuario@uade.edu.ar
+          <FaRegCopy />
+        </div>
       </div>
     </div>
   );

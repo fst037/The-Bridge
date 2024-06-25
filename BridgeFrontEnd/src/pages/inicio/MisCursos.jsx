@@ -1,15 +1,10 @@
 import { InfoCard } from "../../components/InfoCard";
 import { getMyCourses } from "../../services/courses";
 import { useQuery } from "react-query";
-import toast from "react-hot-toast";
+import { queryConfig } from "../../utils/queryConfig";
 
 export const MisCursos = () => {
-  const { data: courses } = useQuery("courses", getMyCourses, {
-    retry: false,
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
+  const { data: courses } = useQuery("courses", getMyCourses, queryConfig);
 
   return (
     <section>

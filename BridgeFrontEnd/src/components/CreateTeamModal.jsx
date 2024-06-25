@@ -1,16 +1,14 @@
-import { useContext, useState } from "react";
-import { FormInput } from "../../components/FormInput";
-import { Modal } from "../../components/Modal";
+import { useState } from "react";
+import { FormInput } from "./FormInput";
+import { Modal } from "./Modal";
 import { RiTeamLine } from "react-icons/ri";
-import { AddActionButton } from "../../components/AddActionButton";
-import { createTeam } from "../../services/teams";
-import { ModalContext } from "./MisEquipos";
+import { AddActionButton } from "./AddActionButton";
+import { createTeam } from "../services/teams";
 import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 
-export const CreateTeamModal = () => {
+export const CreateTeamModal = ({ isOpen, setIsOpen, cardRef }) => {
   const [teamName, setTeamName] = useState("");
-  const { isOpen, setIsOpen, cardRef } = useContext(ModalContext);
   const queryClient = useQueryClient();
 
   const mutation = useMutation(createTeam, {
