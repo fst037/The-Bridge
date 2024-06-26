@@ -6,15 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="TheBridgeNeo4jApiREST" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="TheBridgeNeo4jApiREST" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="TheBridgeNeo4jApiREST" options="-parameters" />
+      <module name="TheBridgeNeo4jApiREST" options="" />
     </option>
   </component>
 </project>
