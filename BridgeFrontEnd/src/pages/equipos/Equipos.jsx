@@ -23,10 +23,9 @@ export const Equipos = () => {
         />
       </div>
       <main className="flex flex-col gap-2 md:gap-4 mt-4 md:mt-8">
-        <Team />
-        <Team />
-        <Team />
-        <Team />
+        {teams?.map(({ team, estudiantes }) => (
+          <Team key={team.identifier} students={estudiantes} />
+        ))}
       </main>
       <CreateTeamModal
         isOpen={isOpen}
