@@ -16,11 +16,20 @@ public class PythonInterpreter {
         try {
 
             String lang = "en";
+            String osName = System.getProperty("os.name").toLowerCase();
             String userDir = System.getProperty("user.dir");
             File currentDir = new File(userDir);
             String parentDir = currentDir.getParent();
-            String pythonScript = parentDir + "/serviciosPython/traductor.py";
-            String pythonInterpreter = parentDir + "/venv/bin/python3";
+            String pythonInterpreter;
+            String pythonScript;
+
+            if (osName.contains("win")) {
+                pythonInterpreter = parentDir + "\\venv\\Scripts\\python.exe";
+                pythonScript = parentDir + "\\serviciosPython\\traductor.py";
+            } else {
+                pythonInterpreter = parentDir + "/venv/bin/python3";
+                pythonScript = parentDir + "/serviciosPython/traductor.py";
+            }
 
             ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, pythonScript, text, lang);
             pb.redirectErrorStream(true);
