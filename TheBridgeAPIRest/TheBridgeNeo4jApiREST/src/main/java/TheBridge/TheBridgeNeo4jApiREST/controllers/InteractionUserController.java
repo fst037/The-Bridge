@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +34,7 @@ public class InteractionUserController {
     }
 
     @PostMapping("/comentarPerfil")
-    public ResponseEntity<CommentDTO> addCommentarioAEstudiante(Principal principal, @RequestBody AddComentarioRequest comentarioRequest) {
+    public ResponseEntity<?> addCommentarioAEstudiante(Principal principal, @RequestBody AddComentarioRequest comentarioRequest) throws IOException {
         User remitente = userService.getUserByUsername(principal.getName());
         User destinatario = userService.getUserByUsername(comentarioRequest.getDestinatario());
         Comment comentario = new Comment(
@@ -41,12 +42,17 @@ public class InteractionUserController {
                 destinatario
         );
 
-        //TODO: Add validation to check if the comment is not toxic
-        interactionUserService.realizarComentario(remitente, comentario);
+        CommentDTO responseComment;
 
-        CommentDTO responseComment = new CommentDTO(comentario.getMensaje(), principal.getName(), comentario.getDestinatario().getUsername(), comentario.getTimestamp());
-
-        return new ResponseEntity<>(responseComment, HttpStatus.CREATED);
+        if (comentario.valorarComentario(comentario.getMensaje()).equals("Very Positive")
+                || comentario.valorarComentario(comentario.getMensaje()).equals("Positive")
+                || comentario.valorarComentario(comentario.getMensaje()).equals("Neutral")) {
+            interactionUserService.realizarComentario(remitente, comentario);
+            responseComment = new CommentDTO(comentario.getMensaje(), principal.getName(), comentario.getDestinatario().getUsername(), comentario.getTimestamp());
+            return new ResponseEntity<>(responseComment, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("El comenterio no se realizó porque era tóxico.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/valorarPerfil")
