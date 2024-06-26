@@ -78,6 +78,14 @@ public class UserSkillsDTO {
 
         Float desvioEstandar = (float) (Math.sqrt(sumaDiferenciaCuadrada / CategoriasValoracion.values().length)/100);
 
+        Float peorDesvioEstandar = (float) (Math.sqrt((30* Math.pow(userSkills.size()/3 - media, 2) + (CategoriasValoracion.values().length-3) * 10 * Math.pow(media,2))/ CategoriasValoracion.values().length)/100);
+
+        System.out.println();
+        System.out.println(desvioEstandar);
+        System.out.println(peorDesvioEstandar);
+        System.out.println(media);
+        System.out.println(1 - desvioEstandar/media);
+
         return (float) (1 - desvioEstandar/media);
     }
 }

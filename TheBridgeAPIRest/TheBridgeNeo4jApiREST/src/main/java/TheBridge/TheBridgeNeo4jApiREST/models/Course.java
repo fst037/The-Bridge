@@ -24,6 +24,10 @@ public class Course {
         this.name = name;
     }
 
+    public UUID getIdentifier() {
+        return identifier;
+    }
+
     public String getCode() {
         return code;
     }

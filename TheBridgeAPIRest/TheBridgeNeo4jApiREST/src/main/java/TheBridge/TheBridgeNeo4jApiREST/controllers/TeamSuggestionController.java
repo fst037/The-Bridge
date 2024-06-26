@@ -1,5 +1,6 @@
 package TheBridge.TheBridgeNeo4jApiREST.controllers;
 
+import TheBridge.TheBridgeNeo4jApiREST.models.CategoriasValoracion;
 import TheBridge.TheBridgeNeo4jApiREST.models.Team;
 import TheBridge.TheBridgeNeo4jApiREST.models.User;
 import TheBridge.TheBridgeNeo4jApiREST.objects.TeamSkillsDTO;
@@ -84,6 +85,8 @@ public class TeamSuggestionController {
             Float compatibility = compatibilityMap.get(combination);
 
             HashMap<String, Float> combinationSkills = new HashMap<String, Float>();
+
+            combinationSkills.putAll(Arrays.stream(CategoriasValoracion.values()).map(CategoriasValoracion::name).collect(Collectors.toMap(String::toString, value -> 0f)));
 
             for (UserSkillsDTO userSkillsDTO : combination) {
                 for (Map.Entry<String, Float> entry : userSkillsDTO.getSkills().entrySet()) {

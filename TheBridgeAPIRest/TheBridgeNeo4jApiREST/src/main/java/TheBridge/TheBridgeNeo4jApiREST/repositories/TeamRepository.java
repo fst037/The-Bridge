@@ -23,6 +23,12 @@ public interface TeamRepository  extends Neo4jRepository<Team, UUID> {
             "RETURN e as team, collect(s) as users")
     TeamUsersQueryResult findTeamWithUsersByIdentifier(String identifier);
 
+    @Query("MATCH (u:User{username: $username})-[:FORMA_PARTE_DE]->(e:Team) " +
+            "WITH e, u " +
+            "MATCH (s:User)-[:FORMA_PARTE_DE]->(e) " +
+            "RETURN e as team, collect(s) as users")
+    List<TeamUsersQueryResult> findTeamsWithUsersByUsername(String username);
+
     @Query("MATCH (p:User{username: $username})-[:FORMA_PARTE_DE]->(e:Team) RETURN e")
     List<Team> findTeamsByStudent(String username);
 

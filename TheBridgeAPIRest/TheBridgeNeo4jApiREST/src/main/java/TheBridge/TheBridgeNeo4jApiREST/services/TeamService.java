@@ -32,8 +32,10 @@ public class TeamService {
         return teamRepository.findTeamWithUsersByIdentifier(identifier);
     }
 
-    public List<Team> getTeamsByStudent(String username) {
-        return teamRepository.findTeamsByStudent(username);
+    public List<TeamDTO> getTeamsByStudent(String username) {
+        return teamRepository.findTeamsWithUsersByUsername(username).stream()
+                .map(TeamUsersQueryResult::toTeamDTO)
+                .toList();
     }
 
     public TeamDTO createTeam(String username, String nombreEquipo) {
@@ -48,8 +50,6 @@ public class TeamService {
         members.add(dueño);
 
         TeamDTO equipoDTO = new TeamDTO(equipo, members);
-
-        System.out.println("equipoDTO creado");
 
         return equipoDTO;
     }

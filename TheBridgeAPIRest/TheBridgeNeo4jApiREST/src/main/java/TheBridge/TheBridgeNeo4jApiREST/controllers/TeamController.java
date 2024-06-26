@@ -35,15 +35,15 @@ public class TeamController {
     }
 
     @GetMapping("/deUsuario")
-    public ResponseEntity<List<Team>> getEquiposByUser(@RequestParam String username) {
-        List<Team> equipos = equipoService.getTeamsByStudent(username);
+    public ResponseEntity<List<TeamDTO>> getEquiposByUser(@RequestParam String username) {
+        List<TeamDTO> equipos = equipoService.getTeamsByStudent(username);
 
         return new ResponseEntity<>(equipos, HttpStatus.OK);
     }
 
     @GetMapping("/misEquipos")
-    public ResponseEntity<List<Team>> getMisEquipos(Principal principal) {
-        List<Team> equipos = equipoService.getTeamsByStudent(principal.getName());
+    public ResponseEntity<List<TeamDTO>> getMisEquipos(Principal principal) {
+        List<TeamDTO> equipos = equipoService.getTeamsByStudent(principal.getName());
 
         return new ResponseEntity<>(equipos, HttpStatus.OK);
     }
