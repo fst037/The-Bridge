@@ -5,7 +5,7 @@ import { Register } from "./pages/register/Register";
 import { Layout } from "./pages/Layout";
 import { Toaster } from "react-hot-toast";
 import { Perfil } from "./pages/perfil/Perfil";
-import { Cursos } from "./pages/Cursos";
+import { Cursos } from "./pages/cursos/Cursos";
 import { Equipos } from "./pages/equipos/Equipos";
 import { Comunidad } from "./pages/Comunidad";
 import { Ratings } from "./pages/Ratings";
