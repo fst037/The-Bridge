@@ -68,24 +68,18 @@ public class UserSkillsDTO {
             }
         }
 
-        Float media = (float) userSkills.size() / CategoriasValoracion.values().length;
+        Float media = (float) userSkills.size() / skills.size();
 
-        Double sumaDiferenciaCuadrada = 0d;
+        Double sumaDiferencia = 0d;
 
         for (String skill : skills.keySet()) {
-            sumaDiferenciaCuadrada += Math.pow(10*(skills.get(skill) - media), 2);
+            sumaDiferencia += Math.abs(skills.get(skill) - media);
         }
 
-        Float desvioEstandar = (float) (Math.sqrt(sumaDiferenciaCuadrada / CategoriasValoracion.values().length)/100);
+        Float diferenciaPromedio = (float) (sumaDiferencia / skills.size());
 
-        Float peorDesvioEstandar = (float) (Math.sqrt((30* Math.pow(userSkills.size()/3 - media, 2) + (CategoriasValoracion.values().length-3) * 10 * Math.pow(media,2))/ CategoriasValoracion.values().length)/100);
+        Float peorDiferenciaPromedio = ((3*((float)userSkills.size()/3 - media) + (skills.size() - 3)*(media)) / skills.size());
 
-        System.out.println();
-        System.out.println(desvioEstandar);
-        System.out.println(peorDesvioEstandar);
-        System.out.println(media);
-        System.out.println(1 - desvioEstandar/media);
-
-        return (float) (1 - desvioEstandar/media);
+        return (float) (1 - diferenciaPromedio/peorDiferenciaPromedio);
     }
 }
