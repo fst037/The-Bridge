@@ -3,7 +3,6 @@ package TheBridge.TheBridgeNeo4jApiREST.objects;
 import TheBridge.TheBridgeNeo4jApiREST.models.Course;
 import TheBridge.TheBridgeNeo4jApiREST.models.Team;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,8 +12,9 @@ public class ProjectDTO {
     private String titulo;
     private String descripcion;
     private List<String> links;
-    private String portadaBase64;
+    private String portadaLink;
     private Team equipo;
+    private List<UserDTO> members;
     private Course curso;
 
     public ProjectDTO() {
@@ -26,14 +26,15 @@ public class ProjectDTO {
         this.descripcion = descripcion;
     }
 
-    public ProjectDTO(UUID identifier, String titulo, String descripcion, List<String> links, String portadaBase64, Team equipo, Course curso) {
+    public ProjectDTO(UUID identifier, String titulo, String descripcion, List<String> links, String portadaLink, Team equipo, Course curso, List<UserDTO> members) {
         this.identifier = identifier;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.links = links;
-        this.portadaBase64 = portadaBase64;
+        this.portadaLink = portadaLink;
         this.equipo = equipo;
         this.curso = curso;
+        this.members = members;
     }
 
     public UUID getIdentifier() {
@@ -68,12 +69,12 @@ public class ProjectDTO {
         this.links = links;
     }
 
-    public String getPortadaBase64() {
-        return portadaBase64;
+    public String getPortadaLink() {
+        return portadaLink;
     }
 
-    public void setPortadaBase64(String portadaBase64) {
-        this.portadaBase64 = portadaBase64;
+    public void setPortadaLink(String portadaLink) {
+        this.portadaLink = portadaLink;
     }
 
     public Team getEquipo() {
@@ -90,5 +91,13 @@ public class ProjectDTO {
 
     public void setCurso(Course curso) {
         this.curso = curso;
+    }
+
+    public List<UserDTO> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<UserDTO> members) {
+        this.members = members;
     }
 }

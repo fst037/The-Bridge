@@ -110,17 +110,19 @@ function agregarBotonACadaFila() {
 
     let boton = document.createElement("a");
     let img = document.createElement("img");
-    img.src = "https://lh3.googleusercontent.com/ogw/AF2bZyg6xCr_vEM6tw2LISVEWXQb6ygRrE9Al-95Mhr3oA=s32-c-mo";
+    img.src = "https://i.imgur.com/7sYdczi.png";
+    img.style.width = "50px";
     let email = fila.children[2].textContent.trim();
-
-    boton.href = "mailto:" + email;
-    boton.target = "_blank";
+    boton.id = "botonPerfil-"+email;
     
     boton.appendChild(img);
     
     boton.addEventListener("click", function(event) {
       // Prevenir la acción predeterminada del enlace
       event.preventDefault();
+
+      // Cargar el perfil del integrante
+      cargarPerfil(email);
 
       // Obtener la siguiente fila
       let siguienteFila = fila.nextElementSibling;
@@ -132,10 +134,9 @@ function agregarBotonACadaFila() {
     });
     td.appendChild(boton);
     fila.insertBefore(td, fila.children[2]);
-    let sigFilaHTML = `<tr class="d-none">      
-                        <td colspan="6">
-
-                        <table style="width:100%;">
+    let sigFilaHTML = `<tr class="d-none">
+          <td colspan="6">
+            <table style="width: 100%">
               <thead>
                 <tr>
                   <td colspan="6">Presentacion</td>
@@ -143,86 +144,189 @@ function agregarBotonACadaFila() {
               </thead>
               <tbody>
                 <tr>
-                  <td colspan="6"> 
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel risus eget nisl euismod euismod. Aliquam eu sapien fermentum turpis dapibus molestie a id felis. Integer fringilla elementum libero, nec accumsan dui finibus vitae. Nam quis posuere lectus. Praesent eget erat dapibus, aliquam enim a, euismod mi. Morbi suscipit lacus a justo cursus varius. Etiam laoreet sit amet mi et vehicula. Integer volutpat ut leo in vestibulum. Quisque aliquet, eros at efficitur suscipit, tellus ante semper enim, at cursus sapien nisi sit amet leo. Morbi sit amet ligula hendrerit, convallis quam vel, mattis purus. Pellentesque vehicula, est sit amet eleifend sagittis, sem neque sodales magna, in aliquet lacus dolor sed turpis. Curabitur vitae lectus ac quam mollis varius tempor eget augue. Vestibulum lacinia dolor ut turpis pellentesque sodales. Pellentesque ac risus blandit, placerat nisi eget, rutrum erat.
-
-                    Fusce mauris augue, accumsan eget viverra vel, ultrices vel nulla. Phasellus gravida sit amet risus sit amet vestibulum. Morbi vel cursus est. Maecenas dignissim, magna non facilisis semper, risus magna auctor elit, vitae tincidunt turpis mi eu leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam eu iaculis metus, id ultrices est. Fusce in diam sit amet felis sagittis posuere bibendum quis tellus. Aenean porttitor augue sit amet tortor interdum, ut faucibus ipsum cursus. Aenean a nulla diam. Morbi in luctus arcu. Vestibulum feugiat risus erat, eget eleifend justo pretium quis. Morbi sed tellus sed erat tincidunt sollicitudin vel et dui.
+                  <td id="presentacion-${email}" colspan="6">
+                    Cargando Presentacion...
                   </td>
                 </tr>
               </tbody>
             </table>
-                            <table style="width:100%;">
+            <table style="width: 100%">
               <thead>
                 <tr>
                   <td colspan="6">Comentarios</td>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="comentariosContainer-${email}">
                 <tr>
-                  <td>
-                    <button id="btnPrev">Prev</button>
-                    <button id="btnNext">Next</button>
-                  </td>
-                  <td colspan="5">
-                    <div id="comentariosContainer" style="position: relative; overflow: hidden;">
-                      <ul id="comentarios" style="margin: 0;padding: 0;list-style-type: none;">
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, repellat beatae tempore, doloribus officiis porro quia natus illum et, necessitatibus quisquam inventore sequi nemo neque provident libero atque praesentium? Culpa?</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, laborum. Quam odio omnis architecto? Veniam, sapiente! Deleniti explicabo perferendis saepe, illum consequatur, optio similique quam voluptatibus quaerat magnam numquam veniam.</li>
-                        <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit magnam cum, placeat, ad incidunt dolore labore nam doloremque vero, esse nihil modi repudiandae reiciendis id culpa laborum accusamus consectetur neque.</li>
-                        <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, beatae, inventore neque, libero similique enim repellendus tempora iste error ad nulla ipsum voluptas expedita praesentium consequatur saepe architecto id? Nam.</li>
-                      </ul>
-                    </div>
-                  </td>
+                  <td>Cargando Comentarios...</td>
                 </tr>
               </tbody>
             </table>
 
-            <table>
+            <table style="width: 100%">
               <thead>
                 <tr>
                   <td colspan="6">Portfolio</td>
                 </tr>
               </thead>
-              <tbody>
-                <tr>                  
-                  <td colspan="6">
-                    <div id="comentariosContainer" style="position: relative; overflow: hidden;">
-                      <ul id="portfolio" style="margin: 0;padding: 0;list-style-type: none;">
-                        <li style="display: flex;">
-                          <img src="https://source.unsplash.com/random/200x100?sig=1" alt="Imagen aleatoria">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, repellat beatae tempore, doloribus officiis porro quia natus illum et, necessitatibus quisquam inventore sequi nemo neque provident libero atque praesentium? Culpa?</p>
-                        </li>
-                        <li style="display: flex;">
-                          <img src="https://source.unsplash.com/random/200x100?sig=2" alt="Imagen aleatoria">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, laborum. Quam odio omnis architecto? Veniam, sapiente! Deleniti explicabo perferendis saepe, illum consequatur, optio similique quam voluptatibus quaerat magnam numquam veniam.</p>
-                        </li>
-                        <li style="display: flex;">
-                          <img src="https://source.unsplash.com/random/200x100?sig=3" alt="Imagen aleatoria">
-                          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit magnam cum, placeat, ad incidunt dolore labore nam doloremque vero, esse nihil modi repudiandae reiciendis id culpa laborum accusamus consectetur neque.</p>
-                        </li>
-                        <li style="display: flex;">
-                          <img src="https://source.unsplash.com/random/200x100?sig=4" alt="Imagen aleatoria">
-                          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, beatae, inventore neque, libero similique enim repellendus tempora iste error ad nulla ipsum voluptas expedita praesentium consequatur saepe architecto id? Nam.</p>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
+              <tbody id="proyectosContainer-${email}">
                 <tr>
-                  <td colspan="3">                    
-                    <button id="btnPrevPortfolio" style="width: 100%;">Prev</button>
-                  </td>
-                  <td colspan="3">
-                    <button id="btnNextPortfolio" style="width: 100%;">Next</button>
-                  </td>
+                  <td>Cargando Proyectos...</td>
                 </tr>
               </tbody>
             </table>
-        </td>
-      </tr>
-      <tr class="d-none"></tr>`;
+          </td>
+        </tr>
+        <tr class="d-none"></tr>`;
     fila.insertAdjacentHTML("afterend", sigFilaHTML);
   }
+}
+
+function completarPerfil(email, data) {
+  document.getElementById("presentacion-"+email).textContent = data.introduction;
+        let comentarios = data.comments
+          .map((comment) => {
+            return `<li>
+            <div>
+              <div style="display: flex; justify-content: space-between;">
+                <p>De: ${comment.remitente}</p>
+                <p>${comment.timestamp}</p>
+              </div>
+              <p>${comment.mensaje}</p>
+              
+            </div>    
+            
+          </li>`;
+          })
+          .join("");
+
+        document.getElementById("comentariosContainer-"+email).innerHTML =
+          `
+        <tr>
+                  <td>
+                    <ul style="margin: 0; padding: 0; list-style-type: none; display:flex; flex-direction:column; justify-content:space-between; height:100%; width: 100%">
+                      <li style="flex-grow:1">
+                        <button style="width:100%; margin:0; padding:0" id="btnPrevComentario-${email}">Prev</button>
+                      </li>
+                      <li style="flex-grow:1">
+                        <button style="width:100%; margin:0; padding:0" id="btnNextComentario-${email}">Next</button>
+                      </li>
+                    </ul>
+                  </td>
+                  <td colspan="5">
+                    <div
+                      id="comentariosContainer"
+                      style="position: relative; overflow: hidden"
+                    >
+                      <ul
+                        id="comentarios-${email}"
+                        style="margin: 0; padding: 0; list-style-type: none"
+                      >
+                        ` +
+          comentarios +
+          `
+                      </ul>
+                    </div>
+                  </td>
+                </tr>`;
+
+        let proyectos = data.projects
+          .map((project) => {
+            return `<li>
+              <div style="display: flex; justify-content: space-between">
+              <h3>${project.titulo}</h3>
+              <p>Curso: ${project.curso.name}</p>
+              </div>
+            <div style="display: flex">
+            <img
+              style="max-width: 200px; max-height: 100px"
+              src="${project.portadaLink}"
+              alt="ImagenProyecto"
+            />
+            <p>
+              ${project.descripcion}
+            </p>
+            </div>
+            <div>
+              <h4>Links</h4>
+              <ul style="list-style-type: none;">
+                ` +
+              project.links
+                .map((link) => {
+                  return `<li><a href="${link}" target="blank">${link}</a></li>`;
+                })
+                .join("") +
+              `
+              </ul>
+            </div>
+            <div>
+              <h4>Equipo: ${project.equipo.nombre}</h4>
+              <ul style="list-style-type: none;">
+                ` +
+              project.members
+                .map((member) => {
+                  return `<li style="display:flex; justify-content: space-between">
+                      <a href="localhost:5173/profile/${member.username}" target="blank">${member.name}</a>
+                      <div>${member.username}</div>
+                      <div>${member.legajo}</div>
+                    </li>`;
+                })
+                .join("") +
+              `
+              </ul>
+            </div>
+          </li>`;
+          })
+          .join("");
+        
+        document.getElementById("proyectosContainer-"+email).innerHTML = `
+          <tr>
+                  <td colspan="6">                    
+                    <ul
+                      id="portfolio-${email}"
+                      style="margin: 0; padding: 0; list-style-type: none;"
+                    >
+                      `+ proyectos +`
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <button id="btnPrevProyecto-${email}" style="width: 100%">
+                      Prev
+                    </button>
+                  </td>
+                  <td colspan="3">
+                    <button id="btnNextProyecto-${email}" style="width: 100%">
+                      Next
+                    </button>
+                  </td>
+                </tr>
+        `;
+
+        setAnimacionesCarrousel(email);
+}
+
+function cargarPerfil(email) {
+  if (perfilesCargados.includes(email)) {
+    return;
+  }
+
+  console.log("Cargando perfil de " + email);
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  
+  let data = {};
+
+  fetch("http://localhost:8080/api/v1/profile/?username="+email, requestOptions)
+    .then((response) => response.text())
+    .then((result) => data = JSON.parse(result))
+    .then(() => completarPerfil(email, data))
+    .catch((error) => console.error(error));
+
+  perfilesCargados.push(email);  
 }
 
 function agregarEstilos() {
@@ -321,10 +425,10 @@ function agregarEstilos() {
   document.head.appendChild(style);
 }
 
-function setAnimacionesCarrousel(){
-  let comentarios = document.querySelector("#comentarios").children;
-  let btnNext = document.querySelector("#btnNext");
-  let btnPrev = document.querySelector("#btnPrev");
+function setAnimacionesCarrousel(email){
+  let comentarios = document.getElementById("comentarios-"+email).children;
+  let btnNext = document.getElementById("btnNextComentario-"+email);
+  let btnPrev = document.getElementById("btnPrevComentario-"+email);
   let index = 0;
 
   // Ocultar todos los comentarios al principio
@@ -382,9 +486,9 @@ function setAnimacionesCarrousel(){
   });
 
 
-  var portfolioItems = document.querySelectorAll('#portfolio li');
-  var btnNextPortfolio = document.getElementById('btnNextPortfolio');
-  var btnPrevPortfolio = document.getElementById('btnPrevPortfolio');
+  var portfolioItems = document.getElementById(`portfolio-${email}`).children;
+  var btnNextPortfolio = document.getElementById("btnNextProyecto-"+email);
+  var btnPrevPortfolio = document.getElementById("btnPrevProyecto-"+email);
   var indexPortfolio = 0;
 
   // Ocultar todos los elementos del portfolio excepto el primero
@@ -406,14 +510,13 @@ function setAnimacionesCarrousel(){
       console.log(indexPortfolio);
       // Comprobar si el índice es válido
 
-      // TODO: CAMBIAR 4 POR LA CANTIDAD REAL DE ITEMS
-      if (indexPortfolio < 4) {
+      if (indexPortfolio < portfolioItems.length) {
         // Mostrar el siguiente elemento del portfolio
-        portfolioItems[indexPortfolio].style.display = "flex";
+        portfolioItems[indexPortfolio].style.display = "block";
         portfolioItems[indexPortfolio].classList.add("slide-in-left");
       } else {
         // Si el índice no es válido, mostrar el primer elemento
-        portfolioItems[0].style.display = "flex";
+        portfolioItems[0].style.display = "block";
         indexPortfolio = 0;
         portfolioItems[indexPortfolio].classList.add("slide-in-left");
       }
@@ -440,13 +543,12 @@ function setAnimacionesCarrousel(){
       // Comprobar si el índice es válido
       if (indexPortfolio >= 0) {
         // Mostrar el elemento del portfolio anterior
-        portfolioItems[indexPortfolio].style.display = "flex";
+        portfolioItems[indexPortfolio].style.display = "block";
         portfolioItems[indexPortfolio].classList.add("slide-in-right");
       } else {
         // Si el índice no es válido, mostrar el último elemento
-        // TODO: CAMBIAR 4 POR LA CANTIDAD REAL DE ITEMS
-        portfolioItems[4 - 1].style.display = "flex";
-        indexPortfolio = 4 - 1;
+        portfolioItems[portfolioItems.length - 1].style.display = "block";
+        indexPortfolio = portfolioItems.length - 1;
         portfolioItems[indexPortfolio].classList.add("slide-in-right");
       }
       console.log(portfolioItems.length);
@@ -465,6 +567,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log(request.nombre + ' was toggled. New state: ' + request.encendido);
   }
 });
+
+let perfilesCargados = [];
 
 cargarIntegrantesNeo4j();
 crearEncabezado();

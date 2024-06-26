@@ -12,7 +12,7 @@ public class Project {
     private UUID identifier;
     private String titulo;
     private String descripcion;
-    private String portadaBase64;
+    private String portadaLink;
     private List<String> links;
 
     public Project() {
@@ -37,12 +37,12 @@ public class Project {
         return this.titulo;
     }
 
-    public String getPortadaBase64() {
-        return portadaBase64;
+    public String getPortadaLink() {
+        return portadaLink;
     }
 
-    public void setPortadaBase64(String portadaBase64) {
-        this.portadaBase64 = portadaBase64;
+    public void setPortadaLink(String portadaLink) {
+        this.portadaLink = portadaLink;
     }
 
     public List<String> getLinks() {

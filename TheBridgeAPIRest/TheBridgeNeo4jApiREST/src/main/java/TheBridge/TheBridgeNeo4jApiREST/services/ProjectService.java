@@ -55,7 +55,7 @@ public class ProjectService {
 
         Project project = new Project(request.getTitulo(), request.getDescripcion());
 
-        project.setPortadaBase64(request.getPortadaBase64());
+        project.setPortadaLink(request.getPortadaLink());
         project.setLinks(request.getLinks());
 
         projectRepository.save(project);

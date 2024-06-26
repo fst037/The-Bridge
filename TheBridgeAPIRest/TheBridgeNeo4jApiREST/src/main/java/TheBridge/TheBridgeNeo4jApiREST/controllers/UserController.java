@@ -30,7 +30,7 @@ public class UserController {
     public ResponseEntity<UserDTO> getUser(@PathVariable String username) {
         User user = userService.getUserByUsername(username);
 
-        UserDTO responseUser = new UserDTO(user.getName(),user.getUsername(),user.getRoles());
+        UserDTO responseUser = new UserDTO(user.getName(),user.getUsername(),user.getLegajo());
 
         return new ResponseEntity<>(responseUser, HttpStatus.OK);
     }

@@ -49,7 +49,8 @@ public interface ProjectRepository extends Neo4jRepository<Project, UUID> {
             "MATCH (p)-[:CON_EQUIPO]->(t) " +
             "WITH p, t " +
             "MATCH (p)-[:PARA_CURSO]->(c:Course) " +
-            "RETURN p AS project, t AS team, c AS course")
+            "MATCH (m:User)-[:FORMA_PARTE_DE]->(t:Team) " +
+            "RETURN p AS project, t AS team, c AS course, collect(m) AS members")
     List<ProjectTeamCourseQueryResult> findProjectWithTeamAndCourseByUser(String username);
 
     @Query("MATCH (p:Project {identifier: $projectIdentifier}) " +
