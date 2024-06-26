@@ -6,9 +6,9 @@ const authAxios = axios.create({
 });
 
 authAxios.interceptors.request.use((request) => {
-  const authUser = localStorage.getItem("bridge-user");
+  const authUser = JSON.parse(localStorage.getItem("bridge-user"));
   if (authUser) {
-    request.headers.Authorization = JSON.parse(authUser);
+    request.headers.Authorization = JSON.stringify(authUser.token);
   }
   return request;
 });

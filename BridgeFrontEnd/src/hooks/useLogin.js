@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { getProfilePic } from "../services/getUserData";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -22,9 +23,17 @@ export const useLogin = () => {
 
       if (!res.ok) throw new Error("Error al iniciar sesion");
 
-      setAuthUser(authorizationHeader);
-      localStorage.setItem("bridge-user", JSON.stringify(authorizationHeader));
+      const profilePic = await getProfilePic(username);
+      const newAuthUser = {
+        token: authorizationHeader,
+        email: username,
+        profilePic,
+      };
+
+      setAuthUser(newAuthUser);
+      localStorage.setItem("bridge-user", JSON.stringify(newAuthUser));
       toast.success("Inicio de sesion exitoso");
+
       return navigate("/inicio");
     } catch (error) {
       toast.error(error.message);

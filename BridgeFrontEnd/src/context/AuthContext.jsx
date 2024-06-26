@@ -8,9 +8,10 @@ export const useAuthContext = () => {
 };
 
 export const AuthContextProvider = ({ children }) => {
-  const [authUser, setAuthUser] = useState(
-    JSON.parse(localStorage.getItem("bridge-user" || null))
-  );
+  const storedUser = localStorage.getItem("bridge-user");
+  const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+
+  const [authUser, setAuthUser] = useState(parsedUser);
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>
