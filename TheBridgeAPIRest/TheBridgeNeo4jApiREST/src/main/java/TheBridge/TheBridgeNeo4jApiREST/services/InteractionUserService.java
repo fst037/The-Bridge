@@ -5,6 +5,7 @@ import TheBridge.TheBridgeNeo4jApiREST.models.Comment;
 import TheBridge.TheBridgeNeo4jApiREST.models.User;
 import TheBridge.TheBridgeNeo4jApiREST.models.Valoracion;
 import TheBridge.TheBridgeNeo4jApiREST.objects.*;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.CommonBuilderQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.UserSkillsQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class InteractionUserService {
@@ -55,11 +57,13 @@ public class InteractionUserService {
             List<String> skillNames = Arrays.stream(CategoriasValoracion.values()).map(CategoriasValoracion::name).toList();
 
             for (String skill : skillNames) {
-                skillsMap.put(skill, 1f/ skillNames.size());
+                skillsMap.put(skill, 0.6f/ skillNames.size());
             }
 
             return skillsMap;
         }
+
+        skillsMap.putAll(Arrays.stream(CategoriasValoracion.values()).map(CategoriasValoracion::name).collect(Collectors.toMap(String::toString, value -> 0f)));
 
         int totalSkills = 0;
 
@@ -79,9 +83,9 @@ public class InteractionUserService {
         return skillsMap;
     }
 
-    public List<UserSkillsDTO> getUsersSkillsByCourse(String courseCode) {
+    public List<UserSkillsDTO> getAvailableUsersSkillsByCourse(String courseCode) {
 
-        List<UserSkillsQueryResult> userSkills = userRepository.getUsersSkillsByCourse(courseCode);
+        List<UserSkillsQueryResult> userSkills = userRepository.getAvailableUsersSkillsByCourse(courseCode);
 
         List<UserSkillsDTO> userSkillsDTOList = new ArrayList<UserSkillsDTO>();
 
@@ -109,5 +113,29 @@ public class InteractionUserService {
                 remitente,
                 principal.getName(),
                 timestamp);
+    }
+
+    public boolean enviarSolicitudBuilder(String emailRemitente, String emailDestinatario) {
+        return userRepository.enviarSolicitudBuilder(emailRemitente, emailDestinatario);
+    }
+
+    public boolean aceptarSolicitudBuilder(String emailRemitente, String emailDestinatario) {
+        return userRepository.aceptarSolicitudBuilder(emailRemitente, emailDestinatario);
+    }
+
+    public boolean eliminarBuilder(String emailRemitente, String emailDestinatario) {
+        return userRepository.eliminarBuilder(emailRemitente, emailDestinatario);
+    }
+
+    public List<UserDTO> getSolicitudesRecibidasBuilder(String emailDestinatario) {
+        return userRepository.findSolicitudesRecibidasBuilder(emailDestinatario).stream().map(User::toUserDTO).toList();
+    }
+
+    public List<UserDTO> getBuilders(String email) {
+        return userRepository.findBuilders(email).stream().map(User::toUserDTO).toList();
+    }
+
+    public List<CommonBuilderQueryResult> getCommonBuilders(String email) {
+        return userRepository.findCommonBuilders(email);
     }
 }

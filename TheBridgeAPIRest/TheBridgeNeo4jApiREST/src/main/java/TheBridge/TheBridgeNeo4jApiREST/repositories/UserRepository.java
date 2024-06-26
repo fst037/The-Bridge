@@ -2,15 +2,12 @@ package TheBridge.TheBridgeNeo4jApiREST.repositories;
 
 import TheBridge.TheBridgeNeo4jApiREST.models.User;
 import TheBridge.TheBridgeNeo4jApiREST.objects.CommentDTO;
-import TheBridge.TheBridgeNeo4jApiREST.objects.UserSkillsDTO;
-import TheBridge.TheBridgeNeo4jApiREST.objects.ValoracionDTO;
-import TheBridge.TheBridgeNeo4jApiREST.objects.VotosDTO;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.CommonBuilderQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.UserSkillsQueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -45,12 +42,41 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
     @Query("MATCH (n)-[c:COMENTO_A]->(u:User{username: $username}) WHERE c.visible = true RETURN c.mensaje as mensaje, n.username as remitente, u.username as destinatario, c.timestamp as timestamp")
     List<CommentDTO> getVisibleCommentsByUser(String username);
 
+    @Query("MATCH (n:User{username: $emailRemitente}), (u:User{username: $emailDestinatario}) " +
+            "OPTIONAL MATCH (u)-[s:BUILDER_CON{aceptada:false}]->(n) " +
+            "WITH n, u, s " +
+            "CALL apoc.do.when(s IS NOT NULL, " +
+            "'SET s.aceptada = true RETURN s', " +
+            "'MERGE (n)-[r:BUILDER_CON{aceptada:false}]->(u) RETURN r', " +
+            "{n:n, u:u, s:s}) YIELD value " +
+            "RETURN value.r IS NOT NULL")
+    boolean enviarSolicitudBuilder(String emailRemitente, String emailDestinatario);
+
+    @Query("MATCH (n:User{username: $emailRemitente})-[s:BUILDER_CON{aceptada:false}]->(u:User{username: $emailDestinatario}) SET s.aceptada = true RETURN s IS NOT NULL")
+    boolean aceptarSolicitudBuilder(String emailRemitente, String emailDestinatario);
+
+    @Query("MATCH (n:User{username: $emailRemitente})-[s:BUILDER_CON]-(u:User{username: $emailDestinatario}) DELETE s RETURN s IS NULL")
+    boolean eliminarBuilder(String emailRemitente, String emailDestinatario);
+
+    @Query("MATCH (u:User)-[s:BUILDER_CON{aceptada:false}]->(n:User{username: $emailDestinatario}) RETURN u")
+    List<User> findSolicitudesRecibidasBuilder(String emailDestinatario);
+
+    @Query("MATCH (n:User)-[s:BUILDER_CON{aceptada:true}]-(u:User{username: $email}) RETURN n")
+    List<User> findBuilders(String email);
+
+    @Query("MATCH (u:User {username: $email})-[:BUILDER_CON {aceptada: true}]-(b:User) " +
+            "WITH u, b " +
+            "MATCH (b)-[:BUILDER_CON {aceptada: true}]-(n:User) " +
+            "WHERE n <> u AND NOT (u)-[:BUILDER_CON {aceptada: true}]-(n) " +
+            "RETURN count(b) AS commonBuilders, n.username AS username, n.name AS name, n.legajo AS legajo ORDER BY commonBuilders DESC")
+    List<CommonBuilderQueryResult> findCommonBuilders(String email);
+
     @Query("MATCH (n)-[v:VALORO_A]->(u:User{username: $username}) " +
             "WITH apoc.text.join(v.votos, \",\") AS votos " +
             "RETURN apoc.text.join(collect(votos), \",\")")
     String getSkillsByUsername(String username);
 
-    @Query("MATCH (c:Course {code: $courseCode})<-[:ESTUDIA_EN]-(u:User) " +
+    @Query("MATCH (c:Course {code: $courseCode})<-[:ESTUDIA_EN{disponible:true}]-(u:User) " +
             "OPTIONAL MATCH (u)<-[v:VALORO_A]-(:User) " +
             "WITH u, v.votos AS votos " +
             "UNWIND coalesce(votos, [null]) AS voto " +
@@ -61,7 +87,7 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
             "CASE WHEN size(keys(skillVotesMap)) = 1 AND keys(skillVotesMap)[0] IS NULL THEN '{}' " +
             "ELSE apoc.convert.toJson(skillVotesMap) " +
             "END AS skillVotesJson")
-    List<UserSkillsQueryResult> getUsersSkillsByCourse(String courseCode);
+    List<UserSkillsQueryResult> getAvailableUsersSkillsByCourse(String courseCode);
 
     @Query("MATCH (u:User {username: $username}) SET u.introduction = $introduction RETURN u")
     User modifyUserIntroduction(String username, String introduction);

@@ -48,8 +48,15 @@ public interface CourseRepository extends Neo4jRepository<Course, UUID> {
 
     @Query("MATCH (u:User {username: $username}) " +
             "MATCH (c:Course {code: $courseCode}) " +
-            "MERGE (u)-[:ESTUDIA_EN]->(c)")
+            "MERGE (u)-[:ESTUDIA_EN{disponible:true}]->(c)")
     void addUserToCourse(String username, String courseCode);
+
+    @Query("MATCH (u:User {username: $username}) " +
+            "MATCH (c:Course {code: $courseCode}) " +
+            "MATCH (u)-[r:ESTUDIA_EN]->(c) " +
+            "SET r.disponible = $available " +
+            "RETURN r IS NOT NULL")
+    boolean setUserAvailabilityInCourse(String username, String courseCode, boolean available);
 
     @Query("MATCH (u:User {username: $username}) " +
             "MATCH (c:Course {code: $courseCode}) " +

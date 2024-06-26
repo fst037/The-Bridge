@@ -78,6 +78,10 @@ public class CourseService {
         return getUsersOfCourse(courseCode);
     }
 
+    public boolean setUserAvailabilityInCourse(String username, String courseCode, boolean available) {
+        return courseRepository.setUserAvailabilityInCourse(username, courseCode, available);
+    }
+
     public CourseDTO removeUserFromCourse(String username, String courseCode) {
         courseRepository.removeUserFromCourse(username, courseCode);
 

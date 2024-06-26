@@ -4,7 +4,9 @@ import TheBridge.TheBridgeNeo4jApiREST.models.Comment;
 import TheBridge.TheBridgeNeo4jApiREST.models.User;
 import TheBridge.TheBridgeNeo4jApiREST.models.Valoracion;
 import TheBridge.TheBridgeNeo4jApiREST.objects.CommentDTO;
+import TheBridge.TheBridgeNeo4jApiREST.objects.UserDTO;
 import TheBridge.TheBridgeNeo4jApiREST.objects.ValoracionDTO;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.CommonBuilderQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.requests.AddComentarioRequest;
 import TheBridge.TheBridgeNeo4jApiREST.requests.AddValoracionRequest;
 import TheBridge.TheBridgeNeo4jApiREST.services.InteractionUserService;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/interaccion")
@@ -93,4 +96,56 @@ public class InteractionUserController {
         interactionUserService.mostrarComentario(principal, remitente, timestamp);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/enviarSolicitudBuilder")
+    public ResponseEntity<String> enviarSolicitudBuilder(Principal principal, @RequestParam String destinatario) {
+        boolean sinErrores = interactionUserService.enviarSolicitudBuilder(principal.getName(), destinatario);
+
+        if (!sinErrores) {
+            return new ResponseEntity<>("No se pudo enviar la solicitud a " + destinatario, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Se envio la solicitud a " + destinatario + " correctamente.",HttpStatus.OK);
+    }
+
+    @PostMapping("/aceptarSolicitudBuilder")
+    public ResponseEntity<String> aceptarSolicitudBuilder(Principal principal, @RequestParam String remitente) {
+        boolean sinErrores = interactionUserService.aceptarSolicitudBuilder(remitente, principal.getName());
+
+        if (!sinErrores) {
+            return new ResponseEntity<>("No se pudo aceptar la solicitud de " + remitente + ".", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Se acepto la solicitud de " + remitente + " correctamente.",HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminarBuilder")
+    public ResponseEntity<String> eliminarBuilder(Principal principal, @RequestParam String builderEliminado) {
+        boolean sinErrores = interactionUserService.eliminarBuilder(principal.getName(), builderEliminado);
+
+        if (!sinErrores) {
+            return new ResponseEntity<>("No se pudo eliminar al builder " + builderEliminado + ".", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Se elimino el builder " + builderEliminado + " correctamente.",HttpStatus.OK);
+    }
+
+    @GetMapping("/solicitudesRecibidasBuilder")
+    public ResponseEntity<List<UserDTO>> findSolicitudesRecibidasBuilder(Principal principal) {
+        List<UserDTO> solicitudes = interactionUserService.getSolicitudesRecibidasBuilder(principal.getName());
+
+        return new ResponseEntity<>(solicitudes, HttpStatus.OK);
+    }
+
+    @GetMapping("/misBuilders")
+    public ResponseEntity<List<UserDTO>> findBuilders(Principal principal) {
+        List<UserDTO> builders = interactionUserService.getBuilders(principal.getName());
+
+        return new ResponseEntity<>(builders, HttpStatus.OK);
+    }
+
+    @GetMapping("/buildersEnComun")
+    public ResponseEntity<List<CommonBuilderQueryResult>> findBuildersEnComun(Principal principal) {
+        List<CommonBuilderQueryResult> builders = interactionUserService.getCommonBuilders(principal.getName());
+
+        return new ResponseEntity<>(builders, HttpStatus.OK);
+    }
+
 }

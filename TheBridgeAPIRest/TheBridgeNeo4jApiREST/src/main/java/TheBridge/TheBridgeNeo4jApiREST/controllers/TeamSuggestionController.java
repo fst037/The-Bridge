@@ -116,7 +116,7 @@ public class TeamSuggestionController {
             return new ResponseEntity<>("La cantidad de integrantes debe estar entre 2 y 4", HttpStatus.BAD_REQUEST);
         }
 
-        List<UserSkillsDTO> userSkillsCursoEntero = interactionUserService.getUsersSkillsByCourse(courseCode);
+        List<UserSkillsDTO> userSkillsCursoEntero = interactionUserService.getAvailableUsersSkillsByCourse(courseCode);
 
         List<TeamSkillsDTO> teamSkillsDTOList = calcularFormacionEquipos(
                 userSkillsCursoEntero,
@@ -140,7 +140,7 @@ public class TeamSuggestionController {
             return new ResponseEntity<>("Se pueden agregar entre 1 y 6 miembros por vez", HttpStatus.BAD_REQUEST);
         }
 
-        List<UserSkillsDTO> userSkillsCursoEntero = interactionUserService.getUsersSkillsByCourse(courseCode);
+        List<UserSkillsDTO> userSkillsCursoEntero = interactionUserService.getAvailableUsersSkillsByCourse(courseCode);
 
         List<TeamSkillsDTO> teamSkillsDTOList = calcularFormacionEquipos(
                 userSkillsCursoEntero,

@@ -115,6 +115,17 @@ public class CourseController {
         return new ResponseEntity<>(course, HttpStatus.OK);
     }
 
+    @PatchMapping("/marcarDisponibilidad")
+    public ResponseEntity<String> setUserAvailabilityInCourse(Principal principal, @RequestParam String courseCode, @RequestParam boolean disponibilidad) {
+        boolean result = courseService.setUserAvailabilityInCourse(principal.getName(), courseCode, disponibilidad);
+
+        if (!result) {
+            return new ResponseEntity<>("No se encontró el usuario en el curso", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>("Se marco la disponibilidad como " + disponibilidad + " correctamente.", HttpStatus.OK);
+    }
+
     @DeleteMapping("/quitarUsuarioACurso")
     public ResponseEntity<CourseDTO> removeUserFromCourse(@RequestParam String username, @RequestParam String courseCode) {
         courseService.removeUserFromCourse(username, courseCode);
