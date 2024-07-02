@@ -21,8 +21,8 @@ export const MisEquipos = () => {
           <AddActionButton text={"Nuevo +"} onClick={() => setIsOpen(true)} />
         </div>
         <article className="grid grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
-          {teams?.map(({ team, estudiantes }) => (
-            <InfoCard key={teams.identifier} title={team.nombre} />
+          {teams?.map(({ team }) => (
+            <InfoCard key={team.identifier} title={team.nombre} />
           ))}
         </article>
       </div>

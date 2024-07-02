@@ -27,7 +27,7 @@ export const MiPerfil = () => {
       <div className="flex justify-center md:justify-end w-1/3">
         <img
           src={authUser.profilePic}
-          className="size-16 md:size-40 rounded-full"
+          className="size-24 md:size-40 aspect-auto rounded-full"
         />
       </div>
       <div className="flex flex-col items-center gap-8 w-2/3">

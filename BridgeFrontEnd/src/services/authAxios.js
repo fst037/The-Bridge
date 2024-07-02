@@ -7,8 +7,6 @@ const authAxios = axios.create({
 
 authAxios.interceptors.request.use((request) => {
   const authUser = JSON.parse(localStorage.getItem("bridge-user"));
-  console.log("Auth User:", authUser);
-  console.log("Token:", authUser.token);
   request.headers.Authorization = authUser.token;
   return request;
 });
