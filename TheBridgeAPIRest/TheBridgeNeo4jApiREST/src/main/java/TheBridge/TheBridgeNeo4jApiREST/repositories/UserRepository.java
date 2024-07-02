@@ -47,7 +47,8 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
             "WITH n, u, s " +
             "CALL apoc.do.when(s IS NOT NULL, " +
             "'SET s.aceptada = true RETURN s', " +
-            "'MERGE (n)-[r:BUILDER_CON{aceptada:false}]->(u) RETURN r', " +
+            "'MERGE (n)-[r:BUILDER_CON]->(u) SET r.aceptada = CASE WHEN r.aceptada <> true THEN false ELSE r.aceptada END " +
+            "RETURN r', " +
             "{n:n, u:u, s:s}) YIELD value " +
             "RETURN value.r IS NOT NULL")
     Boolean enviarSolicitudBuilder(String emailRemitente, String emailDestinatario);
