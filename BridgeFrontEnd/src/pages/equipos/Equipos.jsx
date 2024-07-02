@@ -24,7 +24,7 @@ export const Equipos = () => {
       </div>
       <main className="flex flex-col gap-2 md:gap-4 mt-4 md:mt-8">
         {teams?.map(({ team, estudiantes }) => (
-          <Team key={team.identifier} students={estudiantes} />
+          <Team key={team.identifier} students={estudiantes} team={team} />
         ))}
       </main>
       <CreateTeamModal
