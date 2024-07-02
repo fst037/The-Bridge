@@ -10,6 +10,7 @@ import { Equipos } from "./pages/equipos/Equipos";
 import { Comunidad } from "./pages/Comunidad";
 import { Ratings } from "./pages/Ratings";
 import { Inicio } from "./pages/inicio/Inicio";
+import EncuestaPage from "./pages/encuesta/EncuestaPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="inicio" element={<Inicio />} />
           <Route path="perfil" element={<Perfil />} />
+          <Route path="perfil/encuesta" element={<EncuestaPage />} />
           <Route path="cursos" element={<Cursos />} />
           <Route path="equipos" element={<Equipos />} />
           <Route path="comunidad" element={<Comunidad />} />

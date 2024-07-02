@@ -23,16 +23,22 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public CoursesOfSubjectQueryResult createCourse(String code, String name, String subjectCode) {
+    public CoursesOfSubjectQueryResult createCourse(String code, String name, String shift, String day) {
         Course course = courseRepository.findCourseByCode(code);
 
-        if (course == null) {
-            course = new Course(code, name);
-            courseRepository.save(course);
-            courseRepository.addCourseToSubject(code, subjectCode);
+        if (course != null) {
+
+            String[] words = name.split(" ");
+            for (int i = 0; i < words.length; i++) {
+                words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase();
+            }
+
+            name = String.join(" ", words);
+
+            courseRepository.createCourse(code, name, shift, day);
         }
 
-        return courseRepository.findCoursesOfSubject(subjectCode);
+        return courseRepository.findCoursesOfSubjectByName(name);
     }
 
     public Course getCourseByIdentifier(String identifier) {
@@ -76,6 +82,14 @@ public class CourseService {
         courseRepository.addUserToCourse(username, courseCode);
 
         return getUsersOfCourse(courseCode);
+    }
+
+    public List<Course> addUserToCourses(String username, List<String> courseCodes) {
+        courseRepository.addUserToCourses(username, courseCodes);
+
+        List<Course> courses = courseRepository.findCoursesOfUser(username);
+
+        return courses;
     }
 
     public boolean setUserAvailabilityInCourse(String username, String courseCode, boolean available) {

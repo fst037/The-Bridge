@@ -60,10 +60,10 @@ public class CourseController {
     }
 
     @PostMapping("/crearCurso")
-    public ResponseEntity<CoursesOfSubjectQueryResult> createCourse(@RequestParam String code, @RequestParam String name, @RequestParam String subjectCode) {
-        CoursesOfSubjectQueryResult course = courseService.createCourse(code, name, subjectCode);
+    public ResponseEntity<CoursesOfSubjectQueryResult> createCourse(@RequestParam String code, @RequestParam String name, @RequestParam String shift, @RequestParam String day) {
+        CoursesOfSubjectQueryResult courses = courseService.createCourse(code, name, shift, day);
 
-        return new ResponseEntity<>(course, HttpStatus.CREATED);
+        return new ResponseEntity<>(courses, HttpStatus.CREATED);
     }
 
     @PostMapping("/agregarCursoAMateria")
@@ -113,6 +113,19 @@ public class CourseController {
         CourseDTO course = courseService.getUsersOfCourse(courseCode);
 
         return new ResponseEntity<>(course, HttpStatus.OK);
+    }
+
+    @PostMapping("/agregarUsuarioAVariosCursos")
+public ResponseEntity<List<Course>> addUserToCourses(Principal principal, @RequestBody List<String> courseCodes) {
+        List<Course> oldCourses = courseService.getCoursesOfUser(principal.getName());
+
+        List<String> oldCourseCodes = oldCourses.stream().map(Course::getCode).toList();
+
+        courseCodes.removeAll(oldCourseCodes);
+
+        List<Course> courses = courseService.addUserToCourses(principal.getName(), courseCodes);
+
+        return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
     @PatchMapping("/marcarDisponibilidad")

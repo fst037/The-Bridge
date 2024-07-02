@@ -24,17 +24,17 @@ public class InteractionUserService {
         this.userRepository = userRepository;
     }
 
-    public void realizarComentario(User principal, Comment comentario) {
+    public void realizarComentario(String principalName, Comment comentario) {
         userRepository.comentarPerfilCompañero(
-                principal.getUsername(),
+                principalName,
                 comentario.getDestinatario().getUsername(),
                 comentario.getMensaje(),
                 LocalDateTime.now().toString());
     }
 
-    public void realizarValoracion(User principal, Valoracion valoracion) {
+    public void realizarValoracion(String principalName, Valoracion valoracion) {
         userRepository.valorarPerfilCompañero(
-                principal.getUsername(),
+                principalName,
                 valoracion.getDestinatario().getUsername(),
                 valoracion.getVotos(),
                 valoracion.getMensaje(),
@@ -116,15 +116,15 @@ public class InteractionUserService {
     }
 
     public boolean enviarSolicitudBuilder(String emailRemitente, String emailDestinatario) {
-        return userRepository.enviarSolicitudBuilder(emailRemitente, emailDestinatario);
+        return Boolean.TRUE.equals(userRepository.enviarSolicitudBuilder(emailRemitente, emailDestinatario));
     }
 
-    public boolean aceptarSolicitudBuilder(String emailRemitente, String emailDestinatario) {
-        return userRepository.aceptarSolicitudBuilder(emailRemitente, emailDestinatario);
+    public void aceptarSolicitudBuilder(String emailRemitente, String emailDestinatario) {
+        userRepository.aceptarSolicitudBuilder(emailRemitente, emailDestinatario);
     }
 
-    public boolean eliminarBuilder(String emailRemitente, String emailDestinatario) {
-        return userRepository.eliminarBuilder(emailRemitente, emailDestinatario);
+    public void eliminarBuilder(String emailRemitente, String emailDestinatario) {
+        userRepository.eliminarBuilder(emailRemitente, emailDestinatario);
     }
 
     public List<UserDTO> getSolicitudesRecibidasBuilder(String emailDestinatario) {
@@ -137,5 +137,9 @@ public class InteractionUserService {
 
     public List<CommonBuilderQueryResult> getCommonBuilders(String email) {
         return userRepository.findCommonBuilders(email);
+    }
+
+    public Boolean checkRealizoEncuesta(String name) {
+        return userRepository.checkRealizoEncuesta(name);
     }
 }

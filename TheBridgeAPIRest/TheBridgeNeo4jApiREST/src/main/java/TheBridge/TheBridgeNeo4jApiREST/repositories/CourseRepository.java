@@ -23,10 +23,24 @@ public interface CourseRepository extends Neo4jRepository<Course, UUID> {
             "RETURN collect(c) as courses")
     List<Course> findCoursesOfUser(String username);
 
+    @Query("CREATE (c:Course {code: $code, name: $name, shift: $shift, day: $day}) RETURN c")
+    Course createCourse(String code, String name, String shift, String day);
+
+    @Query("MATCH (u:User {username: $username}) " +
+            "MATCH (c:Course) " +
+            "WHERE c.code IN $courseCodes " +
+            "MERGE (u)-[:ESTUDIA_EN{disponible:true}]->(c)")
+    void addUserToCourses(String username, List<String> courseCodes);
+
     @Query("MATCH (s:Subject {code: $subjectCode}) " +
             "MATCH (c:Course)-[:DE_MATERIA]->(s) " +
             "RETURN collect(c) as courses, s as subject")
     CoursesOfSubjectQueryResult findCoursesOfSubject(String subjectCode);
+
+    @Query("MATCH (s:Subject {name: $subjectName}) " +
+            "MATCH (c:Course)-[:DE_MATERIA]->(s) " +
+            "RETURN collect(c) as courses, s as subject")
+    CoursesOfSubjectQueryResult findCoursesOfSubjectByName(String subjectName);
 
     @Query("MATCH (c:Course {code: $courseCode}) " +
             "WITH c " +

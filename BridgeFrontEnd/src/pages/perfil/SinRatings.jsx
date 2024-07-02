@@ -9,7 +9,7 @@ export const SinRatings = () => {
       <p>
         Sin la encuesta no somos capazes de predecir tus habilidades. Puedes
         hacer la encuesta{" "}
-        <Link className="text-blue-500 hover:underline hover:text-blue-600 active:text-blue-700">
+        <Link className="text-blue-500 hover:underline hover:text-blue-600 active:text-blue-700" to={"./encuesta"}>
           aquí
         </Link>
       </p>

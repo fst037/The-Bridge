@@ -50,13 +50,13 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
             "'MERGE (n)-[r:BUILDER_CON{aceptada:false}]->(u) RETURN r', " +
             "{n:n, u:u, s:s}) YIELD value " +
             "RETURN value.r IS NOT NULL")
-    boolean enviarSolicitudBuilder(String emailRemitente, String emailDestinatario);
+    Boolean enviarSolicitudBuilder(String emailRemitente, String emailDestinatario);
 
-    @Query("MATCH (n:User{username: $emailRemitente})-[s:BUILDER_CON{aceptada:false}]->(u:User{username: $emailDestinatario}) SET s.aceptada = true RETURN s IS NOT NULL")
-    boolean aceptarSolicitudBuilder(String emailRemitente, String emailDestinatario);
+    @Query("MATCH (n:User{username: $emailRemitente})-[s:BUILDER_CON{aceptada:false}]->(u:User{username: $emailDestinatario}) SET s.aceptada = true")
+    void aceptarSolicitudBuilder(String emailRemitente, String emailDestinatario);
 
-    @Query("MATCH (n:User{username: $emailRemitente})-[s:BUILDER_CON]-(u:User{username: $emailDestinatario}) DELETE s RETURN s IS NULL")
-    boolean eliminarBuilder(String emailRemitente, String emailDestinatario);
+    @Query("MATCH (n:User{username: $emailRemitente})-[s:BUILDER_CON]-(u:User{username: $emailDestinatario}) DELETE s")
+    void eliminarBuilder(String emailRemitente, String emailDestinatario);
 
     @Query("MATCH (u:User)-[s:BUILDER_CON{aceptada:false}]->(n:User{username: $emailDestinatario}) RETURN u")
     List<User> findSolicitudesRecibidasBuilder(String emailDestinatario);
@@ -91,4 +91,7 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
 
     @Query("MATCH (u:User {username: $username}) SET u.introduction = $introduction RETURN u")
     User modifyUserIntroduction(String username, String introduction);
+
+    @Query("MATCH (u:User{username: $username}) RETURN exists((u)-[:VALORO_A]->(u))")
+    Boolean checkRealizoEncuesta(String username);
 }

@@ -15,13 +15,17 @@ public class Course {
     private UUID identifier;
     private String code;
     private String name;
+    private String shift;
+    private String day;
 
     public Course() {
     }
 
-    public Course(String code, String name) {
+    public Course(String code, String name, String shift, String day) {
         this.code = code;
         this.name = name;
+        this.shift = shift;
+        this.day = day;
     }
 
     public UUID getIdentifier() {
@@ -42,5 +46,21 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getShift() {
+        return shift;
+    }
+
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 }
