@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useMemo } from 'react';
 import Chart from "chart.js/auto";
+import 'chart.js/auto';
 
-export const RatingRadar = ({ skills}) => {
+const TeamSkills = ({ skills, id }) => {
+
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
@@ -14,12 +15,15 @@ export const RatingRadar = ({ skills}) => {
       labels: skillNames,
       datasets: [
         {
-          label: "Habilidades",
           data: skillScores,
           backgroundColor: "rgba(54, 162, 235, 0.2)",
           borderColor: "rgba(54, 162, 235, 1)",
           borderWidth: 1,
         },
+        {data: [0],
+          fill: false,
+          borderColor: 'rgba(0, 0, 0,0)',
+        }
       ],
     }),
     [skillNames, skillScores]
@@ -27,9 +31,26 @@ export const RatingRadar = ({ skills}) => {
 
   const options = useMemo(
     () => ({
-      scale: {
-        ticks: { beginAtZero: true, max: 1 },
-      },
+      responsive: false, // Disable responsive behavior
+      maintainAspectRatio: false,
+      scales: {
+              r: {
+                ticks: {
+                  
+                  beginAtZero: true,
+                  backdropColor: 'transparent', // Set the ticks background to transparent
+                  fontColor: 'black',
+                },
+                pointLabels: {
+                    fontSize: 16 // Adjust the font size for labels on the points
+                }
+            }
+        },
+      plugins: {
+            legend: {
+                display: false // Disable legend
+            }
+        }
     }),
     []
   );
@@ -56,33 +77,13 @@ export const RatingRadar = ({ skills}) => {
     };
   }, [skills, data, options]);
 
-  if (!skills) {
-    return (
-      <div className="flex justify-center">
-        <article className="flex flex-col text-center gap-4 md:gap-12 p-4 md:p-8 max-w-[500px] border border-gray-300 rounded-lg">
-          <p className="text-lg font-[500]">
-            ¡Uh oh! Parece que no has completado la encuesta.
-          </p>
-          <p>
-            Sin la encuesta no podemos predecir tus habilidades. Puedes
-            realizarla{" "}
-            <Link
-              className="text-blue-500 hover:underline hover:text-blue-600 active:text-blue-700"
-              to="./encuesta"
-            >
-              aquí
-            </Link>
-          </p>
-        </article>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex w-full justify-center">
+    <div>
       <div>
-        <canvas ref={chartRef}/>
+        <canvas height="auto" width="250" ref={chartRef}/>
       </div>
     </div>
   );
 };
+
+export default TeamSkills;

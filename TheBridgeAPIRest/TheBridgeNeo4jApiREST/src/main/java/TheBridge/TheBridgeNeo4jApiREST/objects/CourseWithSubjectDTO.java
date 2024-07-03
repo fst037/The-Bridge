@@ -9,8 +9,8 @@ public class CourseWithSubjectDTO extends CourseDTO{
 
         private Subject subject;
 
-        public CourseWithSubjectDTO(String name, String code, List<UserDTO> users, Subject subject) {
-            super(name, code, users);
+        public CourseWithSubjectDTO(String name, String code, String shift, String day, String period, List<UserDTO> users, Subject subject) {
+            super(name, code, shift, day, period, users);
             this.subject = subject;
         }
 

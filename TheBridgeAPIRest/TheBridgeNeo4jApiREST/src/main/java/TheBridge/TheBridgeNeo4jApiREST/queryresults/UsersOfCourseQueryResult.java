@@ -33,6 +33,6 @@ public class UsersOfCourseQueryResult {
     }
 
     public CourseDTO toCourseDTO() {
-        return new CourseDTO(course.getName(),course.getCode(), users.stream().map(User::toUserDTO).toList());
+        return new CourseDTO(course.getName(),course.getCode(), course.getShift(), course.getDay(), course.getPeriod(), users.stream().map(User::toUserDTO).toList());
     }
 }

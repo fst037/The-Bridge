@@ -2,6 +2,7 @@ import { InfoCard } from "../../components/InfoCard";
 import { getMyCourses } from "../../services/courses";
 import { useQuery } from "react-query";
 import { queryConfig } from "../../utils/queryConfig";
+import { Link } from "react-router-dom";
 
 export const MisCursos = () => {
   const { data: courses } = useQuery("courses", getMyCourses, queryConfig);
@@ -12,11 +13,13 @@ export const MisCursos = () => {
         <h3 className="text-3xl">Mis Cursos</h3>
         <article className="grid grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
           {courses?.map(({ code, year, shift, day, subject }) => (
+            <Link to={`/curso/${code}`} key={code}>
             <InfoCard
               key={code}
               title={subject}
               information={[year, day, shift]}
             />
+            </Link>
           ))}
         </article>
       </div>

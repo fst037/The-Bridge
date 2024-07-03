@@ -23,8 +23,8 @@ public interface CourseRepository extends Neo4jRepository<Course, UUID> {
             "RETURN collect(c) as courses")
     List<Course> findCoursesOfUser(String username);
 
-    @Query("CREATE (c:Course {code: $code, name: $name, shift: $shift, day: $day}) RETURN c")
-    Course createCourse(String code, String name, String shift, String day);
+    @Query("CREATE (c:Course {code: $code, name: $name, shift: $shift, day: $day, period: $period}) RETURN c")
+    Course createCourse(String code, String name, String shift, String day, String period);
 
     @Query("MATCH (u:User {username: $username}) " +
             "MATCH (c:Course) " +
@@ -78,4 +78,9 @@ public interface CourseRepository extends Neo4jRepository<Course, UUID> {
             "DELETE r")
     void removeUserFromCourse(String username, String courseCode);
 
+    @Query("MATCH (u:User {username: $username}) " +
+            "MATCH (c:Course {code: $courseCode}) " +
+            "MATCH (u)-[r:ESTUDIA_EN]->(c) " +
+            "RETURN r.disponible")
+    boolean getUserAvailabilityInCourse(String username, String courseCode);
 }

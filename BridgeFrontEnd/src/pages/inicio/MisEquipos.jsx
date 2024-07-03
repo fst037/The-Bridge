@@ -6,6 +6,7 @@ import { CreateTeamModal } from "../../components/CreateTeamModal";
 import { useCardToggle } from "../../hooks/useCardToggle";
 import { getMyTeams } from "../../services/teams";
 import { queryConfig } from "../../utils/queryConfig";
+import { Link } from "react-router-dom";
 
 export const ModalContext = createContext();
 
@@ -22,7 +23,9 @@ export const MisEquipos = () => {
         </div>
         <article className="grid grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
           {teams?.map(({ team }) => (
-            <InfoCard key={team.identifier} title={team.nombre} />
+            <Link to={`/equipo/${team.identifier}`} key={team.identifier}>
+              <InfoCard key={team.identifier} title={team.nombre} />
+            </Link>
           ))}
         </article>
       </div>

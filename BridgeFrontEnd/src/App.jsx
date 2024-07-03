@@ -12,6 +12,7 @@ import { Comunidad } from "./pages/Comunidad";
 import { Ratings } from "./pages/Ratings";
 import { Inicio } from "./pages/inicio/Inicio";
 import EncuestaPage from "./pages/encuesta/EncuestaPage";
+import CursoEspecifico from "./pages/cursoEspecifico/CursoEspecifico";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="perfil" element={<Perfil />} />
           <Route path="perfil/encuesta" element={<EncuestaPage />} />
           <Route path="cursos" element={<Cursos />} />
+          <Route path="curso/*" element={<CursoEspecifico />} />
           <Route path="equipos" element={<Equipos />} />
           <Route path="comunidad" element={<Comunidad />} />
           <Route path="ratings" element={<Ratings />} />

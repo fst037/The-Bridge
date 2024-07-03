@@ -8,11 +8,20 @@ public class CourseDTO {
 
     private String name;
     private String code;
+    private String shift;
+    private String day;
+    private String period;
     private List<UserDTO> users;
 
-    public CourseDTO(String name, String code, List<UserDTO> users) {
+    public CourseDTO() {
+    }
+
+    public CourseDTO(String name, String code, String shift, String day, String period, List<UserDTO> users) {
         this.name = name;
         this.code = code;
+        this.shift = shift;
+        this.day = day;
+        this.period = period;
         this.users = users;
     }
 
@@ -38,5 +47,29 @@ public class CourseDTO {
 
     public void setUsers(List<UserDTO> users) {
         this.users = users;
+    }
+
+    public String getShift() {
+        return shift;
+    }
+
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
     }
 }

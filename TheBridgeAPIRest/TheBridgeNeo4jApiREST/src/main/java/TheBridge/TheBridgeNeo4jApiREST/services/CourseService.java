@@ -23,7 +23,7 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public CoursesOfSubjectQueryResult createCourse(String code, String name, String shift, String day) {
+    public CoursesOfSubjectQueryResult createCourse(String code, String name, String shift, String day, String period) {
         Course course = courseRepository.findCourseByCode(code);
 
         if (course != null) {
@@ -35,7 +35,7 @@ public class CourseService {
 
             name = String.join(" ", words);
 
-            courseRepository.createCourse(code, name, shift, day);
+            courseRepository.createCourse(code, name, shift, day, period);
         }
 
         return courseRepository.findCoursesOfSubjectByName(name);
@@ -73,7 +73,7 @@ public class CourseService {
         UsersOfCourseQueryResult course = courseRepository.findUsersOfCourse(courseCode);
         if (course == null) {
 
-            return new CourseDTO("", courseCode, new ArrayList<UserDTO>());
+            return null;
         }
         return course.toCourseDTO();
     }
@@ -100,5 +100,9 @@ public class CourseService {
         courseRepository.removeUserFromCourse(username, courseCode);
 
         return getUsersOfCourse(courseCode);
+    }
+
+    public boolean getUserAvailabilityInCourse(String name, String courseCode) {
+        return courseRepository.getUserAvailabilityInCourse(name, courseCode);
     }
 }
