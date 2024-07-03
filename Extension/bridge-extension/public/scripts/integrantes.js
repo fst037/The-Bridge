@@ -135,17 +135,21 @@ function agregarBotonACadaFila() {
     td.appendChild(boton);
     fila.insertBefore(td, fila.children[2]);
     let sigFilaHTML = `<tr class="d-none">
-          <td colspan="6">
+          <td style="background: #F0E9FF;border-radius: 10px;" colspan="6">
             <table style="width: 100%">
               <thead>
                 <tr>
-                  <td colspan="6">Presentacion</td>
+                  <td style="border-radius: 10px;" colspan="5"><h5 style="margin:5px">Presentación</h5></td>
+                  <td style="border-radius: 10px;" colspan="1"><h5 style="margin:5px">Habilidades</h5></td>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td id="presentacion-${email}" colspan="6">
+                  <td style="border-radius: 10px;vertical-align:top" id="presentacion-${email}" colspan="5">
                     Cargando Presentacion...
+                  </td>
+                  <td id="skills-${email}" colspan="1" style="box-sizing: border-box;width: 200px;border-radius: 10px;">
+                    Cargando Skills...
                   </td>
                 </tr>
               </tbody>
@@ -153,12 +157,12 @@ function agregarBotonACadaFila() {
             <table style="width: 100%">
               <thead>
                 <tr>
-                  <td colspan="6">Comentarios</td>
+                  <td style="border-radius: 10px;" colspan="6"><h5 style="margin:5px">Comentarios</h5></td>
                 </tr>
               </thead>
               <tbody id="comentariosContainer-${email}">
                 <tr>
-                  <td>Cargando Comentarios...</td>
+                  <td style="border-radius: 10px;">Cargando Comentarios...</td>
                 </tr>
               </tbody>
             </table>
@@ -166,12 +170,12 @@ function agregarBotonACadaFila() {
             <table style="width: 100%">
               <thead>
                 <tr>
-                  <td colspan="6">Portfolio</td>
+                  <td style="border-radius: 10px;" colspan="6"><h5 style="margin:5px">Portfolio</h5></td>
                 </tr>
               </thead>
               <tbody id="proyectosContainer-${email}">
                 <tr>
-                  <td>Cargando Proyectos...</td>
+                  <td style="border-radius: 10px;">Cargando Proyectos...</td>
                 </tr>
               </tbody>
             </table>
@@ -184,127 +188,190 @@ function agregarBotonACadaFila() {
 
 function completarPerfil(email, data) {
   document.getElementById("presentacion-"+email).textContent = data.introduction;
-        let comentarios = data.comments
-          .map((comment) => {
-            return `<li>
-            <div>
-              <div style="display: flex; justify-content: space-between;">
-                <p>De: ${comment.remitente}</p>
-                <p>${comment.timestamp}</p>
-              </div>
-              <p>${comment.mensaje}</p>
-              
-            </div>    
-            
-          </li>`;
-          })
-          .join("");
 
-        document.getElementById("comentariosContainer-"+email).innerHTML =
-          `
-        <tr>
-                  <td>
-                    <ul style="margin: 0; padding: 0; list-style-type: none; display:flex; flex-direction:column; justify-content:space-between; height:100%; width: 100%">
-                      <li style="flex-grow:1">
-                        <button style="width:100%; margin:0; padding:0" id="btnPrevComentario-${email}">Prev</button>
-                      </li>
-                      <li style="flex-grow:1">
-                        <button style="width:100%; margin:0; padding:0" id="btnNextComentario-${email}">Next</button>
-                      </li>
-                    </ul>
-                  </td>
-                  <td colspan="5">
-                    <div
-                      id="comentariosContainer"
-                      style="position: relative; overflow: hidden"
-                    >
-                      <ul
-                        id="comentarios-${email}"
-                        style="margin: 0; padding: 0; list-style-type: none"
-                      >
-                        ` +
-          comentarios +
-          `
-                      </ul>
-                    </div>
-                  </td>
-                </tr>`;
+  document.getElementById("presentacion-"+email).style.padding = "10px";
 
-        let proyectos = data.projects
-          .map((project) => {
-            return `<li>
-              <div style="display: flex; justify-content: space-between">
-              <h3>${project.titulo}</h3>
-              <p>Curso: ${project.curso.name}</p>
-              </div>
-            <div style="display: flex">
-            <img
-              style="max-width: 200px; max-height: 100px"
-              src="${project.portadaLink}"
-              alt="ImagenProyecto"
-            />
-            <p>
-              ${project.descripcion}
-            </p>
-            </div>
-            <div>
-              <h4>Links</h4>
-              <ul style="list-style-type: none;">
-                ` +
-              project.links
-                .map((link) => {
-                  return `<li><a href="${link}" target="blank">${link}</a></li>`;
-                })
-                .join("") +
-              `
-              </ul>
-            </div>
-            <div>
-              <h4>Equipo: ${project.equipo.nombre}</h4>
-              <ul style="list-style-type: none;">
-                ` +
-              project.members
-                .map((member) => {
-                  return `<li style="display:flex; justify-content: space-between">
-                      <a href="localhost:5173/profile/${member.username}" target="blank">${member.name}</a>
-                      <div>${member.username}</div>
-                      <div>${member.legajo}</div>
-                    </li>`;
-                })
-                .join("") +
-              `
-              </ul>
-            </div>
-          </li>`;
-          })
-          .join("");
-        
-        document.getElementById("proyectosContainer-"+email).innerHTML = `
-          <tr>
-                  <td colspan="6">                    
-                    <ul
-                      id="portfolio-${email}"
-                      style="margin: 0; padding: 0; list-style-type: none;"
-                    >
-                      `+ proyectos +`
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="3">
-                    <button id="btnPrevProyecto-${email}" style="width: 100%">
-                      Prev
-                    </button>
-                  </td>
-                  <td colspan="3">
-                    <button id="btnNextProyecto-${email}" style="width: 100%">
-                      Next
-                    </button>
-                  </td>
-                </tr>
+  document.getElementById("skills-"+email).innerHTML = `
+          <canvas id="skillsChart-${email}" height="200" width="400"></canvas>
         `;
 
-        setAnimacionesCarrousel(email);
+        var ctx = document.getElementById(`skillsChart-${email}`).getContext('2d');
+
+        var skillNames = Object.keys(data.skills);
+        var skillValues = Object.values(data.skills);
+
+        var myChart = new Chart(ctx, {
+            type: 'radar', // Specify the chart type here
+            data: {
+                labels: skillNames, // X-axis labels
+                datasets: [{
+                    data: skillValues, // Data points for the chart
+                    fill: true,
+                    backgroundColor: 'rgb(255, 128, 110, 0.3)',
+                    borderColor: '#00BCC6',
+                    pointBackgroundColor: '#00BCC6',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#00BCC6',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+              responsive: false, // Disable responsive behavior
+              maintainAspectRatio: false,
+              scales: {
+                      r: {
+                        ticks: {
+                          beginAtZero: true,
+                          fontSize: 4,
+                          backdropColor: 'transparent', // Set the ticks background to transparent
+                          fontColor: 'black',
+                        },
+                        pointLabels: {
+                            fontSize: 16 // Adjust the font size for labels on the points
+                        }
+                    }
+                },
+              plugins: {
+                    legend: {
+                        display: false // Disable legend
+                    }
+                }
+            },
+        });
+
+    const dateOptions = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: 'numeric', 
+      minute: 'numeric', 
+      second: 'numeric'// Show milliseconds
+    };
+
+  let comentarios = data.comments
+    .map((comment) => {
+      return `<li>
+      <div>
+        <div style="display: flex; justify-content: space-between; border-bottom: 2px solid black;padding: 5px;margin-bottom: 5px;">
+          <p style="margin:0px" >De: ${comment.remitente}</p>
+          <p style="margin:0px">${new Intl.DateTimeFormat('es-ES', dateOptions).format(new Date(comment.timestamp))}</p>
+        </div>
+        <p style="margin: 5px">${comment.mensaje}</p>
+        
+      </div>    
+      
+    </li>`;
+    })
+    .join("");  
+
+  document.getElementById("comentariosContainer-"+email).innerHTML =
+    `
+  <tr>
+            <td style="height:100%;width: 150px; border-radius: 10px;">
+              <ul style="margin: 0; padding: 0; list-style-type: none; display:flex; flex-direction:column; justify-content:space-between; height:100px; width: 100%">
+                <li style="flex-grow:1; margin: 5px">
+                  <button style="cursor: pointer;width:100%; height:100%; margin:0; padding:0; border-radius: 10px; background: #FF806E" id="btnPrevComentario-${email}">Anterior</button>
+                </li>
+                <li style="flex-grow:1; margin: 5px">
+                  <button style="cursor: pointer;width:100%; height:100%; margin:0; padding:0; border-radius: 10px; background: #00BCC6" id="btnNextComentario-${email}">Siguiente</button>
+                </li>
+              </ul>
+            </td>
+            <td colspan="5" style="vertical-align:top; border-radius: 10px;">
+              <div
+                id="comentariosContainer"
+                style="position: relative; overflow: hidden; height:fit-content"
+              >
+                <ul
+                  id="comentarios-${email}"
+                  style="margin: 0; padding: 0; list-style-type: none"
+                >
+                  ` +
+    comentarios +
+    `
+                </ul>
+              </div>
+            </td>
+          </tr>`;
+
+  let proyectos = data.projects
+    .map((project) => {
+      return `<li>
+        <div style="display: flex;justify-content: space-between;margin-bottom: 5px;padding: 5px;border-bottom: 2px solid black;align-items: end;">
+        <h3 style="margin:0px">${project.titulo}</h3>
+        <p style="margin:0px">Curso: ${project.curso.name}</p>
+        </div>
+      <div style="display: flex; margin:10px">
+      <img
+        style="max-width: 200px; max-height: 100px;"
+        src="${project.portadaLink}"
+        alt="ImagenProyecto"
+      />
+      <div style="margin-left: 10px;width: 100%;border: 1px solid grey; border-radius: 10px">
+        <p style="width: 100%;height: fit-content; margin:5px">
+          ${project.descripcion}
+        </p>
+      </div>
+      </div>
+      <div>
+        <h5 style="margin: 5px;border-bottom: 2px solid grey">Links</h4>
+        <ul style="list-style-type: none;">
+          ` +
+        project.links
+          .map((link) => {
+            return `<li><a href="${link}" target="blank">${link}</a></li>`;
+          })
+          .join("") +
+        `
+        </ul>
+      </div>
+      <div>
+        <h5 style="margin: 5px;border-bottom: 2px solid grey">Equipo: ${project.equipo.nombre}</h4>
+        <ul style="list-style-type: none;">
+          ` +
+        project.members
+          .map((member) => {
+            return `<li style="display:flex; justify-content: space-between">
+                <a style="width: 35%" href="localhost:5173/perfil/${member.username}" target="blank">${member.name}</a>
+                <div style="width: 35%">${member.username}</div>
+                <div style="width: 30%">${member.legajo}</div>
+              </li>`;
+          })
+          .join("") +
+        `
+        </ul>
+      </div>
+    </li>`;
+    })
+    .join("");
+  
+  document.getElementById("proyectosContainer-"+email).innerHTML = `
+    <tr>
+            <td style="border-radius: 10px;" colspan="6">                    
+              <ul
+                id="portfolio-${email}"
+                style="margin: 0; padding: 0; list-style-type: none;"
+              >
+                `+ proyectos +`
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="border-radius: 10px; padding:5px" colspan="3">
+              <button id="btnPrevProyecto-${email}" style="cursor: pointer;width: 100%; border-radius: 10px; background: #FF806E">
+                Anterior
+              </button>
+            </td>
+            <td style="border-radius: 10px; padding:5px" colspan="3">
+              <button id="btnNextProyecto-${email}" style="cursor: pointer;width: 100%;border-radius: 10px; background: #00BCC6">
+                Siguiente
+              </button>
+            </td>
+          </tr>
+  `;
+
+  setAnimacionesCarrousel(email);
 }
 
 function cargarPerfil(email) {

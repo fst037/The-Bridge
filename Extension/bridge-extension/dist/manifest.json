@@ -25,7 +25,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.webcampus.uade.edu.ar/Integrantes/*"],
-      "js": ["scripts/integrantes.js"]
+      "js": ["scripts/integrantes.js", "scripts/chart.min.js"]
     }
   ]
 }
