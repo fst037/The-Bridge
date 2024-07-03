@@ -24,3 +24,19 @@ export const getUserDetail = async (username) => {
   );
   return data;
 };
+
+export const getUserBuilders = async () => {
+  const { data } = await authAxios.get("/api/v1/interaccion/misBuilders");
+
+  const buildersWithProfilePic = await Promise.all(
+    data.map(async (builder) => {
+      const profilePic = await getProfilePic(builder.username);
+      return {
+        ...builder,
+        profilePic,
+      };
+    })
+  );
+
+  return buildersWithProfilePic;
+};

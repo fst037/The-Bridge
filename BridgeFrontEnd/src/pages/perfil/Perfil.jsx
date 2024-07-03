@@ -1,5 +1,5 @@
 import { Comentarios } from "./Comentarios";
-import { Companeros } from "./Companeros";
+import { Builders } from "./Buiders";
 import { InformacionGeneral } from "./InformacionGeneral";
 import { MiPerfil } from "./MiPerfil";
 import { RatingRadar } from "./RatingRadar";
@@ -23,7 +23,7 @@ export const Perfil = () => {
             <MiPerfil user={user} />
             <RatingRadar skills={user?.skills} />
             <InformacionGeneral />
-            <Companeros />
+            <Builders />
             <Comentarios />
           </>
         )}
