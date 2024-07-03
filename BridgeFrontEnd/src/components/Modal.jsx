@@ -6,7 +6,7 @@ export const Modal = ({ isOpen, setIsOpen, cardRef, title, children }) => {
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/10 z-50">
           <div
-            className="flex flex-col p-6 w-full max-w-md mx-2 rounded-md bg-white -translate-y-1/3"
+            className="flex flex-col p-6 w-full max-w-md mx-2 rounded-md bg-white"
             ref={cardRef}
           >
             <div className="flex justify-between items-center mb-4">
