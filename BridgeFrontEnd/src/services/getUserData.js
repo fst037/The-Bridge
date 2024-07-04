@@ -40,3 +40,18 @@ export const getUserBuilders = async () => {
 
   return buildersWithProfilePic;
 };
+
+export const getComments = async () => {
+  const { data } = await authAxios.get("/api/v1/interaccion/misComentarios");
+  const commentsWithProfilePic = await Promise.all(
+    data.map(async (user) => {
+      const profilePic = await getProfilePic(user.remitente);
+      return {
+        ...user,
+        profilePic,
+      };
+    })
+  );
+
+  return commentsWithProfilePic;
+};
