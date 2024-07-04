@@ -26,7 +26,7 @@ function App() {
           <Route path="perfil" element={<Perfil />} />
           <Route path="perfil/encuesta" element={<EncuestaPage />} />
           <Route path="cursos" element={<Cursos />} />
-          <Route path="curso/*" element={<CursoEspecifico />} />
+          <Route path="curso/:courseId" element={<CursoEspecifico />} />
           <Route path="equipos" element={<Equipos />} />
           <Route path="comunidad" element={<Comunidad />} />
           <Route path="ratings" element={<Ratings />} />

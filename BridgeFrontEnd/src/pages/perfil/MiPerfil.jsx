@@ -37,7 +37,7 @@ export const MiPerfil = ({ user }) => {
   };
 
   return (
-    <article className="flex items-center h-[200px]">
+    <article className="flex items-center">
       <div className="relative flex justify-center md:justify-end w-1/3">
         <div
           className="relative group cursor-pointer"
