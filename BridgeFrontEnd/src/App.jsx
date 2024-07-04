@@ -8,9 +8,12 @@ import { Toaster } from "react-hot-toast";
 import { Perfil } from "./pages/perfil/Perfil";
 import { Cursos } from "./pages/cursos/Cursos";
 import { Equipos } from "./pages/equipos/Equipos";
-import { Comunidad } from "./pages/Comunidad";
+import { Comunidad } from "./pages/comunidad/Comunidad";
+import { BuildersC } from "./pages/comunidad/BuildersC";
+import { Recomendados } from "./pages/comunidad/Recomendados";
+import { Conocidos } from "./pages/comunidad/Conocidos";
 import { Ratings } from "./pages/Ratings";
-import { Inicio } from "./pages/inicio/Inicio";
+import { Inicio } from "./pages/inicio/inicio";
 import EncuestaPage from "./pages/encuesta/EncuestaPage";
 import CursoEspecifico from "./pages/cursoEspecifico/CursoEspecifico";
 
@@ -19,6 +22,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Layout />}>
@@ -29,6 +33,9 @@ function App() {
           <Route path="curso/:courseId" element={<CursoEspecifico />} />
           <Route path="equipos" element={<Equipos />} />
           <Route path="comunidad" element={<Comunidad />} />
+          <Route path="builders" element={<BuildersC />} />
+          <Route path="recomendados" element={<Recomendados />} />
+          <Route path="conocidos" element={<Conocidos />} />
           <Route path="ratings" element={<Ratings />} />
         </Route>
       </Routes>

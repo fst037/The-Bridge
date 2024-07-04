@@ -1,4 +1,4 @@
-import LogoBridge from "../../assets/LogoBridge.svg";
+import LogoBridge from "../../assets/LogoBridge.png";
 import Bridge from "../../assets/Bridge.svg";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export const Header = () => {
       <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-2 md:space-y-0 items-center text-[#FAFAFA]">
         <Link
           className="text-2xl font-bold hover:underline transition"
-          to={"/inicio"}
+          to={"/home"}
         >
           Inicio
         </Link>
