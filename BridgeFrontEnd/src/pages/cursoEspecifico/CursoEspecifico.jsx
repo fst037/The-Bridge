@@ -30,22 +30,17 @@ const CursoEspecifico = () => {
 
   return (
     <div className="flex flex-col p-8">
-      <h1>{curso?.name}</h1>
-      <div className="">
+      <h3 className="text-3xl text-gray-400/80">{curso?.name}</h3>
+      <div className="mt-4 text-lg">
         <h3>Código: {curso?.code}</h3>
         <h3>Turno: {curso?.shift}</h3>
         <h3>Día: {curso?.day}</h3>
         <h3>Período: {curso?.period}</h3>
       </div>
 
-      <div className="w-full">
+      <div className="w-full mt-4">
         <div className="flex justify-content-space-between">
-          <h2>Crear Equipo</h2>
           <div>
-            <label htmlFor="disponibleToggle">
-              {" "}
-              Usuario disponible para formar Equipos
-            </label>
             <input
               name="disponibleToggle"
               className="border border-gray-300 rounded-md"
@@ -53,13 +48,19 @@ const CursoEspecifico = () => {
               value={isDisponible}
               id="disponibleToggle"
             />
+            <label htmlFor="disponibleToggle">
+              {" "}
+              Usuario disponible para formar Equipos
+            </label>
           </div>
         </div>
-        <div>
+        
+         {/* <div>
           <input type="text" />
-        </div>
+        </div>  */}
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
           Buscar
         </button>
 
@@ -98,7 +99,7 @@ const CursoEspecifico = () => {
         </div>
       </div>
 
-      <h2>Alumnos</h2>
+      <h2 className="mt-4 mb-4 text-2xl">Alumnos</h2>
 
       <div className="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] gap-2">
         {curso?.users?.map((user) => (

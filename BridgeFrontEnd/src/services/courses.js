@@ -41,3 +41,4 @@ export const getCourseMembers = async (course) => {
     users: dataWithProfilePic,
   };
 };
+
