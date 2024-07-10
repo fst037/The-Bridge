@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo } from "react";
 import Chart from "chart.js/auto";
-import 'chart.js/auto';
+import "chart.js/auto";
 
-const TeamSkills = ({ skills, id }) => {
-
+export const SkillsRadar = ({ skills, className }) => {
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
@@ -20,10 +19,7 @@ const TeamSkills = ({ skills, id }) => {
           borderColor: "rgba(54, 162, 235, 1)",
           borderWidth: 1,
         },
-        {data: [0],
-          fill: false,
-          borderColor: 'rgba(0, 0, 0,0)',
-        }
+        { data: [0], fill: false, borderColor: "rgba(0, 0, 0,0)" },
       ],
     }),
     [skillNames, skillScores]
@@ -31,26 +27,26 @@ const TeamSkills = ({ skills, id }) => {
 
   const options = useMemo(
     () => ({
-      responsive: false, // Disable responsive behavior
+      responsive: true,
       maintainAspectRatio: false,
       scales: {
-              r: {
-                ticks: {
-                  
-                  beginAtZero: true,
-                  backdropColor: 'transparent', // Set the ticks background to transparent
-                  fontColor: 'black',
-                },
-                pointLabels: {
-                    fontSize: 16 // Adjust the font size for labels on the points
-                }
-            }
+        r: {
+          ticks: {
+            display: false,
+            beginAtZero: true,
+            backdropColor: "transparent",
+            fontColor: "black",
+          },
+          pointLabels: {
+            fontSize: 12,
+          },
         },
+      },
       plugins: {
-            legend: {
-                display: false // Disable legend
-            }
-        }
+        legend: {
+          display: false,
+        },
+      },
     }),
     []
   );
@@ -78,12 +74,10 @@ const TeamSkills = ({ skills, id }) => {
   }, [skills, data, options]);
 
   return (
-    <div>
+    <div className={`w-min ${className}`}>
       <div>
-        <canvas height="auto" width="250" ref={chartRef}/>
+        <canvas height="auto" width="auto" ref={chartRef} />
       </div>
     </div>
   );
 };
-
-export default TeamSkills;

@@ -1,4 +1,4 @@
-import LogoBridge from "../assets/LogoBridge.svg";
+import LogoBridge from "../assets/LogoBridge.png";
 import Bridge from "../assets/Bridge.svg";
 import { CiLogout } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
