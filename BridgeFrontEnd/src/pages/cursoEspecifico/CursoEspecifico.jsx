@@ -303,547 +303,547 @@ const CursoEspecifico = () => {
   let sugerencias = []
 
       sugerencias = [
-        {
-            "members": [
-                {
-                    "name": "Carschmit, Donna Isabel",
-                    "username": "dcarschmit@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p2",
-                    "username": "p2@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.8960114,
-            "skills": {
-                "Organización": 0.60854703,
-                "Ideación": 0.6974359,
-                "Liderazgo": 0.4769231,
-                "Comunicación": 0.5982906,
-                "Desarrollo": 0.61880344
+    {
+        "members": [
+            {
+                "name": "Carschmit, Donna Isabel",
+                "username": "dcarschmit@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p2",
+                "username": "p2@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
             }
-        },
-        {
-            "members": [
-                {
-                    "name": "p3",
-                    "username": "p3@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p8",
-                    "username": "p8@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.82407415,
-            "skills": {
-                "Organización": 0.46111113,
-                "Ideación": 0.76666665,
-                "Liderazgo": 0.6333333,
-                "Comunicación": 0.6111111,
-                "Desarrollo": 0.5277778
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "Carschmit, Donna Isabel",
-                    "username": "dcarschmit@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p5",
-                    "username": "p5@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.81766385,
-            "skills": {
-                "Organización": 0.45299146,
-                "Ideación": 0.7863248,
-                "Liderazgo": 0.63247865,
-                "Comunicación": 0.5982906,
-                "Desarrollo": 0.52991456
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "Carschmit, Donna Isabel",
-                    "username": "dcarschmit@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p1",
-                    "username": "p1@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.81766385,
-            "skills": {
-                "Organización": 0.45299146,
-                "Ideación": 0.7863248,
-                "Liderazgo": 0.63247865,
-                "Comunicación": 0.5982906,
-                "Desarrollo": 0.52991456
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p2",
-                    "username": "p2@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p8",
-                    "username": "p8@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.8148148,
-            "skills": {
-                "Organización": 0.64444447,
-                "Ideación": 0.73333335,
-                "Liderazgo": 0.53333336,
-                "Comunicación": 0.44444445,
-                "Desarrollo": 0.64444447
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "Carschmit, Donna Isabel",
-                    "username": "dcarschmit@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p7",
-                    "username": "p7@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.79843307,
-            "skills": {
-                "Organización": 0.8418803,
-                "Ideación": 0.5641026,
-                "Liderazgo": 0.57692313,
-                "Comunicación": 0.5982906,
-                "Desarrollo": 0.41880342
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p2",
-                    "username": "p2@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p5",
-                    "username": "p5@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.7592592,
-            "skills": {
-                "Organización": 0.4888889,
-                "Ideación": 0.6888889,
-                "Liderazgo": 0.62222224,
-                "Comunicación": 0.7777778,
-                "Desarrollo": 0.42222223
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p1",
-                    "username": "p1@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p2",
-                    "username": "p2@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.7592592,
-            "skills": {
-                "Organización": 0.4888889,
-                "Ideación": 0.6888889,
-                "Liderazgo": 0.62222224,
-                "Comunicación": 0.7777778,
-                "Desarrollo": 0.42222223
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "Carschmit, Donna Isabel",
-                    "username": "dcarschmit@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p3",
-                    "username": "p3@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.75356126,
-            "skills": {
-                "Organización": 0.42521366,
-                "Ideación": 0.7307693,
-                "Liderazgo": 0.57692313,
-                "Comunicación": 0.76495725,
-                "Desarrollo": 0.50213677
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p1",
-                    "username": "p1@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p8",
-                    "username": "p8@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.7407408,
-            "skills": {
-                "Organización": 0.4888889,
-                "Ideación": 0.82222223,
-                "Liderazgo": 0.6888889,
-                "Comunicación": 0.44444445,
-                "Desarrollo": 0.5555556
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p5",
-                    "username": "p5@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p8",
-                    "username": "p8@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.7407408,
-            "skills": {
-                "Organización": 0.4888889,
-                "Ideación": 0.82222223,
-                "Liderazgo": 0.6888889,
-                "Comunicación": 0.44444445,
-                "Desarrollo": 0.5555556
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p7",
-                    "username": "p7@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p8",
-                    "username": "p8@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.7407408,
-            "skills": {
-                "Organización": 0.87777776,
-                "Ideación": 0.6,
-                "Liderazgo": 0.6333333,
-                "Comunicación": 0.44444445,
-                "Desarrollo": 0.44444445
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p2",
-                    "username": "p2@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p3",
-                    "username": "p3@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.6851852,
-            "skills": {
-                "Organización": 0.46111113,
-                "Ideación": 0.6333333,
-                "Liderazgo": 0.5666667,
-                "Comunicación": 0.9444445,
-                "Desarrollo": 0.39444444
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "Carschmit, Donna Isabel",
-                    "username": "dcarschmit@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p8",
-                    "username": "p8@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.67378914,
-            "skills": {
-                "Organización": 0.60854703,
-                "Ideación": 0.8307693,
-                "Liderazgo": 0.5435898,
-                "Comunicación": 0.26495728,
-                "Desarrollo": 0.75213677
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p3",
-                    "username": "p3@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p9",
-                    "username": "p9@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.6620371,
-            "skills": {
-                "Organización": 0.6944444,
-                "Ideación": 0.6666667,
-                "Liderazgo": 0.8333334,
-                "Comunicación": 0.6111111,
-                "Desarrollo": 0.19444445
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p1",
-                    "username": "p1@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p4",
-                    "username": "p4@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.6481482,
-            "skills": {
-                "Organización": 0.7777778,
-                "Ideación": 0.7777778,
-                "Liderazgo": 0.5555556,
-                "Comunicación": 0.6666667,
-                "Desarrollo": 0.22222222
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p5",
-                    "username": "p5@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p7",
-                    "username": "p7@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.6481482,
-            "skills": {
-                "Organización": 0.7222222,
-                "Ideación": 0.5555556,
-                "Liderazgo": 0.7222222,
-                "Comunicación": 0.7777778,
-                "Desarrollo": 0.22222222
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p1",
-                    "username": "p1@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p7",
-                    "username": "p7@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.6481482,
-            "skills": {
-                "Organización": 0.7222222,
-                "Ideación": 0.5555556,
-                "Liderazgo": 0.7222222,
-                "Comunicación": 0.7777778,
-                "Desarrollo": 0.22222222
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "p4",
-                    "username": "p4@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p5",
-                    "username": "p5@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.6481482,
-            "skills": {
-                "Organización": 0.7777778,
-                "Ideación": 0.7777778,
-                "Liderazgo": 0.5555556,
-                "Comunicación": 0.6666667,
-                "Desarrollo": 0.22222222
-            }
-        },
-        {
-            "members": [
-                {
-                    "name": "Carschmit, Donna Isabel",
-                    "username": "dcarschmit@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p6",
-                    "username": "p6@uade.edu.ar",
-                    "legajo": "1922125"
-                },
-                {
-                    "name": "p0",
-                    "username": "p0@uade.edu.ar",
-                    "legajo": "1922125"
-                }
-            ],
-            "compatibility": 0.6324786,
-            "skills": {
-                "Organización": 0.7863248,
-                "Ideación": 0.5641026,
-                "Liderazgo": 0.8547009,
-                "Comunicación": 0.37606838,
-                "Desarrollo": 0.41880342
-            }
+        ],
+        "compatibility": 0.8960114,
+        "skills": {
+            "Organización": 0.60854703,
+            "Ideación": 0.6974359,
+            "Liderazgo": 0.4769231,
+            "Comunicación": 0.5982906,
+            "Desarrollo": 0.61880344
         }
-    ]
+    },
+    {
+        "members": [
+            {
+                "name": "p3",
+                "username": "p3@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p8",
+                "username": "p8@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.82407415,
+        "skills": {
+            "Organización": 0.46111113,
+            "Ideación": 0.76666665,
+            "Liderazgo": 0.6333333,
+            "Comunicación": 0.6111111,
+            "Desarrollo": 0.5277778
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "Carschmit, Donna Isabel",
+                "username": "dcarschmit@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p5",
+                "username": "p5@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.81766385,
+        "skills": {
+            "Organización": 0.45299146,
+            "Ideación": 0.7863248,
+            "Liderazgo": 0.63247865,
+            "Comunicación": 0.5982906,
+            "Desarrollo": 0.52991456
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "Carschmit, Donna Isabel",
+                "username": "dcarschmit@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p1",
+                "username": "p1@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.81766385,
+        "skills": {
+            "Organización": 0.45299146,
+            "Ideación": 0.7863248,
+            "Liderazgo": 0.63247865,
+            "Comunicación": 0.5982906,
+            "Desarrollo": 0.52991456
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p2",
+                "username": "p2@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p8",
+                "username": "p8@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.8148148,
+        "skills": {
+            "Organización": 0.64444447,
+            "Ideación": 0.73333335,
+            "Liderazgo": 0.53333336,
+            "Comunicación": 0.44444445,
+            "Desarrollo": 0.64444447
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "Carschmit, Donna Isabel",
+                "username": "dcarschmit@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p7",
+                "username": "p7@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.79843307,
+        "skills": {
+            "Organización": 0.8418803,
+            "Ideación": 0.5641026,
+            "Liderazgo": 0.57692313,
+            "Comunicación": 0.5982906,
+            "Desarrollo": 0.41880342
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p2",
+                "username": "p2@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p5",
+                "username": "p5@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.7592592,
+        "skills": {
+            "Organización": 0.4888889,
+            "Ideación": 0.6888889,
+            "Liderazgo": 0.62222224,
+            "Comunicación": 0.7777778,
+            "Desarrollo": 0.42222223
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p1",
+                "username": "p1@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p2",
+                "username": "p2@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.7592592,
+        "skills": {
+            "Organización": 0.4888889,
+            "Ideación": 0.6888889,
+            "Liderazgo": 0.62222224,
+            "Comunicación": 0.7777778,
+            "Desarrollo": 0.42222223
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "Carschmit, Donna Isabel",
+                "username": "dcarschmit@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p3",
+                "username": "p3@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.75356126,
+        "skills": {
+            "Organización": 0.42521366,
+            "Ideación": 0.7307693,
+            "Liderazgo": 0.57692313,
+            "Comunicación": 0.76495725,
+            "Desarrollo": 0.50213677
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p1",
+                "username": "p1@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p8",
+                "username": "p8@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.7407408,
+        "skills": {
+            "Organización": 0.4888889,
+            "Ideación": 0.82222223,
+            "Liderazgo": 0.6888889,
+            "Comunicación": 0.44444445,
+            "Desarrollo": 0.5555556
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p5",
+                "username": "p5@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p8",
+                "username": "p8@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.7407408,
+        "skills": {
+            "Organización": 0.4888889,
+            "Ideación": 0.82222223,
+            "Liderazgo": 0.6888889,
+            "Comunicación": 0.44444445,
+            "Desarrollo": 0.5555556
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p7",
+                "username": "p7@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p8",
+                "username": "p8@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.7407408,
+        "skills": {
+            "Organización": 0.87777776,
+            "Ideación": 0.6,
+            "Liderazgo": 0.6333333,
+            "Comunicación": 0.44444445,
+            "Desarrollo": 0.44444445
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p2",
+                "username": "p2@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p3",
+                "username": "p3@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.6851852,
+        "skills": {
+            "Organización": 0.46111113,
+            "Ideación": 0.6333333,
+            "Liderazgo": 0.5666667,
+            "Comunicación": 0.9444445,
+            "Desarrollo": 0.39444444
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "Carschmit, Donna Isabel",
+                "username": "dcarschmit@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p8",
+                "username": "p8@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.67378914,
+        "skills": {
+            "Organización": 0.60854703,
+            "Ideación": 0.8307693,
+            "Liderazgo": 0.5435898,
+            "Comunicación": 0.26495728,
+            "Desarrollo": 0.75213677
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p3",
+                "username": "p3@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p9",
+                "username": "p9@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.6620371,
+        "skills": {
+            "Organización": 0.6944444,
+            "Ideación": 0.6666667,
+            "Liderazgo": 0.8333334,
+            "Comunicación": 0.6111111,
+            "Desarrollo": 0.19444445
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p1",
+                "username": "p1@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p4",
+                "username": "p4@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.6481482,
+        "skills": {
+            "Organización": 0.7777778,
+            "Ideación": 0.7777778,
+            "Liderazgo": 0.5555556,
+            "Comunicación": 0.6666667,
+            "Desarrollo": 0.22222222
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p5",
+                "username": "p5@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p7",
+                "username": "p7@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.6481482,
+        "skills": {
+            "Organización": 0.7222222,
+            "Ideación": 0.5555556,
+            "Liderazgo": 0.7222222,
+            "Comunicación": 0.7777778,
+            "Desarrollo": 0.22222222
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p1",
+                "username": "p1@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p7",
+                "username": "p7@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.6481482,
+        "skills": {
+            "Organización": 0.7222222,
+            "Ideación": 0.5555556,
+            "Liderazgo": 0.7222222,
+            "Comunicación": 0.7777778,
+            "Desarrollo": 0.22222222
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "p4",
+                "username": "p4@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p5",
+                "username": "p5@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.6481482,
+        "skills": {
+            "Organización": 0.7777778,
+            "Ideación": 0.7777778,
+            "Liderazgo": 0.5555556,
+            "Comunicación": 0.6666667,
+            "Desarrollo": 0.22222222
+        }
+    },
+    {
+        "members": [
+            {
+                "name": "Carschmit, Donna Isabel",
+                "username": "dcarschmit@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p6",
+                "username": "p6@uade.edu.ar",
+                "legajo": "1922125"
+            },
+            {
+                "name": "p0",
+                "username": "p0@uade.edu.ar",
+                "legajo": "1922125"
+            }
+        ],
+        "compatibility": 0.6324786,
+        "skills": {
+            "Organización": 0.7863248,
+            "Ideación": 0.5641026,
+            "Liderazgo": 0.8547009,
+            "Comunicación": 0.37606838,
+            "Desarrollo": 0.41880342
+        }
+    }
+]
 
 
   return (
