@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,6 +49,7 @@ public class UserService {
         estudiante.setLegajo(request.getLegajo());
         estudiante.setEnabled(true);
         estudiante.setRoles(request.getRoles());
+        estudiante.setContactLinks(new ArrayList<String>());
         estudiante.setPassword(passwordEncoder.encode(request.getPassword()));
 
         userRepository.save(estudiante);
@@ -78,5 +80,31 @@ public class UserService {
 
     public User modifyUserIntroduction(String username, String introduction) {
         return userRepository.modifyUserIntroduction(username, introduction);
+    }
+
+    public User addContactLink(String username, String contactLink) {
+        User estudiante = userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found" + username));
+
+        if (estudiante.getContactLinks() == null) {
+            estudiante.setContactLinks(new ArrayList<>());
+        }
+
+        if (estudiante.getContactLinks().contains(contactLink)) {
+            return estudiante;
+        }
+
+        estudiante.getContactLinks().add(contactLink);
+
+        return userRepository.save(estudiante);
+    }
+
+    public User removeContactLink(String username, String contactLink) {
+        User estudiante = userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found" + username));
+
+        estudiante.getContactLinks().remove(contactLink);
+
+        return userRepository.save(estudiante);
     }
 }

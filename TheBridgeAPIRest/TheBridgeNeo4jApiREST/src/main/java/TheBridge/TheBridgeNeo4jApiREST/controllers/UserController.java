@@ -57,13 +57,4 @@ public class UserController {
 
         return new ResponseEntity<String>("Usuarios precargados: "+ i, HttpStatus.CREATED);
     }
-
-    @PatchMapping("/modifyIntroduction")
-    public ResponseEntity<UserDTO> modifyUserIntroduction(Principal principal, @RequestParam String introduction) {
-        User user = userService.modifyUserIntroduction(principal.getName(), introduction);
-
-        UserDTO responseUser = new UserDTO(user.getName(),user.getUsername(),user.getRoles());
-
-        return new ResponseEntity<>(responseUser, HttpStatus.OK);
-    }
 }
