@@ -9,12 +9,17 @@ import { IoMdPersonAdd } from 'react-icons/io'
 import { useCardToggle } from '../../hooks/useCardToggle'
 import { AddPersonModal } from '../../components/AddPersonModal'
 import { CompleteTeamAutoModal } from '../../components/CompleteTeamAutoModal'
+import { useState } from 'react'
+import SugerenciasEquipos from '../../components/SugerenciasEquipos'
+
 
 const EquipoEspecifico = () => {
   const { teamId } = useParams();
-  const { cardAddMemberRef, isAddMemberOpen, setIsAddMemberOpen } = useCardToggle();
-  const { cardGenerateTeamRef, isGenerateTeamOpen, setIsGenerateTeamOpen } = useCardToggle();
+  const { cardRef, isOpen, setIsOpen } = useCardToggle();
+  const { cardRef:cardRef2, isOpen:isOpen2, setIsOpen:setIsOpen2 } = useCardToggle();  
+  const { cardRef:cardRef3, isOpen:isOpen3, setIsOpen:setIsOpen3 } = useCardToggle();  
 
+  const [sugerencias, setSugerencias] = useState([]);
 
   const { data: teamInfo, isLoading } = useQuery(
     "teamInformation",
@@ -22,14 +27,12 @@ const EquipoEspecifico = () => {
     queryConfig
   );
 
-  console.log(teamInfo.team.projects);
-
   return (
     <div className="flex flex-col h-min gap-4 p-4 md:p-8">
         {isLoading && <p>Cargando...</p>}
         {!isLoading && (
           <>
-            <h2 className="text-4xl text-gray-400/80">{teamInfo.team.equipo.team.nombre}</h2>
+            <h2 className="text-4xl text-gray-400/80">{teamInfo?.team.equipo.team.nombre}</h2>
 
           <div className="flex flex-col lg:flex-row w-full">
             <div className="border border-gray-300 rounded-lg p-4 lg:mr-5 mb-5 lg:mb-0">
@@ -42,7 +45,7 @@ const EquipoEspecifico = () => {
                 <h4 className="text-lg font-[500] mb-4">Miembros del Equipo</h4>
                 <IoMdPersonAdd
                   className="size-5 m-1 ml-2 cursor-pointer"
-                  onClick={() => setIsAddMemberOpen(true)}
+                  onClick={() => setIsOpen(true)}
                 />
               </div>
               <div className="grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2 items-start grow-1 mb-auto">
@@ -55,29 +58,32 @@ const EquipoEspecifico = () => {
                     className={"w-full"}
                   />
                 ))}
-                <AddPersonModal
-                  cardRef={cardAddMemberRef}
-                  isOpen={isAddMemberOpen}
-                  setIsOpen={setIsAddMemberOpen}
-                  team={teamInfo.team.equipo.team}
-                />
               </div>
               <button 
                 className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5'
-                onClick={() => setIsGenerateTeamOpen(true)}
-              >Generar sugerencias para completar el equipo FALTA MODAL</button>
-              <CompleteTeamAutoModal isOpen={isGenerateTeamOpen} setIsOpen={setIsGenerateTeamOpen} cardRef={cardGenerateTeamRef} team={teamInfo.team.equipo} />
+                onClick={() => setIsOpen2(true)}
+              >Generar sugerencias para completar el equipo</button>
             </div>
           </div>
 
           <div className="border border-gray-300 rounded-lg p-4">
             <div className='flex'>
+              <h4 className="text-lg font-[500]">Sugerencias</h4>              
+            </div> 
+            <SugerenciasEquipos sugerencias={sugerencias} usersProfilePic={{}}/>                      
+            
+          </div>
+
+          <div className="border border-gray-300 rounded-lg p-4">
+            <div className='flex'>
               <h4 className="text-lg font-[500]">Proyectos</h4>
-              <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 text-sm rounded ml-5'>Nuevo Proyecto FALTA MODAL</button>
+              <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 text-sm rounded ml-5'
+                onClick={() => setIsOpen3(true)}
+              >Nuevo Proyecto</button>
             </div>            
             <div className='flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(600px,_1fr))] gap-2 items-start'>
               {
-              teamInfo.team.projects.map(project => (
+              teamInfo?.team.projects.map(project => (
                 <div key={project.identifier} className="border border-gray-300 rounded-lg p-4 mt-4 h-full">
                   <Link to={`/proyecto/${project.identifier}`}>
                     <h5 className="text-lg font-[500] mb-2">{project.titulo}</h5>     
@@ -111,6 +117,14 @@ const EquipoEspecifico = () => {
 
             
           
+          <AddPersonModal
+                    cardRef={cardRef}
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                    team={teamInfo?.team.equipo.team}
+                  />
+                  
+          <CompleteTeamAutoModal isOpen={isOpen2} setIsOpen={setIsOpen2} cardRef={cardRef2} team={teamInfo?.team.equipo} sugerencias={sugerencias} setSugerencias={setSugerencias} />
           </>
         )}
     </div>

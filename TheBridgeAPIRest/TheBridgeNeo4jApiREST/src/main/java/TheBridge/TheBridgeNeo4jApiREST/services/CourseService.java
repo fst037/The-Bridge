@@ -72,7 +72,6 @@ public class CourseService {
     public CourseDTO getUsersOfCourse(String courseCode) {
         UsersOfCourseQueryResult course = courseRepository.findUsersOfCourse(courseCode);
         if (course == null) {
-
             return null;
         }
         return course.toCourseDTO();

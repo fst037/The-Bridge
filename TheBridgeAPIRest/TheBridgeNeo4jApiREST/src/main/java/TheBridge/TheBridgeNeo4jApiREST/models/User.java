@@ -21,6 +21,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String introduction;
+    private List<String> contactLinks;
     private String roles;
     private boolean enabled;
 
@@ -44,6 +45,9 @@ public class User implements UserDetails {
     public String getIntroduction() {
         return introduction;
     }
+    public List<String> getContactLinks() {
+        return contactLinks;
+    }
     public String getRoles() {
         return roles;
     }
@@ -65,6 +69,9 @@ public class User implements UserDetails {
     }
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+    public void setContactLinks(List<String> contactLinks) {
+        this.contactLinks = contactLinks;
     }
     public void setRoles(String roles) {
         this.roles = roles;
