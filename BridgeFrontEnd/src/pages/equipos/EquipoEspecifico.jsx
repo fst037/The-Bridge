@@ -22,8 +22,6 @@ const EquipoEspecifico = () => {
     queryConfig
   );
 
-  console.log(teamInfo.team.projects);
-
   return (
     <div className="flex flex-col h-min gap-4 p-4 md:p-8">
         {isLoading && <p>Cargando...</p>}
@@ -55,18 +53,11 @@ const EquipoEspecifico = () => {
                     className={"w-full"}
                   />
                 ))}
-                <AddPersonModal
-                  cardRef={cardAddMemberRef}
-                  isOpen={isAddMemberOpen}
-                  setIsOpen={setIsAddMemberOpen}
-                  team={teamInfo.team.equipo.team}
-                />
               </div>
               <button 
                 className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5'
                 onClick={() => setIsGenerateTeamOpen(true)}
               >Generar sugerencias para completar el equipo FALTA MODAL</button>
-              <CompleteTeamAutoModal isOpen={isGenerateTeamOpen} setIsOpen={setIsGenerateTeamOpen} cardRef={cardGenerateTeamRef} team={teamInfo.team.equipo} />
             </div>
           </div>
 
@@ -113,6 +104,14 @@ const EquipoEspecifico = () => {
           
           </>
         )}
+        <AddPersonModal
+                  cardRef={cardAddMemberRef}
+                  isOpen={isAddMemberOpen}
+                  setIsOpen={setIsAddMemberOpen}
+                  team={teamInfo.team.equipo.team}
+                />
+                
+        <CompleteTeamAutoModal isOpen={isGenerateTeamOpen} setIsOpen={setIsGenerateTeamOpen} cardRef={cardGenerateTeamRef} team={teamInfo.team.equipo} />
     </div>
   )
 }
