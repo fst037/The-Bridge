@@ -1,26 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiTeamLine } from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
-import { useQuery } from 'react-query'
-import { queryConfig } from '../utils/queryConfig'
 import { getTeamsSugestions } from '../services/teams'
+import { useMutation } from 'react-query'
+import toast from "react-hot-toast";
 
-export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team}) => {
-  const [teamMembers, setTeamMembers] = useState(team.estudiantes.lenght);
-  const [courseCode, setCourseCode] = useState("");  
-  let isLoading = false;
+export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugerencias, setSugerencias}) => {
+  const [teamMembers, setTeamMembers] = useState(team.estudiantes.length);
+  const [courseCode, setCourseCode] = useState("");
+
+  const mutation = useMutation(
+    getTeamsSugestions,  
+    {
+      onSuccess: (data) => {
+        setSugerencias(data);
+        toast.success(`Sugerencias generadas exitosamente`);
+        console.log("sugerencias", data);
+        setIsOpen(false);
+      },
+      onError: (error) => {
+        toast.error("Error al generar las sugerencias: " + error.message);
+      },
+    }
+  );
 
   const handleSubmit = (e) => {
+    console.log("teamMembers", teamMembers);
+    console.log("courseCode", courseCode);
+    console.log("team", team.team.identifier);
     e.preventDefault();
-    const { data: teamsSugestions, isLoading } = useQuery(
-      "teamsSugestions",
-      () => getTeamsSugestions(teamMembers, team.team.identifier, courseCode),
-      queryConfig
-    );
-    console.log("Generar sugerencias para completar el equipo");
+    if (!teamMembers || !courseCode) return;
+    mutation.mutate({teamMembers, teamIdentifier:team.team.identifier , courseCode});
   }
+
 
   return (
     <Modal
@@ -44,7 +58,7 @@ export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team}) => {
           value={courseCode}
           onChange={(e) => setCourseCode(e.target.value)}
         />
-        <AddActionButton text={"Generar"} isLoading={isLoading} />
+        <AddActionButton text={"Generar"} isLoading={mutation.isLoading} />
       </form>
     </Modal>
   );
