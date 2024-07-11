@@ -2,7 +2,7 @@ import { Comentarios } from "./Comentarios";
 import { Builders } from "./Buiders";
 import { InformacionGeneral } from "./InformacionGeneral";
 import { MiPerfil } from "./MiPerfil";
-import { RatingRadar } from "./RatingRadar";
+import { RatingRadar } from "../../components/RatingRadar";
 import { useQuery } from "react-query";
 import { getUserDetail } from "../../services/getUserData";
 import { useAuthContext } from "../../context/AuthContext";

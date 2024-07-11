@@ -14,12 +14,12 @@ export const RatingRadar = ({ skills}) => {
       labels: skillNames,
       datasets: [
         {
-          label: "Habilidades",
           data: skillScores,
           backgroundColor: "rgba(54, 162, 235, 0.2)",
           borderColor: "rgba(54, 162, 235, 1)",
           borderWidth: 1,
         },
+        { data: [0], fill: false, borderColor: "rgba(0, 0, 0,0)" },
       ],
     }),
     [skillNames, skillScores]
@@ -27,8 +27,22 @@ export const RatingRadar = ({ skills}) => {
 
   const options = useMemo(
     () => ({
-      scale: {
-        ticks: { beginAtZero: true, max: 1 },
+      scales: {
+        r: {
+          ticks: {
+            beginAtZero: true,
+            backdropColor: "transparent",
+            fontColor: "black",
+          },
+          pointLabels: {
+            fontSize: 12,
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
       },
     }),
     []

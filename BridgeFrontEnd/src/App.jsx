@@ -12,10 +12,10 @@ import { Comunidad } from "./pages/comunidad/Comunidad";
 import { BuildersC } from "./pages/comunidad/BuildersC";
 import { Recomendados } from "./pages/comunidad/Recomendados";
 import { Conocidos } from "./pages/comunidad/Conocidos";
-import { Ratings } from "./pages/Ratings";
 import { Inicio } from "./pages/inicio/inicio";
 import EncuestaPage from "./pages/encuesta/EncuestaPage";
 import CursoEspecifico from "./pages/cursoEspecifico/CursoEspecifico";
+import EquipoEspecifico from "./pages/equipos/EquipoEspecifico";
 
 function App() {
   return (
@@ -32,11 +32,11 @@ function App() {
           <Route path="cursos" element={<Cursos />} />
           <Route path="curso/:courseId" element={<CursoEspecifico />} />
           <Route path="equipos" element={<Equipos />} />
+          <Route path="equipo/:teamId" element={<EquipoEspecifico />} />
           <Route path="comunidad" element={<Comunidad />} />
           <Route path="builders" element={<BuildersC />} />
           <Route path="recomendados" element={<Recomendados />} />
           <Route path="conocidos" element={<Conocidos />} />
-          <Route path="ratings" element={<Ratings />} />
         </Route>
       </Routes>
       <Toaster />

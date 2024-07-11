@@ -69,14 +69,14 @@ public class TeamSuggestionController {
                 .toList();
 
         // Devolver las 10 mejores combinaciones
-        List<List<UserSkillsDTO>> top20Combinations = sortedCombinations.stream()
-                .limit(20)
+        List<List<UserSkillsDTO>> top24Combinations = sortedCombinations.stream()
+                .limit(24)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
 
         List<TeamSkillsDTO> teamSkillsDTOList = new ArrayList<TeamSkillsDTO>();
 
-        for (List<UserSkillsDTO> combination : top20Combinations) {
+        for (List<UserSkillsDTO> combination : top24Combinations) {
 
             List<UserDTO> members = combination.stream()
                     .map(userSkillsDTO -> new UserDTO(userSkillsDTO.getName(), userSkillsDTO.getUsername(), userSkillsDTO.getLegajo()))

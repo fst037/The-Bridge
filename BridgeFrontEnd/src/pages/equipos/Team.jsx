@@ -5,6 +5,7 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { useCardToggle } from "../../hooks/useCardToggle";
 import { AddPersonModal } from "../../components/AddPersonModal";
 import { queryConfig } from "../../utils/queryConfig";
+import { Link } from "react-router-dom";
 
 export const Team = ({ students, team }) => {
   const { cardRef, isOpen, setIsOpen } = useCardToggle();
@@ -13,7 +14,7 @@ export const Team = ({ students, team }) => {
     <article className="flex flex-col min-h-20 p-2 gap-1 border border-gray-400 rounded-lg md:mx-8 md:flex-row">
       <div className="flex justify-between p-1 items-start md:w-1/2">
         <div className="flex gap-4">
-          <p>{team.nombre}</p>
+          <Link to={`/equipo/${team.identifier}`} ><p>{team.nombre}</p></Link>
           <div className="flex items-center gap-1">
             <FaUsers />
             <span>{students.length}</span>
@@ -48,9 +49,9 @@ const Student = ({ student }) => {
   );
 
   return (
-    <div className="flex items-center gap-2 cursor-pointer">
+    <div className="flex items-center gap-2">
       <img src={profilePic} className="size-8 rounded-full" />
-      <p>{student.name}</p>
+      <Link to={`/perfil/${student.username}`}><p>{student.name}</p></Link>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const authAxios = axios.create({
   baseURL: "http://localhost:8080",
-  timeout: 5000,
+  timeout: 20000,
 });
 
 authAxios.interceptors.request.use((request) => {

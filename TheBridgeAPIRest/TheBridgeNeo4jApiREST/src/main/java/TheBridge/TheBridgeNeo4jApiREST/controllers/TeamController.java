@@ -3,6 +3,8 @@ package TheBridge.TheBridgeNeo4jApiREST.controllers;
 import TheBridge.TheBridgeNeo4jApiREST.models.*;
 import TheBridge.TheBridgeNeo4jApiREST.objects.*;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.TeamUsersQueryResult;
+import TheBridge.TheBridgeNeo4jApiREST.services.InteractionUserService;
+import TheBridge.TheBridgeNeo4jApiREST.services.ProjectService;
 import TheBridge.TheBridgeNeo4jApiREST.services.TeamService;
 import TheBridge.TheBridgeNeo4jApiREST.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -18,18 +20,44 @@ import java.util.Map.Entry;
 public class TeamController {
 
     private final TeamService equipoService;
-    private final UserService userService;
+    private final InteractionUserService interactionUserService;
+    private final ProjectService projectService;
 
-    public TeamController(TeamService equipoService, UserService userService) {
+    public TeamController(TeamService equipoService, InteractionUserService interactionUserService, ProjectService projectService) {
         this.equipoService = equipoService;
-        this.userService = userService;
+        this.interactionUserService = interactionUserService;
+        this.projectService = projectService;
     }
 
     @GetMapping("/porIdentifier")
-    public ResponseEntity<TeamDTO> equipoDetails(@RequestParam String identifier) {
+    public ResponseEntity<TeamProfileDTO> equipoDetails(@RequestParam String identifier) {
         TeamUsersQueryResult result = equipoService.getTeamWithUsersByIdentifier(identifier);
 
-        TeamDTO responseEquipo = result.toTeamDTO();
+        TeamProfileDTO responseEquipo = new TeamProfileDTO();
+
+        responseEquipo.setEquipo(result.toTeamDTO());
+
+        HashMap<String, Float> teamSkills = new HashMap<String, Float>();
+
+        for (User user : result.getUsers()) {
+            HashMap<String, Float> userSkills = interactionUserService.getSkillsByUsername(user.getUsername());
+
+            for (Entry<String, Float> entry : userSkills.entrySet()) {
+                String skill = entry.getKey();
+                Float value = entry.getValue();
+                if (teamSkills.containsKey(skill)) {
+                    teamSkills.put(skill, teamSkills.get(skill) + value);
+                } else {
+                    teamSkills.put(skill, value);
+                }
+            }
+        }
+
+        responseEquipo.setSkills(teamSkills);
+
+        List<Project> projects = projectService.getProjectsByTeam(result.getTeam().getIdentifier().toString());
+
+        responseEquipo.setProjects(projects);
 
         return new ResponseEntity<>(responseEquipo, HttpStatus.OK);
     }

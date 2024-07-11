@@ -12,7 +12,7 @@ export const Layout = () => {
     <div className="w-full">
       <Header />
       <SideBar />
-      <div className="ml-12 mt-12 md:mt-16 md:ml-16 flex-1">
+      <div className="ml-12 mt-14 md:mt-16 md:ml-16 flex-1">
         <Outlet />
       </div>
     </div>

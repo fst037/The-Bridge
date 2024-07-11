@@ -74,8 +74,8 @@ export const SkillsRadar = ({ skills, className }) => {
   }, [skills, data, options]);
 
   return (
-    <div className={`w-min ${className}`}>
-      <div>
+    <div className={`${className} flex justify-center align-center h-full`} style={{ maxHeight: '200px' }}>
+      <div className="flex w-min">
         <canvas height="auto" width="auto" ref={chartRef} />
       </div>
     </div>
