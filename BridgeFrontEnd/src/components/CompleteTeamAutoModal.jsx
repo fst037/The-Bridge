@@ -27,9 +27,6 @@ export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugere
   );
 
   const handleSubmit = (e) => {
-    console.log("teamMembers", teamMembers);
-    console.log("courseCode", courseCode);
-    console.log("team", team.team.identifier);
     e.preventDefault();
     if (!teamMembers || !courseCode) return;
     mutation.mutate({teamMembers, teamIdentifier:team.team.identifier , courseCode});
