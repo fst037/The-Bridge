@@ -37,3 +37,8 @@ export const getTeamsSugestions = async ({teamMembers, teamIdentifier, courseCod
 
   return data;
 };
+
+export const deleteFromTeam = async ({teamId, username}) => {
+  const { data } = await authAxios.delete(`equipos/removeStudent?username=${username}&identifier=${teamId}`);
+  return data;
+};

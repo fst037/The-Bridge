@@ -7,8 +7,8 @@ import { getTeamsSugestions } from '../services/teams'
 import { useMutation } from 'react-query'
 import toast from "react-hot-toast";
 
-export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugerencias, setSugerencias}) => {
-  const [teamMembers, setTeamMembers] = useState(team.estudiantes.length);
+export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugerencias, setSugerencias, courses}) => {
+  const [teamMembers, setTeamMembers] = useState(team.estudiantes?.length);
   const [courseCode, setCourseCode] = useState("");
 
   const mutation = useMutation(
@@ -40,7 +40,7 @@ export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugere
       cardRef={cardRef}
       title={"Generar sugerencias para completar el equipo"}
     >
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <form className="flex flex-col gap-4 content-box" onSubmit={handleSubmit}>
         <FormInput
           type={"number"}
           Icon={RiTeamLine}
@@ -48,13 +48,16 @@ export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugere
           value={teamMembers}
           onChange={(e) => setTeamMembers(e.target.value)}
         />
-        <FormInput
-          type={"text"}
-          Icon={RiTeamLine}
-          placeholder={"Introduce el codigo del curso"}
+        <select
+          className="form-select w-full border border-gray-400 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           value={courseCode}
           onChange={(e) => setCourseCode(e.target.value)}
-        />
+        >
+          <option disabled>Selecciona el curso</option>
+          {courses.map(course => (
+            <option key={course.code} value={course.code}>{course.name}</option>
+          ))}
+        </select>
         <AddActionButton text={"Generar"} isLoading={mutation.isLoading} />
       </form>
     </Modal>

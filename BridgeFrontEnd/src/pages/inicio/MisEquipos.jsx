@@ -21,7 +21,7 @@ export const MisEquipos = () => {
           <h3 className="text-3xl">Mis Equipos</h3>
           <AddActionButton text={"Nuevo +"} onClick={() => setIsOpen(true)} />
         </div>
-        <article className="grid grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
+        <article className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
           {teams?.map(({ team }) => (
             <Link to={`/equipo/${team.identifier}`} key={team.identifier}>
               <InfoCard key={team.identifier} title={team.nombre} />

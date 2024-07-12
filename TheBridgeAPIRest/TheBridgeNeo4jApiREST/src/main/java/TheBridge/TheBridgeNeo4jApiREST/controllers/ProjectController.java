@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/proyectos")
@@ -56,8 +57,9 @@ public class ProjectController {
     }
 
     @GetMapping("/misProyectos")
-    public ResponseEntity<List<Project>> misProyectos(Principal principal) {
-        List<Project> proyectos = proyectoService.getProjectsByUser(principal.getName());
+    public ResponseEntity<List<ProjectDTO>> misProyectos(Principal principal) {
+        List<ProjectDTO> proyectos = proyectoService.getProjectWithTeamAndCourseByUser(principal.getName())
+                .stream().map(ProjectTeamCourseQueryResult::toProjectDTO).collect(Collectors.toList());
 
         return new ResponseEntity<>(proyectos, HttpStatus.OK);
     }
