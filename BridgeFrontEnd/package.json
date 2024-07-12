@@ -20,7 +20,8 @@
     "react-image-crop": "^11.0.5",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.23.1",
-    "react-spinners": "^0.13.8"
+    "react-spinners": "^0.13.8",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

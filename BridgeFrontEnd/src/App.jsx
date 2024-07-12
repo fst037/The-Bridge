@@ -12,7 +12,7 @@ import { Comunidad } from "./pages/comunidad/Comunidad";
 import { BuildersC } from "./pages/comunidad/BuildersC";
 import { Recomendados } from "./pages/comunidad/Recomendados";
 import { Conocidos } from "./pages/comunidad/Conocidos";
-import { Inicio } from "./pages/inicio/inicio";
+import { Inicio } from "./pages/inicio/Inicio";
 import EncuestaPage from "./pages/encuesta/EncuestaPage";
 import CursoEspecifico from "./pages/cursoEspecifico/CursoEspecifico";
 import EquipoEspecifico from "./pages/equipos/EquipoEspecifico";

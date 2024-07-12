@@ -36,7 +36,7 @@ const ProfileCard = ({ cardRef, isOpen, onClick = () => {} }) => {
   return (
     <div
       ref={cardRef}
-      className={`header-profile-card ${isOpen ? "scale-100" : "scale-0"}`}
+      className={`profile-card ${isOpen ? "scale-100" : "scale-0"}`}
       onClick={onClick}
     >
       <ProfileCardItem
