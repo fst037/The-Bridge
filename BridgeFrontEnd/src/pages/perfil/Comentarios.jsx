@@ -1,12 +1,11 @@
-import { useQuery } from "react-query";
-import { queryConfig } from "../../utils/queryConfig";
-import { getComments } from "../../services/getUserData";
-import { calculateTimeAgo } from "../../utils/calculateTimeAgo";
-import { SlOptionsVertical } from "react-icons/sl";
-import { FaRegEye } from "react-icons/fa";
+import { useQuery } from 'react-query'
+import { queryConfig } from '../../utils/queryConfig'
+import { getComments } from '../../services/getUserData'
+import { calculateTimeAgo } from '../../utils/calculateTimeAgo'
+import { FaRegEye } from 'react-icons/fa'
 
 export const Comentarios = () => {
-  const { data: comments } = useQuery("comments", getComments, queryConfig);
+  const { data: comments } = useQuery('comments', getComments, queryConfig)
 
   return (
     <article className="flex flex-col gap-2 border border-gray-300 rounded-lg p-4">
@@ -17,11 +16,11 @@ export const Comentarios = () => {
         ))}
       </div>
     </article>
-  );
-};
+  )
+}
 
 const Comentario = ({ comment }) => {
-  const timeAgo = calculateTimeAgo(comment.timestamp);
+  const timeAgo = calculateTimeAgo(comment.timestamp)
 
   return (
     <div className="flex justify-between items-center">
@@ -44,5 +43,5 @@ const Comentario = ({ comment }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}

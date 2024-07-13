@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { SkillsRadar } from "./SkillsRadar";
-import { UserCard } from "./UserCard";
-import { useState } from "react";
+import { SkillsRadar } from './SkillsRadar'
+import { UserCard } from './UserCard'
 
 const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
-  if (!usersProfilePic) usersProfilePic = {};
+  if (!usersProfilePic) usersProfilePic = {}
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))]">
@@ -22,7 +20,7 @@ const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
             {parseFloat(sugerencia.compatibility * 100).toFixed(2)}%
           </div>
           <div className="flex flex-col sm:flex-row align-center justify-center h-full">
-            <SkillsRadar skills={sugerencia.skills} className={"self-center"} />
+            <SkillsRadar skills={sugerencia.skills} className={'self-center'} />
 
             <div className="flex flex-col gap-2 w-full mt-3 sm:mt-0">
               {sugerencia?.members?.map((user) => (
@@ -31,7 +29,7 @@ const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
                   profilePic={usersProfilePic[user.username]}
                   username={user.username}
                   name={user.name}
-                  className={"w-full"}
+                  className={'w-full'}
                 />
               ))}
             </div>
@@ -39,7 +37,7 @@ const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default SugerenciasEquipos;
+export default SugerenciasEquipos
