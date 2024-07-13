@@ -4,6 +4,7 @@ import TheBridge.TheBridgeNeo4jApiREST.models.Project;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectTeamCourseQueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -66,4 +67,10 @@ public interface ProjectRepository extends Neo4jRepository<Project, UUID> {
     @Query("MATCH (p:Project {identifier: $identifier}) " +
             "DETACH DELETE p")
     void deleteProject(String identifier);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "SET p.links = [link IN p.links | CASE link WHEN $oldLink THEN $newLink ELSE link END]")
+    void updateLinkInProject(@Param("identifier") String identifier, @Param("oldLink") String oldLink, @Param("newLink") String newLink);
+
 }
+

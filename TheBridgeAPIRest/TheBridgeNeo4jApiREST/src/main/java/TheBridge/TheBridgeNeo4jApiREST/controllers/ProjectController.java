@@ -67,8 +67,12 @@ public class ProjectController {
     @DeleteMapping("/eliminarProyecto")
     public ResponseEntity<Void> eliminarProyecto(Principal principal, @RequestParam String identifier) {
         proyectoService.deleteProject(principal, identifier);
-
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{identifier}/links")
+    public ResponseEntity<Void> updateLinkInProject(@PathVariable String identifier, @RequestParam String oldLink, @RequestParam String newLink) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

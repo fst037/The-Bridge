@@ -6,6 +6,7 @@ import TheBridge.TheBridgeNeo4jApiREST.repositories.ProjectRepository;
 import TheBridge.TheBridgeNeo4jApiREST.requests.CreateProyectRequest;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -76,5 +77,10 @@ public class ProjectService {
         }
 
         projectRepository.deleteProject(identifier);
+    }
+
+    @Transactional
+    public void updateLinkInProject(String identifier, String oldLink, String newLink) {
+        projectRepository.updateLinkInProject(identifier, oldLink, newLink);
     }
 }
