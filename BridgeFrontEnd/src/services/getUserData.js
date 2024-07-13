@@ -19,7 +19,7 @@ export const getProfilePic = async (email) => {
 };
 
 export const getUserDetail = async (username) => {
-  const { data } = await axios.get(
+  const { data } = await authAxios.get(
     `http://localhost:8080/api/v1/profile/?username=${username}`
   );
   return data;

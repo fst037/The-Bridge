@@ -16,6 +16,7 @@ import { Inicio } from "./pages/inicio/Inicio";
 import EncuestaPage from "./pages/encuesta/EncuestaPage";
 import CursoEspecifico from "./pages/cursoEspecifico/CursoEspecifico";
 import EquipoEspecifico from "./pages/equipos/EquipoEspecifico";
+import PerfilEspecifico from "./pages/perfilEspecifico/PerfilEspecifico";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="builders" element={<BuildersC />} />
           <Route path="recomendados" element={<Recomendados />} />
           <Route path="conocidos" element={<Conocidos />} />
+          <Route path="perfil/:username" element={<PerfilEspecifico />} />
         </Route>
       </Routes>
       <Toaster />

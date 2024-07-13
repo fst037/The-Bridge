@@ -17,6 +17,6 @@
 
   .profile-card {
     @apply absolute flex flex-col top-12 md:top-16 right-2 w-max border-gray-300 border overflow-hidden rounded-md
-    origin-top-right transition-all duration-100 cursor-pointer;
+    origin-top-right transition-all duration-100 cursor-pointer z-10;
   }
 }
