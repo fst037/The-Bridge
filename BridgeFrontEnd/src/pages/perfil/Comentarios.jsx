@@ -9,7 +9,7 @@ export const Comentarios = () => {
   const { data: comments } = useQuery("comments", getComments, queryConfig);
 
   return (
-    <article className="flex flex-col gap-2">
+    <article className="flex flex-col gap-2 border border-gray-300 rounded-lg p-4">
       <h4 className="text-lg font-[500]">Comentarios {comments?.length}</h4>
       <div className="flex flex-col gap-2">
         {comments?.map((comment) => (

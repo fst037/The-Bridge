@@ -1,25 +1,21 @@
 import { useState } from "react";
 import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
-import { RiTeamLine } from "react-icons/ri";
+import { RiFolderLine} from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
 import { useQuery } from 'react-query'
 import { queryConfig } from '../utils/queryConfig'
 import { getTeamsSugestions } from '../services/teams'
 
-export const CreateProjectModal = ({ isOpen, setIsOpen, cardRef, team}) => {
-  const [teamMembers, setTeamMembers] = useState(team.estudiantes.lenght);
-  const [courseCode, setCourseCode] = useState("");  
+export const CreateProjectModal = ({ isOpen, setIsOpen, cardRef, teams, courses}) => {
   let isLoading = false;
+  const [projectName, setProjectName] = useState("");
+  const [courseCode, setCourseCode] = useState("");
+  const [teamIdentifier, setTeamIdentifier] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { data: teamsSugestions, isLoading } = useQuery(
-      "teamsSugestions",
-      () => getTeamsSugestions(teamMembers, team.team.identifier, courseCode),
-      queryConfig
-    );
-    console.log("Generar sugerencias para completar el equipo");
+    
   }
 
   return (
@@ -27,24 +23,38 @@ export const CreateProjectModal = ({ isOpen, setIsOpen, cardRef, team}) => {
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       cardRef={cardRef}
-      title={"Generar sugerencias para completar el equipo"}
+      title={"Nuevo Proyecto"}
     >
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <FormInput
-          type={"number"}
-          Icon={RiTeamLine}
-          placeholder={"Introduce la cantidad de personas totales del equipo"}
-          value={teamMembers}
-          onChange={(e) => setTeamMembers(e.target.value)}
-        />
-        <FormInput
           type={"text"}
-          Icon={RiTeamLine}
-          placeholder={"Introduce el codigo del curso"}
+          Icon={RiFolderLine}
+          placeholder={"Introduce el nombre del proyecto"}
+          value={projectName}
+          onChange={(e) => setProjectName(e.target.value)}
+        />
+
+        <select
+          className="form-select w-full border border-gray-400 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          value={teamIdentifier}
+          onChange={(e) => setTeamIdentifier(e.target.value)}
+        >
+          {teams.map(team => (
+            <option key={team.identifier} value={team.identifier}>{team.nombre}</option>
+          ))}
+        </select>
+
+        <select
+          className="form-select w-full border border-gray-400 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           value={courseCode}
           onChange={(e) => setCourseCode(e.target.value)}
-        />
-        <AddActionButton text={"Generar"} isLoading={isLoading} />
+        >
+          <option disabled>Selecciona el curso</option>
+          {courses.map(course => (
+            <option key={course.code} value={course.code}>{course.name}</option>
+          ))}
+        </select>
+        <AddActionButton text={"Crear Proyecto"} isLoading={isLoading} />
       </form>
     </Modal>
   );

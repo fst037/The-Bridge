@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { queryConfig } from '../../utils/queryConfig'
@@ -11,6 +11,9 @@ import { AddPersonModal } from '../../components/AddPersonModal'
 import { CompleteTeamAutoModal } from '../../components/CompleteTeamAutoModal'
 import { useState } from 'react'
 import SugerenciasEquipos from '../../components/SugerenciasEquipos'
+import { getMyCourses } from '../../services/courses'
+import { RiDeleteBinFill, RiDeleteBinLine, RiEyeLine } from 'react-icons/ri'
+import { CreateProjectModal } from '../../components/CreateProjectModal'
 
 
 const EquipoEspecifico = () => {
@@ -27,10 +30,37 @@ const EquipoEspecifico = () => {
     queryConfig
   );
 
+  const {data: courses, isLoading2} = useQuery('courses', () => getMyCourses(), queryConfig);
+
+  const [allLoaded, setAllLoaded] = useState(false);
+
+  useEffect (() => {
+    if (teamInfo && courses) {
+      if (teamInfo.team.equipo.team.identifier !== teamId) {
+        setAllLoaded(false);
+      } else {
+        setAllLoaded(true);
+      }
+    }
+  }, [teamId, teamInfo, courses])
+
+  const [showSuggestions, setShowSuggestions] = useState(true);
+
+  const deleteFromTeam = (username, teamId, teamName) => {
+    if (confirm(`Pro favor confirmar que deseas eliminar al usuario "${username}" del equipo "${teamName}"`)){
+      const { data: data } = deleteFromTeam({teamId, username});
+      if (data) {
+        toast.success(`Usuario ${username} eliminado del equipo`);
+      } else {
+        toast.error(`Error al eliminar al usuario ${username} del equipo`);
+      }
+    };
+  }
+
   return (
     <div className="flex flex-col h-min gap-4 p-4 md:p-8">
-        {isLoading && <p>Cargando...</p>}
-        {!isLoading && (
+        {!(allLoaded) && <p>Cargando...</p>}
+        {(allLoaded) && (
           <>
             <h2 className="text-4xl text-gray-400/80">{teamInfo?.team.equipo.team.nombre}</h2>
 
@@ -56,6 +86,7 @@ const EquipoEspecifico = () => {
                     name={name}
                     username={username}
                     className={"w-full"}
+                    extraButton={<RiDeleteBinLine className="cursor-pointer h-5 w-4" onClick={() => deleteFromTeam(username, teamId, teamInfo?.team.equipo.team.nombre)}/>}
                   />
                 ))}
               </div>
@@ -67,11 +98,11 @@ const EquipoEspecifico = () => {
           </div>
 
           <div className="border border-gray-300 rounded-lg p-4">
-            <div className='flex'>
-              <h4 className="text-lg font-[500]">Sugerencias</h4>              
+            <div className='flex justify-between'>
+              <h4 className="text-lg font-[500]">Sugerencias {!showSuggestions && "(Están ocultas)"}</h4>
+              <RiEyeLine onClick={() => setShowSuggestions(!showSuggestions)} className='cursor-pointer h-6 w-6'></RiEyeLine>
             </div> 
-            <SugerenciasEquipos sugerencias={sugerencias} usersProfilePic={{}}/>                      
-            
+            {showSuggestions && <SugerenciasEquipos sugerencias={sugerencias} usersProfilePic={{}}/>}
           </div>
 
           <div className="border border-gray-300 rounded-lg p-4">
@@ -81,7 +112,7 @@ const EquipoEspecifico = () => {
                 onClick={() => setIsOpen3(true)}
               >Nuevo Proyecto</button>
             </div>            
-            <div className='flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(600px,_1fr))] gap-2 items-start'>
+            <div className='flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(600px,_1fr))] gap-2 items-start mb-4'>
               {
               teamInfo?.team.projects.map(project => (
                 <div key={project.identifier} className="border border-gray-300 rounded-lg p-4 mt-4 h-full">
@@ -97,7 +128,7 @@ const EquipoEspecifico = () => {
                       <p className='ml-3 break-words text-left mt-1'>{project.descripcion}</p>
                       <h6 className="text-md font-[500] mt-2">Links: </h6>
                       <ul className='ml-3 mt-1'>
-                        {project.links.map(link => (
+                        {project.links && project.links.map(link => (
                           <li key={link}>
                             <a href={link} target="_blank" rel="noreferrer" className='text-sm text-blue-500 underline break-all text-left'>{link}</a>
                           </li>
@@ -118,13 +149,29 @@ const EquipoEspecifico = () => {
             
           
           <AddPersonModal
-                    cardRef={cardRef}
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
-                    team={teamInfo?.team.equipo.team}
+            cardRef={cardRef}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            team={teamInfo?.team.equipo.team}
                   />
                   
-          <CompleteTeamAutoModal isOpen={isOpen2} setIsOpen={setIsOpen2} cardRef={cardRef2} team={teamInfo?.team.equipo} sugerencias={sugerencias} setSugerencias={setSugerencias} />
+          <CompleteTeamAutoModal 
+            isOpen={isOpen2} 
+            setIsOpen={setIsOpen2} 
+            cardRef={cardRef2} 
+            team={[teamInfo?.team.equipo]} 
+            sugerencias={sugerencias} 
+            setSugerencias={setSugerencias}
+            courses={courses}
+            />
+          
+          <CreateProjectModal
+            isOpen={isOpen3}
+            setIsOpen={setIsOpen3}
+            cardRef={cardRef3}
+            teams={[teamInfo?.team.equipo.team]}
+            courses={courses}
+          />
           </>
         )}
     </div>

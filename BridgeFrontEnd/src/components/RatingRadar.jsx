@@ -1,74 +1,7 @@
-import { useEffect, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
-import Chart from "chart.js/auto";
+import { SkillsRadar } from "./SkillsRadar";
 
 export const RatingRadar = ({ skills}) => {
-  const chartRef = useRef(null);
-  const chartInstanceRef = useRef(null);
-
-  const skillNames = Object.keys(skills);
-  const skillScores = Object.values(skills);
-
-  const data = useMemo(
-    () => ({
-      labels: skillNames,
-      datasets: [
-        {
-          data: skillScores,
-          backgroundColor: "rgba(54, 162, 235, 0.2)",
-          borderColor: "rgba(54, 162, 235, 1)",
-          borderWidth: 1,
-        },
-        { data: [0], fill: false, borderColor: "rgba(0, 0, 0,0)" },
-      ],
-    }),
-    [skillNames, skillScores]
-  );
-
-  const options = useMemo(
-    () => ({
-      scales: {
-        r: {
-          ticks: {
-            beginAtZero: true,
-            backdropColor: "transparent",
-            fontColor: "black",
-          },
-          pointLabels: {
-            fontSize: 12,
-          },
-        },
-      },
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-    }),
-    []
-  );
-
-  useEffect(() => {
-    if (!skills) return;
-
-    if (chartInstanceRef.current) {
-      chartInstanceRef.current.destroy();
-    }
-
-    const ctx = chartRef.current.getContext("2d");
-    chartInstanceRef.current = new Chart(ctx, {
-      type: "radar",
-      data: data,
-      options: options,
-    });
-
-    return () => {
-      if (chartInstanceRef.current) {
-        chartInstanceRef.current.destroy();
-        chartInstanceRef.current = null;
-      }
-    };
-  }, [skills, data, options]);
 
   if (!skills) {
     return (
@@ -93,10 +26,11 @@ export const RatingRadar = ({ skills}) => {
   }
 
   return (
-    <div className="flex w-full justify-center">
-      <div>
-        <canvas ref={chartRef}/>
-      </div>
+    <div className="flex flex-col w-full justify-center border border-gray-300 rounded-lg p-4">
+      <h4 className="text-xl font-[500]">Skills</h4>
+      <div className="min-h-[200px]">
+        <SkillsRadar skills={skills}/>
+      </div>           
     </div>
   );
 };

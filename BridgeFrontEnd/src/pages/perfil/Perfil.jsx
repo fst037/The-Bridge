@@ -16,20 +16,22 @@ export const Perfil = () => {
     queryConfig
   );
   return (
-    <div className="flex flex-col gap-4 p-4 lg:p-8">
+    <div className="flex flex-col gap-4 p-4 md:p-8">
       <h2 className="text-4xl text-gray-400/80">Perfil</h2>
-      <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12 pb-12">
-        {isLoading && <p>Cargando...</p>}
+      {isLoading && <p>Cargando...</p>}
         {!isLoading && (
+          
           <>
-            <MiPerfil user={user} />
-            <RatingRadar skills={user?.skills} />
-            <InformacionGeneral user={user} />
-            <Builders />
+            <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 pb-0. lg:pb-4">
+              <MiPerfil user={user} />
+              <RatingRadar skills={user?.skills} />
+              <InformacionGeneral user={user} />
+              <Builders />
+            </main>            
             <Comentarios />
           </>
         )}
-      </main>
+      
     </div>
   );
 };

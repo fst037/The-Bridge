@@ -4,8 +4,7 @@ import { getProfilePic } from "./getUserData";
 
 export const getMyCourses = async () => {
   const { data } = await authAxios.get("/api/v1/cursos/misCursos");
-  const courses = convertCourses(data);
-  return courses;
+  return data;
 };
 
 export const getSuggestions = async (course, groupSize = 3) => {

@@ -59,7 +59,7 @@ export const InformacionGeneral = ({ user }) => {
   };
 
   return (
-    <article className="flex flex-col gap-4">
+    <article className="flex flex-col gap-4 border border-gray-300 rounded-lg p-4">
       <h4 className="text-xl font-[500]">Información general</h4>
       <form
         className="flex flex-col items-center w-full gap-4"
@@ -87,6 +87,7 @@ export const InformacionGeneral = ({ user }) => {
             disabled={authUser.email !== user.username}
           />
         ))}
+<<<<<<< HEAD
         {authUser.email === user.username && (
           <button
             className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756]"
@@ -99,6 +100,18 @@ export const InformacionGeneral = ({ user }) => {
             )}
           </button>
         )}
+=======
+        <button
+          className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full"
+          disabled={mutation.isLoading}
+        >
+          {mutation.isLoading ? (
+            <ClipLoader size={16} color="#fff" />
+          ) : (
+            "Guardar"
+          )}
+        </button>
+>>>>>>> f3dacde44832ee358fcba12033732131ee554599
       </form>
     </article>
   );

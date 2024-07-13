@@ -37,3 +37,18 @@ export const getTeamsSugestions = async ({teamMembers, teamIdentifier, courseCod
 
   return data;
 };
+
+<<<<<<< HEAD
+export const getTeamsSugestions2 = async ({teamMembers, courseCode}) => {
+  const { data } = await authAxios.get(`/api/v1/sugerenciasEquipos/sugerirEquipos?courseCode=${courseCode}&cantIntegrantesFinales=${teamMembers}`);
+
+  return data;
+};
+
+
+=======
+export const deleteFromTeam = async ({teamId, username}) => {
+  const { data } = await authAxios.delete(`equipos/removeStudent?username=${username}&identifier=${teamId}`);
+  return data;
+};
+>>>>>>> 462eb3fb6dc8f4edfa032f8f4d9db69bf3543d6d

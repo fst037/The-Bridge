@@ -1,20 +1,19 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getCourseMembers, getSuggestions } from "../../services/courses";
 import { queryConfig } from "../../utils/queryConfig";
 import { UserCard } from "../../components/UserCard";
-import { SkillsRadar } from "../../components/SkillsRadar";
 import SugerenciasEquipos from "../../components/SugerenciasEquipos";
+import BuscarEquipoModal from "../../components/BuscarEquipoModal";
+import { useCardToggle } from "../../hooks/useCardToggle";
 
 const CursoEspecifico = () => {
   const { courseId } = useParams();
   const [isDisponible, setIsDisponible] = useState(false);
-  const { data: sugerencias } = useQuery(
-    "suggestions",
-    () => getSuggestions(courseId),
-    queryConfig
-  );
+  const { isOpen, setIsOpen, cardRef } = useCardToggle();
+  const [sugerencias, setSugerencias] = useState([]);
+
   const { data: curso } = useQuery(
     "courseMembers",
     () => getCourseMembers(courseId),
@@ -51,21 +50,31 @@ const CursoEspecifico = () => {
             />
             <label htmlFor="disponibleToggle">
               {" "}
-              Usuario disponible para formar Equipos
+              Estoy disponible para formar Equipos
             </label>
           </div>
         </div>
-        
-        {/* <div>
-          <input type="text" />
-        </div>  */}
 
-
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
-          Buscar
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 mt-4"
+          onClick={() => setIsOpen(true)}
+        >
+          Buscar  REVEER NO SUBE LAS SUGERENCIAS
         </button>
 
-        <SugerenciasEquipos sugerencias={sugerencias} usersProfilePic={usersProfilePic}/>
+        <BuscarEquipoModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          cardRef={cardRef}
+          setSugerencias={setSugerencias}
+        />
+      </div>
+
+      <div className="border border-gray-300 rounded-lg p-4">
+        <div className="flex">
+          <h4 className="text-lg font-[500]">Sugerencias de Equipo</h4>
+        </div>
+        <SugerenciasEquipos sugerencias={sugerencias} usersProfilePic={usersProfilePic} />
       </div>
 
       <h2 className="mt-4 mb-4 text-2xl">Alumnos</h2>
