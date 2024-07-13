@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SkillsRadar } from './SkillsRadar'
 import { UserCard } from './UserCard'
+import { useState } from 'react'
 
 const SugerenciasEquipos = ({sugerencias, usersProfilePic}) => {
 
   if (!usersProfilePic) usersProfilePic = {};
 
+<<<<<<< HEAD
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))]">
+=======
+  return ( 
+      <div className="grid grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))]">
+>>>>>>> 462eb3fb6dc8f4edfa032f8f4d9db69bf3543d6d
           {sugerencias?.map((sugerencia, index) => (
             <div
               className="flex flex-col m-2 p-2 border border-gray-300 rounded-md"
@@ -43,7 +49,7 @@ const SugerenciasEquipos = ({sugerencias, usersProfilePic}) => {
               
             </div>
           ))}
-        </div>
+        </div>  
   )
 }
 

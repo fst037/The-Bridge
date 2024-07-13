@@ -60,7 +60,7 @@ public class ProfileController {
         return new ResponseEntity<>(responseUser, HttpStatus.OK);
     }
 
-    @PostMapping("/añadirLinkContacto")
+    @PostMapping("/anadirLinkContacto")
     public ResponseEntity<UserDTO> añadirLinkContacto(Principal principal, @RequestParam String link) {
         User user = userService.addContactLink(principal.getName(), link);
 

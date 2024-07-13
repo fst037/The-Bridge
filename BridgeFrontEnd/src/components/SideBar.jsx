@@ -5,28 +5,29 @@ import { HiUserGroup } from "react-icons/hi";
 import { TbWorld } from "react-icons/tb";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { RiFolderLine } from "react-icons/ri";
 
 export const SideBar = () => {
   return (
     <div className="fixed top-12 md:top-16 left-0 h-screen w-12 md:w-16 m-0 flex flex-col bg-[#F0E9FF] items-center shadow">
-      <SideBarIcon icon={<TiHome size={32} />} text="Inicio" to="/inicio" />
-      <SideBarIcon icon={<FaUser size={32} />} text="Perfil" to="/perfil" />
+      <SideBarIcon icon={<TiHome className="h-6 w-6 md:w-auto md:h-8" />} text="Inicio" to="/inicio" />
+      <SideBarIcon icon={<FaUser className="h-6 w-6 md:w-auto md:h-8" />} text="Perfil" to="/perfil" />
       <SideBarIcon
-        icon={<FaGraduationCap size={32} />}
+        icon={<FaGraduationCap className="h-6 w-6 md:w-auto md:h-8" />}
         text="Cursos"
         to="/cursos"
       />
       <SideBarIcon
-        icon={<HiUserGroup size={32} />}
+        icon={<HiUserGroup className="h-6 w-6 md:w-auto md:h-8" />}
         text="Equipos"
         to="/equipos"
       />
+      <SideBarIcon icon={<RiFolderLine className="h-6 w-6 md:w-auto md:h-8"/>} text="Proyectos" to="/proyectos" />
       <SideBarIcon
-        icon={<TbWorld size={32} />}
+        icon={<TbWorld className="h-6 w-6 md:w-auto md:h-8" />}
         text="Comunidad"
         to="/comunidad"
-      />
-      <SideBarIcon icon={<FaStar size={32} />} text="Ratings" to="/ratings" />
+      />      
     </div>
   );
 };

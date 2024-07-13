@@ -11,13 +11,13 @@ export const MisCursos = () => {
     <section>
       <div className="mt-2">
         <h3 className="text-3xl">Mis Cursos</h3>
-        <article className="grid grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
-          {courses?.map(({ code, year, shift, day, subject }) => (
+        <article className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
+          {courses?.map(({ code, name, shift, day, period }) => (
             <Link to={`/curso/${code}`} key={code}>
             <InfoCard
               key={code}
-              title={subject}
-              information={[year, day, shift]}
+              title={name}
+              information={[code, day, shift, period]}
             />
             </Link>
           ))}
