@@ -6,12 +6,14 @@ import { RatingRadar } from "../../components/RatingRadar";
 import { useQuery } from "react-query";
 import { getUserDetail } from "../../services/getUserData";
 import { useAuthContext } from "../../context/AuthContext";
+import { queryConfig } from "../../utils/queryConfig";
 
 export const Perfil = () => {
   const { authUser } = useAuthContext();
   const { data: user, isLoading } = useQuery(
     ["profileDetail", authUser.email],
-    () => getUserDetail(authUser.email)
+    () => getUserDetail(authUser.email),
+    queryConfig
   );
   return (
     <div className="flex flex-col gap-4 p-4 lg:p-8">

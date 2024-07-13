@@ -6,8 +6,10 @@ import { FormInput } from "../../components/FormInput";
 import { v4 as uuidv4 } from "uuid";
 import { FaLink } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../../context/AuthContext";
 
 export const InformacionGeneral = ({ user }) => {
+  const { authUser } = useAuthContext();
   const initializeLinks = (contactLinks) => {
     const links = contactLinks.slice(0, 3).map((link) => ({
       value: link || "",
@@ -73,6 +75,7 @@ export const InformacionGeneral = ({ user }) => {
             }))
           }
           className="w-full h-32 p-2 border rounded-md border-gray-400 focus:border-gray-600 outline-none"
+          disabled={authUser.email !== user.username}
         />
         {userInformation.links.map((link) => (
           <FormInput
@@ -81,18 +84,21 @@ export const InformacionGeneral = ({ user }) => {
             value={link.value}
             onChange={handleLinkChange(link.id)}
             Icon={FaLink}
+            disabled={authUser.email !== user.username}
           />
         ))}
-        <button
-          className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756]"
-          disabled={mutation.isLoading}
-        >
-          {mutation.isLoading ? (
-            <ClipLoader size={16} color="#fff" />
-          ) : (
-            "Guardar"
-          )}
-        </button>
+        {authUser.email === user.username && (
+          <button
+            className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756]"
+            disabled={mutation.isLoading}
+          >
+            {mutation.isLoading ? (
+              <ClipLoader size={16} color="#fff" />
+            ) : (
+              "Guardar"
+            )}
+          </button>
+        )}
       </form>
     </article>
   );

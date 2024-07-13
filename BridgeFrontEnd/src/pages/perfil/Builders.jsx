@@ -3,7 +3,7 @@ import { queryConfig } from "../../utils/queryConfig";
 import { getUserBuilders } from "../../services/getUserData";
 import { UserCard } from "../../components/UserCard";
 
-export const Builders = () => {
+export const Builders = ({ user }) => {
   const { data: builders } = useQuery("builders", getUserBuilders, queryConfig);
 
   return (

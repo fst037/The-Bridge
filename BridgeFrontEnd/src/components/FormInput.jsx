@@ -4,6 +4,7 @@ export const FormInput = ({
   value,
   placeholder,
   onChange,
+  disabled = false,
 }) => {
   return (
     <div className="w-full relative flex items-center text-gray-500 focus-within:text-gray-800">
@@ -14,6 +15,7 @@ export const FormInput = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       />
     </div>
   );
