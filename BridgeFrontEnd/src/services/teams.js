@@ -14,7 +14,9 @@ export const getMyTeams = async () => {
 };
 
 export const getTeam = async (teamId) => {
-  const { data } = await authAxios.get(`/api/v1/equipos/porIdentifier?identifier=${teamId}`);
+  const { data } = await authAxios.get(
+    `/api/v1/equipos/porIdentifier?identifier=${teamId}`
+  );
 
   const usersWithProfilePic = await Promise.all(
     data.equipo.estudiantes.map(async (user) => {
@@ -32,23 +34,29 @@ export const getTeam = async (teamId) => {
   };
 };
 
-export const getTeamsSugestions = async ({teamMembers, teamIdentifier, courseCode}) => {
-  const { data } = await authAxios.get(`/api/v1/sugerenciasEquipos/completarEquipo?courseCode=${courseCode}&cantIntegrantesFinales=${teamMembers}&teamId=${teamIdentifier}`);
+export const getTeamsSugestions = async ({
+  teamMembers,
+  teamIdentifier,
+  courseCode,
+}) => {
+  const { data } = await authAxios.get(
+    `/api/v1/sugerenciasEquipos/completarEquipo?courseCode=${courseCode}&cantIntegrantesFinales=${teamMembers}&teamId=${teamIdentifier}`
+  );
 
   return data;
 };
 
-<<<<<<< HEAD
-export const getTeamsSugestions2 = async ({teamMembers, courseCode}) => {
-  const { data } = await authAxios.get(`/api/v1/sugerenciasEquipos/sugerirEquipos?courseCode=${courseCode}&cantIntegrantesFinales=${teamMembers}`);
+export const getTeamsSugestions2 = async ({ teamMembers, courseCode }) => {
+  const { data } = await authAxios.get(
+    `/api/v1/sugerenciasEquipos/sugerirEquipos?courseCode=${courseCode}&cantIntegrantesFinales=${teamMembers}`
+  );
 
   return data;
 };
 
-
-=======
-export const deleteFromTeam = async ({teamId, username}) => {
-  const { data } = await authAxios.delete(`equipos/removeStudent?username=${username}&identifier=${teamId}`);
+export const deleteFromTeam = async ({ teamId, username }) => {
+  const { data } = await authAxios.delete(
+    `equipos/removeStudent?username=${username}&identifier=${teamId}`
+  );
   return data;
 };
->>>>>>> 462eb3fb6dc8f4edfa032f8f4d9db69bf3543d6d

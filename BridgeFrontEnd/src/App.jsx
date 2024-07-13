@@ -16,11 +16,8 @@ import { Inicio } from "./pages/inicio/Inicio";
 import EncuestaPage from "./pages/encuesta/EncuestaPage";
 import CursoEspecifico from "./pages/cursoEspecifico/CursoEspecifico";
 import EquipoEspecifico from "./pages/equipos/EquipoEspecifico";
-<<<<<<< HEAD
 import PerfilEspecifico from "./pages/perfilEspecifico/PerfilEspecifico";
-=======
 import Proyectos from "./pages/proyectos/Proyectos";
->>>>>>> f3dacde44832ee358fcba12033732131ee554599
 
 function App() {
   return (
@@ -38,7 +35,7 @@ function App() {
           <Route path="curso/:courseId" element={<CursoEspecifico />} />
           <Route path="equipos" element={<Equipos />} />
           <Route path="equipo/:teamId" element={<EquipoEspecifico />} />
-          <Route path="proyectos" element={<Proyectos/>} />
+          <Route path="proyectos" element={<Proyectos />} />
           <Route path="proyecto/:teamId" element={<EquipoEspecifico />} />
           <Route path="comunidad" element={<Comunidad />} />
           <Route path="builders" element={<BuildersC />} />
