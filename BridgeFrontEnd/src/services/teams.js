@@ -37,3 +37,11 @@ export const getTeamsSugestions = async ({teamMembers, teamIdentifier, courseCod
 
   return data;
 };
+
+export const getTeamsSugestions2 = async ({teamMembers, courseCode}) => {
+  const { data } = await authAxios.get(`/api/v1/sugerenciasEquipos/sugerirEquipos?courseCode=${courseCode}&cantIntegrantesFinales=${teamMembers}`);
+
+  return data;
+};
+
+

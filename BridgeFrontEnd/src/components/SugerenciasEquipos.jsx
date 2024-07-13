@@ -6,7 +6,6 @@ const SugerenciasEquipos = ({sugerencias, usersProfilePic}) => {
 
   if (!usersProfilePic) usersProfilePic = {};
 
-  
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))]">
