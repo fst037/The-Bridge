@@ -6,10 +6,10 @@ import { useState } from "react";
 const SugerenciasEquipos = ({ sugerencias}) => {
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))]">
+    <div className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))] gap-4">
       {sugerencias?.map((sugerencia, index) => (
         <div
-          className="flex flex-col m-2 p-2 border border-gray-300 rounded-md"
+          className="flex flex-col p-2 border border-gray-300 rounded-md"
           key={index}
         >
           <div
@@ -20,7 +20,7 @@ const SugerenciasEquipos = ({ sugerencias}) => {
           >
             {parseFloat(sugerencia.compatibility * 100).toFixed(2)}%
           </div>
-          <div className="flex flex-col sm:flex-row align-center justify-center h-full">
+          <div className="flex flex-col md:flex-row align-center justify-center h-full">
             <SkillsRadar skills={sugerencia.skills} className={"self-center"} />
 
             <div className="flex flex-col gap-2 w-full mt-3 sm:mt-0">
