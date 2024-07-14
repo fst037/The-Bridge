@@ -1,9 +1,7 @@
-import { SkillsRadar } from './SkillsRadar'
-import { UserCard } from './UserCard'
+import { SkillsRadar } from "./SkillsRadar";
+import { UserCard } from "./UserCard";
 
 const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
-  if (!usersProfilePic) usersProfilePic = {}
-
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))]">
       {sugerencias?.map((sugerencia, index) => (
@@ -19,17 +17,17 @@ const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
           >
             {parseFloat(sugerencia.compatibility * 100).toFixed(2)}%
           </div>
-          <div className="flex flex-col sm:flex-row align-center justify-center h-full">
-            <SkillsRadar skills={sugerencia.skills} className={'self-center'} />
+          <div className="flex flex-col lg:flex-row align-center justify-center h-full">
+            <SkillsRadar skills={sugerencia.skills} className={"self-center"} />
 
-            <div className="flex flex-col gap-2 w-full mt-3 sm:mt-0">
+            <div className="flex flex-col gap-2 w-full mt-3">
               {sugerencia?.members?.map((user) => (
                 <UserCard
                   key={user.username}
-                  profilePic={usersProfilePic[user.username]}
+                  profilePic={usersProfilePic[user.username] || ""}
                   username={user.username}
                   name={user.name}
-                  className={'w-full'}
+                  className={"w-full"}
                 />
               ))}
             </div>
@@ -37,7 +35,7 @@ const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default SugerenciasEquipos
+export default SugerenciasEquipos;

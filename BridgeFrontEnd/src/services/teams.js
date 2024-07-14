@@ -13,7 +13,8 @@ export const getMyTeams = async () => {
   return data;
 };
 
-export const getTeam = async (teamId) => {
+export const getTeam = async ({ teamId }) => {
+  console.log(teamId);
   const { data } = await authAxios.get(
     `/api/v1/equipos/porIdentifier?identifier=${teamId}`
   );
@@ -48,7 +49,7 @@ export const getTeamsSugestions = async ({
 
 export const getTeamsSugestions2 = async ({ teamMembers, courseCode }) => {
   const { data } = await authAxios.get(
-    `/api/v1/sugerenciasEquipos/sugerirEquipos?courseCode=${courseCode}&cantIntegrantesFinales=${teamMembers}`
+    `/api/v1/sugerenciasEquipos/sugerirEquipos?courseCode=${courseCode}&cantIntegrantes=${teamMembers}`
   );
 
   return data;
@@ -56,7 +57,7 @@ export const getTeamsSugestions2 = async ({ teamMembers, courseCode }) => {
 
 export const deleteFromTeam = async ({ teamId, username }) => {
   const { data } = await authAxios.delete(
-    `equipos/removeStudent?username=${username}&identifier=${teamId}`
+    `/api/v1/equipos/removeStudent?username=${username}&identifier=${teamId}`
   );
   return data;
 };

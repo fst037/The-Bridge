@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import { FormInput } from './FormInput'
-import { Modal } from './Modal'
-import { RiTeamLine } from 'react-icons/ri'
-import { AddActionButton } from './AddActionButton'
-import { getTeamsSugestions } from '../services/teams'
-import { useMutation } from 'react-query'
-import toast from 'react-hot-toast'
+import { useState } from "react";
+import { FormInput } from "./FormInput";
+import { Modal } from "./Modal";
+import { RiTeamLine } from "react-icons/ri";
+import { AddActionButton } from "./AddActionButton";
+import { getTeamsSugestions } from "../services/teams";
+import { useMutation } from "react-query";
+import toast from "react-hot-toast";
+import { getCourseMembers } from "../services/courses";
 
 export const CompleteTeamAutoModal = ({
   isOpen,
@@ -13,45 +14,59 @@ export const CompleteTeamAutoModal = ({
   cardRef,
   team,
   setSugerencias,
+  setUsersProfilePic,
   courses,
 }) => {
-  const [teamMembers, setTeamMembers] = useState(team.estudiantes?.length)
-  const [courseCode, setCourseCode] = useState('')
+  const [teamMembers, setTeamMembers] = useState(team[0].estudiantes.length);
+  const [courseCode, setCourseCode] = useState(courses[0].code);
+
+  const courseMutation = useMutation(() => getCourseMembers(courseCode), {
+    onSuccess: (course) => {
+      const newUsersProfilePic = course.users.reduce((acc, user) => {
+        acc[user.username] = user.profilePic;
+        return acc;
+      }, {});
+
+      setUsersProfilePic(newUsersProfilePic);
+    },
+  });
 
   const mutation = useMutation(getTeamsSugestions, {
     onSuccess: (data) => {
-      setSugerencias(data)
-      toast.success(`Sugerencias generadas exitosamente`)
-      console.log('sugerencias', data)
-      setIsOpen(false)
+      courseMutation.mutate(courseCode);
+      setSugerencias(data);
+      toast.success(`Sugerencias generadas exitosamente`);
+      console.log("sugerencias", data);
+      setIsOpen(false);
     },
     onError: (error) => {
-      toast.error('Error al generar las sugerencias: ' + error.message)
+      toast.error("Error al generar las sugerencias: " + error.message);
     },
-  })
+  });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!teamMembers || !courseCode) return
+    e.preventDefault();
+
+    if (!teamMembers || !courseCode) return;
     mutation.mutate({
       teamMembers,
-      teamIdentifier: team.team.identifier,
+      teamIdentifier: team[0].team.identifier,
       courseCode,
-    })
-  }
+    });
+  };
 
   return (
     <Modal
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       cardRef={cardRef}
-      title={'Generar sugerencias para completar el equipo'}
+      title={"Generar sugerencias para completar el equipo"}
     >
       <form className="flex flex-col gap-4 content-box" onSubmit={handleSubmit}>
         <FormInput
-          type={'number'}
+          type={"number"}
           Icon={RiTeamLine}
-          placeholder={'Introduce la cantidad de personas totales del equipo'}
+          placeholder={"Introduce la cantidad de personas totales del equipo"}
           value={teamMembers}
           onChange={(e) => setTeamMembers(e.target.value)}
         />
@@ -67,8 +82,8 @@ export const CompleteTeamAutoModal = ({
             </option>
           ))}
         </select>
-        <AddActionButton text={'Generar'} isLoading={mutation.isLoading} />
+        <AddActionButton text={"Generar"} isLoading={mutation.isLoading} />
       </form>
     </Modal>
-  )
-}
+  );
+};

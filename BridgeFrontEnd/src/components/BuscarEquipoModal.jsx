@@ -3,24 +3,28 @@ import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiTeamLine } from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
-import { getTeamsSugestions2 } from '../services/teams';
-import { useMutation } from 'react-query';
+import { getTeamsSugestions2 } from "../services/teams";
+import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 
-export const BuscarEquipoModal = ({ isOpen, setIsOpen, cardRef, setSugerencias }) => {
+export const BuscarEquipoModal = ({
+  isOpen,
+  setIsOpen,
+  cardRef,
+  setSugerencias,
+  courseCode,
+}) => {
   const [teamMembers, setTeamMembers] = useState("");
-  const [courseCode, setCourseCode] = useState("");
 
   const mutation = useMutation(getTeamsSugestions2, {
     onSuccess: (data) => {
+      console.log(data);
       setSugerencias(data);
       toast.success(`Sugerencias generadas exitosamente`);
       setIsOpen(false);
     },
     onError: (error) => {
-      const errorMessage = error.response?.data || error.message || "Error desconocido";
       toast.error("Error al generar las sugerencias: " + error.message);
-      console.error("Error al generar las sugerencias:", error.response || error);
     },
   });
 
@@ -30,7 +34,7 @@ export const BuscarEquipoModal = ({ isOpen, setIsOpen, cardRef, setSugerencias }
       toast.error("Por favor, complete todos los campos.");
       return;
     }
-    mutation.mutate({ courseCode, cantIntegrantes: teamMembers });
+    mutation.mutate({ courseCode, teamMembers });
   };
 
   return (
@@ -47,13 +51,6 @@ export const BuscarEquipoModal = ({ isOpen, setIsOpen, cardRef, setSugerencias }
           placeholder={"Introduce la cantidad de personas totales del equipo"}
           value={teamMembers}
           onChange={(e) => setTeamMembers(e.target.value)}
-        />
-        <FormInput
-          type={"text"}
-          Icon={RiTeamLine}
-          placeholder={"Introduce el codigo del curso"}
-          value={courseCode}
-          onChange={(e) => setCourseCode(e.target.value)}
         />
         <AddActionButton text={"Buscar"} isLoading={mutation.isLoading} />
       </form>

@@ -1,71 +1,74 @@
-import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { queryConfig } from '../../utils/queryConfig'
-import { getTeam } from '../../services/teams'
-import { UserCard } from '../../components/UserCard'
-import { SkillsRadar } from '../../components/SkillsRadar'
-import { IoMdPersonAdd } from 'react-icons/io'
-import { useCardToggle } from '../../hooks/useCardToggle'
-import { AddPersonModal } from '../../components/AddPersonModal'
-import { CompleteTeamAutoModal } from '../../components/CompleteTeamAutoModal'
-import SugerenciasEquipos from '../../components/SugerenciasEquipos'
-import { getMyCourses } from '../../services/courses'
-import { RiDeleteBinLine, RiEyeLine } from 'react-icons/ri'
-import { CreateProjectModal } from '../../components/CreateProjectModal'
-import { deleteFromTeam } from '../../services/teams'
-import toast from 'react-hot-toast'
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { queryConfig } from "../../utils/queryConfig";
+import { getTeam } from "../../services/teams";
+import { UserCard } from "../../components/UserCard";
+import { SkillsRadar } from "../../components/SkillsRadar";
+import { IoMdPersonAdd } from "react-icons/io";
+import { useCardToggle } from "../../hooks/useCardToggle";
+import { AddPersonModal } from "../../components/AddPersonModal";
+import { CompleteTeamAutoModal } from "../../components/CompleteTeamAutoModal";
+import SugerenciasEquipos from "../../components/SugerenciasEquipos";
+import { getMyCourses } from "../../services/courses";
+import { RiDeleteBinLine, RiEyeLine } from "react-icons/ri";
+import { CreateProjectModal } from "../../components/CreateProjectModal";
+import { deleteFromTeam } from "../../services/teams";
+import toast from "react-hot-toast";
+import { useAuthContext } from "../../context/AuthContext";
 
 const EquipoEspecifico = () => {
-  const { teamId } = useParams()
-  const { cardRef, isOpen, setIsOpen } = useCardToggle()
+  const { authUser } = useAuthContext();
+  const { teamId } = useParams();
+  const { cardRef, isOpen, setIsOpen } = useCardToggle();
   const {
     cardRef: cardRef2,
     isOpen: isOpen2,
     setIsOpen: setIsOpen2,
-  } = useCardToggle()
+  } = useCardToggle();
   const {
     cardRef: cardRef3,
     isOpen: isOpen3,
     setIsOpen: setIsOpen3,
-  } = useCardToggle()
-  const [sugerencias, setSugerencias] = useState([])
-  const queryClient = useQueryClient()
-  const { data: teamInfo, isLoading } = useQuery(
-    'teamInformation',
-    () => getTeam(teamId),
-    queryConfig,
-  )
-  const { data: courses, isLoading2 } = useQuery(
-    'courses',
-    () => getMyCourses(),
-    queryConfig,
-  )
+  } = useCardToggle();
+  const [sugerencias, setSugerencias] = useState([]);
+  const [usersProfilePic, setUsersProfilePic] = useState({});
+  const queryClient = useQueryClient();
+  const { data: teamInfo, isLoading: isLoadingTeam } = useQuery(
+    "teamInformation",
+    async () => getTeam({ teamId }),
+    queryConfig
+  );
+  const { data: courses, isLoading: isLoadingCourse } = useQuery(
+    "courses",
+    getMyCourses,
+    queryConfig
+  );
   const mutation = useMutation(deleteFromTeam, {
     onSuccess: () => {
-      toast.success('Usuario eliminado correctamente')
-      queryClient.invalidateQueries('teamInformation')
+      toast.success("Usuario eliminado correctamente");
+      queryClient.invalidateQueries("teamInformation");
     },
     onError: (err) => {
-      toast.error(`Error al eliminar el usuario: ${err.message}`)
+      toast.error(`Error al eliminar el usuario: ${err.message}`);
     },
-  })
-  const [showSuggestions, setShowSuggestions] = useState(true)
+  });
+  const [showSuggestions, setShowSuggestions] = useState(true);
 
   const handleDeleteFromTeam = async (username, teamId, teamName) => {
     if (
-      confirm(
-        `Deseas eliminar al usuario "${username}" del equipo "${teamName}?"`,
+      window.confirm(
+        `Deseas eliminar al usuario "${username}" del equipo "${teamName}?"`
       )
     ) {
-      mutation.mutate({ teamId, username })
+      mutation.mutate({ teamId, username });
     }
-  }
+  };
 
   return (
     <div className="flex flex-col h-min gap-4 p-4 md:p-8">
-      {(isLoading || isLoading2) && <p>Cargando...</p>}
-      {(!isLoading || !isLoading2) && (
+      {(isLoadingCourse || isLoadingTeam) && <p>Cargando...</p>}
+      {!isLoadingCourse && !isLoadingTeam && (
         <>
           <h2 className="text-4xl text-gray-400/80">
             {teamInfo?.team.equipo.team.nombre}
@@ -76,7 +79,7 @@ const EquipoEspecifico = () => {
               <h4 className="text-lg font-[500] mb-4">Skills</h4>
               <SkillsRadar
                 skills={teamInfo?.team.skills}
-                className={'w-full'}
+                className={"w-full"}
               />
             </div>
 
@@ -89,24 +92,28 @@ const EquipoEspecifico = () => {
                 />
               </div>
               <div className="grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2 items-start grow-1 mb-auto">
-                {teamInfo.users?.map(({ name, username, profilePic }) => (
+                {teamInfo.users.map(({ name, username, profilePic }) => (
                   <UserCard
                     key={username}
                     profilePic={profilePic}
                     name={name}
                     username={username}
-                    className={'w-full'}
+                    className={"w-full"}
                     extraButton={
-                      <RiDeleteBinLine
-                        className="cursor-pointer h-5 w-4"
+                      <button
                         onClick={() =>
                           handleDeleteFromTeam(
                             username,
                             teamId,
-                            teamInfo?.team.equipo.team.nombre,
+                            teamInfo?.team.equipo.team.nombre
                           )
                         }
-                      />
+                        disabled={username === authUser.email}
+                      >
+                        <RiDeleteBinLine
+                          className={`cursor-pointer size-4 ${username === authUser.email ? "hidden" : ""}`}
+                        />
+                      </button>
                     }
                   />
                 ))}
@@ -123,7 +130,7 @@ const EquipoEspecifico = () => {
           <div className="border border-gray-300 rounded-lg p-4">
             <div className="flex justify-between">
               <h4 className="text-lg font-[500]">
-                Sugerencias {!showSuggestions && '(Están ocultas)'}
+                Sugerencias {!showSuggestions && "(Están ocultas)"}
               </h4>
               <RiEyeLine
                 onClick={() => setShowSuggestions(!showSuggestions)}
@@ -133,7 +140,7 @@ const EquipoEspecifico = () => {
             {showSuggestions && (
               <SugerenciasEquipos
                 sugerencias={sugerencias}
-                usersProfilePic={{}}
+                usersProfilePic={usersProfilePic}
               />
             )}
           </div>
@@ -168,7 +175,7 @@ const EquipoEspecifico = () => {
                     </Link>
                     <div>
                       <h6 className="text-md font-[500] mt-2 md:mt-0">
-                        Descripción:{' '}
+                        Descripción:{" "}
                       </h6>
                       <p className="ml-3 break-words text-left mt-1">
                         {project.descripcion}
@@ -208,6 +215,7 @@ const EquipoEspecifico = () => {
             team={[teamInfo?.team.equipo]}
             sugerencias={sugerencias}
             setSugerencias={setSugerencias}
+            setUsersProfilePic={setUsersProfilePic}
             courses={courses}
           />
           <CreateProjectModal
@@ -220,7 +228,7 @@ const EquipoEspecifico = () => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default EquipoEspecifico
+export default EquipoEspecifico;

@@ -1,32 +1,32 @@
-import { useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useQuery } from 'react-query'
-import { getCourseMembers } from '../../services/courses'
-import { queryConfig } from '../../utils/queryConfig'
-import { UserCard } from '../../components/UserCard'
-import SugerenciasEquipos from '../../components/SugerenciasEquipos'
-import BuscarEquipoModal from '../../components/BuscarEquipoModal'
-import { useCardToggle } from '../../hooks/useCardToggle'
+import { useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getCourseMembers } from "../../services/courses";
+import { queryConfig } from "../../utils/queryConfig";
+import { UserCard } from "../../components/UserCard";
+import SugerenciasEquipos from "../../components/SugerenciasEquipos";
+import BuscarEquipoModal from "../../components/BuscarEquipoModal";
+import { useCardToggle } from "../../hooks/useCardToggle";
 
 const CursoEspecifico = () => {
-  const { courseId } = useParams()
-  const [isDisponible, setIsDisponible] = useState(false)
-  const { isOpen, setIsOpen, cardRef } = useCardToggle()
-  const [sugerencias, setSugerencias] = useState([])
+  const { courseId } = useParams();
+  const [isDisponible, setIsDisponible] = useState(false);
+  const { isOpen, setIsOpen, cardRef } = useCardToggle();
+  const [sugerencias, setSugerencias] = useState([]);
 
   const { data: curso } = useQuery(
-    'courseMembers',
+    "courseMembers",
     () => getCourseMembers(courseId),
-    queryConfig,
-  )
+    queryConfig
+  );
 
   const usersProfilePic = useMemo(() => {
-    if (!curso || !curso.users) return {}
+    if (!curso || !curso.users) return {};
     return curso.users.reduce((acc, user) => {
-      acc[user.username] = user.profilePic
-      return acc
-    }, {})
-  }, [curso])
+      acc[user.username] = user.profilePic;
+      return acc;
+    }, {});
+  }, [curso]);
 
   return (
     <div className="flex flex-col p-8">
@@ -49,7 +49,7 @@ const CursoEspecifico = () => {
               id="disponibleToggle"
             />
             <label htmlFor="disponibleToggle">
-              {' '}
+              {" "}
               Estoy disponible para formar Equipos
             </label>
           </div>
@@ -67,6 +67,7 @@ const CursoEspecifico = () => {
           setIsOpen={setIsOpen}
           cardRef={cardRef}
           setSugerencias={setSugerencias}
+          courseCode={curso?.code}
         />
       </div>
 
@@ -89,12 +90,12 @@ const CursoEspecifico = () => {
             profilePic={user.profilePic}
             name={user.name}
             username={user.username}
-            className={'w-full'}
+            className={"w-full"}
           />
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CursoEspecifico
+export default CursoEspecifico;
