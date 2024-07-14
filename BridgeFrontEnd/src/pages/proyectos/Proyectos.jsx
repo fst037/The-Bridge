@@ -1,31 +1,31 @@
-import { useQuery } from 'react-query'
-import { getMyProjects } from '../../services/projects'
-import { queryConfig } from '../../utils/queryConfig'
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { UserCard } from '../../components/UserCard'
-import { AddActionButton } from '../../components/AddActionButton'
-import { useCardToggle } from '../../hooks/useCardToggle'
-import { getMyCourses } from '../../services/courses'
-import { getMyTeams } from '../../services/teams'
-import { CreateProjectModal } from '../../components/CreateProjectModal'
+import { useQuery } from "react-query";
+import { getMyProjects } from "../../services/projects";
+import { queryConfig } from "../../utils/queryConfig";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { UserCard } from "../../components/UserCard";
+import { AddActionButton } from "../../components/AddActionButton";
+import { useCardToggle } from "../../hooks/useCardToggle";
+import { getMyCourses } from "../../services/courses";
+import { getMyTeams } from "../../services/teams";
+import { CreateProjectModal } from "../../components/CreateProjectModal";
 
 const Proyectos = () => {
-  const { data: projects } = useQuery('projects', getMyProjects, queryConfig)
+  const { data: projects } = useQuery("projects", getMyProjects, queryConfig);
   const { data: courses } = useQuery(
-    'courses',
+    "courses",
     () => getMyCourses(),
-    queryConfig,
-  )
-  const { data: teams } = useQuery('teams', () => getMyTeams(), queryConfig)
+    queryConfig
+  );
+  const { data: teams } = useQuery("teams", () => getMyTeams(), queryConfig);
 
-  const [searchName, setSearchName] = useState('')
-  const [searchCourse, setSearchCourse] = useState('')
-  const [searchTeam, setSearchTeam] = useState('')
-  const [searchMember, setSearchMember] = useState('')
-  const [filteredProjects, setFilteredProjects] = useState(projects)
+  const [searchName, setSearchName] = useState("");
+  const [searchCourse, setSearchCourse] = useState("");
+  const [searchTeam, setSearchTeam] = useState("");
+  const [searchMember, setSearchMember] = useState("");
+  const [filteredProjects, setFilteredProjects] = useState(projects);
 
-  const { isOpen, setIsOpen, cardRef } = useCardToggle()
+  const { isOpen, setIsOpen, cardRef } = useCardToggle();
 
   useEffect(() => {
     if (projects) {
@@ -44,22 +44,22 @@ const Proyectos = () => {
               .join()
               .toLowerCase()
               .includes(searchMember.toLowerCase())
-          )
-        }),
-      )
+          );
+        })
+      );
     }
-  }, [projects, searchName, searchCourse, searchMember, searchTeam])
+  }, [projects, searchName, searchCourse, searchMember, searchTeam]);
 
   return (
     <section>
       <div className="p-4 md:p-8">
-        <div className="flex flex-col sm:flex-row  gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <h3 className="text-4xl text-gray-400/80">Mis Proyectos</h3>
           <AddActionButton
-            text={'Nuevo +'}
+            text={"Nuevo +"}
             className="w-max rounded-[15px]"
             onClick={() => {
-              setIsOpen(!isOpen)
+              setIsOpen(!isOpen);
             }}
           />
         </div>
@@ -143,7 +143,7 @@ const Proyectos = () => {
                   </Link>
                   <div>
                     <h6 className="text-md font-[500] mt-2 md:mt-0">
-                      Descripción:{' '}
+                      Descripción:{" "}
                     </h6>
                     <p className="ml-3 break-words text-left mt-1">
                       {project.descripcion}
@@ -198,9 +198,9 @@ const Proyectos = () => {
                             profilePic={profilePic}
                             name={name}
                             username={username}
-                            className={'w-full'}
+                            className={"w-full"}
                           />
-                        ),
+                        )
                       )}
                     </div>
                   </ul>
@@ -218,7 +218,7 @@ const Proyectos = () => {
         courses={courses}
       />
     </section>
-  )
-}
+  );
+};
 
-export default Proyectos
+export default Proyectos;

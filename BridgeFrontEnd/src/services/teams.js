@@ -35,7 +35,7 @@ export const getTeam = async ({ teamId }) => {
   };
 };
 
-export const getTeamsSugestions = async ({
+export const getCompleteTeamsSugestions = async ({
   teamMembers,
   teamIdentifier,
   courseCode,
@@ -44,12 +44,42 @@ export const getTeamsSugestions = async ({
     `/api/v1/sugerenciasEquipos/completarEquipo?courseCode=${courseCode}&cantIntegrantesFinales=${teamMembers}&teamId=${teamIdentifier}`
   );
 
+  const suggestionsWithProfilePic = await Promise.all(
+    data.map(async (suggestion) => {
+      suggestion.members = await Promise.all(
+        suggestion.members.map(async (student) => {
+          const profilePic = await getProfilePic(student.username);
+          return {
+            ...student,
+            profilePic,
+          };
+        })
+      );
+      return suggestion;
+    })
+  );
+
   return data;
 };
 
-export const getTeamsSugestions2 = async ({ teamMembers, courseCode }) => {
+export const getCreateTeamsSugestions = async ({ teamMembers, courseCode }) => {
   const { data } = await authAxios.get(
     `/api/v1/sugerenciasEquipos/sugerirEquipos?courseCode=${courseCode}&cantIntegrantes=${teamMembers}`
+  );
+
+  const suggestionsWithProfilePic = await Promise.all(
+    data.map(async (suggestion) => {
+      suggestion.members = await Promise.all(
+        suggestion.members.map(async (student) => {
+          const profilePic = await getProfilePic(student.username);
+          return {
+            ...student,
+            profilePic,
+          };
+        })
+      );
+      return suggestion;
+    })
   );
 
   return data;

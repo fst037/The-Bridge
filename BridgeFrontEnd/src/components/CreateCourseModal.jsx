@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Modal } from "../../components/Modal";
-import { AddActionButton } from "../../components/AddActionButton";
+import { Modal } from "./Modal";
+import { AddActionButton } from "./AddActionButton";
 
 
 const CreateCourseModal = ({ isOpen, setIsOpen, cardRef }) => {

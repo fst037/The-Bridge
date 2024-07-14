@@ -3,10 +3,10 @@ import { UserCard } from "./UserCard";
 
 const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))]">
+    <div className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))] gap-4">
       {sugerencias?.map((sugerencia, index) => (
         <div
-          className="flex flex-col m-2 p-2 border border-gray-300 rounded-md"
+          className="flex flex-col p-2 border border-gray-300 rounded-md"
           key={index}
         >
           <div

@@ -7,6 +7,7 @@ import TheBridge.TheBridgeNeo4jApiREST.objects.UserDTO;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.TeamUsersQueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,4 +50,8 @@ public interface TeamRepository  extends Neo4jRepository<Team, UUID> {
             "MATCH (d:User{username: $username})-[r:FORMA_PARTE_DE]->(e) " +
             "DELETE r")
     void removeStudentFromTeam(String propietario, String username, String identifier);
+
+    @Query("MATCH (t:Team {identifier: $identifier}) " +
+            "SET t.nombre = $newName ")
+    void updateTeamName(String identifier, String newName);
 }

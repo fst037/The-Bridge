@@ -8,7 +8,7 @@ export const AddActionButton = ({
 }) => {
   return (
     <button
-      className={`px-4 py-1 rounded-sm text-xl text-white transition hover:bg-[#01AAB3] active:bg-[#009CA4] outline-none ${isLoading ? "bg-[#009CA4]" : "bg-[#00BCC6]"} ${className}`}
+      className={`px-4 py-1 text-xl text-white transition hover:bg-[#01AAB3] active:bg-[#009CA4] outline-none ${isLoading ? "bg-[#009CA4]" : "bg-[#00BCC6]"} ${className}`}
       onClick={onClick}
       disabled={isLoading}
     >

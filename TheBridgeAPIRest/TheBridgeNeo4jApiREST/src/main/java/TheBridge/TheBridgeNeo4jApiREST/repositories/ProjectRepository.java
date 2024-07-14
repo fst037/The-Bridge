@@ -4,6 +4,7 @@ import TheBridge.TheBridgeNeo4jApiREST.models.Project;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectTeamCourseQueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +23,9 @@ public interface ProjectRepository extends Neo4jRepository<Project, UUID> {
     @Query("MATCH (p:Project {identifier: $identifier}) " +
             "WITH p " +
             "MATCH (p)-[:CON_EQUIPO]->(t:Team) " +
+            "MATCH (m:User)-[:FORMA_PARTE_DE]->(t)" +
             "MATCH (p)-[:PARA_CURSO]->(c:Course) " +
-            "RETURN p as project, t as team, c as course")
+            "RETURN p as project, t as team, c as course, collect(m) as members")
     ProjectTeamCourseQueryResult findProjectWithTeamAndCourseByIdentifier(String identifier);
 
     @Query("MATCH (u:User {username: $username})-[:FORMA_PARTE_DE]->(t:Team) " +
@@ -66,4 +68,31 @@ public interface ProjectRepository extends Neo4jRepository<Project, UUID> {
     @Query("MATCH (p:Project {identifier: $identifier}) " +
             "DETACH DELETE p")
     void deleteProject(String identifier);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "SET p.portadaLink = $portadaLink " +
+            "RETURN p")
+    Project changeCover(String identifier, String portadaLink);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "SET p.titulo = $titulo " +
+            "RETURN p")
+    Project changeTitle(String identifier, String titulo);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "SET p.descripcion = $descripcion " +
+            "RETURN p")
+    Project changeDescription(String identifier, String descripcion);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "WHERE NOT $link IN p.links " +
+            "SET p.links = coalesce(p.links, []) + $link " +
+            "RETURN p")
+    Project addLink(String identifier, String link);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "SET p.links = [link IN p.links WHERE link <> $link] " +
+            "RETURN p")
+    Project deleteLink(String identifier, String link);
 }
+

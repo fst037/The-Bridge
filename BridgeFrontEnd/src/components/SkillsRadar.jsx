@@ -6,8 +6,8 @@ export const SkillsRadar = ({ skills, className }) => {
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
-  const skillNames = Object.keys(skills);
-  const skillScores = Object.values(skills);
+  const skillNames = Object.keys(skills || {});
+  const skillScores = Object.values(skills || {});
 
   const data = useMemo(
     () => ({

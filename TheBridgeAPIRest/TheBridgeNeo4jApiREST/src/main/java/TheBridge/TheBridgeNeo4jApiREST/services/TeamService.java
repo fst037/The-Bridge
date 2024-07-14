@@ -7,6 +7,7 @@ import TheBridge.TheBridgeNeo4jApiREST.objects.UserDTO;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.TeamUsersQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.repositories.TeamRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,6 +70,12 @@ public class TeamService {
 
         TeamUsersQueryResult result = teamRepository.findTeamWithUsersByIdentifier(identifier);
 
+        return result.toTeamDTO();
+    }
+
+    public TeamDTO updateTeamName(String identifier, String newName) {
+        teamRepository.updateTeamName(identifier, newName);
+        TeamUsersQueryResult result = teamRepository.findTeamWithUsersByIdentifier(identifier);
         return result.toTeamDTO();
     }
 }

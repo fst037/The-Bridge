@@ -6,34 +6,21 @@ import { AddActionButton } from "./AddActionButton";
 import { getTeamsSugestions } from "../services/teams";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
-import { getCourseMembers } from "../services/courses";
 
 export const CompleteTeamAutoModal = ({
   isOpen,
   setIsOpen,
   cardRef,
   team,
+  sugerencias,
   setSugerencias,
-  setUsersProfilePic,
   courses,
 }) => {
-  const [teamMembers, setTeamMembers] = useState(team[0].estudiantes.length);
-  const [courseCode, setCourseCode] = useState(courses[0].code);
-
-  const courseMutation = useMutation(() => getCourseMembers(courseCode), {
-    onSuccess: (course) => {
-      const newUsersProfilePic = course.users.reduce((acc, user) => {
-        acc[user.username] = user.profilePic;
-        return acc;
-      }, {});
-
-      setUsersProfilePic(newUsersProfilePic);
-    },
-  });
+  const [teamMembers, setTeamMembers] = useState(team.estudiantes?.length);
+  const [courseCode, setCourseCode] = useState("");
 
   const mutation = useMutation(getTeamsSugestions, {
     onSuccess: (data) => {
-      courseMutation.mutate(courseCode);
       setSugerencias(data);
       toast.success(`Sugerencias generadas exitosamente`);
       console.log("sugerencias", data);
@@ -50,7 +37,7 @@ export const CompleteTeamAutoModal = ({
     if (!teamMembers || !courseCode) return;
     mutation.mutate({
       teamMembers,
-      teamIdentifier: team[0].team.identifier,
+      teamIdentifier: team.team.identifier,
       courseCode,
     });
   };

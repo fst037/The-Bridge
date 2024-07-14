@@ -1,7 +1,13 @@
 import authAxios from "./authAxios";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "./firebase";
-import axios from "axios";
+
+export const getLoggedUsername = () => {
+  const credentials = localStorage.getItem("bridge-user");
+  const { email } = JSON.parse(credentials);
+
+  return email;
+};
 
 export const getUserData = async (email) => {
   const res = authAxios.get(`api/v1/auth/user/${email}`);
@@ -39,6 +45,39 @@ export const getUserBuilders = async () => {
   );
 
   return buildersWithProfilePic;
+};
+
+
+export const getUserRecommended = async () => {
+  const { data } = await authAxios.get("/api/v1/interaccion/buildersEnComun");
+
+  const recommendedWithProfilePic = await Promise.all(
+    data.map(async (user) => {
+      const profilePic = await getProfilePic(user.username);
+      return {
+        ...user,
+        profilePic,
+      };
+    })
+  );
+
+  return recommendedWithProfilePic;
+};
+
+export const getUserKnown = async () => {
+  const { data } = await authAxios.get("/api/v1/interaccion/conocidos");
+
+  const knownWithProfilePic = await Promise.all(
+    data.map(async (user) => {
+      const profilePic = await getProfilePic(user.username);
+      return {
+        ...user,
+        profilePic,
+      };
+    })
+  );
+
+  return knownWithProfilePic;
 };
 
 export const getComments = async () => {

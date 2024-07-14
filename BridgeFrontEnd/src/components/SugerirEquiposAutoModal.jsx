@@ -3,38 +3,43 @@ import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiTeamLine } from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
-import { getTeamsSugestions2 } from "../services/teams";
+import { getCreateTeamsSugestions } from "../services/teams";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 
-export const BuscarEquipoModal = ({
+export const SugerirEquiposAutoModal = ({
   isOpen,
   setIsOpen,
   cardRef,
   setSugerencias,
-  courseCode,
+  course,
 }) => {
   const [teamMembers, setTeamMembers] = useState("");
 
-  const mutation = useMutation(getTeamsSugestions2, {
+  const mutation = useMutation(getCreateTeamsSugestions, {
     onSuccess: (data) => {
-      console.log(data);
       setSugerencias(data);
       toast.success(`Sugerencias generadas exitosamente`);
       setIsOpen(false);
     },
     onError: (error) => {
+      const errorMessage =
+        error.response?.data || error.message || "Error desconocido";
       toast.error("Error al generar las sugerencias: " + error.message);
+      console.error(
+        "Error al generar las sugerencias:",
+        error.response || error
+      );
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!teamMembers || !courseCode) {
+    if (!teamMembers) {
       toast.error("Por favor, complete todos los campos.");
       return;
     }
-    mutation.mutate({ courseCode, teamMembers });
+    mutation.mutate({ courseCode: course.code, teamMembers: teamMembers });
   };
 
   return (
@@ -48,14 +53,15 @@ export const BuscarEquipoModal = ({
         <FormInput
           type={"number"}
           Icon={RiTeamLine}
-          placeholder={"Introduce la cantidad de personas totales del equipo"}
+          placeholder={"Tamaño del equipo"}
           value={teamMembers}
           onChange={(e) => setTeamMembers(e.target.value)}
         />
-        <AddActionButton text={"Buscar"} isLoading={mutation.isLoading} />
+        <AddActionButton
+          text={"Generar sugerencias"}
+          isLoading={mutation.isLoading}
+        />
       </form>
     </Modal>
   );
 };
-
-export default BuscarEquipoModal;

@@ -94,6 +94,13 @@ public class TeamController {
         TeamDTO nuevoEquipo = equipoService.removeStudentFromTeam(principal.getName(), username, identifier);
         return new ResponseEntity<>(nuevoEquipo, HttpStatus.OK);
     }
+
+    @PatchMapping("/modificarNombre")
+    public ResponseEntity<TeamDTO> updateTeamName(@RequestParam String teamId, @RequestParam String newName) {
+        TeamDTO equipoModificado = equipoService.updateTeamName(teamId, newName);
+        return new ResponseEntity<>(equipoModificado, HttpStatus.OK);
+    }
+
     /*
     @GetMapping("/{identifier}/reccomendations")
     public ResponseEntity<List<UserSkillsDTO>> getEstudiantesRecomendaciones(@RequestParam String identifier) {

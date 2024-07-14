@@ -50,10 +50,11 @@ public class InteractionUserService {
     }
 
     public HashMap<String, Float> getSkillsByUsername(String username) {
-        List<String> skills = Arrays.stream(userRepository.getSkillsByUsername(username).split(",")).toList();
+        String queryResult = userRepository.getSkillsByUsername(username);
+        List<String> skills = Arrays.stream(queryResult.split(",")).toList();
         HashMap<String, Float> skillsMap = new HashMap<>();
 
-        if (skills.isEmpty()) {
+        if (queryResult.isEmpty()) {
             List<String> skillNames = Arrays.stream(CategoriasValoracion.values()).map(CategoriasValoracion::name).toList();
 
             for (String skill : skillNames) {
@@ -141,5 +142,9 @@ public class InteractionUserService {
 
     public Boolean checkRealizoEncuesta(String name) {
         return userRepository.checkRealizoEncuesta(name);
+    }
+
+    public List<UserDTO> getConocidos(String username) {
+        return userRepository.getConocidos(username).stream().map(User::toUserDTO).toList();
     }
 }

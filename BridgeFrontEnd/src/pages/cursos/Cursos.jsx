@@ -1,17 +1,17 @@
-import { useState, useMemo } from 'react'
-import { InfoCard } from '../../components/InfoCard'
-import { getMyCourses } from '../../services/courses'
-import { useQuery } from 'react-query'
-import { queryConfig } from '../../utils/queryConfig'
-import { Link } from 'react-router-dom'
+import { useState, useMemo } from "react";
+import { InfoCard } from "../../components/InfoCard";
+import { getMyCourses } from "../../services/courses";
+import { useQuery } from "react-query";
+import { queryConfig } from "../../utils/queryConfig";
+import { Link } from "react-router-dom";
 
 export const Cursos = () => {
-  const { data: courses } = useQuery('courses', getMyCourses, queryConfig)
+  const { data: courses } = useQuery("courses", getMyCourses, queryConfig);
   const [searchParams, setSearchParams] = useState({
-    name: '',
-    period: '',
-    day: '',
-  })
+    name: "",
+    period: "",
+    day: "",
+  });
 
   const filteredCourses = useMemo(() => {
     if (courses && courses.length > 0) {
@@ -24,16 +24,16 @@ export const Cursos = () => {
           course?.period
             .toLowerCase()
             .includes(searchParams.period.toLowerCase())
-        )
-      })
+        );
+      });
     }
-    return []
-  }, [courses, searchParams.name, searchParams.day, searchParams.period])
+    return [];
+  }, [courses, searchParams.name, searchParams.day, searchParams.period]);
 
   return (
     <section>
       <div className="p-4 md:p-8">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mb-8">
           <h3 className="text-4xl text-gray-400/80">Mis Cursos</h3>
         </div>
         <div className="flex mt-4 flex-col md:flex-row">
@@ -95,5 +95,5 @@ export const Cursos = () => {
         </article>
       </div>
     </section>
-  )
-}
+  );
+};

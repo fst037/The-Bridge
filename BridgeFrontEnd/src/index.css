@@ -19,4 +19,38 @@
     @apply absolute flex flex-col top-12 md:top-16 right-2 w-max border-gray-300 border overflow-hidden rounded-md
     origin-top-right transition-all duration-100 cursor-pointer z-10;
   }
+
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px; /* Ajusta según sea necesario */    
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    padding: 0 10px; /* Agrega padding para el texto */
+    transition: background-color 0.2s;
+  }
+  
+  .toggle-knob {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    transition: left 0.2s;
+    left: 3px;
+  }
+  
+  .toggle-knob.toggled {
+    left: 33px; /* Ajusta según el tamaño de tu contenedor */
+  }
+  
+  .toggle-text {
+    color: black;
+    font-size: 12px;
+  }
 }
