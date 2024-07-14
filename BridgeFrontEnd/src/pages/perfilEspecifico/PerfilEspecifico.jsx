@@ -8,7 +8,7 @@ import { InformacionGeneral } from "../perfil/InformacionGeneral";
 import { Builders } from "../perfil/Builders";
 import { Comentarios } from "../perfil/Comentarios";
 
-const PerfilEspecifico = () => {
+export const PerfilEspecifico = () => {
   const { username } = useParams();
   const { data: user, isLoading } = useQuery(
     ["specificProfileDetail", username],
@@ -36,5 +36,3 @@ const PerfilEspecifico = () => {
     </div>
   );
 };
-
-export default PerfilEspecifico;

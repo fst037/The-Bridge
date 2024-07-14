@@ -3,7 +3,7 @@ import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiTeamLine } from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
-import { getTeamsSugestions2 } from '../services/teams';
+import { getCreateTeamsSugestions} from '../services/teams';
 import { useMutation } from 'react-query';
 import toast from "react-hot-toast";
 
@@ -11,7 +11,7 @@ export const BuscarEquipoModal = ({ isOpen, setIsOpen, cardRef, setSugerencias }
   const [teamMembers, setTeamMembers] = useState("");
   const [courseCode, setCourseCode] = useState("");
 
-  const mutation = useMutation(getTeamsSugestions2, {
+  const mutation = useMutation(getCreateTeamsSugestions, {
     onSuccess: (data) => {
       setSugerencias(data);
       toast.success(`Sugerencias generadas exitosamente`);

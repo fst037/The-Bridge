@@ -8,14 +8,14 @@ import SugerenciasEquipos from "../../components/SugerenciasEquipos";
 import BuscarEquipoModal from "../../components/BuscarEquipoModal";
 import { useCardToggle } from "../../hooks/useCardToggle";
 
-const CursoEspecifico = () => {
+export const CursoEspecifico = () => {
   const { courseId } = useParams();
   const [isDisponible, setIsDisponible] = useState(false);
   const { isOpen, setIsOpen, cardRef } = useCardToggle();
   const [sugerencias, setSugerencias] = useState([]);
 
   const { data: curso } = useQuery(
-    "courseMembers",
+    ("courseMembers"+courseId),
     () => getCourseMembers(courseId),
     queryConfig
   );
@@ -94,4 +94,3 @@ const CursoEspecifico = () => {
   );
 };
 
-export default CursoEspecifico;

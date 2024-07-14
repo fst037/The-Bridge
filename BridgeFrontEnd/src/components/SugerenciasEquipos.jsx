@@ -3,8 +3,7 @@ import { SkillsRadar } from "./SkillsRadar";
 import { UserCard } from "./UserCard";
 import { useState } from "react";
 
-const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
-  if (!usersProfilePic) usersProfilePic = {};
+const SugerenciasEquipos = ({ sugerencias}) => {
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(550px,_1fr))]">
@@ -28,7 +27,7 @@ const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
               {sugerencia?.members?.map((user) => (
                 <UserCard
                   key={user.username}
-                  profilePic={usersProfilePic[user.username]}
+                  profilePic={user.profilePic}
                   username={user.username}
                   name={user.name}
                   className={"w-full"}

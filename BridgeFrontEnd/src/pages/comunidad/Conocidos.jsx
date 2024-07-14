@@ -5,7 +5,7 @@ import { UsersComunidad } from "../../components/UsersComunidad";
 
 
 export const Conocidos = () => {
-  const { data: known, isLoading } = useQuery("known", getUserKnown, queryConfig);
+  const { data: known, isLoading } = useQuery("conocidos", getUserKnown, queryConfig);
 
   return (
     <div className="p-4 md:p-8">

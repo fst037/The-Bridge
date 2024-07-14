@@ -5,7 +5,7 @@ import { queryConfig } from '../../utils/queryConfig';
 import { UsersComunidad } from '../../components/UsersComunidad';
 
 export const Recomendados = () => {
-  const { data: recommended, isLoading } = useQuery("recommended", getUserRecommended, queryConfig);
+  const { data: recommended, isLoading } = useQuery("recomendados", getUserRecommended, queryConfig);
 
   return (
     <div className="p-4 md:p-8">

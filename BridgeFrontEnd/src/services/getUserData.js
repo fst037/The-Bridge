@@ -1,7 +1,13 @@
 import authAxios from "./authAxios";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "./firebase";
-import axios from "axios";
+
+export const getLoggedUsername = () => {
+  const credentials = localStorage.getItem("bridge-user");
+  const { email } = JSON.parse(credentials);
+
+  return email;
+};
 
 export const getUserData = async (email) => {
   const res = authAxios.get(`api/v1/auth/user/${email}`);

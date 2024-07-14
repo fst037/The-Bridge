@@ -3,9 +3,6 @@ import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiFolderLine} from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
-import { useQuery } from 'react-query'
-import { queryConfig } from '../utils/queryConfig'
-import { getTeamsSugestions } from '../services/teams'
 
 export const CreateProjectModal = ({ isOpen, setIsOpen, cardRef, teams, courses}) => {
   let isLoading = false;
@@ -39,8 +36,8 @@ export const CreateProjectModal = ({ isOpen, setIsOpen, cardRef, teams, courses}
           value={teamIdentifier}
           onChange={(e) => setTeamIdentifier(e.target.value)}
         >
-          {teams.map(team => (
-            <option key={team.identifier} value={team.identifier}>{team.nombre}</option>
+          {teams?.map(team => (
+            <option key={team?.identifier} value={team?.identifier}>{team?.nombre}</option>
           ))}
         </select>
 
@@ -50,7 +47,7 @@ export const CreateProjectModal = ({ isOpen, setIsOpen, cardRef, teams, courses}
           onChange={(e) => setCourseCode(e.target.value)}
         >
           <option disabled>Selecciona el curso</option>
-          {courses.map(course => (
+          {courses?.map(course => (
             <option key={course.code} value={course.code}>{course.name}</option>
           ))}
         </select>

@@ -32,7 +32,7 @@ export const AddPersonModal = ({ isOpen, setIsOpen, cardRef, team }) => {
 
   return (
     <Modal
-      title={`Agrega un companero a ${team.nombre}`}
+      title={`Agrega un companero a ${team?.nombre}`}
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       cardRef={cardRef}

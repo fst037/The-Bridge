@@ -3,21 +3,25 @@ import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiTeamLine } from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
-import { getTeamsSugestions } from '../services/teams'
+import { getCompleteTeamsSugestions} from '../services/teams'
 import { useMutation } from 'react-query'
 import toast from "react-hot-toast";
 
 export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugerencias, setSugerencias, courses}) => {
-  const [teamMembers, setTeamMembers] = useState(team.estudiantes?.length);
+  const [teamMembers, setTeamMembers] = useState("");
   const [courseCode, setCourseCode] = useState("");
 
+  useEffect(() => {
+    setTeamMembers(team?.[0]?.estudiantes?.length);
+    setCourseCode(courses?.[0]?.code);
+  }, [team, courses]);
+
   const mutation = useMutation(
-    getTeamsSugestions,  
+    getCompleteTeamsSugestions,  
     {
       onSuccess: (data) => {
         setSugerencias(data);
         toast.success(`Sugerencias generadas exitosamente`);
-        console.log("sugerencias", data);
         setIsOpen(false);
       },
       onError: (error) => {
@@ -29,7 +33,7 @@ export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugere
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!teamMembers || !courseCode) return;
-    mutation.mutate({teamMembers, teamIdentifier:team.team.identifier , courseCode});
+    mutation.mutate({teamMembers, teamIdentifier:team?.[0]?.team.identifier , courseCode});
   }
 
 
@@ -53,8 +57,7 @@ export const CompleteTeamAutoModal = ({ isOpen, setIsOpen, cardRef, team, sugere
           value={courseCode}
           onChange={(e) => setCourseCode(e.target.value)}
         >
-          <option disabled>Selecciona el curso</option>
-          {courses.map(course => (
+          {courses?.map(course => (
             <option key={course.code} value={course.code}>{course.name}</option>
           ))}
         </select>
