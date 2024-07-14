@@ -41,6 +41,39 @@ export const getUserBuilders = async () => {
   return buildersWithProfilePic;
 };
 
+
+export const getUserRecommended = async () => {
+  const { data } = await authAxios.get("/api/v1/interaccion/buildersEnComun");
+
+  const recommendedWithProfilePic = await Promise.all(
+    data.map(async (user) => {
+      const profilePic = await getProfilePic(user.username);
+      return {
+        ...user,
+        profilePic,
+      };
+    })
+  );
+
+  return recommendedWithProfilePic;
+};
+
+export const getUserKnown = async () => {
+  const { data } = await authAxios.get("/api/v1/interaccion/conocidos");
+
+  const knownWithProfilePic = await Promise.all(
+    data.map(async (user) => {
+      const profilePic = await getProfilePic(user.username);
+      return {
+        ...user,
+        profilePic,
+      };
+    })
+  );
+
+  return knownWithProfilePic;
+};
+
 export const getComments = async () => {
   const { data } = await authAxios.get("/api/v1/interaccion/misComentarios");
   const commentsWithProfilePic = await Promise.all(

@@ -9,7 +9,7 @@ import { Perfil } from "./pages/perfil/Perfil";
 import { Cursos } from "./pages/cursos/Cursos";
 import { Equipos } from "./pages/equipos/Equipos";
 import { Comunidad } from "./pages/comunidad/Comunidad";
-import { BuildersC } from "./pages/comunidad/BuildersC";
+import { Builders } from "./pages/comunidad/Builders";
 import { Recomendados } from "./pages/comunidad/Recomendados";
 import { Conocidos } from "./pages/comunidad/Conocidos";
 import { Inicio } from "./pages/inicio/Inicio";
@@ -31,17 +31,17 @@ function App() {
           <Route path="inicio" element={<Inicio />} />
           <Route path="perfil" element={<Perfil />} />
           <Route path="perfil/encuesta" element={<EncuestaPage />} />
+          <Route path="perfil/:username" element={<PerfilEspecifico />} />
           <Route path="cursos" element={<Cursos />} />
           <Route path="curso/:courseId" element={<CursoEspecifico />} />
           <Route path="equipos" element={<Equipos />} />
           <Route path="equipo/:teamId" element={<EquipoEspecifico />} />
           <Route path="proyectos" element={<Proyectos />} />
-          <Route path="proyecto/:teamId" element={<EquipoEspecifico />} />
+          <Route path="proyecto/:teamId" element={<div>no existe</div>} />
           <Route path="comunidad" element={<Comunidad />} />
-          <Route path="builders" element={<BuildersC />} />
+          <Route path="builders" element={<Builders />} />
           <Route path="recomendados" element={<Recomendados />} />
-          <Route path="conocidos" element={<Conocidos />} />
-          <Route path="perfil/:username" element={<PerfilEspecifico />} />
+          <Route path="conocidos" element={<Conocidos />} />          
         </Route>
       </Routes>
       <Toaster />

@@ -70,7 +70,7 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
             "WITH u, b " +
             "MATCH (b)-[:BUILDER_CON {aceptada: true}]-(n:User) " +
             "WHERE n <> u AND NOT (u)-[:BUILDER_CON {aceptada: true}]-(n) " +
-            "RETURN count(b) AS commonBuilders, n.username AS username, n.name AS name, n.legajo AS legajo ORDER BY commonBuilders DESC")
+            "RETURN DISTINCT count(b) AS commonBuilders, n.username AS username, n.name AS name, n.legajo AS legajo ORDER BY commonBuilders DESC")
     List<CommonBuilderQueryResult> findCommonBuilders(String email);
 
     @Query("MATCH (n)-[v:VALORO_A]->(u:User{username: $username}) " +
@@ -99,6 +99,6 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
 
     @Query("MATCH (u:User {username: $username})-[:ESTUDIA_EN]->(c:Course)<-[:ESTUDIA_EN]-(known:User) " +
             "WHERE known.username <> $username " +
-            "RETURN known")
+            "RETURN DISTINCT known")
     List<User> getConocidos(String username);
 }

@@ -26,7 +26,7 @@ export const Team = ({ students, team }) => {
         />
       </div>
       <hr className="h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-50 dark:via-neutral-400 md:h-auto md:w-[2px] md:bg-gradient-to-b md:inline-block" />
-      <div className="flex flex-col w-1/2 p-1 gap-2">
+      <div className="flex flex-col w-fit p-1 gap-2">
         {students.map((student) => (
           <Student key={student.username} student={student} />
         ))}
