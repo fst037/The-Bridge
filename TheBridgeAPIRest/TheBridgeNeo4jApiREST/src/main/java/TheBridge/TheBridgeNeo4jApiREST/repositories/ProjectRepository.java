@@ -69,8 +69,29 @@ public interface ProjectRepository extends Neo4jRepository<Project, UUID> {
     void deleteProject(String identifier);
 
     @Query("MATCH (p:Project {identifier: $identifier}) " +
-            "SET p.links = [link IN p.links | CASE link WHEN $oldLink THEN $newLink ELSE link END]")
-    void updateLinkInProject(@Param("identifier") String identifier, @Param("oldLink") String oldLink, @Param("newLink") String newLink);
+            "SET p.portadaLink = $portadaLink " +
+            "RETURN p")
+    Project changeCover(String identifier, String portadaLink);
 
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "SET p.titulo = $titulo " +
+            "RETURN p")
+    Project changeTitle(String identifier, String titulo);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "SET p.descripcion = $descripcion " +
+            "RETURN p")
+    Project changeDescription(String identifier, String descripcion);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "WHERE NOT $link IN p.links " +
+            "SET p.links = coalesce(p.links, []) + $link " +
+            "RETURN p")
+    Project addLink(String identifier, String link);
+
+    @Query("MATCH (p:Project {identifier: $identifier}) " +
+            "SET p.links = [link IN p.links WHERE link <> $link] " +
+            "RETURN p")
+    Project deleteLink(String identifier, String link);
 }
 

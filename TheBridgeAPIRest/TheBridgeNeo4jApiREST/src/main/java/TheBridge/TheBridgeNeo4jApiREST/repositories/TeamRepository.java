@@ -52,6 +52,6 @@ public interface TeamRepository  extends Neo4jRepository<Team, UUID> {
     void removeStudentFromTeam(String propietario, String username, String identifier);
 
     @Query("MATCH (t:Team {identifier: $identifier}) " +
-            "SET t.name = $newName ")
-    void updateTeamName(@Param("identifier") String identifier, @Param("newName") String newName);
+            "SET t.nombre = $newName ")
+    void updateTeamName(String identifier, String newName);
 }

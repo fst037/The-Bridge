@@ -142,4 +142,8 @@ public class InteractionUserService {
     public Boolean checkRealizoEncuesta(String name) {
         return userRepository.checkRealizoEncuesta(name);
     }
+
+    public List<UserDTO> getConocidos(String username) {
+        return userRepository.getConocidos(username).stream().map(User::toUserDTO).toList();
+    }
 }

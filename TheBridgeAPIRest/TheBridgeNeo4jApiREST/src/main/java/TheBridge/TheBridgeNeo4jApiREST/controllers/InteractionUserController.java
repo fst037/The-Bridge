@@ -11,6 +11,7 @@ import TheBridge.TheBridgeNeo4jApiREST.requests.AddComentarioRequest;
 import TheBridge.TheBridgeNeo4jApiREST.requests.AddValoracionRequest;
 import TheBridge.TheBridgeNeo4jApiREST.services.InteractionUserService;
 import TheBridge.TheBridgeNeo4jApiREST.services.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -185,6 +186,13 @@ public class InteractionUserController {
         List<CommonBuilderQueryResult> builders = interactionUserService.getCommonBuilders(principal.getName());
 
         return new ResponseEntity<>(builders, HttpStatus.OK);
+    }
+
+    @GetMapping("/conocidos")
+    public ResponseEntity<List<UserDTO>> findConocidos(Principal principal) {
+        List<UserDTO> conocidos = interactionUserService.getConocidos(principal.getName());
+
+        return new ResponseEntity<>(conocidos, HttpStatus.OK);
     }
 
 }

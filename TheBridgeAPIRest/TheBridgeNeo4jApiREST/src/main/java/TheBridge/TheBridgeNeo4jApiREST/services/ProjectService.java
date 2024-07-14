@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -57,7 +59,9 @@ public class ProjectService {
         Project project = new Project(request.getTitulo(), request.getDescripcion());
 
         project.setPortadaLink(request.getPortadaLink());
-        project.setLinks(request.getLinks());
+
+        List<String> links = request.getLinks();
+        project.setLinks(Objects.requireNonNullElseGet(links, ArrayList::new));
 
         projectRepository.save(project);
 
@@ -79,8 +83,23 @@ public class ProjectService {
         projectRepository.deleteProject(identifier);
     }
 
-    @Transactional
-    public void updateLinkInProject(String identifier, String oldLink, String newLink) {
-        projectRepository.updateLinkInProject(identifier, oldLink, newLink);
+    public Project changeCover(String identifier, String portadaLink) {
+        return projectRepository.changeCover(identifier, portadaLink);
+    }
+
+    public Project changeTitle(String identifier, String titulo) {
+        return projectRepository.changeTitle(identifier, titulo);
+    }
+
+    public Project changeDescription(String identifier, String descripcion) {
+        return projectRepository.changeDescription(identifier, descripcion);
+    }
+
+    public Project addLink(String identifier, String link) {
+        return projectRepository.addLink(identifier, link);
+    }
+
+    public Project deleteLink(String identifier, String link) {
+        return projectRepository.deleteLink(identifier, link);
     }
 }

@@ -81,7 +81,7 @@ const Proyectos = () => {
         </div>
         
         <article className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(500px,_1fr))] gap-4 my-4">
-        {projects &&
+        {(projects && filteredProjects) &&
               filteredProjects.map(project => (
                 <div key={project.identifier} className="border border-gray-300 rounded-lg p-4 mt-4 h-full">
                   <Link to={`/proyecto/${project.identifier}`}>

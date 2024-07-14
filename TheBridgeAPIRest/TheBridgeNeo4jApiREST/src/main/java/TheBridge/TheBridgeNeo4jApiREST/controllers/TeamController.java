@@ -95,9 +95,9 @@ public class TeamController {
         return new ResponseEntity<>(nuevoEquipo, HttpStatus.OK);
     }
 
-    @PutMapping("/modificarNombre/{identifier}")
-    public ResponseEntity<TeamDTO> updateTeamName(@PathVariable String identifier, @RequestParam String newName) {
-        TeamDTO equipoModificado = equipoService.updateTeamName(identifier, newName);
+    @PatchMapping("/modificarNombre")
+    public ResponseEntity<TeamDTO> updateTeamName(@RequestParam String teamId, @RequestParam String newName) {
+        TeamDTO equipoModificado = equipoService.updateTeamName(teamId, newName);
         return new ResponseEntity<>(equipoModificado, HttpStatus.OK);
     }
 

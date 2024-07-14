@@ -73,7 +73,6 @@ public class TeamService {
         return result.toTeamDTO();
     }
 
-    @Transactional
     public TeamDTO updateTeamName(String identifier, String newName) {
         teamRepository.updateTeamName(identifier, newName);
         TeamUsersQueryResult result = teamRepository.findTeamWithUsersByIdentifier(identifier);

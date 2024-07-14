@@ -7,6 +7,7 @@ import TheBridge.TheBridgeNeo4jApiREST.queryresults.UserSkillsQueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -95,4 +96,9 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
 
     @Query("MATCH (u:User{username: $username}) RETURN exists((u)-[:VALORO_A]->(u))")
     Boolean checkRealizoEncuesta(String username);
+
+    @Query("MATCH (u:User {username: $username})-[:ESTUDIA_EN]->(c:Course)<-[:ESTUDIA_EN]-(known:User) " +
+            "WHERE known.username <> $username " +
+            "RETURN known")
+    List<User> getConocidos(String username);
 }
