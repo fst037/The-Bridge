@@ -2,6 +2,7 @@ package TheBridge.TheBridgeNeo4jApiREST.controllers;
 
 import TheBridge.TheBridgeNeo4jApiREST.models.*;
 import TheBridge.TheBridgeNeo4jApiREST.objects.*;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectWithCourseQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.TeamUsersQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.services.InteractionUserService;
 import TheBridge.TheBridgeNeo4jApiREST.services.ProjectService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/equipos")
@@ -55,9 +57,9 @@ public class TeamController {
 
         responseEquipo.setSkills(teamSkills);
 
-        List<Project> projects = projectService.getProjectsByTeam(result.getTeam().getIdentifier().toString());
+        List<ProjectDTO> proyectos = projectService.getProjectsByTeam(identifier).stream().map(ProjectWithCourseQueryResult::toProjectDTO).collect(Collectors.toList());
 
-        responseEquipo.setProjects(projects);
+        responseEquipo.setProjects(proyectos);
 
         return new ResponseEntity<>(responseEquipo, HttpStatus.OK);
     }

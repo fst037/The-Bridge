@@ -14,7 +14,6 @@ export const getMyTeams = async () => {
 };
 
 export const getTeam = async ({ teamId }) => {
-  console.log(teamId);
   const { data } = await authAxios.get(
     `/api/v1/equipos/porIdentifier?identifier=${teamId}`
   );

@@ -48,7 +48,7 @@ public class InteractionUserController {
                 || comentario.valorarComentario(comentario.getMensaje()).equals("Positive")
                 || comentario.valorarComentario(comentario.getMensaje()).equals("Neutral")) {
             interactionUserService.realizarComentario(principal.getName(), comentario);
-            responseComment = new CommentDTO(comentario.getMensaje(), principal.getName(), comentario.getDestinatario().getUsername(), comentario.getTimestamp());
+            responseComment = new CommentDTO(comentario.getMensaje(), principal.getName(), comentario.getDestinatario().getUsername(), comentario.getTimestamp(), true);
             return new ResponseEntity<>(responseComment, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("El comenterio no se realizó porque era tóxico.", HttpStatus.BAD_REQUEST);

@@ -2,6 +2,7 @@ package TheBridge.TheBridgeNeo4jApiREST.services;
 
 import TheBridge.TheBridgeNeo4jApiREST.models.Project;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectTeamCourseQueryResult;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectWithCourseQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.repositories.ProjectRepository;
 import TheBridge.TheBridgeNeo4jApiREST.requests.CreateProyectRequest;
 import org.springframework.http.HttpStatusCode;
@@ -32,7 +33,7 @@ public class ProjectService {
         return projectRepository.findProjectsByUser(username);
     }
 
-    public List<Project> getProjectsByTeam(String teamIdentifier) {
+    public List<ProjectWithCourseQueryResult> getProjectsByTeam(String teamIdentifier) {
         return projectRepository.findProjectsByTeam(teamIdentifier);
     }
 
@@ -51,11 +52,6 @@ public class ProjectService {
     public ProjectTeamCourseQueryResult createProject(Principal principal, CreateProyectRequest request) {
 
         String verify = projectRepository.isUserInCourseAndTeam(principal.getName(), request.getCursoIdentifier(), request.getEquipoIdentifier());
-
-        System.out.println(verify);
-        System.out.println(request.getCursoIdentifier());
-        System.out.println(request.getEquipoIdentifier());
-        System.out.println(principal.getName());
 
         if (verify == null || !verify.equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(403));

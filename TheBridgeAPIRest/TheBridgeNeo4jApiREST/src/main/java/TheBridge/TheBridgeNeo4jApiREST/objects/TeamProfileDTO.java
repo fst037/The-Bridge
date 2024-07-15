@@ -9,12 +9,12 @@ public class TeamProfileDTO {
 
     private TeamDTO equipo;
     private HashMap<String, Float> skills;
-    private List<Project> projects;
+    private List<ProjectDTO> projects;
 
     public TeamProfileDTO() {
     }
 
-    public TeamProfileDTO(TeamDTO equipo, HashMap<String, Float> skills, List<Project> projects) {
+    public TeamProfileDTO(TeamDTO equipo, HashMap<String, Float> skills, List<ProjectDTO> projects) {
         this.equipo = equipo;
         this.skills = skills;
         this.projects = projects;
@@ -36,11 +36,11 @@ public class TeamProfileDTO {
         this.skills = skills;
     }
 
-    public List<Project> getProjects() {
+    public List<ProjectDTO> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<Project> projects) {
+    public void setProjects(List<ProjectDTO> projects) {
         this.projects = projects;
     }
 }

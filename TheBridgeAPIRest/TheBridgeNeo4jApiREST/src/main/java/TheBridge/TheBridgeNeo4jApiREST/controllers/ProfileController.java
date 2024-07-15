@@ -48,6 +48,8 @@ public class ProfileController {
         userProfileDTO.setProjects(projectService.getProjectWithTeamAndCourseByUser(username)
                 .stream().map(ProjectTeamCourseQueryResult::toProjectDTO).collect(Collectors.toList()));
 
+        userProfileDTO.setBuilders(interactionUserService.getBuilders(username));
+
         return new ResponseEntity<>(userProfileDTO, HttpStatus.OK);
     }
 

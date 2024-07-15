@@ -4,6 +4,7 @@ import TheBridge.TheBridgeNeo4jApiREST.models.Project;
 import TheBridge.TheBridgeNeo4jApiREST.objects.ProjectDTO;
 import TheBridge.TheBridgeNeo4jApiREST.objects.UserDTO;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectTeamCourseQueryResult;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectWithCourseQueryResult;
 import TheBridge.TheBridgeNeo4jApiREST.requests.CreateProyectRequest;
 import TheBridge.TheBridgeNeo4jApiREST.services.ProjectService;
 import org.springframework.http.HttpStatus;
@@ -44,8 +45,8 @@ public class ProjectController {
     }
 
     @GetMapping("/deEquipo")
-    public ResponseEntity<List<Project>> proyectosDeEquipo(@RequestParam String teamIdentifier) {
-        List<Project> proyectos = projectService.getProjectsByTeam(teamIdentifier);
+    public ResponseEntity<List<ProjectDTO>> proyectosDeEquipo(@RequestParam String teamIdentifier) {
+        List<ProjectDTO> proyectos = projectService.getProjectsByTeam(teamIdentifier).stream().map(ProjectWithCourseQueryResult::toProjectDTO).collect(Collectors.toList());
 
         return new ResponseEntity<>(proyectos, HttpStatus.OK);
     }

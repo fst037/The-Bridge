@@ -37,10 +37,10 @@ public interface UserRepository extends Neo4jRepository<User, UUID> {
             "SET r.votos = $votos, r.mensaje = $mensaje, r.timestamp = $fecha")
     String valorarPerfilCompañero(String emailRemitente, String emailDestinatario, List<String> votos, String mensaje, String fecha);
 
-    @Query("MATCH (n)-[c:COMENTO_A]->(u:User{username: $username}) RETURN c.mensaje as mensaje, n.username as remitente, u.username as destinatario, c.timestamp as timestamp")
+    @Query("MATCH (n)-[c:COMENTO_A]->(u:User{username: $username}) RETURN c.mensaje as mensaje, n.username as remitente, u.username as destinatario, c.timestamp as timestamp, c.visible as visible")
     List<CommentDTO> getCommentsByUser(String username);
 
-    @Query("MATCH (n)-[c:COMENTO_A]->(u:User{username: $username}) WHERE c.visible = true RETURN c.mensaje as mensaje, n.username as remitente, u.username as destinatario, c.timestamp as timestamp")
+    @Query("MATCH (n)-[c:COMENTO_A]->(u:User{username: $username}) WHERE c.visible = true RETURN c.mensaje as mensaje, n.username as remitente, u.username as destinatario, c.timestamp as timestamp, c.visible as visible")
     List<CommentDTO> getVisibleCommentsByUser(String username);
 
     @Query("MATCH (n:User{username: $emailRemitente}), (u:User{username: $emailDestinatario}) " +

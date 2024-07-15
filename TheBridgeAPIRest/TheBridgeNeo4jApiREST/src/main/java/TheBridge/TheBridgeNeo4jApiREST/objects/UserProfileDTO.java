@@ -13,11 +13,12 @@ public class UserProfileDTO {
     private HashMap<String, Float> skills;
     private List<CommentDTO> comments;
     private List<ProjectDTO> projects;
+    private List<UserDTO> builders;
 
     public UserProfileDTO() {
     }
 
-    public UserProfileDTO(String name, String username, String legajo, String introduction, List<String> contactLinks, HashMap<String, Float> skills, List<CommentDTO> comments, List<ProjectDTO> projects) {
+    public UserProfileDTO(String name, String username, String legajo, String introduction, List<String> contactLinks, HashMap<String, Float> skills, List<CommentDTO> comments, List<ProjectDTO> projects, List<UserDTO> builders) {
         this.name = name;
         this.username = username;
         this.legajo = legajo;
@@ -26,6 +27,7 @@ public class UserProfileDTO {
         this.skills = skills;
         this.comments = comments;
         this.projects = projects;
+        this.builders = builders;
     }
 
     public String getName() {
@@ -90,5 +92,13 @@ public class UserProfileDTO {
 
     public void setProjects(List<ProjectDTO> projects) {
         this.projects = projects;
+    }
+
+    public List<UserDTO> getBuilders() {
+        return builders;
+    }
+
+    public void setBuilders(List<UserDTO> builders) {
+        this.builders = builders;
     }
 }

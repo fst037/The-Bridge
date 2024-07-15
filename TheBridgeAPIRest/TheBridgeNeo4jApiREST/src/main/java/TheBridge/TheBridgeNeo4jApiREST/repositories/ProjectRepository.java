@@ -2,6 +2,7 @@ package TheBridge.TheBridgeNeo4jApiREST.repositories;
 
 import TheBridge.TheBridgeNeo4jApiREST.models.Project;
 import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectTeamCourseQueryResult;
+import TheBridge.TheBridgeNeo4jApiREST.queryresults.ProjectWithCourseQueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
@@ -36,9 +37,10 @@ public interface ProjectRepository extends Neo4jRepository<Project, UUID> {
 
     @Query("MATCH (t:Team {identifier: $teamIdentifier}) " +
             "WITH t " +
-            "MATCH (p)-[:CON_EQUIPO]->(t)" +
-            "RETURN collect(p) as project")
-    List<Project> findProjectsByTeam(String teamIdentifier);
+            "MATCH (p)-[:CON_EQUIPO]->(t) " +
+            "MATCH (p)-[:PARA_CURSO]->(c:Course)" +
+            "RETURN p as project, c as course")
+    List<ProjectWithCourseQueryResult> findProjectsByTeam(String teamIdentifier);
 
     @Query("MATCH (p)-[:PARA_CURSO]->(c:Course{identifier: $courseIdentifier}) " +
             "WITH p " +

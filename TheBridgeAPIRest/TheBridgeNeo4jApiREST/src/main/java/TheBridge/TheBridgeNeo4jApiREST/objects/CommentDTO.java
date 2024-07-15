@@ -5,12 +5,14 @@ public class CommentDTO {
     private String remitente;
     private String destinatario;
     private String timestamp;
+    private boolean visible;
 
-    public CommentDTO(String mensaje, String remitente, String destinatario, String timestamp) {
+    public CommentDTO(String mensaje, String remitente, String destinatario, String timestamp, boolean visible) {
         this.mensaje = mensaje;
         this.remitente = remitente;
         this.destinatario = destinatario;
         this.timestamp = timestamp;
+        this.visible = visible;
     }
 
     public String getMensaje() {
@@ -36,5 +38,8 @@ public class CommentDTO {
     }
     public void setRemitente(String remitente) {
         this.remitente = remitente;
+    }
+    public boolean isVisible() {
+        return visible;
     }
 }
