@@ -88,7 +88,6 @@ public class Comment {
 
     private String traducirComentario(String comentario) throws IOException {
         PythonInterpreter pythonInterpreter = new PythonInterpreter();
-        pythonInterpreter.traductor(comentario);
         return pythonInterpreter.traductor(comentario);
     }
 

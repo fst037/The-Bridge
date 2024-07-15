@@ -24,7 +24,7 @@ public class PythonInterpreter {
             String pythonScript;
 
             if (osName.contains("win")) {
-                pythonInterpreter = parentDir + "\\venv\\Scripts\\python.exe";
+                pythonInterpreter = parentDir + "\\venvWin\\myenv\\Scripts\\python.exe";
                 pythonScript = parentDir + "\\serviciosPython\\traductor.py";
             } else {
                 pythonInterpreter = parentDir + "/venv/bin/python3";
@@ -42,6 +42,7 @@ public class PythonInterpreter {
             if (exitCode == 0) {
                 return lineaTraducida;
             } else {
+                System.out.println(exitCode);
                 System.err.println("Error al ejecutar el script Python.");
             }
         } catch (Exception e) {

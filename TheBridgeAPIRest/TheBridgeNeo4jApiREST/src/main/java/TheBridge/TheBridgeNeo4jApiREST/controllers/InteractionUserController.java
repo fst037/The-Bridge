@@ -44,9 +44,9 @@ public class InteractionUserController {
 
         CommentDTO responseComment;
 
-        if (comentario.valorarComentario(comentario.getMensaje()).equals("Very Positive")
-                || comentario.valorarComentario(comentario.getMensaje()).equals("Positive")
-                || comentario.valorarComentario(comentario.getMensaje()).equals("Neutral")) {
+        String valoracion = comentario.valorarComentario(comentario.getMensaje());
+
+        if (valoracion.equals("Very Positive") || valoracion.equals("Positive") || valoracion.equals("Neutral")) {
             interactionUserService.realizarComentario(principal.getName(), comentario);
             responseComment = new CommentDTO(comentario.getMensaje(), principal.getName(), comentario.getDestinatario().getUsername(), comentario.getTimestamp(), true);
             return new ResponseEntity<>(responseComment, HttpStatus.CREATED);

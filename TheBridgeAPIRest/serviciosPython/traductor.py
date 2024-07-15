@@ -11,5 +11,6 @@ def main():
     lang = sys.argv[2]
     print(traducir(text, lang))
     return traducir(text, lang)
+
 main()
 
