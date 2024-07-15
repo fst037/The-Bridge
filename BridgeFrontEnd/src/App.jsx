@@ -20,7 +20,6 @@ import { EncuestaPage } from "./pages/encuesta/EncuestaPage";
 import { PerfilEspecifico } from "./pages/perfilEspecifico/PerfilEspecifico";
 import { ProyectoEspecifico } from "./pages/proyectos/ProyectoEspecifico";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -43,8 +42,8 @@ function App() {
           <Route path="comunidad" element={<Comunidad />} />
           <Route path="builders" element={<Builders />} />
           <Route path="recomendados" element={<Recomendados />} />
-          <Route path="conocidos" element={<Conocidos />} />  
-          <Route path="*" element={<div>404</div>} />        
+          <Route path="conocidos" element={<Conocidos />} />
+          <Route path="*" element={<div>404</div>} />
         </Route>
       </Routes>
       <Toaster />

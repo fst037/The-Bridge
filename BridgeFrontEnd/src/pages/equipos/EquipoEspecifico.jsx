@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { queryConfig } from "../../utils/queryConfig";
 import { getTeam } from "../../services/teams";
@@ -17,6 +17,7 @@ import { deleteFromTeam } from "../../services/teams";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
 import { getLoggedUsername } from "../../services/getUserData";
+import { Proyecto } from "../../components/Proyecto";
 
 export const EquipoEspecifico = () => {
   const { authUser } = useAuthContext();
@@ -37,12 +38,12 @@ export const EquipoEspecifico = () => {
   const queryClient = useQueryClient();
 
   const { data: teamInfo, isLoading: isLoadingTeam } = useQuery(
-    "teamInformation"+teamId,
+    "teamInformation" + teamId,
     async () => getTeam({ teamId }),
     queryConfig
   );
   const { data: courses, isLoading: isLoadingCourse } = useQuery(
-    "courses"+getLoggedUsername,
+    "courses" + getLoggedUsername(),
     getMyCourses,
     queryConfig
   );
@@ -159,50 +160,10 @@ export const EquipoEspecifico = () => {
               </button>
             </div>
             <div className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(600px,_1fr))] gap-2 items-start mb-4">
-              {teamInfo?.team.projects.map((project) => (
-                <div
-                  key={project.identifier}
-                  className="border border-gray-300 rounded-lg p-4 mt-4 h-full"
-                >
-                  <Link to={`/proyecto/${project.identifier}`}>
-                    <h5 className="text-lg font-[500] mb-2">
-                      {project.titulo}
-                    </h5>
-                  </Link>
-                  <div className="flex flex-col md:flex-row">
-                    <Link
-                      to={`/proyecto/${project.identifier}`}
-                      className="w-auto h-auto max-w-40 md:mr-5 self-center"
-                    >
-                      <img src={project.portadaLink} alt={project.titulo} />
-                    </Link>
-                    <div>
-                      <h6 className="text-md font-[500] mt-2 md:mt-0">
-                        Descripción:{" "}
-                      </h6>
-                      <p className="ml-3 break-words text-left mt-1">
-                        {project.descripcion}
-                      </p>
-                      <h6 className="text-md font-[500] mt-2">Links: </h6>
-                      <ul className="ml-3 mt-1">
-                        {project.links &&
-                          project.links.map((link) => (
-                            <li key={link}>
-                              <a
-                                href={link}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="text-sm text-blue-500 underline break-all text-left"
-                              >
-                                {link}
-                              </a>
-                            </li>
-                          ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {teamInfo?.team.projects.map((project) => {
+                console.log(project);
+                return <Proyecto key={project.identifier} project={project} />;
+              })}
             </div>
           </div>
           <AddPersonModal
