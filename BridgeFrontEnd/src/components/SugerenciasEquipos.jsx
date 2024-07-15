@@ -17,7 +17,7 @@ const SugerenciasEquipos = ({ sugerencias, usersProfilePic }) => {
           >
             {parseFloat(sugerencia.compatibility * 100).toFixed(2)}%
           </div>
-          <div className="flex flex-col lg:flex-row align-center justify-center h-full">
+          <div className="flex flex-col md:flex-row align-center justify-center h-full">
             <SkillsRadar skills={sugerencia.skills} className={"self-center"} />
 
             <div className="flex flex-col gap-2 w-full mt-3">

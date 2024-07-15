@@ -52,6 +52,11 @@ public class ProjectService {
 
         String verify = projectRepository.isUserInCourseAndTeam(principal.getName(), request.getCursoIdentifier(), request.getEquipoIdentifier());
 
+        System.out.println(verify);
+        System.out.println(request.getCursoIdentifier());
+        System.out.println(request.getEquipoIdentifier());
+        System.out.println(principal.getName());
+
         if (verify == null || !verify.equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(403));
         }

@@ -87,9 +87,9 @@ export const CursoEspecifico = () => {
               Generar sugerencias de equipos
             </button>
 
-            <RiArrowDownLine onClick={() => setShowSuggestions(!showSuggestions)}  className={`h-6 w-auto self-center mx-auto cursor-pointer ${showSuggestions ? 'rotate-180 mb-4' : 'rotate-0'} transition`}/>
+            <RiArrowDownLine onClick={() => setShowSuggestions(!showSuggestions)}  className={`h-6 w-auto self-center mx-auto cursor-pointer ${(showSuggestions && sugerencias.length != 0) ? 'rotate-180 mb-4' : 'rotate-0'} transition`}/>
 
-            {showSuggestions && <SugerenciasEquipos sugerencias={sugerencias} usersProfilePic={usersProfilePic}/>}                       
+            {(showSuggestions && sugerencias.length != 0) && <SugerenciasEquipos sugerencias={sugerencias} usersProfilePic={usersProfilePic}/>}                       
           </div>
 
           <h2 className="mt-4 mb-4 text-2xl">Alumnos</h2>

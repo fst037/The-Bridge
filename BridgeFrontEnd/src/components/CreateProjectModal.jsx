@@ -15,20 +15,19 @@ export const CreateProjectModal = ({
   courses,
 }) => {
   const [projectName, setProjectName] = useState("");
-  const [courseCode, setCourseCode] = useState("");
-  const [teamIdentifier, setTeamIdentifier] = useState();
+  const [courseIdentifier, setCourseIdentifier] = useState(courses?.[0]?.identifier);
+  const [teamIdentifier, setTeamIdentifier] = useState(teams?.[0]?.identifier);
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    if (teams.length === 1) {
-      setTeamIdentifier(teams[0].identifier);
-    }
-  }, [teams]);
+    setTeamIdentifier(teams?.[0]?.identifier);
+    setCourseIdentifier(courses?.[0]?.identifier);
+  }, [teams, courses]);
 
   const mutation = useMutation(createProject, {
     onSuccess: () => {
       queryClient.invalidateQueries("teamInformation");
-      toast.success("Equipo creado correctamente");
+      toast.success("Proyecto creado correctamente");
     },
     onError: (err) => {
       toast.error(err.message);
@@ -37,7 +36,7 @@ export const CreateProjectModal = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await mutation.mutate({ projectName, courseCode, teamIdentifier });
+    await mutation.mutate({ projectName, courseIdentifier, teamIdentifier });
   };
 
   return (
@@ -61,7 +60,7 @@ export const CreateProjectModal = ({
           value={teamIdentifier}
           onChange={(e) => setTeamIdentifier(e.target.value)}
         >
-          {teams.map((team) => (
+          {teams?.map((team) => (
             <option key={team.identifier} value={team.identifier}>
               {team.nombre}
             </option>
@@ -70,12 +69,12 @@ export const CreateProjectModal = ({
 
         <select
           className="form-select w-full border border-gray-400 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          value={courseCode}
-          onChange={(e) => setCourseCode(e.target.value)}
+          value={courseIdentifier}
+          onChange={(e) => setCourseIdentifier(e.target.value)}
         >
           <option disabled>Selecciona el curso</option>
-          {courses.map((course) => (
-            <option key={course.code} value={course.code}>
+          {courses?.map((course) => (
+            <option key={course.identifier} value={course.identifier}>
               {course.name}
             </option>
           ))}

@@ -16,8 +16,9 @@ import { CreateProjectModal } from "../../components/CreateProjectModal";
 import { deleteFromTeam } from "../../services/teams";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
+import { getLoggedUsername } from "../../services/getUserData";
 
-const EquipoEspecifico = () => {
+export const EquipoEspecifico = () => {
   const { authUser } = useAuthContext();
   const { teamId } = useParams();
   const { cardRef, isOpen, setIsOpen } = useCardToggle();
@@ -34,16 +35,18 @@ const EquipoEspecifico = () => {
   const [sugerencias, setSugerencias] = useState([]);
   const [usersProfilePic, setUsersProfilePic] = useState({});
   const queryClient = useQueryClient();
+
   const { data: teamInfo, isLoading: isLoadingTeam } = useQuery(
-    "teamInformation",
+    "teamInformation"+teamId,
     async () => getTeam({ teamId }),
     queryConfig
   );
   const { data: courses, isLoading: isLoadingCourse } = useQuery(
-    "courses",
+    "courses"+getLoggedUsername,
     getMyCourses,
     queryConfig
   );
+
   const mutation = useMutation(deleteFromTeam, {
     onSuccess: () => {
       toast.success("Usuario eliminado correctamente");
@@ -230,5 +233,3 @@ const EquipoEspecifico = () => {
     </div>
   );
 };
-
-export default EquipoEspecifico;

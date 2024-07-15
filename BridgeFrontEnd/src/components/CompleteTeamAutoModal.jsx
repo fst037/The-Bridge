@@ -3,7 +3,7 @@ import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiTeamLine } from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
-import { getTeamsSugestions } from "../services/teams";
+import { getCompleteTeamsSugestions} from "../services/teams";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 
@@ -16,10 +16,10 @@ export const CompleteTeamAutoModal = ({
   setSugerencias,
   courses,
 }) => {
-  const [teamMembers, setTeamMembers] = useState(team.estudiantes?.length);
-  const [courseCode, setCourseCode] = useState("");
+  const [teamMembers, setTeamMembers] = useState(team[0].estudiantes.length);
+  const [courseCode, setCourseCode] = useState(courses[0].code);
 
-  const mutation = useMutation(getTeamsSugestions, {
+  const mutation = useMutation(getCompleteTeamsSugestions, {
     onSuccess: (data) => {
       setSugerencias(data);
       toast.success(`Sugerencias generadas exitosamente`);

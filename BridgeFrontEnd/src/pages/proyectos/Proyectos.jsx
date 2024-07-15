@@ -10,7 +10,7 @@ import { getMyCourses } from "../../services/courses";
 import { getMyTeams } from "../../services/teams";
 import { CreateProjectModal } from "../../components/CreateProjectModal";
 
-const Proyectos = () => {
+export const Proyectos = () => {
   const { data: projects } = useQuery("projects", getMyProjects, queryConfig);
   const { data: courses } = useQuery(
     "courses",
@@ -126,7 +126,7 @@ const Proyectos = () => {
 
         <article className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(500px,_1fr))] gap-4 my-4">
           {projects &&
-            filteredProjects.map((project) => (
+            filteredProjects?.map((project) => (
               <div
                 key={project.identifier}
                 className="border border-gray-300 rounded-lg p-4 mt-4 h-full"
@@ -214,11 +214,9 @@ const Proyectos = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         cardRef={cardRef}
-        teams={teams.map((team) => team.team)}
+        teams={teams?.map((team) => team.team)}
         courses={courses}
       />
     </section>
   );
 };
-
-export default Proyectos;

@@ -38,12 +38,12 @@ export const getProject = async (projectId) => {
 
 export const createProject = async ({
   teamIdentifier,
-  courseCode,
+  courseIdentifier,
   projectName,
 }) => {
   const { data } = await authAxios.post("/api/v1/proyectos/crearProyecto", {
     equipoIdentifier: teamIdentifier,
-    cursoIdentifier: courseCode,
+    cursoIdentifier: courseIdentifier,
     titulo: projectName,
   });
 

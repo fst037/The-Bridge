@@ -8,6 +8,7 @@ export const UserCard = ({
   username,
   className,
   extraButton,
+  commonCount
 }) => {
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
