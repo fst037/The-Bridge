@@ -9,17 +9,31 @@ export const commentProfile = async ({ username, message }) => {
   return data;
 };
 
-export const hideComment = async ({ user, timestamp }) => {
+export const hideComment = async ({ username, timestamp }) => {
   const { data } = await authAxios.patch(
-    `/api/v1/interaccion/ocultarComentario?remitente=${user}&timestamp=${timestamp}`
+    `/api/v1/interaccion/ocultarComentario?remitente=${username}&timestamp=${timestamp}`
   );
   return data;
 };
 
-export const showComment = async ({ user, timestamp }) => {
+export const showComment = async ({ username, timestamp }) => {
   const { data } = authAxios.patch(
-    `/api/v1/interaccion/mostrarComentario?remitente=${user}&timestamp=${timestamp}`
+    `/api/v1/interaccion/mostrarComentario?remitente=${username}&timestamp=${timestamp}`
   );
 
   return data;
+};
+
+export const handleCommentVisibility = async ({
+  username,
+  timestamp,
+  isHidden,
+}) => {
+  if (isHidden) {
+    await showComment({ username, timestamp });
+    return "Comentario visible";
+  } else {
+    await hideComment({ username, timestamp });
+    return "Comentario ocultado";
+  }
 };

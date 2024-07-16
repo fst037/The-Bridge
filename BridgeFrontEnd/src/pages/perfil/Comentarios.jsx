@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { calculateTimeAgo } from "../../utils/calculateTimeAgo";
-import { FaRegEye } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { getProfilePic } from "../../services/getUserData";
 import { queryConfig } from "../../utils/queryConfig";
 import { useAuthContext } from "../../context/AuthContext";
 import { FormInput } from "../../components/FormInput";
 import { FaRegCommentDots } from "react-icons/fa";
 import { AddActionButton } from "../../components/AddActionButton";
-import { commentProfile } from "../../services/comments";
+import {
+  commentProfile,
+  handleCommentVisibility,
+} from "../../services/comments";
 import toast from "react-hot-toast";
 
 export const Comentarios = ({ user }) => {
@@ -73,8 +76,20 @@ const Comentario = ({ comment, isMyProfile }) => {
     () => getProfilePic(comment.remitente),
     queryConfig
   );
+  const queryClient = useQueryClient();
 
   const timeAgo = calculateTimeAgo(comment.timestamp);
+
+  const visibilityMutation = useMutation(handleCommentVisibility, {
+    onSuccess: (message) => {
+      queryClient.invalidateQueries("profileDetail");
+      queryClient.invalidateQueries("myComments");
+      toast.success(message);
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
 
   return (
     <div className="flex justify-between items-center bg-gray-200 p-2 rounded-lg">
@@ -93,8 +108,20 @@ const Comentario = ({ comment, isMyProfile }) => {
       </div>
       {isMyProfile && (
         <div className="flex h-[16px] m-2">
-          <button onClick={() => {}}>
-            <FaRegEye className="flex cursor-pointer h-[16px] w-auto justify-center self-top" />
+          <button
+            onClick={() => {
+              visibilityMutation.mutate({
+                username: comment.remitente,
+                timestamp: comment.timestamp,
+                isHidden: !comment.visible,
+              });
+            }}
+          >
+            {comment.visible ? (
+              <FaRegEye className="flex cursor-pointer h-[16px] w-auto justify-center self-top" />
+            ) : (
+              <FaRegEyeSlash className="flex cursor-pointer h-[16px] w-auto justify-center self-top" />
+            )}
           </button>
         </div>
       )}
