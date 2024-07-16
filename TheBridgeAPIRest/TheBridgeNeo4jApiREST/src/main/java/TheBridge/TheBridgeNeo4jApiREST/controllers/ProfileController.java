@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -63,18 +64,9 @@ public class ProfileController {
         return new ResponseEntity<>(responseUser, HttpStatus.OK);
     }
 
-    @PostMapping("/agregarLinkContacto")
-    public ResponseEntity<UserDTO> agregarLinkContacto(Principal principal, @RequestParam String link) {
-        User user = userService.addContactLink(principal.getName(), link);
-
-        UserDTO responseUser = new UserDTO(user.getName(),user.getUsername(),user.getRoles());
-
-        return new ResponseEntity<>(responseUser, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/eliminarLinkContacto")
-    public ResponseEntity<UserDTO> eliminarLinkContacto(Principal principal, @RequestParam String link) {
-        User user = userService.removeContactLink(principal.getName(), link);
+    @PatchMapping("/modificarLinksContacto")
+    public ResponseEntity<UserDTO> agregarLinkContacto(Principal principal, @RequestBody List<String> links) {
+        User user = userService.setContactLinks(principal.getName(), links);
 
         UserDTO responseUser = new UserDTO(user.getName(),user.getUsername(),user.getRoles());
 

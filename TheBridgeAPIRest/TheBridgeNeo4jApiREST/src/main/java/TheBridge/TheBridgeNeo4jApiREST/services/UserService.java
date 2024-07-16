@@ -82,7 +82,7 @@ public class UserService {
         return userRepository.modifyUserIntroduction(username, introduction);
     }
 
-    public User addContactLink(String username, String contactLink) {
+    public User setContactLinks(String username, List<String> contactLinks) {
         User estudiante = userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found" + username));
 
@@ -90,20 +90,7 @@ public class UserService {
             estudiante.setContactLinks(new ArrayList<>());
         }
 
-        if (estudiante.getContactLinks().contains(contactLink)) {
-            return estudiante;
-        }
-
-        estudiante.getContactLinks().add(contactLink);
-
-        return userRepository.save(estudiante);
-    }
-
-    public User removeContactLink(String username, String contactLink) {
-        User estudiante = userRepository.findUserByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found" + username));
-
-        estudiante.getContactLinks().remove(contactLink);
+        estudiante.setContactLinks(contactLinks);
 
         return userRepository.save(estudiante);
     }
