@@ -3,14 +3,26 @@ import { useCardToggle } from "../../hooks/useCardToggle";
 import { ImageCropper } from "./ImageCropper";
 import { LinkIcon } from "../../components/LinkIcon";
 import { AddActionButton } from "../../components/AddActionButton";
-import { useParams } from "react-router-dom";
 import { sendInviteAccount } from "../../services/users";
-import { useQuery } from "react-query";
-import { queryConfig } from "../../utils/queryConfig";
+import { useMutation } from "react-query";
+import toast from "react-hot-toast";
 
 export const MiPerfil = ({ user, profilePic }) => {
   const { isOpen, setIsOpen, cardRef } = useCardToggle();
   const { authUser } = useAuthContext();
+
+  const mutation = useMutation(sendInviteAccount, {
+    onSuccess: () => {
+      toast.success("Invitacion enviada exitosamente");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  const handleInvite = () => {
+    mutation.mutate({ username: user.username });
+  };
 
   return (
     <article className="flex items-center">
@@ -39,26 +51,24 @@ export const MiPerfil = ({ user, profilePic }) => {
         </h1>
         {user.hasAccount ? (
           <div className="border border-gray-300 rounded-lg p-4">
-          <h4 className="text-lg font-[500]">Contacto</h4>
-          <div className="flex flex-col gap-1">
-            {user?.contactLinks?.map((link) => (
-              <LinkIcon key={link} link={link} />
-            ))}
+            <h4 className="text-lg font-[500]">Contacto</h4>
+            <div className="flex flex-col gap-1">
+              {user?.contactLinks?.map((link) => (
+                <LinkIcon key={link} link={link} />
+              ))}
+            </div>
           </div>
-        </div> 
-        ) : (      
+        ) : (
           <div className="flex flex-col border border-gray-300 rounded-lg p-4 gap-2">
             Este usuario no tiene creada una cuenta en Bridge.
             <AddActionButton
               text="Enviar invitacion"
               className="bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756]"
-              onClick={() => useQuery(
-                sendInviteAccount(user?.username),
-                queryConfig
-              )}
+              onClick={handleInvite}
+              isLoading={mutation.isLoading}
             />
           </div>
-        )}       
+        )}
         <ImageCropper isOpen={isOpen} setIsOpen={setIsOpen} cardRef={cardRef} />
       </div>
     </article>
