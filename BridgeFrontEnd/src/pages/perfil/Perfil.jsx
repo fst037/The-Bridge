@@ -25,7 +25,7 @@ export const Perfil = () => {
             <MiPerfil user={user} profilePic={authUser.profilePic} />
             <RatingRadar skills={user?.skills} />
             <InformacionGeneral user={user} />
-            <Builders />
+            <Builders builders={user?.builders} />
           </main>
           <Comentarios user={user} />
         </>

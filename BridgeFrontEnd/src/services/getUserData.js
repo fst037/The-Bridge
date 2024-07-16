@@ -47,7 +47,6 @@ export const getUserBuilders = async () => {
   return buildersWithProfilePic;
 };
 
-
 export const getUserRecommended = async () => {
   const { data } = await authAxios.get("/api/v1/interaccion/buildersEnComun");
 

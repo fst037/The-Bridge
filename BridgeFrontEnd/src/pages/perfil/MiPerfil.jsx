@@ -33,7 +33,7 @@ export const MiPerfil = ({ user, profilePic }) => {
           {user?.username}
         </h1>
         <div className="flex gap-1">
-          {user?.contactLinks.map((link) => (
+          {user?.contactLinks?.map((link) => (
             <LinkIcon key={link} link={link} />
           ))}
         </div>

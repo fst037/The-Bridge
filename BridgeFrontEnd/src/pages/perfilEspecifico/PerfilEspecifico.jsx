@@ -32,7 +32,7 @@ export const PerfilEspecifico = () => {
             <MiPerfil user={user} profilePic={profilePicUrl} />
             <RatingRadar skills={user?.skills} />
             <InformacionGeneral user={user} />
-            <Builders />
+            <Builders builders={user?.builders} />
           </main>
           <Comentarios user={user} />
         </>
