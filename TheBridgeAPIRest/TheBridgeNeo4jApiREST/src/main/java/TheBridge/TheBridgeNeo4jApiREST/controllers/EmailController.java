@@ -6,6 +6,8 @@ import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api/v1/email")
 public class EmailController {
@@ -34,5 +36,10 @@ public class EmailController {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+    @PostMapping("/emailInviteToCreateAccountBridge")
+    public void emailInviteToCreateAccountBridge(Principal principal, @RequestParam String to) throws MessagingException {
+        emailService.inviteToCreateAccountBridge(principal.getName(), to);
     }
 }

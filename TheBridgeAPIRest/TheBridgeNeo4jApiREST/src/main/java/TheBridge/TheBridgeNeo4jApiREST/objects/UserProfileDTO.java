@@ -9,6 +9,7 @@ public class UserProfileDTO {
     private String username;
     private String legajo;
     private String introduction;
+    private boolean hasAccount;
     private List<String> contactLinks;
     private HashMap<String, Float> skills;
     private List<CommentDTO> comments;
@@ -18,11 +19,12 @@ public class UserProfileDTO {
     public UserProfileDTO() {
     }
 
-    public UserProfileDTO(String name, String username, String legajo, String introduction, List<String> contactLinks, HashMap<String, Float> skills, List<CommentDTO> comments, List<ProjectDTO> projects, List<UserDTO> builders) {
+    public UserProfileDTO(String name, String username, String legajo, String introduction, boolean hasAccount, List<String> contactLinks, HashMap<String, Float> skills, List<CommentDTO> comments, List<ProjectDTO> projects, List<UserDTO> builders) {
         this.name = name;
         this.username = username;
         this.legajo = legajo;
         this.introduction = introduction;
+        this.hasAccount = hasAccount;
         this.contactLinks = contactLinks;
         this.skills = skills;
         this.comments = comments;
@@ -60,6 +62,14 @@ public class UserProfileDTO {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public boolean isHasAccount() {
+        return hasAccount;
+    }
+
+    public void setHasAccount(boolean hasAccount) {
+        this.hasAccount = hasAccount;
     }
 
     public List<String> getContactLinks() {

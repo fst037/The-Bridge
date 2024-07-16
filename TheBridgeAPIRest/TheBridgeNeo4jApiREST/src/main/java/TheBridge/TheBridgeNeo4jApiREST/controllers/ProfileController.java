@@ -40,6 +40,7 @@ public class ProfileController {
         userProfileDTO.setLegajo(usuario.getLegajo());
         userProfileDTO.setIntroduction(usuario.getIntroduction());
         userProfileDTO.setContactLinks(usuario.getContactLinks());
+        userProfileDTO.setHasAccount(usuario.isEnabled());
 
         userProfileDTO.setSkills(interactionUserService.getSkillsByUsername(username));
 
@@ -62,8 +63,8 @@ public class ProfileController {
         return new ResponseEntity<>(responseUser, HttpStatus.OK);
     }
 
-    @PostMapping("/anadirLinkContacto")
-    public ResponseEntity<UserDTO> añadirLinkContacto(Principal principal, @RequestParam String link) {
+    @PostMapping("/agregarLinkContacto")
+    public ResponseEntity<UserDTO> agregarLinkContacto(Principal principal, @RequestParam String link) {
         User user = userService.addContactLink(principal.getName(), link);
 
         UserDTO responseUser = new UserDTO(user.getName(),user.getUsername(),user.getRoles());

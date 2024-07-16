@@ -109,4 +109,20 @@ public class EmailService {
 
     }
 
+    public void inviteToCreateAccountBridge(String remitente, String destinatario) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setTo(destinatario);
+
+        helper.setSubject("Invitación a registrarte en Bridge.com");
+
+        String body = "<p>" + remitente + " te ha invitado a registrarte en Bridge. </p>" +
+                "<p> Para registrarte, puedes hacer click en el siguiente enlace: " +
+                "<a href='http://localhost:5173/register'>Registrarse</a></p>";
+
+        helper.setText(body, true);
+
+        mailSender.send(message);
+    }
 }
