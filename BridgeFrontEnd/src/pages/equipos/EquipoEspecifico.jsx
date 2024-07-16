@@ -161,7 +161,6 @@ export const EquipoEspecifico = () => {
             </div>
             <div className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(600px,_1fr))] gap-2 items-start mb-4">
               {teamInfo?.team.projects.map((project) => {
-                console.log(project);
                 return <Proyecto key={project.identifier} project={project} />;
               })}
             </div>

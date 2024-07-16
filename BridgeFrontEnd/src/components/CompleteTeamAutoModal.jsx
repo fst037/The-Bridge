@@ -3,27 +3,38 @@ import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiTeamLine } from "react-icons/ri";
 import { AddActionButton } from "./AddActionButton";
-import { getCompleteTeamsSugestions} from "../services/teams";
+import { getCompleteTeamsSugestions } from "../services/teams";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
+import { getCourseMembers } from "../services/courses";
 
 export const CompleteTeamAutoModal = ({
   isOpen,
   setIsOpen,
   cardRef,
   team,
-  sugerencias,
   setSugerencias,
+  setUsersProfilePic,
   courses,
 }) => {
   const [teamMembers, setTeamMembers] = useState(team[0].estudiantes.length);
   const [courseCode, setCourseCode] = useState(courses[0].code);
+  const courseMutation = useMutation(() => getCourseMembers(courseCode), {
+    onSuccess: (course) => {
+      const newUsersProfilePic = course.users.reduce((acc, user) => {
+        acc[user.username] = user.profilePic;
+        return acc;
+      }, {});
+
+      setUsersProfilePic(newUsersProfilePic);
+    },
+  });
 
   const mutation = useMutation(getCompleteTeamsSugestions, {
     onSuccess: (data) => {
+      courseMutation.mutate(courseCode);
       setSugerencias(data);
       toast.success(`Sugerencias generadas exitosamente`);
-      console.log("sugerencias", data);
       setIsOpen(false);
     },
     onError: (error) => {
@@ -33,11 +44,10 @@ export const CompleteTeamAutoModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!teamMembers || !courseCode) return;
     mutation.mutate({
       teamMembers,
-      teamIdentifier: team.team.identifier,
+      teamIdentifier: team[0].team.identifier,
       courseCode,
     });
   };

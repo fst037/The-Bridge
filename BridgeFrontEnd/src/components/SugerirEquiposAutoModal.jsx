@@ -23,13 +23,7 @@ export const SugerirEquiposAutoModal = ({
       setIsOpen(false);
     },
     onError: (error) => {
-      const errorMessage =
-        error.response?.data || error.message || "Error desconocido";
       toast.error("Error al generar las sugerencias: " + error.message);
-      console.error(
-        "Error al generar las sugerencias:",
-        error.response || error
-      );
     },
   });
 

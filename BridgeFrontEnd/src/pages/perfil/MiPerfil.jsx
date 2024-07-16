@@ -1,6 +1,7 @@
 import { useAuthContext } from "../../context/AuthContext";
 import { useCardToggle } from "../../hooks/useCardToggle";
 import { ImageCropper } from "./ImageCropper";
+import { LinkIcon } from "../../components/LinkIcon";
 
 export const MiPerfil = ({ user, profilePic }) => {
   const { isOpen, setIsOpen, cardRef } = useCardToggle();
@@ -31,6 +32,11 @@ export const MiPerfil = ({ user, profilePic }) => {
         <h1 className="text-gray-400/80 font-light text-xl">
           {user?.username}
         </h1>
+        <div className="flex gap-1">
+          {user?.contactLinks.map((link) => (
+            <LinkIcon key={link} link={link} />
+          ))}
+        </div>
         <ImageCropper isOpen={isOpen} setIsOpen={setIsOpen} cardRef={cardRef} />
       </div>
     </article>

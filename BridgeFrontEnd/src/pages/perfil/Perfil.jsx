@@ -21,13 +21,13 @@ export const Perfil = () => {
       {isLoading && <p>Cargando...</p>}
       {!isLoading && (
         <>
-          <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 pb-0. lg:pb-4">
+          <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 lg:pb-4">
             <MiPerfil user={user} profilePic={authUser.profilePic} />
             <RatingRadar skills={user?.skills} />
             <InformacionGeneral user={user} />
             <Builders />
           </main>
-          <Comentarios />
+          <Comentarios user={user} />
         </>
       )}
     </div>

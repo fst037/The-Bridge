@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
 import { RiFolderLine } from "react-icons/ri";
@@ -15,28 +15,26 @@ export const CreateProjectModal = ({
   courses,
 }) => {
   const [projectName, setProjectName] = useState("");
-  const [courseIdentifier, setCourseIdentifier] = useState(courses?.[0]?.identifier);
+  const [courseIdentifier, setCourseIdentifier] = useState(
+    courses?.[0]?.identifier
+  );
   const [teamIdentifier, setTeamIdentifier] = useState(teams?.[0]?.identifier);
   const queryClient = useQueryClient();
-
-  useEffect(() => {
-    setTeamIdentifier(teams?.[0]?.identifier);
-    setCourseIdentifier(courses?.[0]?.identifier);
-  }, [teams, courses]);
 
   const mutation = useMutation(createProject, {
     onSuccess: () => {
       queryClient.invalidateQueries("teamInformation");
       toast.success("Proyecto creado correctamente");
+      setIsOpen(false);
     },
     onError: (err) => {
       toast.error(err.message);
     },
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await mutation.mutate({ projectName, courseIdentifier, teamIdentifier });
+    mutation.mutate({ projectName, courseIdentifier, teamIdentifier });
   };
 
   return (
