@@ -113,6 +113,11 @@ function agregarBotonACadaFila() {
     img.src = "https://i.imgur.com/7sYdczi.png";
     img.style.width = "50px";
     let email = fila.children[2].textContent.trim();
+
+    let tempContent = fila.children[1].innerHTML;
+
+    fila.children[1].innerHTML = `<a href="localhost:5173/perfil/${email}" target="blank">${tempContent}</a>`;
+
     boton.id = "botonPerfil-"+email;
     
     boton.appendChild(img);
@@ -187,11 +192,45 @@ function agregarBotonACadaFila() {
 }
 
 function completarPerfil(email, data) {
-  document.getElementById("presentacion-"+email).textContent = data.introduction;
+  
+  if (data.introduction == null) {
+    document.getElementById("presentacion-"+email).textContent = "No hay información.";
+  } else {
+    document.getElementById("presentacion-"+email).textContent = data.introduction;
+    document.getElementById("presentacion-"+email).style.padding = "10px";
+  }
 
-  document.getElementById("presentacion-"+email).style.padding = "10px";
+  data.skills = {
+    "Comunicación": parseFloat(data.skills.Comunicación).toFixed(5),
+    "Desarrollo": parseFloat(data.skills.Desarrollo).toFixed(5),
+    "Organización": parseFloat(data.skills.Organización).toFixed(5),
+    "Ideación": parseFloat(data.skills.Ideación).toFixed(5),
+    "Liderazgo": parseFloat(data.skills.Liderazgo).toFixed(5)
+  };
 
-  document.getElementById("skills-"+email).innerHTML = `
+  const defaultSkills = {
+    "Comunicación": "0.12000",
+    "Desarrollo": "0.12000",
+    "Organización": "0.12000",
+    "Ideación": "0.12000",
+    "Liderazgo": "0.12000"
+  };
+
+  let hasSkills = false;
+
+  for (const key in defaultSkills) {
+    console.log(data.skills[key]);
+    console.log(defaultSkills[key]);
+    if (data.skills[key] !== defaultSkills[key]) {
+      hasSkills = true;
+      break;
+    }
+  }
+
+  if (!hasSkills) {
+    document.getElementById("skills-"+email).textContent = "No hay información.";
+  } else {
+    document.getElementById("skills-"+email).innerHTML = `
           <canvas id="skillsChart-${email}" height="200" width="400"></canvas>
         `;
 
@@ -239,7 +278,14 @@ function completarPerfil(email, data) {
                 }
             },
         });
+  }
+  
 
+  if (data.comments.length == 0) {
+    document.getElementById("comentariosContainer-"+email).innerHTML = `<tr>
+                  <td style="border-radius: 10px;">No hay comentarios.</td>
+                </tr>`;
+  } else {
     const dateOptions = { 
       year: 'numeric', 
       month: 'long', 
@@ -249,129 +295,136 @@ function completarPerfil(email, data) {
       second: 'numeric'// Show milliseconds
     };
 
-  let comentarios = data.comments
-    .map((comment) => {
-      return `<li>
-      <div>
-        <div style="display: flex; justify-content: space-between; border-bottom: 2px solid black;padding: 5px;margin-bottom: 5px;">
-          <p style="margin:0px" >De: ${comment.remitente}</p>
-          <p style="margin:0px">${new Intl.DateTimeFormat('es-ES', dateOptions).format(new Date(comment.timestamp))}</p>
-        </div>
-        <p style="margin: 5px">${comment.mensaje}</p>
+    let comentarios = data.comments
+      .map((comment) => {
+        return `<li>
+        <div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 2px solid black;padding: 5px;margin-bottom: 5px;">
+            <p style="margin:0px" >De: ${comment.remitente}</p>
+            <p style="margin:0px">${new Intl.DateTimeFormat('es-ES', dateOptions).format(new Date(comment.timestamp))}</p>
+          </div>
+          <p style="margin: 5px">${comment.mensaje}</p>
+          
+        </div>    
         
-      </div>    
-      
-    </li>`;
-    })
-    .join("");  
+      </li>`;
+      })
+      .join("");  
 
-  document.getElementById("comentariosContainer-"+email).innerHTML =
-    `
-  <tr>
-            <td style="height:100%;width: 150px; border-radius: 10px;">
-              <ul style="margin: 0; padding: 0; list-style-type: none; display:flex; flex-direction:column; justify-content:space-between; height:100px; width: 100%">
-                <li style="flex-grow:1; margin: 5px">
-                  <button style="cursor: pointer;width:100%; height:100%; margin:0; padding:0; border-radius: 10px; background: #FF806E" id="btnPrevComentario-${email}">Anterior</button>
-                </li>
-                <li style="flex-grow:1; margin: 5px">
-                  <button style="cursor: pointer;width:100%; height:100%; margin:0; padding:0; border-radius: 10px; background: #00BCC6" id="btnNextComentario-${email}">Siguiente</button>
-                </li>
-              </ul>
-            </td>
-            <td colspan="5" style="vertical-align:top; border-radius: 10px;">
-              <div
-                id="comentariosContainer"
-                style="position: relative; overflow: hidden; height:fit-content"
-              >
-                <ul
-                  id="comentarios-${email}"
-                  style="margin: 0; padding: 0; list-style-type: none"
-                >
-                  ` +
-    comentarios +
-    `
-                </ul>
-              </div>
-            </td>
-          </tr>`;
-
-  let proyectos = data.projects
-    .map((project) => {
-      return `<li>
-        <div style="display: flex;justify-content: space-between;margin-bottom: 5px;padding: 5px;border-bottom: 2px solid black;align-items: end;">
-        <h3 style="margin:0px">${project.titulo}</h3>
-        <p style="margin:0px">Curso: ${project.curso.name}</p>
-        </div>
-      <div style="display: flex; margin:10px">
-      <img
-        style="max-width: 200px; max-height: 100px;"
-        src="${project.portadaLink}"
-        alt="ImagenProyecto"
-      />
-      <div style="margin-left: 10px;width: 100%;border: 1px solid grey; border-radius: 10px">
-        <p style="width: 100%;height: fit-content; margin:5px">
-          ${project.descripcion}
-        </p>
-      </div>
-      </div>
-      <div>
-        <h5 style="margin: 5px;border-bottom: 2px solid grey">Links</h4>
-        <ul style="list-style-type: none;">
-          ` +
-        project.links
-          .map((link) => {
-            return `<li><a href="${link}" target="blank">${link}</a></li>`;
-          })
-          .join("") +
-        `
-        </ul>
-      </div>
-      <div>
-        <h5 style="margin: 5px;border-bottom: 2px solid grey">Equipo: ${project.equipo.nombre}</h4>
-        <ul style="list-style-type: none;">
-          ` +
-        project.members
-          .map((member) => {
-            return `<li style="display:flex; justify-content: space-between">
-                <a style="width: 35%" href="localhost:5173/perfil/${member.username}" target="blank">${member.name}</a>
-                <div style="width: 35%">${member.username}</div>
-                <div style="width: 30%">${member.legajo}</div>
-              </li>`;
-          })
-          .join("") +
-        `
-        </ul>
-      </div>
-    </li>`;
-    })
-    .join("");
-  
-  document.getElementById("proyectosContainer-"+email).innerHTML = `
+    document.getElementById("comentariosContainer-"+email).innerHTML =
+      `
     <tr>
-            <td style="border-radius: 10px;" colspan="6">                    
-              <ul
-                id="portfolio-${email}"
-                style="margin: 0; padding: 0; list-style-type: none;"
-              >
-                `+ proyectos +`
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td style="border-radius: 10px; padding:5px" colspan="3">
-              <button id="btnPrevProyecto-${email}" style="cursor: pointer;width: 100%; border-radius: 10px; background: #FF806E">
-                Anterior
-              </button>
-            </td>
-            <td style="border-radius: 10px; padding:5px" colspan="3">
-              <button id="btnNextProyecto-${email}" style="cursor: pointer;width: 100%;border-radius: 10px; background: #00BCC6">
-                Siguiente
-              </button>
-            </td>
-          </tr>
-  `;
+              <td style="height:100%;width: 150px; border-radius: 10px;">
+                <ul style="margin: 0; padding: 0; list-style-type: none; display:flex; flex-direction:column; justify-content:space-between; height:100px; width: 100%">
+                  <li style="flex-grow:1; margin: 5px">
+                    <button style="cursor: pointer;width:100%; height:100%; margin:0; padding:0; border-radius: 10px; background: #FF806E" id="btnPrevComentario-${email}">Anterior</button>
+                  </li>
+                  <li style="flex-grow:1; margin: 5px">
+                    <button style="cursor: pointer;width:100%; height:100%; margin:0; padding:0; border-radius: 10px; background: #00BCC6" id="btnNextComentario-${email}">Siguiente</button>
+                  </li>
+                </ul>
+              </td>
+              <td colspan="5" style="vertical-align:top; border-radius: 10px;">
+                <div
+                  id="comentariosContainer"
+                  style="position: relative; overflow: hidden; height:fit-content"
+                >
+                  <ul
+                    id="comentarios-${email}"
+                    style="margin: 0; padding: 0; list-style-type: none"
+                  >
+                    ` +
+      comentarios +
+      `
+                  </ul>
+                </div>
+              </td>
+            </tr>`;
+    setAnimacionesCarrouselComentarios(email);
+  }
 
-  setAnimacionesCarrousel(email);
+  if (data.projects.length == 0) {
+    document.getElementById("proyectosContainer-"+email).innerHTML = `<tr>
+                  <td style="border-radius: 10px;">No hay proyectos.</td>
+                </tr>`;
+  } else {
+    let proyectos = data.projects
+      .map((project) => {
+        return `<li>
+          <div style="display: flex;justify-content: space-between;margin-bottom: 5px;padding: 5px;border-bottom: 2px solid black;align-items: end;">
+          <h3 style="margin:0px">${project.titulo}</h3>
+          <p style="margin:0px">Curso: ${project.curso.name}</p>
+          </div>
+        <div style="display: flex; margin:10px">
+        <img
+          style="max-width: 200px; max-height: 100px;"
+          src="${project.portadaLink}"
+          alt="ImagenProyecto"
+        />
+        <div style="margin-left: 10px;width: 100%;border: 1px solid grey; border-radius: 10px">
+          <p style="width: 100%;height: fit-content; margin:5px">
+            ${project.descripcion}
+          </p>
+        </div>
+        </div>
+        <div>
+          <h5 style="margin: 5px;border-bottom: 2px solid grey">Links</h4>
+          <ul style="list-style-type: none;">
+            ` +
+          project.links
+            .map((link) => {
+              return `<li><a href="${link}" target="blank">${link}</a></li>`;
+            })
+            .join("") +
+          `
+          </ul>
+        </div>
+        <div>
+          <h5 style="margin: 5px;border-bottom: 2px solid grey">Equipo: ${project.equipo.nombre}</h4>
+          <ul style="list-style-type: none;">
+            ` +
+          project.members
+            .map((member) => {
+              return `<li style="display:flex; justify-content: space-between">
+                  <a style="width: 35%" href="localhost:5173/perfil/${member.username}" target="blank">${member.name}</a>
+                  <div style="width: 35%">${member.username}</div>
+                  <div style="width: 30%">${member.legajo}</div>
+                </li>`;
+            })
+            .join("") +
+          `
+          </ul>
+        </div>
+      </li>`;
+      })
+      .join("");
+    
+    document.getElementById("proyectosContainer-"+email).innerHTML = `
+      <tr>
+              <td style="border-radius: 10px;" colspan="6">                    
+                <ul
+                  id="portfolio-${email}"
+                  style="margin: 0; padding: 0; list-style-type: none;"
+                >
+                  `+ proyectos +`
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td style="border-radius: 10px; padding:5px" colspan="3">
+                <button id="btnPrevProyecto-${email}" style="cursor: pointer;width: 100%; border-radius: 10px; background: #FF806E">
+                  Anterior
+                </button>
+              </td>
+              <td style="border-radius: 10px; padding:5px" colspan="3">
+                <button id="btnNextProyecto-${email}" style="cursor: pointer;width: 100%;border-radius: 10px; background: #00BCC6">
+                  Siguiente
+                </button>
+              </td>
+            </tr>
+    `;
+    setAnimacionesCarrouselProyectos(email);
+  }  
 }
 
 function cargarPerfil(email) {
@@ -492,7 +545,7 @@ function agregarEstilos() {
   document.head.appendChild(style);
 }
 
-function setAnimacionesCarrousel(email){
+function setAnimacionesCarrouselComentarios(email){
   let comentarios = document.getElementById("comentarios-"+email).children;
   let btnNext = document.getElementById("btnNextComentario-"+email);
   let btnPrev = document.getElementById("btnPrevComentario-"+email);
@@ -551,8 +604,10 @@ function setAnimacionesCarrousel(email){
       }, 500);
     }, 500);
   });
+}
 
-
+function setAnimacionesCarrouselProyectos(email){
+  
   var portfolioItems = document.getElementById(`portfolio-${email}`).children;
   var btnNextPortfolio = document.getElementById("btnNextProyecto-"+email);
   var btnPrevPortfolio = document.getElementById("btnPrevProyecto-"+email);
@@ -641,4 +696,3 @@ cargarIntegrantesNeo4j();
 crearEncabezado();
 agregarBotonACadaFila();
 agregarEstilos();
-setAnimacionesCarrousel()

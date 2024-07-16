@@ -4,22 +4,22 @@
   width: 100%;
 }
 
-.ListaConfiguraciones {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.alertaDesarrollo {
+  background-color: #F0E9FF;
+  display: flex; 
+  justify-content:center; 
   align-items: center;
-  background-color: #f8f8f8;
-  height: 100%;
-  width: 100%;
-  padding: 20px;  
+  width: 400px;
+  height: 150px;
+  padding: 20px;
   box-sizing: border-box;
 }
 
-.ListaConfiguraciones li {
-  margin: 10px;
-  width: 100%;
-  height: 100%;
+.alertaDesarrollo p {
+  font-size: 1.5em;
+  text-align: center;
+  vertical-align: center;
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {

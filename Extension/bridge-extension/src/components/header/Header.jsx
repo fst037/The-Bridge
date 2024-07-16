@@ -4,7 +4,7 @@ import './Header.css'
 const Header = () => {
   return (
     <div className='WrapperHeader'>
-      <h1>Bridge Extension</h1>
+      <h1>Extensión Bridge</h1>
       
     </div>
   )

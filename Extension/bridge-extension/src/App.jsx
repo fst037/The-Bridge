@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect } from 'react';
 import Header from './components/header/Header.jsx';
 import Interruptor from './components/varios/Interruptor.jsx';
+import { Link } from 'react-router-dom';
 
 
 function App() {
@@ -14,14 +15,11 @@ function App() {
   return (
     <div className="App">
       <Header />      
-      <ul className='ListaConfiguraciones'>
-        
-      <li><Interruptor nombre="Cargar Compañeros"/></li>
-        <li><Interruptor nombre="Cargar Cursos"/></li>
-        <li><Interruptor nombre="Mostrar Perfiles"/></li>
-      </ul>
-
-
+      <div className='alertaDesarrollo'>
+        <p styles={"width:100%; margin: 0; height: 100%"}>
+          La extensión esta en desarrollo. Puedes disfrutar de todas las funciones de Bridge en nuestra <a href='http://localhost:5173/' target='_blank'>Página web</a>
+        </p>
+      </div>
     </div>
   );
 }
