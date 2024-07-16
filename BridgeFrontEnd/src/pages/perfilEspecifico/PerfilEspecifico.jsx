@@ -7,6 +7,7 @@ import { RatingRadar } from "../../components/RatingRadar";
 import { InformacionGeneral } from "../perfil/InformacionGeneral";
 import { Builders } from "../perfil/Builders";
 import { Comentarios } from "../perfil/Comentarios";
+import { Proyecto } from "../../components/Proyecto";
 
 export const PerfilEspecifico = () => {
   const { username } = useParams();
@@ -28,13 +29,23 @@ export const PerfilEspecifico = () => {
       {(isLoading || isLoadingProfilePic) && <p>Cargando...</p>}
       {!isLoading && !isLoadingProfilePic && (
         <>
-          <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12 pb-12">
+          <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
             <MiPerfil user={user} profilePic={profilePicUrl} />
             <RatingRadar skills={user?.skills} />
             <InformacionGeneral user={user} />
             <Builders builders={user?.builders} />
           </main>
           <Comentarios user={user} />
+          <div className="border border-gray-300 rounded-lg p-4">
+            <div className="flex">
+              <h4 className="text-lg font-[500]">Proyectos</h4>
+            </div>
+            <div className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(600px,_1fr))] gap-2 items-start mb-4">
+              {user?.projects.map((project) => {
+                return <Proyecto key={project.identifier} project={project} />;
+              })}
+            </div>
+          </div>
         </>
       )}
     </div>

@@ -9,26 +9,29 @@ import {
 
 export const LinkIcon = ({ link = "", className = "" }) => {
   const getIcon = () => {
+    let icon;
+
     if (link.includes("linkedin.com")) {
-      return <FaLinkedin className={`size-8 ${className}`} />;
+      icon = <FaLinkedin className={`size-5 ${className}`} />;
     } else if (link.includes("github.com")) {
-      return <FaGithub className={`size-8 ${className}`} />;
+      icon = <FaGithub className={`size-5 ${className}`} />;
     } else if (link.includes("figma.com")) {
-      return <FaFigma className={`size-8 ${className}`} />;
+      icon = <FaFigma className={`size-5 ${className}`} />;
     } else if (link.includes("discord.gg")) {
-      return <FaDiscord className={`size-8 ${className}`} />;
+      icon = <FaDiscord className={`size-5 ${className}`} />;
     }
     return (
       <div className="flex gap-1 items-center">
         <span className="text-blue-500 hover:underline">{link}</span>
-        <FaExternalLinkAlt className="text-blue-500" />
+        {icon ? icon :<FaExternalLinkAlt className="text-blue-500" />}
       </div>
     );
   };
 
+  console.log(link);
   return (
-    <Link to={link} target="_blank" className="cursor-pointer">
+    <a href={"https://"+link} target="_blank" rel="noopener noreferrer" className={`cursor-pointer ${className}`}>
       {getIcon()}
-    </Link>
+    </a>
   );
 };

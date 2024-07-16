@@ -5,8 +5,11 @@ import { queryConfig } from "../../utils/queryConfig";
 import { UserCard } from "../../components/UserCard";
 import { Link } from "react-router-dom";
 import { LinkIcon } from "../../components/LinkIcon";
+import { useAuthContext } from "../../context/AuthContext";
+import { RiPencilLine } from "react-icons/ri";
 
 export const ProyectoEspecifico = () => {
+  const { authUser } = useAuthContext();
   const { projectId } = useParams();
   const { data: project, isLoading } = useQuery(
     "projectInformation" + projectId,
@@ -14,12 +17,23 @@ export const ProyectoEspecifico = () => {
     queryConfig
   );
 
+  let isMember = false;
+
+  for (let member of project?.members || []) {
+    if (member.username === authUser.email) {
+      isMember = true;
+      break;
+    }
+  }
+
   return (
     <div className="p-4 md:p-8">
       {isLoading && <p>Cargando...</p>}
       {!isLoading && (
         <>
-          <h2 className="text-4xl text-gray-400/80 mb-4">{project.titulo}</h2>
+          <h2 className="flex text-4xl text-gray-400/80 mb-4">
+            {project.titulo}{isMember ? <RiPencilLine className="cursor-pointer"/> : ""}            
+          </h2>
           <div className="flex flex-col md:flex-row">
             <div className="w-auto md:mr-5 self-center">
               <img
@@ -32,14 +46,14 @@ export const ProyectoEspecifico = () => {
               <div className="border border-gray-300 rounded-lg p-4 h-full w-full">
                 <div className="flex flex-col md:flex-row">
                   <div>
-                    <h6 className="text-md font-[500] mt-2 md:mt-0">
-                      Descripción:{" "}
+                    <h6 className="flex text-md font-[500] mt-2 md:mt-0">
+                      Descripción:{" "} {isMember ? <RiPencilLine className="cursor-pointer m-2"/> : ""}      
                     </h6>
                     <p className="ml-3 break-words text-left mt-1">
                       {project.descripcion}
                     </p>
                     <h6 className="text-md font-[500] mt-2">Links: </h6>
-                    <div className="flex gap-2 px-3">
+                    <div className="flex flex-col gap-1 px-3">
                       {project.links &&
                         project.links.map((link) => (
                           <LinkIcon key={link} link={link} />

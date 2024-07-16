@@ -74,10 +74,12 @@ export const InformacionGeneral = ({ user }) => {
               introduction: e.target.value,
             }))
           }
-          className="w-full h-32 p-2 border rounded-md border-gray-400 focus:border-gray-600 outline-none"
+          className={"w-full p-2 border rounded-md border-gray-400 focus:border-gray-600 outline-none " + (authUser.email !== user.username ? "h-[300px]" : "h-[200px]")}
           disabled={authUser.email !== user.username}
         />
-        {userInformation.links.map((link) => (
+
+        {authUser.email === user.username && 
+          userInformation.links.map((link) => (
           <FormInput
             key={link.id}
             placeholder={"Introduce un link de contacto"}
@@ -89,7 +91,7 @@ export const InformacionGeneral = ({ user }) => {
         ))}
         {authUser.email === user.username && (
           <button
-            className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756]"
+            className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full"
             disabled={mutation.isLoading}
           >
             {mutation.isLoading ? (

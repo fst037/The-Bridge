@@ -21,7 +21,7 @@ export const Proyecto = ({ project }) => {
             {project?.descripcion}
           </p>
           <h6 className="text-md font-[500] mt-2">Links: </h6>
-          <div className="flex gap-2 px-3">
+          <div className="flex gap-1 px-3 flex-col">
             {project.links &&
               project?.links.map((link) => <LinkIcon key={link} link={link} />)}
           </div>
@@ -32,7 +32,7 @@ export const Proyecto = ({ project }) => {
         <div>
           <h6 className="text-md font-[500] mt-2">Curso:</h6>
           <Link
-            to={`/curso/${project.curso.identifier}`}
+            to={`/curso/${project.curso.code}`}
             className="text-blue-500 underline ml-3 break-words text-left mt-1"
           >
             {project?.curso.name}

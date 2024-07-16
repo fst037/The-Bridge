@@ -56,7 +56,7 @@ export const Proyectos = () => {
           <h3 className="text-4xl text-gray-400/80">Mis Proyectos</h3>
           <AddActionButton
             text={"Nuevo +"}
-            className="w-max"
+            className="w-max rounded-[15px]"
             onClick={() => {
               setIsOpen(!isOpen);
             }}

@@ -21,17 +21,19 @@ export const Builders = ({ builders }) => {
   return (
     <div className="border border-gray-300 rounded-lg p-4">
       <h4 className="text-lg font-[500] mb-4">Builders</h4>
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2">
-        {buildersWithPics?.map(({ name, username, profilePic }) => (
-          <UserCard
-            key={username}
-            profilePic={profilePic}
-            name={name}
-            username={username}
-            className={"w-full"}
-          />
-        ))}
-      </div>
+      <div className="max-h-[600px] md:max-h-[450px] overflow-auto">
+        <div className="flex flex-col sm:grid sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2">
+          {buildersWithPics?.map(({ name, username, profilePic }) => (
+            <UserCard
+              key={username}
+              profilePic={profilePic}
+              name={name}
+              username={username}
+              className={"w-full"}
+            />
+          ))}
+        </div>
+      </div>      
     </div>
   );
 };

@@ -2,6 +2,11 @@ import { useAuthContext } from "../../context/AuthContext";
 import { useCardToggle } from "../../hooks/useCardToggle";
 import { ImageCropper } from "./ImageCropper";
 import { LinkIcon } from "../../components/LinkIcon";
+import { AddActionButton } from "../../components/AddActionButton";
+import { useParams } from "react-router-dom";
+import { sendInviteAccount } from "../../services/users";
+import { useQuery } from "react-query";
+import { queryConfig } from "../../utils/queryConfig";
 
 export const MiPerfil = ({ user, profilePic }) => {
   const { isOpen, setIsOpen, cardRef } = useCardToggle();
@@ -27,16 +32,33 @@ export const MiPerfil = ({ user, profilePic }) => {
           )}
         </div>
       </div>
-      <div className="flex flex-col items-center gap-8 w-2/3">
+      <div className="flex flex-col items-center gap-4 w-2/3">
         <h3 className="text-2xl font-semibold">{user?.name}</h3>
         <h1 className="text-gray-400/80 font-light text-xl">
           {user?.username}
         </h1>
-        <div className="flex gap-1">
-          {user?.contactLinks?.map((link) => (
-            <LinkIcon key={link} link={link} />
-          ))}
-        </div>
+        {user.hasAccount ? (
+          <div className="border border-gray-300 rounded-lg p-4">
+          <h4 className="text-lg font-[500]">Contacto</h4>
+          <div className="flex flex-col gap-1">
+            {user?.contactLinks?.map((link) => (
+              <LinkIcon key={link} link={link} />
+            ))}
+          </div>
+        </div> 
+        ) : (      
+          <div className="flex flex-col border border-gray-300 rounded-lg p-4 gap-2">
+            Este usuario no tiene creada una cuenta en Bridge.
+            <AddActionButton
+              text="Enviar invitacion"
+              className="bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756]"
+              onClick={() => useQuery(
+                sendInviteAccount(user?.username),
+                queryConfig
+              )}
+            />
+          </div>
+        )}       
         <ImageCropper isOpen={isOpen} setIsOpen={setIsOpen} cardRef={cardRef} />
       </div>
     </article>

@@ -35,12 +35,12 @@ export const Comentarios = ({ user }) => {
   };
 
   return (
-    <article className="flex flex-col gap-2 rounded-lg p-4">
+    <article className="flex flex-col gap-4 border border-gray-300 rounded-lg p-4">
       <h4 className="text-lg font-[500]">
-        Comentarios {user?.comments.length}
+        Comentarios - {user?.comments.length}
       </h4>
       {authUser.email !== user.username && (
-        <form onSubmit={handleSubmit} className="flex">
+        <form onSubmit={handleSubmit} className="flex gap-4">
           <FormInput
             onChange={(e) => setMessage(e.target.value)}
             placeholder={"Introduce un comentario"}
@@ -54,7 +54,7 @@ export const Comentarios = ({ user }) => {
           />
         </form>
       )}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 max-h-[600px] overflow-auto">
         {user?.comments.map((comment) => (
           <Comentario
             key={comment.timestamp}
@@ -77,24 +77,24 @@ const Comentario = ({ comment, isMyProfile }) => {
   const timeAgo = calculateTimeAgo(comment.timestamp);
 
   return (
-    <div className="flex justify-between items-center">
-      <div className="flex gap-1 lg:gap-4">
+    <div className="flex justify-between items-center bg-gray-200 p-2 rounded-lg">
+      <div className="flex gap-1 lg:gap-4 w-full">
         <img
           src={isLoadingProfilePicUrl ? "" : profilePicUrl}
-          className="size-8 lg:size-10 rounded-full"
+          className="size-8 p-1 sm:size-10 rounded-full"
         />
-        <div className="flex flex-col">
-          <div className="flex items-center gap-1 lg:gap-2">
+        <div className="flex flex-col w-full">
+          <div className="flex flex-col sm:flex-row gap-0 sm:gap-4 w-full border-b border-black">
             <span>{comment.remitente}</span>
             <span className="text-sm text-[#AAA] font-light">{timeAgo}</span>
           </div>
-          <p className="text-sm">{comment.mensaje}</p>
+          <p className="text-sm p-1">{comment.mensaje}</p>
         </div>
       </div>
       {isMyProfile && (
-        <div className="relative">
+        <div className="flex h-[16px] m-2">
           <button onClick={() => {}}>
-            <FaRegEye className="cursor-pointer" />
+            <FaRegEye className="flex cursor-pointer h-[16px] w-auto justify-center self-top" />
           </button>
         </div>
       )}
