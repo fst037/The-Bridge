@@ -49,3 +49,10 @@ export const createProject = async ({
 
   return data;
 };
+
+export const modifyProjectName = async ({ newName, projectId }) => {
+  const { data } = await authAxios.patch(
+    `/api/v1/proyectos/cambiarTitulo?identifier=${projectId}&titulo=${newName}`
+  );
+  return data;
+};

@@ -60,3 +60,10 @@ export const deleteFromTeam = async ({ teamId, username }) => {
   );
   return data;
 };
+
+export const modifyTeamName = async ({ teamId, newName }) => {
+  const { data } = await authAxios.patch(
+    `/api/v1/equipos/modificarNombre?teamId=${teamId}&newName=${newName}`
+  );
+  return data;
+};

@@ -11,13 +11,14 @@ import { AddPersonModal } from "../../components/AddPersonModal";
 import { CompleteTeamAutoModal } from "../../components/CompleteTeamAutoModal";
 import SugerenciasEquipos from "../../components/SugerenciasEquipos";
 import { getMyCourses } from "../../services/courses";
-import { RiDeleteBinLine, RiEyeLine } from "react-icons/ri";
+import { RiDeleteBinLine, RiEyeLine, RiPencilLine } from "react-icons/ri";
 import { CreateProjectModal } from "../../components/CreateProjectModal";
 import { deleteFromTeam } from "../../services/teams";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
 import { getLoggedUsername } from "../../services/getUserData";
 import { Proyecto } from "../../components/Proyecto";
+import { ModifyTeamNameModal } from "../../components/ModifyTeamNameModal";
 
 export const EquipoEspecifico = () => {
   const { authUser } = useAuthContext();
@@ -32,6 +33,11 @@ export const EquipoEspecifico = () => {
     cardRef: cardRef3,
     isOpen: isOpen3,
     setIsOpen: setIsOpen3,
+  } = useCardToggle();
+  const {
+    cardRef: teamNameCard,
+    isOpen: isOpenTeamNameCard,
+    setIsOpen: setIsOpenTeamNameCard,
   } = useCardToggle();
   const [sugerencias, setSugerencias] = useState([]);
   const [usersProfilePic, setUsersProfilePic] = useState({});
@@ -51,7 +57,7 @@ export const EquipoEspecifico = () => {
   const mutation = useMutation(deleteFromTeam, {
     onSuccess: () => {
       toast.success("Usuario eliminado correctamente");
-      queryClient.invalidateQueries("teamInformation");
+      queryClient.invalidateQueries("teamInformation" + teamId);
     },
     onError: (err) => {
       toast.error(`Error al eliminar el usuario: ${err.message}`);
@@ -74,9 +80,13 @@ export const EquipoEspecifico = () => {
       {(isLoadingCourse || isLoadingTeam) && <p>Cargando...</p>}
       {!isLoadingCourse && !isLoadingTeam && (
         <>
-          <h2 className="text-4xl text-gray-400/80">
-            {teamInfo?.team.equipo.team.nombre}
-          </h2>
+          <div className="flex items-center text-4xl text-gray-400/80">
+            <h2>{teamInfo?.team.equipo.team.nombre}</h2>
+            <RiPencilLine
+              className="cursor-pointer"
+              onClick={() => setIsOpenTeamNameCard(!isOpenTeamNameCard)}
+            />
+          </div>
 
           <div className="flex flex-col lg:flex-row w-full">
             <div className="border border-gray-300 rounded-lg p-4 lg:mr-5 mb-5 lg:mb-0">
@@ -187,6 +197,12 @@ export const EquipoEspecifico = () => {
             cardRef={cardRef3}
             teams={[teamInfo?.team.equipo.team]}
             courses={courses}
+          />
+          <ModifyTeamNameModal
+            cardRef={teamNameCard}
+            isOpen={isOpenTeamNameCard}
+            setIsOpen={setIsOpenTeamNameCard}
+            team={teamInfo.team.equipo.team}
           />
         </>
       )}

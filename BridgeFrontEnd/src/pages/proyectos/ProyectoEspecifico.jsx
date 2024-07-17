@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { LinkIcon } from "../../components/LinkIcon";
 import { useAuthContext } from "../../context/AuthContext";
 import { RiPencilLine } from "react-icons/ri";
+import { useCardToggle } from "../../hooks/useCardToggle";
+import { ModifyProjectNameModal } from "../../components/ModifyProjectNameModal";
 
 export const ProyectoEspecifico = () => {
   const { authUser } = useAuthContext();
@@ -16,6 +18,7 @@ export const ProyectoEspecifico = () => {
     () => getProject(projectId),
     queryConfig
   );
+  const { cardRef, isOpen, setIsOpen } = useCardToggle();
 
   let isMember = false;
 
@@ -31,8 +34,16 @@ export const ProyectoEspecifico = () => {
       {isLoading && <p>Cargando...</p>}
       {!isLoading && (
         <>
-          <h2 className="flex text-4xl text-gray-400/80 mb-4">
-            {project.titulo}{isMember ? <RiPencilLine className="cursor-pointer"/> : ""}            
+          <h2 className="flex items-center text-4xl text-gray-400/80 mb-4">
+            {project.titulo}
+            {isMember ? (
+              <RiPencilLine
+                className="cursor-pointer"
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            ) : (
+              ""
+            )}
           </h2>
           <div className="flex flex-col md:flex-row">
             <div className="w-auto md:mr-5 self-center">
@@ -47,7 +58,12 @@ export const ProyectoEspecifico = () => {
                 <div className="flex flex-col md:flex-row">
                   <div>
                     <h6 className="flex text-md font-[500] mt-2 md:mt-0">
-                      Descripción:{" "} {isMember ? <RiPencilLine className="cursor-pointer m-2"/> : ""}      
+                      Descripción:{" "}
+                      {isMember ? (
+                        <RiPencilLine className="cursor-pointer m-2" />
+                      ) : (
+                        ""
+                      )}
                     </h6>
                     <p className="ml-3 break-words text-left mt-1">
                       {project.descripcion}
@@ -104,6 +120,12 @@ export const ProyectoEspecifico = () => {
           </div>
         </>
       )}
+      <ModifyProjectNameModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        cardRef={cardRef}
+        project={project}
+      />
     </div>
   );
 };
