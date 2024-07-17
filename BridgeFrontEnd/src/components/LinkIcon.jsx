@@ -27,8 +27,6 @@ export const LinkIcon = ({ link = "", className = "" }) => {
       </div>
     );
   };
-
-  console.log(link);
   return (
     <a href={"https://"+link} target="_blank" rel="noopener noreferrer" className={`cursor-pointer ${className}`}>
       {getIcon()}

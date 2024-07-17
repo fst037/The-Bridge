@@ -31,7 +31,7 @@ export const PerfilEspecifico = () => {
         <>
           <main className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
             <MiPerfil user={user} profilePic={profilePicUrl} />
-            <RatingRadar skills={user?.skills} />
+            <RatingRadar skills={user?.skills} username={user?.username}/>
             <InformacionGeneral user={user} />
             <Builders builders={user?.builders} />
           </main>

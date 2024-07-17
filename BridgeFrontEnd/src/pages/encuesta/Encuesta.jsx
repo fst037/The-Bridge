@@ -291,7 +291,7 @@ const Encuesta = () => {
         ))}
         <AddActionButton
           text={"Enviar"}
-          className="mx-1/10 w-4/5"
+          className="mx-1/10 w-4/5 rounded-[15px] m-2"
           isLoading={isLoading}
         />
       </form>

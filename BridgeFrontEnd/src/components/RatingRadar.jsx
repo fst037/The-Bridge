@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { SkillsRadar } from "./SkillsRadar";
+import { useAuthContext } from "../context/AuthContext";
 
-export const RatingRadar = ({ skills}) => {
+export const RatingRadar = ({ skills, username}) => {
+  const authUser = useAuthContext().authUser;
 
   if (!skills) {
     return (
@@ -30,6 +32,17 @@ export const RatingRadar = ({ skills}) => {
       <h4 className="text-xl font-[500]">Skills</h4>
       <div className="min-h-[200px]">
         <SkillsRadar skills={skills}/>
+        {authUser.email == username ? (
+          <Link to={"./encuesta"} className="">
+            <button className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full mt-4">
+              Puedes actualizar tus habilidades haciendo click aqui
+            </button>
+          </Link>
+        ) : (
+          <button className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full mt-4">
+            Valorar habilidades del perfil
+          </button>
+        )}
       </div>           
     </div>
   );

@@ -49,7 +49,7 @@ export const MiPerfil = ({ user, profilePic }) => {
         <h1 className="text-gray-400/80 font-light text-xl">
           {user?.username}
         </h1>
-        {user.hasAccount ? (
+        {user?.hasAccount ? (
           <div className="border border-gray-300 rounded-lg p-4">
             <h4 className="text-lg font-[500]">Contacto</h4>
             <div className="flex flex-col gap-1">
@@ -57,6 +57,9 @@ export const MiPerfil = ({ user, profilePic }) => {
                 <LinkIcon key={link} link={link} />
               ))}
             </div>
+            {(user?.contactLinks == null || user?.contactLinks == []) && (
+              <p className="text-gray-400/80">No hay links de contacto</p>
+            )}
           </div>
         ) : (
           <div className="flex flex-col border border-gray-300 rounded-lg p-4 gap-2">
