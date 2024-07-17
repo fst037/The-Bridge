@@ -1,8 +1,17 @@
-import { useQueries } from "react-query";
+import { useQueries, useQuery } from "react-query";
 import { UserCard } from "../../components/UserCard";
-import { getProfilePic } from "../../services/getUserData";
+import { getProfilePic, getUserBuilders } from "../../services/getUserData";
+import { useAuthContext } from "../../context/AuthContext";
+import { queryConfig } from "../../utils/queryConfig";
 
 export const Builders = ({ builders }) => {
+  const { authUser } = useAuthContext();
+  const { data: myBuilders } = useQuery(
+    "myBuilders",
+    getUserBuilders,
+    queryConfig
+  );
+
   const profilePicQueries = useQueries(
     builders.map((builder) => {
       return {
@@ -23,17 +32,19 @@ export const Builders = ({ builders }) => {
       <h4 className="text-lg font-[500] mb-4">Builders</h4>
       <div className="max-h-[600px] md:max-h-[450px] overflow-auto">
         <div className="flex flex-col sm:grid sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-2">
-          {buildersWithPics?.map(({ name, username, profilePic }) => (
-            <UserCard
-              key={username}
-              profilePic={profilePic}
-              name={name}
-              username={username}
-              className={"w-full"}
-            />
-          ))}
+          {buildersWithPics?.map(({ name, username, profilePic }) => {
+            return (
+              <UserCard
+                key={username}
+                profilePic={profilePic}
+                name={name}
+                username={username}
+                className={"w-full"}
+              />
+            );
+          })}
         </div>
-      </div>      
+      </div>
     </div>
   );
 };
