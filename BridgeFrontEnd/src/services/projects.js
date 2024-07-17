@@ -56,3 +56,27 @@ export const modifyProjectName = async ({ newName, projectId }) => {
   );
   return data;
 };
+
+export const modifyProjectDescription = async ({
+  newDescription,
+  projectId,
+}) => {
+  const { data } = await authAxios.patch(
+    `/api/v1/proyectos/cambiarDescripcion?identifier=${projectId}&descripcion=${newDescription}`
+  );
+  return data;
+};
+
+export const addProjectLink = async ({ newLink, projectId }) => {
+  const { data } = await authAxios.post(
+    `/api/v1/proyectos/agregarLink?identifier=${projectId}&link=${newLink}`
+  );
+  return data;
+};
+
+export const deleteProjectLink = async ({ link, projectId }) => {
+  const { data } = await authAxios.delete(
+    `/api/v1/proyectos/eliminarLink?identifier=${projectId}&link=${link}`
+  );
+  return data;
+};
