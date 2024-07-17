@@ -9,15 +9,10 @@ export const modifyIntroduction = async (introduction) => {
 
 export const modifyLink = async (links) => {
   const validLinks = links.filter((link) => link.value !== "");
-  const responses = await Promise.all(
-    validLinks.map(async (link) => {
-      const { data } = await authAxios.post(
-        `/api/v1/profile/anadirLinkContacto?link=${link.value}`
-      );
-      return data;
-    })
-  );
-  return responses;
+  const { data } = await authAxios.patch(
+    `/api/v1/profile/modificarLinksContacto`, validLinks
+  );  
+  return data;
 };
 
 export const modifyUserInformation = async ({ introduction, links }) => {

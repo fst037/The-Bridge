@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQueryClient, useMutation } from "react-query";
 import { modifyUserInformation } from "../../services/modifyUserInformation";
 import { ClipLoader } from "react-spinners";
@@ -11,15 +11,7 @@ import { useAuthContext } from "../../context/AuthContext";
 export const InformacionGeneral = ({ user }) => {
   const { authUser } = useAuthContext();
   const initializeLinks = (contactLinks) => {
-    const links = contactLinks.slice(0, 3).map((link) => ({
-      value: link || "",
-      id: uuidv4(),
-    }));
-
-    while (links.length < 3) {
-      links.push({ value: "", id: uuidv4() });
-    }
-
+    const links = contactLinks.slice(0, 3);
     return links;
   };
 
@@ -32,7 +24,7 @@ export const InformacionGeneral = ({ user }) => {
 
   const mutation = useMutation(modifyUserInformation, {
     onSuccess: () => {
-      toast.success("Introducción modificada correctamente");
+      toast.success("Informacion modificada correctamente");
       queryClient.invalidateQueries("profileDetail");
     },
     onError: (err) => {
@@ -40,21 +32,21 @@ export const InformacionGeneral = ({ user }) => {
     },
   });
 
-  const handleLinkChange = (id) => (e) => {
-    const { value } = e.target;
-    setUserInformation((prev) => {
-      const newLinks = prev.links.map((link) =>
-        link.id === id ? { ...link, value } : link
-      );
-      return { ...prev, links: newLinks };
-    });
-  };
+  const [link1, setLink1] = useState(userInformation.links[0] || "");
+  const [link2, setLink2] = useState(userInformation.links[1] || "");
+  const [link3, setLink3] = useState(userInformation.links[2] || "");
+
+  useEffect(() => {
+    setLink1(userInformation.links?.[0] || "");
+    setLink2(userInformation.links?.[1] || "");
+    setLink3(userInformation.links?.[2] || "");
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate({
       introduction: userInformation.introduction,
-      links: userInformation.links,
+      links: [link1, link2, link3],
     });
   };
 
@@ -78,17 +70,35 @@ export const InformacionGeneral = ({ user }) => {
           disabled={authUser.email !== user.username}
         />
 
-        {authUser.email === user.username && 
-          userInformation.links.map((link) => (
-          <FormInput
-            key={link.id}
-            placeholder={"Introduce un link de contacto"}
-            value={link.value}
-            onChange={handleLinkChange(link.id)}
-            Icon={FaLink}
-            disabled={authUser.email !== user.username}
-          />
-        ))}
+        {authUser.email === user.username && (
+          <>
+            <FormInput
+              key={1}
+              placeholder={"Introduce un link de contacto"}
+              value={link1}
+              onChange={e => setLink1(e.target.value)}
+              Icon={FaLink}
+              disabled={authUser.email !== user.username}
+            />
+            <FormInput
+              key={2}
+              placeholder={"Introduce un link de contacto"}
+              value={link2}
+              onChange={e => setLink2(e.target.value)}
+              Icon={FaLink}
+              disabled={authUser.email !== user.username}
+            />
+            <FormInput
+              key={3}
+              placeholder={"Introduce un link de contacto"}
+              value={link3}
+              onChange={e => setLink3(e.target.value)}
+              Icon={FaLink}
+              disabled={authUser.email !== user.username}
+            />
+          </>
+          
+        )}
         {authUser.email === user.username && (
           <button
             className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full"
