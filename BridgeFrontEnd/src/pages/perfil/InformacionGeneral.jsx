@@ -66,11 +66,11 @@ export const InformacionGeneral = ({ user }) => {
               introduction: e.target.value,
             }))
           }
-          className={"w-full p-2 border rounded-md border-gray-400 focus:border-gray-600 outline-none " + (authUser.email !== user.username ? "h-[300px]" : "h-[200px]")}
-          disabled={authUser.email !== user.username}
+          className={"w-full p-2 border rounded-md border-gray-400 focus:border-gray-600 outline-none " + (authUser.email !== user?.username ? "h-[300px]" : "h-[200px]")}
+          disabled={authUser.email !== user?.username}
         />
 
-        {authUser.email === user.username && (
+        {authUser.email === user?.username && (
           <>
             <FormInput
               key={1}
@@ -78,7 +78,7 @@ export const InformacionGeneral = ({ user }) => {
               value={link1}
               onChange={e => setLink1(e.target.value)}
               Icon={FaLink}
-              disabled={authUser.email !== user.username}
+              disabled={authUser.email !== user?.username}
             />
             <FormInput
               key={2}
@@ -86,7 +86,7 @@ export const InformacionGeneral = ({ user }) => {
               value={link2}
               onChange={e => setLink2(e.target.value)}
               Icon={FaLink}
-              disabled={authUser.email !== user.username}
+              disabled={authUser.email !== user?.username}
             />
             <FormInput
               key={3}
@@ -94,12 +94,12 @@ export const InformacionGeneral = ({ user }) => {
               value={link3}
               onChange={e => setLink3(e.target.value)}
               Icon={FaLink}
-              disabled={authUser.email !== user.username}
+              disabled={authUser.email !== user?.username}
             />
           </>
           
         )}
-        {authUser.email === user.username && (
+        {authUser.email === user?.username && (
           <button
             className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full"
             disabled={mutation.isLoading}

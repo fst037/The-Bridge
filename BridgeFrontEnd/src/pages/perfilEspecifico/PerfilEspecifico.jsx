@@ -23,6 +23,7 @@ export const PerfilEspecifico = () => {
     queryConfig
   );
 
+
   return (
     <div className="flex flex-col gap-4 p-4 md:p-8 lg:gap-8">
       <h2 className="text-4xl text-gray-400/80">Perfil</h2>
@@ -42,7 +43,7 @@ export const PerfilEspecifico = () => {
             </div>
             <div className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(600px,_1fr))] gap-2 items-start mb-4">
               {user?.projects.map((project) => {
-                return <Proyecto key={project.identifier} project={project} />;
+                return <Proyecto key={project?.identifier} project={project} />;
               })}
             </div>
           </div>

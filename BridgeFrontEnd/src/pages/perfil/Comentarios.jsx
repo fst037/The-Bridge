@@ -60,7 +60,7 @@ export const Comentarios = ({ user }) => {
       <div className="flex flex-col gap-2 max-h-[600px] overflow-auto">
         {user?.comments.map((comment) => (
           <Comentario
-            key={comment.timestamp}
+            key={comment.timestamp+comment.remitente}
             comment={comment}
             isMyProfile={authUser.email === user.username}
           />
@@ -76,6 +76,7 @@ const Comentario = ({ comment, isMyProfile }) => {
     () => getProfilePic(comment.remitente),
     queryConfig
   );
+
   const queryClient = useQueryClient();
 
   const timeAgo = calculateTimeAgo(comment.timestamp);

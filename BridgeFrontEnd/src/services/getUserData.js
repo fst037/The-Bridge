@@ -28,6 +28,23 @@ export const getUserDetail = async (username) => {
   const { data } = await authAxios.get(
     `http://localhost:8080/api/v1/profile/?username=${username}`
   );
+
+  const addData = async (data) => await Promise.all(
+    data.projects.map(async (project) => {
+      project.members = await Promise.all(
+        project.members.map(async (member) => {
+          const profilePic = await getProfilePic(member.username);
+          return {
+            ...member,
+            profilePic,
+          };
+        })
+      );
+    })
+  );
+
+  await addData(data);
+
   return data;
 };
 

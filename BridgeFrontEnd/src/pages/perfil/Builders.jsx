@@ -4,7 +4,7 @@ import { getProfilePic } from "../../services/getUserData";
 
 export const Builders = ({ builders }) => {
   const profilePicQueries = useQueries(
-    builders.map((builder) => {
+    builders?.map((builder) => {
       return {
         queryKey: ["profilePic", builder.username],
         queryFn: () => getProfilePic(builder.username),
@@ -13,7 +13,7 @@ export const Builders = ({ builders }) => {
     })
   );
 
-  const buildersWithPics = builders.map((builder, index) => ({
+  const buildersWithPics = builders?.map((builder, index) => ({
     ...builder,
     profilePic: profilePicQueries[index]?.data,
   }));

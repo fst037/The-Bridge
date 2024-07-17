@@ -31,7 +31,6 @@ export const Perfil = () => {
     [comments, user]
   );
 
-  console.log();
   return (
     <div className="flex flex-col gap-4 p-4 md:p-8">
       <h2 className="text-4xl text-gray-400/80">Perfil</h2>

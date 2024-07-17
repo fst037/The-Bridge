@@ -63,6 +63,7 @@ public class InteractionUserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
+
         if (valoracionRequest.getVotos().isEmpty() || valoracionRequest.getVotos().size() > 3) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
