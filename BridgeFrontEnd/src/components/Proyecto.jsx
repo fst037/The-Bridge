@@ -44,17 +44,17 @@ export const Proyecto = ({ project }) => {
           </p>
           <h6 className="text-md font-[500] mt-2">Links: </h6>
           <div className="flex gap-1 px-3 flex-col">
-            {project.links &&
+            {project?.links &&
               project?.links.map((link) => <LinkIcon key={link} link={link} />)}
           </div>
         </div>
       </div>
 
-      {project.curso && (
+      {project?.curso && (
         <div>
           <h6 className="text-md font-[500] mt-2">Curso:</h6>
           <Link
-            to={`/curso/${project.curso.code}`}
+            to={`/curso/${project?.curso.code}`}
             className="text-blue-500 underline ml-3 break-words text-left mt-1"
           >
             {project?.curso.name}
@@ -62,7 +62,7 @@ export const Proyecto = ({ project }) => {
         </div>
       )}
 
-      {project.equipo && (
+      {project?.equipo && (
         <div>
           <h6 className="text-md font-[500] mt-2">Equipo:</h6>
           <Link
@@ -74,7 +74,7 @@ export const Proyecto = ({ project }) => {
         </div>
       )}
 
-      {project.members && (
+      {project?.members && (
         <div>
           <h6 className="text-md font-[500] mt-2">Miembros: </h6>
           <ul className="ml-3 mt-1">

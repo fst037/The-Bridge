@@ -21,7 +21,7 @@ const reactions = [
   },
   {
     Icon: PiSpeakerLowBold,
-    value: "Comunicacion",
+    value: "Comunicación",
   },
   {
     Icon: IoIosSettings,
@@ -56,15 +56,23 @@ export const ValorarPerfilModal = ({
     },
   });
 
+
+
   const toggleReaction = (value) => {
-    setReactionsSelected((prev) => {
-      if (prev.includes(value)) {
-        return prev.filter((reaction) => reaction !== value);
-      } else {
+  setReactionsSelected((prev) => {
+    if (prev.includes(value)) {
+      return prev.filter((reaction) => reaction !== value);
+    } else {
+      // If adding a new value does not exceed the max length, add it
+      if (prev.length < 3) {
         return [...prev, value];
+      } else {
+        // Option 2: Replace the last item (or any other logic you prefer)
+        return [...prev.slice(1, 3), value]; // Uncomment this line if you prefer replacing the last item
       }
-    });
-  };
+    }
+  });
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,8 +86,8 @@ export const ValorarPerfilModal = ({
       setIsOpen={setIsOpen}
       title={"Valorar perfil"}
     >
-      <form className="flex flex-col w-full" onSubmit={handleSubmit}>
-        <div className="flex gap-2">
+      <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-2">
           {reactions.map((reaction) => (
             <div
               key={reaction.value}
@@ -92,7 +100,7 @@ export const ValorarPerfilModal = ({
             </div>
           ))}
         </div>
-        <AddActionButton text={"Valorar"} isLoading={mutation.isLoading} />
+        <AddActionButton text={"Valorar"} className="rounded[15px]" isLoading={mutation.isLoading} />
       </form>
     </Modal>
   );

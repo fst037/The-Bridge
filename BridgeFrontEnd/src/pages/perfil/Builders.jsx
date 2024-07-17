@@ -38,7 +38,7 @@ export const Builders = ({ builders }) => {
   };
 
   const profilePicQueries = useQueries(
-    builders.map((builder) => {
+    builders?.map((builder) => {
       return {
         queryKey: ["profilePic", builder.username],
         queryFn: () => getProfilePic(builder.username),
