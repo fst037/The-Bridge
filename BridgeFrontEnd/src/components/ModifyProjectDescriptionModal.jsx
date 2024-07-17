@@ -1,38 +1,38 @@
 import { useState } from "react";
 import { FormInput } from "./FormInput";
 import { Modal } from "./Modal";
-import { FaLink } from "react-icons/fa6";
 import { AddActionButton } from "./AddActionButton";
 import { useMutation, useQueryClient } from "react-query";
+import { modifyProjectDescription } from "../services/projects";
 import toast from "react-hot-toast";
-import { addProjectLink } from "../services/projects";
+import { RiPencilLine } from "react-icons/ri";
 
-export const AddLinkToProjectModal = ({
+export const ModifyProjectDescriptionModal = ({
   isOpen,
   setIsOpen,
   cardRef,
   project,
 }) => {
-  const [newLink, setNewLink] = useState("");
+  const [newDescription, setNewDescription] = useState("");
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(addProjectLink, {
+  const mutation = useMutation(modifyProjectDescription, {
     onSuccess: () => {
       queryClient.invalidateQueries("projectInformation" + project.identifier);
-      toast.success("Link agregado correctamente");
+      toast.success("Descripcion actualizada correctamente");
     },
     onError: (err) => {
       toast.error(err.message);
     },
     onSettled: () => {
-      setNewLink("");
+      setNewDescription("");
       setIsOpen(false);
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutation.mutate({ newLink, projectId: project.identifier });
+    mutation.mutate({ newDescription, projectId: project.identifier });
   };
 
   return (
@@ -40,17 +40,17 @@ export const AddLinkToProjectModal = ({
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       cardRef={cardRef}
-      title={"Agregar nuevo link"}
+      title={"Cambiar descripcion de proyecto"}
     >
       <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
         <FormInput
-          value={newLink}
-          onChange={(e) => setNewLink(e.target.value)}
-          placeholder={"Ingresa un nuevo nombre de equipo"}
-          Icon={FaLink}
+          value={newDescription}
+          onChange={(e) => setNewDescription(e.target.value)}
+          placeholder={"Ingresa una nueva descripcion"}
+          Icon={RiPencilLine}
         />
         <AddActionButton
-          text={"Agregar"}
+          text={"Guardar"}
           className="rounded-sm"
           isLoading={mutation.isLoading}
         />

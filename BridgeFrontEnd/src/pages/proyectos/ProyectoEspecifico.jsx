@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getProject } from "../../services/projects";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { deleteProjectLink, getProject } from "../../services/projects";
 import { queryConfig } from "../../utils/queryConfig";
 import { UserCard } from "../../components/UserCard";
 import { Link } from "react-router-dom";
@@ -9,6 +9,11 @@ import { useAuthContext } from "../../context/AuthContext";
 import { RiPencilLine } from "react-icons/ri";
 import { useCardToggle } from "../../hooks/useCardToggle";
 import { ModifyProjectNameModal } from "../../components/ModifyProjectNameModal";
+import { FaTrash } from "react-icons/fa6";
+import toast from "react-hot-toast";
+import { AddLinkToProjectModal } from "../../components/AddLinkToProjectModal";
+import { IoMdAddCircle } from "react-icons/io";
+import { ModifyProjectDescriptionModal } from "../../components/ModifyProjectDescriptionModal";
 
 export const ProyectoEspecifico = () => {
   const { authUser } = useAuthContext();
@@ -18,8 +23,18 @@ export const ProyectoEspecifico = () => {
     () => getProject(projectId),
     queryConfig
   );
+  const {
+    cardRef: newLinkCard,
+    isOpen: isOpenLinkCard,
+    setIsOpen: setIsOpenLinkCard,
+  } = useCardToggle();
+  const {
+    cardRef: DescriptionCard,
+    isOpen: isOpenDescriptionCard,
+    setIsOpen: setIsOpenDescriptionCard,
+  } = useCardToggle();
   const { cardRef, isOpen, setIsOpen } = useCardToggle();
-
+  const queryClient = useQueryClient();
   let isMember = false;
 
   for (let member of project?.members || []) {
@@ -28,6 +43,20 @@ export const ProyectoEspecifico = () => {
       break;
     }
   }
+
+  const deleteLinkMutation = useMutation(deleteProjectLink, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("projectInformation" + projectId);
+      toast.success("Link eliminado correctamente");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  const handleDeleteLink = (link) => {
+    deleteLinkMutation.mutate({ projectId, link });
+  };
 
   return (
     <div className="p-4 md:p-8">
@@ -57,10 +86,15 @@ export const ProyectoEspecifico = () => {
               <div className="border border-gray-300 rounded-lg p-4 h-full w-full">
                 <div className="flex flex-col md:flex-row">
                   <div>
-                    <h6 className="flex text-md font-[500] mt-2 md:mt-0">
-                      Descripción:{" "}
+                    <h6 className="flex items-center gap-1 text-md font-[500] mt-2 md:mt-0">
+                      Descripción
                       {isMember ? (
-                        <RiPencilLine className="cursor-pointer m-2" />
+                        <RiPencilLine
+                          className="cursor-pointer"
+                          onClick={() =>
+                            setIsOpenDescriptionCard(!isOpenDescriptionCard)
+                          }
+                        />
                       ) : (
                         ""
                       )}
@@ -68,11 +102,22 @@ export const ProyectoEspecifico = () => {
                     <p className="ml-3 break-words text-left mt-1">
                       {project.descripcion}
                     </p>
-                    <h6 className="text-md font-[500] mt-2">Links: </h6>
+                    <h6 className="flex gap-1 items-center text-md font-[500] mt-2">
+                      <span>Links</span>
+                      <IoMdAddCircle
+                        onClick={() => setIsOpenLinkCard(!isOpenLinkCard)}
+                      />
+                    </h6>
                     <div className="flex flex-col gap-1 px-3">
                       {project.links &&
                         project.links.map((link) => (
-                          <LinkIcon key={link} link={link} />
+                          <div key={link} className="flex gap-1 items-center">
+                            <LinkIcon key={link} link={link} />
+                            <FaTrash
+                              className="size-4 cursor-pointer"
+                              onClick={() => handleDeleteLink(link)}
+                            />
+                          </div>
                         ))}
                     </div>
                   </div>
@@ -124,6 +169,18 @@ export const ProyectoEspecifico = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         cardRef={cardRef}
+        project={project}
+      />
+      <AddLinkToProjectModal
+        isOpen={isOpenLinkCard}
+        setIsOpen={setIsOpenLinkCard}
+        cardRef={newLinkCard}
+        project={project}
+      />
+      <ModifyProjectDescriptionModal
+        isOpen={isOpenDescriptionCard}
+        setIsOpen={setIsOpenDescriptionCard}
+        cardRef={DescriptionCard}
         project={project}
       />
     </div>
