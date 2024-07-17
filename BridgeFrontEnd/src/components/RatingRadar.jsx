@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { SkillsRadar } from "./SkillsRadar";
 import { useAuthContext } from "../context/AuthContext";
+import { useCardToggle } from "../hooks/useCardToggle";
+import { ValorarPerfilModal } from "./ValorarPerfilModal";
 
-export const RatingRadar = ({ skills, username}) => {
+export const RatingRadar = ({ skills, username }) => {
   const authUser = useAuthContext().authUser;
+  const { cardRef, isOpen, setIsOpen } = useCardToggle();
 
   if (!skills) {
     return (
@@ -31,7 +34,7 @@ export const RatingRadar = ({ skills, username}) => {
     <div className="flex flex-col w-full justify-center border border-gray-300 rounded-lg p-4">
       <h4 className="text-xl font-[500]">Skills</h4>
       <div className="min-h-[200px]">
-        <SkillsRadar skills={skills}/>
+        <SkillsRadar skills={skills} />
         {authUser.email == username ? (
           <Link to={"./encuesta"} className="">
             <button className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full mt-4">
@@ -39,11 +42,20 @@ export const RatingRadar = ({ skills, username}) => {
             </button>
           </Link>
         ) : (
-          <button className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full mt-4">
+          <button
+            className="self-end bg-button2 hover:bg-[#FF573F] active:bg-[#FC3F24] px-6 py-1 rounded-md text-white disabled:bg-[#D96756] w-full mt-4"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             Valorar habilidades del perfil
           </button>
         )}
-      </div>           
+      </div>
+      <ValorarPerfilModal
+        cardRef={cardRef}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        username={username}
+      />
     </div>
   );
 };

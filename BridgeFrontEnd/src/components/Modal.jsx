@@ -1,10 +1,19 @@
 import { IoMdClose } from "react-icons/io";
 
-export const Modal = ({ isOpen, setIsOpen, cardRef, title, children }) => {
+export const Modal = ({
+  isOpen,
+  setIsOpen,
+  cardRef,
+  title,
+  children,
+  className,
+}) => {
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/10 z-50">
+        <div
+          className={`fixed inset-0 flex items-center justify-center bg-black/10 z-50 ${className}`}
+        >
           <div
             className="flex flex-col p-6 w-full max-w-md mx-2 rounded-md bg-white"
             ref={cardRef}

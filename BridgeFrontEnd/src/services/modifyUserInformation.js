@@ -10,8 +10,9 @@ export const modifyIntroduction = async (introduction) => {
 export const modifyLink = async (links) => {
   const validLinks = links.filter((link) => link.value !== "");
   const { data } = await authAxios.patch(
-    `/api/v1/profile/modificarLinksContacto`, validLinks
-  );  
+    `/api/v1/profile/modificarLinksContacto`,
+    validLinks
+  );
   return data;
 };
 
@@ -25,3 +26,15 @@ export const modifyUserInformation = async ({ introduction, links }) => {
 };
 
 export default modifyUserInformation;
+
+export const rateProfile = async ({ username, ratings }) => {
+  console.log(ratings);
+  console.log(username);
+  const { data } = await authAxios.post(`/api/v1/interaccion/valorarPerfil`, {
+    destinatario: username,
+    votos: ratings,
+    mensaje: "tipazo",
+  });
+  console.log(data);
+  return data;
+};
