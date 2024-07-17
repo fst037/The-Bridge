@@ -80,3 +80,10 @@ export const deleteProjectLink = async ({ link, projectId }) => {
   );
   return data;
 };
+
+export const deleteProject = async ({ projectId }) => {
+  const { data } = await authAxios.delete(
+    `/api/v1/proyectos/eliminarProyecto?identifier=${projectId}`
+  );
+  return data;
+};

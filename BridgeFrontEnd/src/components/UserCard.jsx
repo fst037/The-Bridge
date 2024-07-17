@@ -8,7 +8,7 @@ export const UserCard = ({
   username,
   className,
   extraButton,
-  commonCount
+  commonCount,
 }) => {
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -18,7 +18,7 @@ export const UserCard = ({
 
   return (
     <div
-      className={`flex size-max border items-center gap-2 p-2 border-gray-300 rounded-md ${className}`}
+      className={`flex w-max overflow-y-hidden border items-center gap-2 p-2 border-gray-300 rounded-md ${className}`}
     >
       <div>
         <Link to={`/perfil/${username}`}>

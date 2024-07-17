@@ -1,13 +1,35 @@
 import { Link } from "react-router-dom";
 import { LinkIcon } from "./LinkIcon";
 import { UserCard } from "./UserCard";
+import { FaTrash } from "react-icons/fa";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteProject } from "../services/projects";
+import toast from "react-hot-toast";
 
 export const Proyecto = ({ project }) => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(deleteProject, {
+    onSuccess: () => {
+      toast.success("Equipo eliminado correctamente");
+      queryClient.invalidateQueries("projects");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
   return (
     <div className="border border-gray-300 rounded-lg p-4 mt-4 h-full">
-      <Link to={`/proyecto/${project?.identifier}`}>
-        <h5 className="text-lg font-[500] mb-2">{project?.titulo}</h5>
-      </Link>
+      <div className="flex gap-2 items-center">
+        <Link to={`/proyecto/${project?.identifier}`}>
+          <h5 className="text-lg font-[500]">{project?.titulo}</h5>
+        </Link>
+        <FaTrash
+          className={mutation.isLoading ? "cursor-wait" : "cursor-pointer"}
+          onClick={() => mutation.mutate({ projectId: project?.identifier })}
+        />
+      </div>
       <div className="flex flex-col md:flex-row">
         <Link
           to={`/proyecto/${project?.identifier}`}
