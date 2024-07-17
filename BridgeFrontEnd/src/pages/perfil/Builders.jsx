@@ -5,11 +5,13 @@ import { getProfilePic, getUserBuilders } from "../../services/getUserData";
 import { queryConfig } from "../../utils/queryConfig";
 import { AddActionButton } from "../../components/AddActionButton";
 import { sendBuilderRequest } from "../../services/builders";
+import { useAuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 
 export const Builders = ({ builders }) => {
+  const { authUser } = useAuthContext();
   const { data: myBuilders } = useQuery(
-    "myBuilders",
+    "myBuilders" + authUser.email,
     getUserBuilders,
     queryConfig
   );
