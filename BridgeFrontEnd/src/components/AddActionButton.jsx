@@ -1,14 +1,14 @@
 import { ClipLoader } from "react-spinners";
 
 export const AddActionButton = ({
-  text,
+  text = "text",
   onClick = () => {},
   className = "",
   isLoading = false,
 }) => {
   return (
     <button
-      className={`px-4 py-1 text-xl text-white transition hover:bg-[#01AAB3] active:bg-[#009CA4] outline-none ${isLoading ? "bg-[#009CA4]" : "bg-[#00BCC6]"} ${className}`}
+      className={`px-4 py-1 text-xl text-white transition rounded-md hover:bg-[#01AAB3] active:bg-[#009CA4] outline-none ${isLoading ? "bg-[#009CA4]" : "bg-[#00BCC6]"} ${className}`}
       onClick={onClick}
       disabled={isLoading}
     >

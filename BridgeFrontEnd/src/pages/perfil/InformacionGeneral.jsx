@@ -3,7 +3,6 @@ import { useQueryClient, useMutation } from "react-query";
 import { modifyUserInformation } from "../../services/modifyUserInformation";
 import { ClipLoader } from "react-spinners";
 import { FormInput } from "../../components/FormInput";
-import { v4 as uuidv4 } from "uuid";
 import { FaLink } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
@@ -40,7 +39,7 @@ export const InformacionGeneral = ({ user }) => {
     setLink1(userInformation.links?.[0] || "");
     setLink2(userInformation.links?.[1] || "");
     setLink3(userInformation.links?.[2] || "");
-  }, [user]);
+  }, [user, userInformation.links]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,7 +65,10 @@ export const InformacionGeneral = ({ user }) => {
               introduction: e.target.value,
             }))
           }
-          className={"w-full p-2 border rounded-md border-gray-400 focus:border-gray-600 outline-none " + (authUser.email !== user?.username ? "h-[300px]" : "h-[200px]")}
+          className={
+            "w-full p-2 border rounded-md border-gray-400 focus:border-gray-600 outline-none " +
+            (authUser.email !== user?.username ? "h-[300px]" : "h-[200px]")
+          }
           disabled={authUser.email !== user?.username}
         />
 
@@ -76,7 +78,7 @@ export const InformacionGeneral = ({ user }) => {
               key={1}
               placeholder={"Introduce un link de contacto"}
               value={link1}
-              onChange={e => setLink1(e.target.value)}
+              onChange={(e) => setLink1(e.target.value)}
               Icon={FaLink}
               disabled={authUser.email !== user?.username}
             />
@@ -84,7 +86,7 @@ export const InformacionGeneral = ({ user }) => {
               key={2}
               placeholder={"Introduce un link de contacto"}
               value={link2}
-              onChange={e => setLink2(e.target.value)}
+              onChange={(e) => setLink2(e.target.value)}
               Icon={FaLink}
               disabled={authUser.email !== user?.username}
             />
@@ -92,12 +94,11 @@ export const InformacionGeneral = ({ user }) => {
               key={3}
               placeholder={"Introduce un link de contacto"}
               value={link3}
-              onChange={e => setLink3(e.target.value)}
+              onChange={(e) => setLink3(e.target.value)}
               Icon={FaLink}
               disabled={authUser.email !== user?.username}
             />
           </>
-          
         )}
         {authUser.email === user?.username && (
           <button

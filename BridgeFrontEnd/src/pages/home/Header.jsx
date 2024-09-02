@@ -14,13 +14,13 @@ export const Header = () => {
           className="rounded-md bg-button2 px-4 py-2 hover:bg-button2/80 transition-all"
           to={"/register"}
         >
-          Sign Up
+          Registrarse
         </Link>
         <Link
           className="rounded-md bg-button1 px-4 py-2 hover:bg-button1/80 transition-all"
           to={"/login"}
         >
-          Log In
+          Iniciar Sesión
         </Link>
       </div>
     </header>

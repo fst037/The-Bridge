@@ -16,19 +16,35 @@ export const Cursos = () => {
   const filteredCourses = useMemo(() => {
     if (courses && courses.length > 0) {
       return courses.filter((course) => {
-        return (
-          course?.name
-            .toLowerCase()
-            .includes(searchParams.name.toLowerCase()) &&
-          course.day?.toLowerCase().includes(searchParams.day.toLowerCase()) &&
-          course?.period
-            .toLowerCase()
-            .includes(searchParams.period.toLowerCase())
-        );
+        const nameMatch = course?.name
+          ?.toLowerCase()
+          .includes(searchParams.name.toLowerCase());
+        const dayMatch = course.day
+          ? course.day.toLowerCase().includes(searchParams.day.toLowerCase())
+          : true;
+        const periodMatch = course.period
+          ? course.period
+              .toLowerCase()
+              .includes(searchParams.period.toLowerCase())
+          : true;
+
+        console.log({
+          name: course?.name,
+          day: course.day,
+          period: course.period,
+          searchParams,
+          nameMatch,
+          dayMatch,
+          periodMatch,
+        });
+
+        return nameMatch && dayMatch && periodMatch;
       });
     }
     return [];
-  }, [courses, searchParams.name, searchParams.day, searchParams.period]);
+  }, [courses, searchParams]);
+
+  console.log("Filtered Courses:", filteredCourses);
 
   return (
     <section>
@@ -85,7 +101,6 @@ export const Cursos = () => {
           {filteredCourses.map(({ code, name, shift, day, period }) => (
             <Link to={`/curso/${code}`} key={code}>
               <InfoCard
-                key={code}
                 title={name}
                 information={[code, day, shift, period]}
                 className="w-full"

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   FaDiscord,
   FaExternalLinkAlt,
@@ -23,12 +22,17 @@ export const LinkIcon = ({ link = "", className = "" }) => {
     return (
       <div className="flex gap-1 items-center">
         <span className="text-blue-500 hover:underline">{link}</span>
-        {icon ? icon :<FaExternalLinkAlt className="text-blue-500" />}
+        {icon ? icon : <FaExternalLinkAlt className="text-blue-500" />}
       </div>
     );
   };
   return (
-    <a href={"https://"+link} target="_blank" rel="noopener noreferrer" className={`cursor-pointer ${className}`}>
+    <a
+      href={"https://" + link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`cursor-pointer ${className}`}
+    >
       {getIcon()}
     </a>
   );

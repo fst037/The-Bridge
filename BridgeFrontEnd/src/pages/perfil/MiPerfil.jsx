@@ -4,6 +4,7 @@ import { ImageCropper } from "./ImageCropper";
 import { LinkIcon } from "../../components/LinkIcon";
 import { AddActionButton } from "../../components/AddActionButton";
 import { sendInviteAccount } from "../../services/users";
+import { sendBuilderRequest } from "../../services/builders";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 
@@ -20,10 +21,21 @@ export const MiPerfil = ({ user, profilePic }) => {
     },
   });
 
+  const builderInvitationMutation = useMutation(sendBuilderRequest, {
+    onSuccess: () => {
+      toast.success("Invitacion enviada exitosamente");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
   const handleInvite = () => {
     mutation.mutate({ username: user.username });
   };
 
+  console.log(user);
+  console.log(authUser.email);
   return (
     <article className="flex items-center">
       <div className="relative flex justify-center md:justify-end w-1/3">
@@ -50,17 +62,33 @@ export const MiPerfil = ({ user, profilePic }) => {
           {user?.username}
         </h1>
         {user?.hasAccount ? (
-          <div className="border border-gray-300 rounded-lg p-4">
-            <h4 className="text-lg font-[500]">Contacto</h4>
-            <div className="flex flex-col gap-1">
-              {user?.contactLinks?.map((link) => (
-                <LinkIcon key={link} link={link} />
-              ))}
-            </div>
-            {(user?.contactLinks == null || user?.contactLinks == []) && (
+          <>
+            {user?.contactLinks && user.contactLinks.length > 0 ? (
+              <div className="border border-gray-300 rounded-lg p-4">
+                <h4 className="text-lg font-[500]">Contacto</h4>
+                <div className="flex flex-col gap-1">
+                  {user?.contactLinks.map((link) => (
+                    <LinkIcon key={link} link={link} />
+                  ))}
+                </div>
+              </div>
+            ) : (
               <p className="text-gray-400/80">No hay links de contacto</p>
             )}
-          </div>
+            {!user.builders?.some(
+              (currentUser) => currentUser.username === authUser.email
+            ) &&
+              authUser?.email !== user?.username && (
+                <AddActionButton
+                  text="Agregar builder"
+                  onClick={() =>
+                    builderInvitationMutation.mutate({
+                      username: user.username,
+                    })
+                  }
+                />
+              )}
+          </>
         ) : (
           <div className="flex flex-col border border-gray-300 rounded-lg p-4 gap-2">
             Este usuario no tiene creada una cuenta en Bridge.
@@ -72,6 +100,7 @@ export const MiPerfil = ({ user, profilePic }) => {
             />
           </div>
         )}
+
         <ImageCropper isOpen={isOpen} setIsOpen={setIsOpen} cardRef={cardRef} />
       </div>
     </article>

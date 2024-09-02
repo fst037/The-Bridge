@@ -76,6 +76,7 @@ export const ImageCropper = ({ isOpen, setIsOpen, cardRef }) => {
 
         toast.success("Foto actualizada correctamente");
       } catch (err) {
+        console.log(err.message);
         toast.error(err.message);
       } finally {
         setIsOpen(false);

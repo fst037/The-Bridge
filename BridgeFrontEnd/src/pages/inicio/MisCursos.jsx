@@ -14,11 +14,11 @@ export const MisCursos = () => {
         <article className="flex flex-col md:grid md:grid-cols-[repeat(auto-fit,_minmax(400px,_1fr))] gap-4 my-4">
           {courses?.map(({ code, name, shift, day, period }) => (
             <Link to={`/curso/${code}`} key={code}>
-            <InfoCard
-              key={code}
-              title={name}
-              information={[code, day, shift, period]}
-            />
+              <InfoCard
+                key={code}
+                title={name}
+                information={[code, day, shift, period]}
+              />
             </Link>
           ))}
         </article>

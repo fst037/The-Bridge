@@ -31,10 +31,10 @@ export const UserCard = ({
       </div>
       <div className="grow-1">
         <Link to={`/perfil/${username}`}>
-          <p>{name}</p>
+          <p className="truncate">{name}</p>
         </Link>
         <div
-          className="flex items-center gap-1 text-gray-400 font-light text-sm overflow-hidden hover:underline hover:cursor-pointer break-all"
+          className="flex items-center gap-1 text-gray-400 font-light text-xs overflow-hidden hover:underline hover:cursor-pointer break-all"
           onClick={() => copyToClipboard(username)}
         >
           {username}
